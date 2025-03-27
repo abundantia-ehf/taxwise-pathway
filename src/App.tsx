@@ -9,6 +9,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Pages
+import LoadingPage from "./pages/LoadingPage";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -32,6 +33,9 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
+              {/* Initial loading page */}
+              <Route path="/index" element={<LoadingPage />} />
+              
               {/* Public routes */}
               <Route path="/" element={<Welcome />} />
               <Route path="/login" element={<Login />} />
