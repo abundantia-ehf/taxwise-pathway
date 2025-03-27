@@ -8,10 +8,10 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
   useEffect(() => {
-    // Automatically dismiss the loading screen after 2 seconds
+    // Automatically dismiss the loading screen after 3 seconds
     const timer = setTimeout(() => {
       onFinished();
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [onFinished]);
