@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface LoadingScreenProps {
@@ -21,8 +21,11 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-24 h-24 flex items-center justify-center"
+        transition={{ 
+          duration: 0.5, 
+          ease: "easeOut",
+        }}
+        className="w-32 h-32 flex items-center justify-center"
       >
         <div className="rounded-xl overflow-hidden">
           <img 

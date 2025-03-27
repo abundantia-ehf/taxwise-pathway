@@ -7,7 +7,7 @@ const Index = () => {
   
   useEffect(() => {
     // Redirect to loading page
-    navigate('/index');
+    navigate('/loading');
   }, [navigate]);
 
   return (

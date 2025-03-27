@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -33,11 +33,14 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              {/* Initial loading page */}
-              <Route path="/index" element={<LoadingPage />} />
+              {/* Initial route redirects to loading */}
+              <Route path="/" element={<Navigate to="/loading" />} />
+              
+              {/* Loading page */}
+              <Route path="/loading" element={<LoadingPage />} />
               
               {/* Public routes */}
-              <Route path="/" element={<Welcome />} />
+              <Route path="/welcome" element={<Welcome />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               

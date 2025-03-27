@@ -9,13 +9,13 @@ const LoadingPage = () => {
 
   const handleLoadingFinished = () => {
     setShowLoading(false);
-    navigate('/');
+    navigate('/welcome');
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-black">
       {showLoading && <LoadingScreen onFinished={handleLoadingFinished} />}
-    </>
+    </div>
   );
 };
 
