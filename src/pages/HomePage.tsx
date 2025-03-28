@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -207,12 +208,12 @@ const HomePage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <h2 className="text-lg font-semibold mb-4">Your Tax Journey</h2>
+            <h2 className="text-lg font-semibold mb-4">Your Untaxable Journey</h2>
             <div className="grid grid-cols-2 gap-4">
               <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
                 <CardContent className="p-4 text-center">
-                  <h3 className="text-3xl font-bold text-brand">$5,210</h3>
-                  <p className="text-xs text-muted-foreground mt-1">Potential Savings</p>
+                  <h3 className="text-3xl font-bold text-brand">3</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Questions Answered</p>
                 </CardContent>
               </Card>
               <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
