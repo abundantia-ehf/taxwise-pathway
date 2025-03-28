@@ -91,15 +91,15 @@ const HomePage = () => {
   return (
     <MobileLayout>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
-        <div className="container max-w-md mx-auto px-4 py-6">
-          {/* Logo Section */}
+        <div className="container max-w-md mx-auto px-4 py-3">
+          {/* Logo Section - reduced padding */}
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex justify-center mb-8"
+            className="flex justify-center mb-4"
           >
-            <div className="w-32 h-32">
+            <div className="w-28 h-28">
               <img 
                 src="/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
                 alt="Untaxable Logo" 
