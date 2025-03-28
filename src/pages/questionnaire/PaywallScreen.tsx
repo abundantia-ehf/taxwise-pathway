@@ -101,14 +101,14 @@ const PaywallScreen = () => {
             <CarouselContent className="-ml-2">
               {testimonials.map((testimonial, index) => (
                 <CarouselItem key={index} className="pl-2 basis-[85%]">
-                  <div className="bg-white rounded-xl p-4 shadow-lg h-[175px] flex flex-col">
+                  <div className="bg-white rounded-xl p-4 shadow-lg h-[160px] flex flex-col">
                     {/* Centered name and flag */}
-                    <div className="flex justify-center mb-2">
+                    <div className="flex justify-center mb-1">
                       <span className="font-medium text-sm text-[#1A1F2C]">{testimonial.name}</span>
                       <span className="ml-1">{testimonial.flag}</span>
                     </div>
                     
-                    <p className="text-gray-700 text-sm mb-3 flex-grow">
+                    <p className="text-gray-700 text-sm mb-2 flex-grow">
                       {testimonial.text}
                     </p>
                     
