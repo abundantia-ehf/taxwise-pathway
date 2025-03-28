@@ -52,9 +52,9 @@ const Welcome = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
-                className="flex justify-center mt-8"
+                className="flex justify-center mt-24"
               >
-                <ArrowDown className="text-brand animate-bounce" size={32} />
+                <ArrowDown className="text-brand animate-bounce" size={42} />
               </motion.div>
             </motion.div>
           </div>
