@@ -58,21 +58,29 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
 
       {!hideNavigation && (
         <nav className="fixed bottom-0 left-0 right-0 border-t bg-background/80 backdrop-blur-md flex justify-between items-center px-2 py-2 z-50">
-          {navigationItems.map((item) => (
-            <button
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              className={cn(
-                "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
-                isActive(item.path) 
-                  ? "text-brand" 
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <item.icon size={20} />
-              <span className="text-xs mt-1">{item.label}</span>
-            </button>
-          ))}
+          {navigationItems.map((item) => {
+            const active = isActive(item.path);
+            return (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className={cn(
+                  "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
+                  active 
+                    ? "text-brand" 
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <div className={cn(
+                  "flex items-center justify-center",
+                  active && theme === 'light' ? "bg-zinc-800 p-1 rounded" : ""
+                )}>
+                  <item.icon size={20} />
+                </div>
+                <span className="text-xs mt-1">{item.label}</span>
+              </button>
+            );
+          })}
         </nav>
       )}
     </div>
