@@ -7,6 +7,7 @@ import { BookOpen, MessageSquare, Headset, ArrowRight, Moon, Sun } from 'lucide-
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
+import Header from '@/components/layout/Header';
 
 interface NavigationCardProps {
   title: string;
@@ -46,7 +47,7 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   
   // Animation variants
   const containerVariants = {
@@ -92,48 +93,25 @@ const HomePage = () => {
   return (
     <MobileLayout>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
+        {/* Custom Header with Logo */}
+        <Header 
+          title={
+            <div className="h-[24px] w-auto">
+              <img 
+                src={theme === 'dark' 
+                  ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
+                  : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png"
+                } 
+                alt="Untaxable Logo" 
+                className="h-full w-auto object-contain"
+              />
+            </div>
+          } 
+          showBack={false}
+          showThemeToggle={true}
+        />
+        
         <div className="container max-w-md mx-auto px-4">
-          {/* Header with Logo and Theme Toggle */}
-          <div className="flex justify-between items-center py-4">
-            {/* Logo - moved to left, respecting aspect ratio and 50% larger than previous size */}
-            <motion.div 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center"
-            >
-              <div className="h-[30px] w-auto">
-                <img 
-                  src={theme === 'dark' 
-                    ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
-                    : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png"
-                  } 
-                  alt="Untaxable Logo" 
-                  className="h-full w-auto object-contain"
-                />
-              </div>
-            </motion.div>
-            
-            {/* Theme Toggle - updated to match other pages */}
-            <motion.div
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center"
-            >
-              <button
-                onClick={toggleTheme}
-                className="rounded-md p-2 hover:bg-accent"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="h-[1.2rem] w-[1.2rem]" />
-                ) : (
-                  <Moon className="h-[1.2rem] w-[1.2rem]" />
-                )}
-              </button>
-            </motion.div>
-          </div>
-          
           {/* Recent Progress Section */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}

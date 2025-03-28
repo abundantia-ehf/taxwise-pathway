@@ -6,7 +6,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Moon, Sun } from 'lucide-react';
 
 interface HeaderProps {
-  title: string;
+  title: string | React.ReactNode;
   showBack?: boolean;
   showThemeToggle?: boolean;
 }
@@ -32,7 +32,11 @@ const Header: React.FC<HeaderProps> = ({
                 <ChevronLeft className="h-5 w-5" />
               </button>
             )}
-            <h1 className="font-semibold text-lg">{title}</h1>
+            {typeof title === 'string' ? (
+              <h1 className="font-semibold text-lg">{title}</h1>
+            ) : (
+              title
+            )}
           </div>
           
           {showThemeToggle && (
