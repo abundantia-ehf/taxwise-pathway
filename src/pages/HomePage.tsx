@@ -120,7 +120,7 @@ const HomePage = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-8 mt-4"
           >
-            <h2 className="text-lg font-semibold mb-4">Continue Learning</h2>
+            <h2 className="text-lg font-semibold mb-4">Continue Learning →</h2>
             <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
               <CardContent className="p-4">
                 <div className="flex items-center">
