@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +9,8 @@ const ConfirmationScreen = () => {
   const navigate = useNavigate();
 
   const handleContinue = () => {
-    // Navigate to the next screen (will be implemented later)
-    navigate('/questionnaire/analysis'); // This route will be created in the future
+    // Navigate to the tax rate screen
+    navigate('/questionnaire/tax-rate');
   };
 
   return (

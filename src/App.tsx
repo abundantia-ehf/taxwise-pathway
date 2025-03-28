@@ -14,6 +14,7 @@ import Welcome from "./pages/Welcome";
 import OnboardingFeatures from "./pages/OnboardingFeatures";
 import Questionnaire from "./pages/Questionnaire";
 import ConfirmationScreen from "./pages/questionnaire/ConfirmationScreen";
+import TaxRateScreen from "./pages/questionnaire/TaxRateScreen";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Onboarding from "./pages/Onboarding";
@@ -47,6 +48,7 @@ const App = () => (
               <Route path="/onboarding-features" element={<OnboardingFeatures />} />
               <Route path="/questionnaire" element={<Questionnaire />} />
               <Route path="/questionnaire/confirmation" element={<ConfirmationScreen />} />
+              <Route path="/questionnaire/tax-rate" element={<TaxRateScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/onboarding" element={<Onboarding />} />
