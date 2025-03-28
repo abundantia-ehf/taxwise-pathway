@@ -54,7 +54,7 @@ const PaywallScreen = () => {
       setIsProcessing(false);
       // Would integrate with Superwall/Stripe here
       startSubscription();
-      navigate('/learn');
+      navigate('/home');
       toast.success("Your free trial has started!");
     }, 2000);
   };

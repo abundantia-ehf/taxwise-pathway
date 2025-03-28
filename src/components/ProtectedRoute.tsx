@@ -16,7 +16,7 @@ const ProtectedRoute = ({
 
   // If subscription is required but user doesn't have one, redirect to subscription page
   if (requireSubscription && !hasSubscription) {
-    return <Navigate to="/subscribe" state={{ from: location }} replace />;
+    return <Navigate to="/questionnaire/paywall" state={{ from: location }} replace />;
   }
 
   return <>{children}</>;
