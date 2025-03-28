@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Video, MessageSquare, User, Search } from 'lucide-react';
+import { BookOpen, MessageSquare, Headset, User, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -21,6 +21,11 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
 
   const navigationItems = [
     {
+      label: 'Home',
+      icon: Home,
+      path: '/home',
+    },
+    {
       label: 'Learn',
       icon: BookOpen,
       path: '/learn',
@@ -32,7 +37,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'Support',
-      icon: Search,
+      icon: Headset,
       path: '/support',
     },
     {
@@ -58,7 +63,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
               key={item.path}
               onClick={() => navigate(item.path)}
               className={cn(
-                "flex flex-col items-center justify-center w-1/4 py-1 px-1 rounded-lg transition-all",
+                "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
                 isActive(item.path) 
                   ? "text-brand" 
                   : "text-muted-foreground hover:text-foreground"

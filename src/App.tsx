@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Onboarding from "./pages/Onboarding";
 import Subscribe from "./pages/Subscribe";
+import HomePage from "./pages/HomePage";
 import Learn from "./pages/Learn";
 import VideoPlayer from "./pages/VideoPlayer";
 import AIHelp from "./pages/AIHelp";
@@ -57,6 +58,14 @@ const App = () => (
               <Route path="/subscribe" element={<Subscribe />} />
               
               {/* Protected routes requiring subscription */}
+              <Route 
+                path="/home" 
+                element={
+                  <ProtectedRoute requireSubscription>
+                    <HomePage />
+                  </ProtectedRoute>
+                } 
+              />
               <Route 
                 path="/learn" 
                 element={
