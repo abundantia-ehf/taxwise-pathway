@@ -14,14 +14,14 @@ interface FeatureSlideProps {
 
 const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
   return (
-    <div className="flex flex-col items-center space-y-6">
-      <div className="w-48 h-48 rounded-full bg-brand/10 flex items-center justify-center">
+    <div className="flex flex-col items-center space-y-4">
+      <div className="w-36 h-36 rounded-full bg-brand/10 flex items-center justify-center">
         {icon}
       </div>
       
-      <div className="text-center space-y-2 max-w-xs">
-        <h2 className="text-2xl font-unitext font-bold">{title}</h2>
-        <p className="text-white/70">{description}</p>
+      <div className="text-center space-y-1 max-w-xs">
+        <h2 className="text-xl font-unitext font-bold">{title}</h2>
+        <p className="text-sm text-white/70">{description}</p>
       </div>
     </div>
   );
@@ -85,7 +85,7 @@ const OnboardingFeatures = () => {
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       
-      <div className="container max-w-md mx-auto px-4 py-12 h-screen flex flex-col">
+      <div className="container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
         <div className="flex-1 flex items-center justify-center">
           <Carousel className="w-full" 
             defaultSlideSize={100}
@@ -106,12 +106,12 @@ const OnboardingFeatures = () => {
           </Carousel>
         </div>
         
-        <div className="pb-12 space-y-6">
+        <div className="pb-6 space-y-4">
           <div className="flex justify-center space-x-2">
             {[0, 1, 2, 3].map((dot) => (
               <div
                 key={dot}
-                className={`w-2.5 h-2.5 rounded-full ${
+                className={`w-2 h-2 rounded-full ${
                   currentSlide === dot ? 'bg-brand' : 'bg-white/30'
                 } transition-colors cursor-pointer`}
                 onClick={() => setCurrentSlide(dot)}
@@ -120,13 +120,13 @@ const OnboardingFeatures = () => {
           </div>
           
           <Button 
-            className="w-full py-6 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
+            className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
             onClick={handleNext}
           >
             {currentSlide < 3 ? (
-              <>Next <ArrowRight size={18} className="ml-1" /></>
+              <>Next <ArrowRight size={16} className="ml-1" /></>
             ) : (
-              <>Rate Us <Star size={18} className="ml-1" /></>
+              <>Rate Us <Star size={16} className="ml-1" /></>
             )}
           </Button>
         </div>

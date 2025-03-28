@@ -33,14 +33,14 @@ const Signup = () => {
     <MobileLayout hideNavigation>
       <Header title="Create Account" showBack />
       
-      <div className="container max-w-md p-6 space-y-6">
-        <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-bold">Create your account</h1>
-          <p className="text-muted-foreground">Enter your information to get started</p>
+      <div className="container max-w-md px-6 py-2 h-[calc(100vh-4rem)] flex flex-col">
+        <div className="space-y-1 text-center mb-4">
+          <h1 className="text-xl font-bold">Create your account</h1>
+          <p className="text-sm text-muted-foreground">Enter your information to get started</p>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
+        <form onSubmit={handleSubmit} className="space-y-3 flex-1">
+          <div className="space-y-1">
             <label htmlFor="name" className="text-sm font-medium">
               Full Name
             </label>
@@ -51,11 +51,11 @@ const Signup = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="h-12"
+              className="h-10"
             />
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label htmlFor="email" className="text-sm font-medium">
               Email
             </label>
@@ -66,11 +66,11 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="h-12"
+              className="h-10"
             />
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label htmlFor="password" className="text-sm font-medium">
               Password
             </label>
@@ -82,34 +82,36 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={8}
-              className="h-12"
+              className="h-10"
             />
             <p className="text-xs text-muted-foreground">
               Password must be at least 8 characters
             </p>
           </div>
           
-          <Button 
-            type="submit" 
-            className="w-full h-12 bg-brand text-black hover:bg-brand/90"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Creating account...' : 'Create Account'}
-          </Button>
-        </form>
-        
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground">
-            Already have an account?{' '}
+          <div className="flex flex-col justify-end mt-auto py-4">
             <Button 
-              variant="link" 
-              className="p-0 h-auto"
-              onClick={() => navigate('/login')}
+              type="submit" 
+              className="w-full h-10 bg-brand text-black hover:bg-brand/90"
+              disabled={isSubmitting}
             >
-              Login
+              {isSubmitting ? 'Creating account...' : 'Create Account'}
             </Button>
-          </p>
-        </div>
+            
+            <div className="text-center mt-3">
+              <p className="text-sm text-muted-foreground">
+                Already have an account?{' '}
+                <Button 
+                  variant="link" 
+                  className="p-0 h-auto"
+                  onClick={() => navigate('/login')}
+                >
+                  Login
+                </Button>
+              </p>
+            </div>
+          </div>
+        </form>
       </div>
     </MobileLayout>
   );
