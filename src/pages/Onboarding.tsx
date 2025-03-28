@@ -116,12 +116,12 @@ const Onboarding = () => {
     <MobileLayout hideNavigation>
       <div className="flex flex-col min-h-screen">
         <div className="p-4 border-b">
-          {/* Added logo at the top */}
+          {/* Updated logo to use the provided white logo */}
           <div className="w-full flex justify-center mb-4">
             <img 
-              src="/lovable-uploads/3a8c1801-15f3-4359-956c-fb0125f565f9.png" 
+              src="/lovable-uploads/bce91dd7-e69e-4ac6-a7c0-a42f182b9eda.png" 
               alt="Untaxable Logo" 
-              className="h-8 object-contain"
+              className="h-10 object-contain"
             />
           </div>
           
