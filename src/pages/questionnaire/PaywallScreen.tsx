@@ -22,7 +22,7 @@ const PaywallScreen = () => {
         className="flex flex-col h-full"
       >
         {/* Top section with brand gradient background */}
-        <div className="gradient-brand-subtle px-6 py-6 pb-16">
+        <div className="bg-gradient-to-br from-black to-zinc-900 px-6 py-6 pb-16">
           {/* Logo */}
           <div className="flex justify-center mb-4">
             <img 
@@ -34,8 +34,8 @@ const PaywallScreen = () => {
           
           {/* Main headline */}
           <div className="text-center mb-3">
-            <h1 className="text-2xl font-bold mb-2">Pay less tax, <span className="border-b-2 border-[#ea384c]">legally</span></h1>
-            <p className="text-sm">
+            <h1 className="text-2xl font-bold mb-2 text-white">Pay less tax, <span className="border-b-4 border-[#ea384c]">legally</span></h1>
+            <p className="text-sm text-white/80">
               Join thousands of users who have legally reduced their tax rate, often to 0%
             </p>
           </div>
@@ -64,7 +64,7 @@ const PaywallScreen = () => {
         <div className="bg-white rounded-t-3xl -mt-8 px-6 py-6 flex-1 flex flex-col">
           {/* Pro badge */}
           <div className="flex justify-center mb-3">
-            <div className="bg-[#1A1F2C] text-white px-4 py-1 rounded-full text-xs font-semibold">
+            <div className="bg-[#1A1F2C] text-white px-4 py-1 rounded-md text-xs font-semibold">
               UNTAXABLE PRO
             </div>
           </div>
@@ -78,7 +78,7 @@ const PaywallScreen = () => {
               Make a low-tax or no-tax life a reality in two weeks or less
             </p>
             <p className="font-medium text-sm text-gray-900">
-              3 day free trial, then just <span className="text-black bg-brand px-1 rounded">$48.50 US$/month</span>
+              3 day free trial, then just <span className="text-black bg-brand px-1 rounded font-bold">$48.50 US$/month</span>
             </p>
           </div>
           
