@@ -92,26 +92,20 @@ const HomePage = () => {
     <MobileLayout>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
         <div className="container max-w-md mx-auto px-4 py-6">
-          {/* Header Section */}
+          {/* Logo Section */}
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="flex justify-center mb-8"
           >
-            <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 rounded-xl overflow-hidden">
-                <img 
-                  src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
-                  alt="Untaxable Logo" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h1 className="text-2xl font-bold">Untaxable</h1>
+            <div className="w-32 h-32">
+              <img 
+                src="/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
+                alt="Untaxable Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
-            <p className="text-muted-foreground mt-2">
-              Your journey to legal tax optimization starts here
-            </p>
           </motion.div>
           
           {/* Recent Progress Section */}
