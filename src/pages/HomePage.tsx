@@ -95,14 +95,14 @@ const HomePage = () => {
         <div className="container max-w-md mx-auto px-4">
           {/* Header with Logo and Theme Toggle */}
           <div className="flex justify-between items-center py-4">
-            {/* Logo - moved to left, removed text */}
+            {/* Logo - moved to left, removed text, doubled size */}
             <motion.div 
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               className="flex items-center"
             >
-              <div className="w-10 h-10">
+              <div className="w-20 h-20">
                 <img 
                   src={theme === 'dark' 
                     ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
