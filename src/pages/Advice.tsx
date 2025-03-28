@@ -2,73 +2,177 @@
 import React, { useState } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from "sonner";
-import { MessageSquare, User, Clock } from 'lucide-react';
-import emailjs from 'emailjs-com';
+import { MessageSquare, User, Clock, ExternalLink } from 'lucide-react';
+
+const FORM_SUBMISSION_OPTIONS = [
+  { 
+    name: 'Tally',
+    url: 'https://tally.so', 
+    description: 'Create a free form and paste the URL here' 
+  },
+  { 
+    name: 'Typeform',
+    url: 'https://typeform.com', 
+    description: 'Create a Typeform and paste the URL here' 
+  },
+  { 
+    name: 'Google Forms',
+    url: 'https://forms.google.com', 
+    description: 'Create a Google Form and paste the URL here' 
+  },
+  { 
+    name: 'Formspree',
+    url: 'https://formspree.io', 
+    description: 'Create a Formspree form and paste the URL here' 
+  },
+  { 
+    name: 'Airtable',
+    url: 'https://airtable.com', 
+    description: 'Create an Airtable form and paste the URL here' 
+  }
+];
 
 const Advice = () => {
   const [question, setQuestion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [emailServiceSetup, setEmailServiceSetup] = useState({
-    serviceId: '',
-    templateId: '',
-    userId: ''
+  const [formSetup, setFormSetup] = useState({
+    formUrl: '',
+    isConfigured: false
   });
-  const [setupMode, setSetupMode] = useState(!process.env.REACT_APP_EMAILJS_SERVICE_ID);
   
+  // Check if form URL is in localStorage or use setup mode
+  React.useEffect(() => {
+    const savedFormUrl = localStorage.getItem('expertHelpFormUrl');
+    if (savedFormUrl) {
+      setFormSetup({
+        formUrl: savedFormUrl,
+        isConfigured: true
+      });
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
     
     setIsSubmitting(true);
     
-    try {
-      // Use environment variables if available, otherwise use the values from the setup form
-      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || emailServiceSetup.serviceId;
-      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || emailServiceSetup.templateId;
-      const userId = process.env.REACT_APP_EMAILJS_USER_ID || emailServiceSetup.userId;
+    // If we have a form URL configured, redirect to it
+    if (formSetup.formUrl) {
+      // Open the form URL in a new tab with the question pre-filled if possible
+      // Most form services allow prefilling via URL parameters
+      const formUrl = new URL(formSetup.formUrl);
       
-      if (!serviceId || !templateId || !userId) {
-        toast.error("Email service not configured properly. Please set up the service or contact support.");
-        setIsSubmitting(false);
-        return;
-      }
+      // Try to add the question as a parameter (this works with many form services)
+      // Different services use different parameter names, so we're using common ones
+      formUrl.searchParams.append('question', question);
+      formUrl.searchParams.append('entry.1', question); // For Google Forms
+      formUrl.searchParams.append('prefill', question);
       
-      // Send the email using EmailJS
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          question: question,
-          timestamp: new Date().toString(),
-          user_email: "user@example.com", // You would get this from the user profile
-        },
-        userId
-      );
+      window.open(formUrl.toString(), '_blank');
       
-      toast.success("Your question has been submitted to our tax professionals");
+      toast.success("Opening form submission page. Please complete your submission there.");
       setQuestion('');
+    } else {
+      toast.error("Form not configured. Please set up the form URL in the settings.");
+    }
+    
+    setIsSubmitting(false);
+  };
+
+  const handleFormSetup = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      // Basic URL validation
+      new URL(formSetup.formUrl);
+      
+      // Save to localStorage for persistence
+      localStorage.setItem('expertHelpFormUrl', formSetup.formUrl);
+      
+      setFormSetup({
+        ...formSetup,
+        isConfigured: true
+      });
+      
+      toast.success("Form URL configured successfully!");
     } catch (error) {
-      console.error("Failed to submit question:", error);
-      toast.error("Failed to submit your question. Please try again later.");
-    } finally {
-      setIsSubmitting(false);
+      toast.error("Please enter a valid URL");
     }
   };
 
-  const handleSetupSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (emailServiceSetup.serviceId && emailServiceSetup.templateId && emailServiceSetup.userId) {
-      setSetupMode(false);
-      toast.success("Email service configured successfully!");
-    } else {
-      toast.error("Please fill in all fields");
-    }
-  };
+  // Form setup mode
+  if (!formSetup.isConfigured) {
+    return (
+      <MobileLayout>
+        <Header title="Expert Help - Setup" />
+        <div className="container p-4 space-y-6">
+          <Card>
+            <CardContent className="p-6 space-y-4">
+              <h2 className="font-semibold text-lg">Set Up Form Service</h2>
+              <p className="text-sm text-muted-foreground">
+                To enable users to submit questions to your team, please configure a form service URL.
+                We recommend using one of the following free services:
+              </p>
+              
+              <div className="space-y-3">
+                {FORM_SUBMISSION_OPTIONS.map((option) => (
+                  <a 
+                    key={option.name}
+                    href={option.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-3 bg-secondary rounded-md hover:bg-secondary/80 transition-colors"
+                  >
+                    <div>
+                      <h3 className="font-medium">{option.name}</h3>
+                      <p className="text-xs text-muted-foreground">{option.description}</p>
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                  </a>
+                ))}
+              </div>
+              
+              <form onSubmit={handleFormSetup} className="space-y-4">
+                <div className="space-y-2">
+                  <label htmlFor="formUrl" className="text-sm font-medium">Form URL</label>
+                  <Input 
+                    id="formUrl"
+                    value={formSetup.formUrl}
+                    onChange={(e) => setFormSetup({...formSetup, formUrl: e.target.value})}
+                    placeholder="https://your-form-service.com/your-form"
+                    required
+                  />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-brand text-black hover:bg-brand/90"
+                >
+                  Save Configuration
+                </Button>
+                
+                <div className="text-xs text-muted-foreground p-2 bg-secondary rounded-md">
+                  <p className="font-medium">Instructions:</p>
+                  <ol className="list-decimal pl-4 space-y-1 mt-1">
+                    <li>Create a form using one of the services above</li>
+                    <li>Copy the public URL of your form</li>
+                    <li>Paste it in the input field above</li>
+                    <li>When users submit questions, they'll be directed to your form</li>
+                  </ol>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </MobileLayout>
+    );
+  }
 
   const previousQuestions = [
     {
@@ -86,77 +190,6 @@ const Advice = () => {
       answered: false
     }
   ];
-
-  if (setupMode) {
-    return (
-      <MobileLayout>
-        <Header title="Expert Help - Setup" />
-        <div className="container p-4 space-y-6">
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <h2 className="font-semibold text-lg">Set Up Email Service</h2>
-              <p className="text-sm text-muted-foreground">
-                To enable users to submit questions to your team, please configure EmailJS service credentials.
-                For production, it's recommended to set these as environment variables.
-              </p>
-              
-              <form onSubmit={handleSetupSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <label htmlFor="serviceId" className="text-sm font-medium">EmailJS Service ID</label>
-                  <Input 
-                    id="serviceId"
-                    value={emailServiceSetup.serviceId}
-                    onChange={(e) => setEmailServiceSetup({...emailServiceSetup, serviceId: e.target.value})}
-                    placeholder="e.g., service_xxxxxxx"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="templateId" className="text-sm font-medium">EmailJS Template ID</label>
-                  <Input 
-                    id="templateId"
-                    value={emailServiceSetup.templateId}
-                    onChange={(e) => setEmailServiceSetup({...emailServiceSetup, templateId: e.target.value})}
-                    placeholder="e.g., template_xxxxxxx"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="userId" className="text-sm font-medium">EmailJS User ID (Public Key)</label>
-                  <Input 
-                    id="userId"
-                    value={emailServiceSetup.userId}
-                    onChange={(e) => setEmailServiceSetup({...emailServiceSetup, userId: e.target.value})}
-                    placeholder="e.g., user_xxxxxxx"
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full bg-brand text-black hover:bg-brand/90"
-                >
-                  Save Configuration
-                </Button>
-                
-                <div className="text-xs text-muted-foreground p-2 bg-secondary rounded-md">
-                  <p className="font-medium">Instructions:</p>
-                  <ol className="list-decimal pl-4 space-y-1 mt-1">
-                    <li>Create a free account at <a href="https://www.emailjs.com/" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">EmailJS</a></li>
-                    <li>Create a service (connecting to your email)</li>
-                    <li>Create an email template with variables {{question}}, {{timestamp}}, etc.</li>
-                    <li>Copy the Service ID, Template ID, and User ID (Public Key)</li>
-                  </ol>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </MobileLayout>
-    );
-  }
 
   return (
     <MobileLayout>
@@ -202,9 +235,22 @@ const Advice = () => {
                 {isSubmitting ? 'Submitting...' : 'Submit Question'}
               </Button>
               
-              <p className="text-xs text-muted-foreground text-center mt-2">
-                You accept answers provided by Untaxable are general feedback only. The risk is always on you for all actions carried out in relation to your taxes.
-              </p>
+              <div className="flex justify-between items-center text-xs text-muted-foreground mt-2">
+                <p>
+                  You accept answers provided by Untaxable are general feedback only. The risk is always on you for all actions carried out in relation to your taxes.
+                </p>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-xs h-auto p-1"
+                  onClick={() => {
+                    localStorage.removeItem('expertHelpFormUrl');
+                    setFormSetup({formUrl: '', isConfigured: false});
+                  }}
+                >
+                  Reset Form
+                </Button>
+              </div>
             </form>
           </CardContent>
         </Card>
