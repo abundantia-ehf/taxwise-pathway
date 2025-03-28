@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -14,21 +13,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { CircleDollarSign, Bell, Moon, Sun, HelpCircle, FileText, MessageSquare, X } from 'lucide-react';
+import { CircleDollarSign, Bell, Moon, Sun, HelpCircle, FileText, MessageSquare, AlertTriangle } from 'lucide-react';
 
 const Settings = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   
-  // Support form state
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Check if subscription is trial and format date
   const isTrialActive = user?.subscription?.status === 'trial' && user?.subscription?.trialEndDate ? 
     new Date(user.subscription.trialEndDate) > new Date() : false;
   
@@ -45,7 +42,6 @@ const Settings = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
     setTimeout(() => {
       toast.success("Support request submitted successfully");
       setName('');
@@ -266,14 +262,19 @@ const Settings = () => {
                 </CardContent>
               </Card>
               
-              <Button
-                variant="destructive"
-                className="w-full flex items-center justify-center"
-                onClick={handleResetAppData}
-              >
-                <X className="h-4 w-4 mr-2" />
-                <span>Reset App Data</span>
-              </Button>
+              <div className="space-y-2">
+                <Button
+                  variant="destructive"
+                  className="w-full flex items-center justify-center"
+                  onClick={handleResetAppData}
+                >
+                  <AlertTriangle className="h-4 w-4 mr-2" />
+                  <span>Reset App Data</span>
+                </Button>
+                <p className="text-xs text-muted-foreground text-center px-2">
+                  Warning: This will clear all your saved preferences, progress, and session data. You will be logged out and returned to the welcome screen.
+                </p>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
