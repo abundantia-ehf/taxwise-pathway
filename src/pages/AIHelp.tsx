@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { CircleDollarSign, Send, User, Bot } from 'lucide-react';
+import { CircleDollarSign, Send, User, Robot } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -92,7 +92,7 @@ const AIHelp = () => {
                   {message.sender === 'user' ? (
                     <User className="h-4 w-4" />
                   ) : (
-                    <Bot className="h-4 w-4" />
+                    <Robot className="h-4 w-4" />
                   )}
                 </div>
                 
@@ -114,7 +114,7 @@ const AIHelp = () => {
             <div className="flex justify-start">
               <div className="flex max-w-[85%] flex-row">
                 <div className="flex-shrink-0 h-8 w-8 rounded-full bg-secondary flex items-center justify-center mr-2">
-                  <Bot className="h-4 w-4" />
+                  <Robot className="h-4 w-4" />
                 </div>
                 <div className="rounded-2xl p-3 bg-secondary text-secondary-foreground">
                   <div className="flex space-x-1">

@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, MessageSquare, Headset, User, Home } from 'lucide-react';
+import { BookOpen, Robot, MessagesSquare, Settings, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -32,18 +32,18 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'AI Help',
-      icon: MessageSquare,
+      icon: Robot,
       path: '/ai-help',
     },
     {
-      label: 'Support',
-      icon: Headset,
-      path: '/support',
+      label: 'Advice',
+      icon: MessagesSquare,
+      path: '/advice',
     },
     {
-      label: 'Profile',
-      icon: User,
-      path: '/profile',
+      label: 'Settings',
+      icon: Settings,
+      path: '/settings',
     },
   ];
 

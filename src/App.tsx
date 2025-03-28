@@ -24,8 +24,8 @@ import HomePage from "./pages/HomePage";
 import Learn from "./pages/Learn";
 import VideoPlayer from "./pages/VideoPlayer";
 import AIHelp from "./pages/AIHelp";
-import Support from "./pages/Support";
-import Profile from "./pages/Profile";
+import Advice from "./pages/Advice";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -91,18 +91,18 @@ const App = () => (
                 } 
               />
               <Route 
-                path="/support" 
+                path="/advice" 
                 element={
                   <ProtectedRoute requireSubscription>
-                    <Support />
+                    <Advice />
                   </ProtectedRoute>
                 } 
               />
               <Route 
-                path="/profile" 
+                path="/settings" 
                 element={
                   <ProtectedRoute>
-                    <Profile />
+                    <Settings />
                   </ProtectedRoute>
                 } 
               />
