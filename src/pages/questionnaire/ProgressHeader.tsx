@@ -13,7 +13,9 @@ const ProgressHeader: React.FC<ProgressHeaderProps> = ({ currentStep, totalSteps
 
   return (
     <div className="p-4 bg-black border-b">
-      <Progress value={progress} className="h-2" />
+      <Progress value={progress} className="h-2 bg-secondary/30">
+        <div className="h-full bg-brand" style={{ width: `${progress}%` }} />
+      </Progress>
       <div className="flex justify-between mt-2 text-sm text-muted-foreground">
         <span>Question {currentStep} of {totalSteps}</span>
         <span>{Math.round(progress)}% Complete</span>
