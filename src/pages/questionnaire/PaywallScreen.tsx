@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -40,6 +40,7 @@ const testimonials: Testimonial[] = [
 
 const PaywallScreen = () => {
   const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleContinue = () => {
     // Will be updated with Superwall/payment integration in the future
@@ -73,10 +74,19 @@ const PaywallScreen = () => {
           </div>
           
           {/* Testimonial carousel */}
-          <Carousel className="w-full">
-            <CarouselContent>
+          <Carousel 
+            className="w-full" 
+            opts={{
+              align: "start",
+              containScroll: false,
+              loop: true,
+            }}
+            onSlideChange={setCurrentSlide}
+            currentSlide={currentSlide}
+          >
+            <CarouselContent className="-ml-2">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index}>
+                <CarouselItem key={index} className="pl-2 md:basis-full basis-4/5">
                   <div className="bg-white rounded-xl p-4 shadow-lg">
                     {/* Centered name and flag */}
                     <div className="flex justify-center mb-2">
@@ -98,6 +108,20 @@ const PaywallScreen = () => {
               ))}
             </CarouselContent>
           </Carousel>
+          
+          {/* Carousel indicators */}
+          <div className="flex justify-center mt-4 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`h-2 rounded-full transition-all ${
+                  currentSlide === index ? "w-4 bg-white" : "w-2 bg-white/40"
+                }`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
         
         {/* Bottom section with white background */}
