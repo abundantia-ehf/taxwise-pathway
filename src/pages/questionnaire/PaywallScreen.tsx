@@ -64,7 +64,7 @@ const PaywallScreen = () => {
         <div className="bg-white rounded-t-3xl -mt-8 px-6 py-6 flex-1 flex flex-col">
           {/* Pro badge */}
           <div className="flex justify-center mb-3">
-            <div className="bg-[#1A1F2C] text-white px-4 py-1 rounded-md text-xs font-semibold">
+            <div className="bg-[#1A1F2C] text-white px-4 flex items-center justify-center h-7 rounded-md text-xs font-semibold">
               UNTAXABLE PRO
             </div>
           </div>
