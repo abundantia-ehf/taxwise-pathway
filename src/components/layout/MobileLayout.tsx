@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Video, MessageSquare, User, Search } from 'lucide-react';
+import { BookOpen, MessageSquare, User, Search } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -45,14 +45,14 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
   return (
     <div className={cn(
       "flex flex-col min-h-screen w-full overflow-hidden",
-      theme === 'dark' ? 'bg-background text-foreground' : 'bg-background text-foreground'
+      theme === 'dark' ? 'bg-background text-foreground' : 'bg-brand-light text-foreground'
     )}>
       <main className="flex-1 overflow-y-auto pb-16">
         {children}
       </main>
 
       {!hideNavigation && (
-        <nav className="fixed bottom-0 left-0 right-0 border-t bg-background/80 backdrop-blur-md flex justify-between items-center px-2 py-2 z-50">
+        <nav className="fixed bottom-0 left-0 right-0 border-t bg-white/80 backdrop-blur-md flex justify-between items-center px-2 py-2 z-50 shadow-lg">
           {navigationItems.map((item) => (
             <button
               key={item.path}
