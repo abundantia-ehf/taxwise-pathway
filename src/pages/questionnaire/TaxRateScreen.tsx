@@ -22,8 +22,8 @@ const TaxRateScreen = () => {
   }, []);
 
   const handleContinue = () => {
-    // Will be updated to navigate to the next screen in the future
-    navigate('/onboarding');
+    // Navigate to the paywall screen
+    navigate('/questionnaire/paywall');
   };
 
   return (
