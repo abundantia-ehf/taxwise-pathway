@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
   {
     name: "Anna R.",
     flag: "🇦🇺",
-    text: "\"Almost all our business is global and outside Australia's borders, yet we've been paying 30% of our profits to the ATO for nearly half a decade. Now, we're paying zero tax anywhere.\""
+    text: "\"We've been paying the ATO 30% of our profits for nearly half a decade. Now, we're paying zero tax anywhere.\""
   },
   {
     name: "Randall Kinson",
