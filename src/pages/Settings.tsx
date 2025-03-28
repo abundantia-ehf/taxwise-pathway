@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { CircleDollarSign, Bell, LogOut, Moon, Sun, HelpCircle, FileText, MessageSquare } from 'lucide-react';
+import { CircleDollarSign, Bell, Moon, Sun, HelpCircle, FileText, MessageSquare, X } from 'lucide-react';
 
 const Settings = () => {
   const { user, logout } = useAuth();
@@ -54,6 +54,11 @@ const Settings = () => {
       setMessage('');
       setIsSubmitting(false);
     }, 1500);
+  };
+  
+  const handleResetAppData = () => {
+    logout();
+    toast.success("App data has been reset");
   };
   
   const faqItems = [
@@ -262,12 +267,12 @@ const Settings = () => {
               </Card>
               
               <Button
-                variant="outline"
+                variant="destructive"
                 className="w-full flex items-center justify-center"
-                onClick={logout}
+                onClick={handleResetAppData}
               >
-                <LogOut className="h-4 w-4 mr-2" />
-                <span>Log Out</span>
+                <X className="h-4 w-4 mr-2" />
+                <span>Reset App Data</span>
               </Button>
             </div>
           </TabsContent>
