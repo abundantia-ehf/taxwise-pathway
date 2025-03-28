@@ -5,6 +5,38 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Star, Flag, ArrowRight } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+// Testimonial type for strong typing
+type Testimonial = {
+  name: string;
+  flag: string;
+  text: string;
+};
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Anna R.",
+    flag: "🇦🇺",
+    text: "\"Almost all our business is global and outside Australia's borders, yet we've been paying 30% of our profits to the ATO for nearly half a decade. Now, we're paying zero tax anywhere.\""
+  },
+  {
+    name: "Randall Kinson",
+    flag: "🇺🇸",
+    text: "\"Thanks to Untaxable, we'll be paying less than a third in tax compared what we paid last year on even more income.\""
+  },
+  {
+    name: "Eva Bonillo",
+    flag: "🇦🇷",
+    text: "\"This Just what I was looking for as tax in Argentina is very bad and this has helped me escape from most of it.\""
+  }
+];
 
 const PaywallScreen = () => {
   const navigate = useNavigate();
@@ -40,24 +72,32 @@ const PaywallScreen = () => {
             </p>
           </div>
           
-          {/* Testimonial card */}
-          <div className="bg-white rounded-xl p-4 shadow-lg">
-            {/* Centered name and flag */}
-            <div className="flex justify-center mb-2">
-              <span className="font-medium text-sm text-[#1A1F2C]">Anna R.</span>
-              <span className="ml-1">🇦🇺</span>
-            </div>
-            
-            <p className="text-gray-700 text-sm mb-3">
-              "Almost all our business is global and outside Australia's borders, yet we've been paying 30% of our profits to the ATO for nearly half a decade. Now, we're paying zero tax anywhere."
-            </p>
-            
-            <div className="flex justify-center">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+          {/* Testimonial carousel */}
+          <Carousel className="w-full">
+            <CarouselContent>
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index}>
+                  <div className="bg-white rounded-xl p-4 shadow-lg">
+                    {/* Centered name and flag */}
+                    <div className="flex justify-center mb-2">
+                      <span className="font-medium text-sm text-[#1A1F2C]">{testimonial.name}</span>
+                      <span className="ml-1">{testimonial.flag}</span>
+                    </div>
+                    
+                    <p className="text-gray-700 text-sm mb-3">
+                      {testimonial.text}
+                    </p>
+                    
+                    <div className="flex justify-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                  </div>
+                </CarouselItem>
               ))}
-            </div>
-          </div>
+            </CarouselContent>
+          </Carousel>
         </div>
         
         {/* Bottom section with white background */}
