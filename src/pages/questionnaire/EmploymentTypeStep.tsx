@@ -38,7 +38,7 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
       <RadioGroup
         value={data.employmentType}
         onValueChange={(value) => updateData('employmentType', value)}
-        className="space-y-3"
+        className="space-y-3 mb-6"
       >
         {options.map((option) => (
           <div key={option} className="flex items-center space-x-2 border rounded-lg p-4">
