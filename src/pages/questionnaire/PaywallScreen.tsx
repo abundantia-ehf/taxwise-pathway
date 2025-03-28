@@ -34,11 +34,7 @@ const PaywallScreen = () => {
           
           {/* Main headline */}
           <div className="text-center mb-3">
-            <h1 className="text-2xl font-bold mb-2 text-white">Pay less tax, <span className="relative">legally
-              <svg className="absolute w-full h-3 left-0 -bottom-1" viewBox="0 0 100 15" preserveAspectRatio="none">
-                <path d="M0,7 Q30,12 50,7 Q70,2 100,8" fill="none" stroke="#ea384c" strokeWidth="6" strokeLinecap="round" />
-              </svg>
-            </span></h1>
+            <h1 className="text-2xl font-bold mb-2 text-white">Pay less tax, <span className="border-b-4 border-[#ea384c]">legally</span></h1>
             <p className="text-sm text-white/80">
               Join thousands of users who have legally reduced their tax rate, often to 0%
             </p>
@@ -76,7 +72,7 @@ const PaywallScreen = () => {
           {/* Offer details */}
           <div className="text-center mb-4">
             <h2 className="text-lg font-bold mb-2 text-gray-900">
-              Personalized help from tax mitigation pros
+              Get help from tax mitigation pros
             </h2>
             <p className="text-gray-800 text-sm mb-3">
               Make a low-tax or no-tax life a reality in two weeks or less
