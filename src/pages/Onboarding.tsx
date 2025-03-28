@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -114,9 +115,9 @@ const Onboarding = () => {
         <div className="p-4 border-b bg-black">
           <div className="w-full flex justify-center mb-4">
             <img 
-              src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
-              alt="Untaxable Logo" 
-              className="h-12 object-contain"
+              src="/lovable-uploads/3a8c1801-15f3-4359-956c-fb0125f565f9.png" 
+              alt="Untaxable White Logo" 
+              className="h-10 object-contain"
             />
           </div>
           
