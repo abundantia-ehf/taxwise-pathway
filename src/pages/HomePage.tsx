@@ -122,7 +122,10 @@ const HomePage = () => {
           >
             <h2 className="text-lg font-semibold mb-4 flex items-center">
               Continue Learning 
-              <ArrowRight size={18} className="ml-1 text-brand" />
+              <ArrowRight 
+                size={18} 
+                className={`ml-1 ${theme === 'dark' ? 'text-brand' : 'text-foreground'}`} 
+              />
             </h2>
             <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
               <CardContent className="p-4">
