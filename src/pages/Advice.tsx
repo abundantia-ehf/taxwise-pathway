@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
@@ -84,7 +83,7 @@ const Advice = () => {
               </Button>
               
               <p className="text-xs text-muted-foreground text-center mt-2">
-                By submitting your question, you accept answers provided are general feedback only. The risk is always on you for all actions carried out in relation to your taxes.
+                You accept answers provided by Untaxable are general feedback only. The risk is always on you for all actions carried out in relation to your taxes.
               </p>
             </form>
           </CardContent>
