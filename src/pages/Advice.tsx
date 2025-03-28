@@ -8,23 +8,66 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from "sonner";
 import { MessageSquare, User, Clock } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 const Advice = () => {
   const [question, setQuestion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailServiceSetup, setEmailServiceSetup] = useState({
+    serviceId: '',
+    templateId: '',
+    userId: ''
+  });
+  const [setupMode, setSetupMode] = useState(!process.env.REACT_APP_EMAILJS_SERVICE_ID);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Use environment variables if available, otherwise use the values from the setup form
+      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || emailServiceSetup.serviceId;
+      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || emailServiceSetup.templateId;
+      const userId = process.env.REACT_APP_EMAILJS_USER_ID || emailServiceSetup.userId;
+      
+      if (!serviceId || !templateId || !userId) {
+        toast.error("Email service not configured properly. Please set up the service or contact support.");
+        setIsSubmitting(false);
+        return;
+      }
+      
+      // Send the email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          question: question,
+          timestamp: new Date().toString(),
+          user_email: "user@example.com", // You would get this from the user profile
+        },
+        userId
+      );
+      
       toast.success("Your question has been submitted to our tax professionals");
       setQuestion('');
+    } catch (error) {
+      console.error("Failed to submit question:", error);
+      toast.error("Failed to submit your question. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
+  };
+
+  const handleSetupSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (emailServiceSetup.serviceId && emailServiceSetup.templateId && emailServiceSetup.userId) {
+      setSetupMode(false);
+      toast.success("Email service configured successfully!");
+    } else {
+      toast.error("Please fill in all fields");
+    }
   };
 
   const previousQuestions = [
@@ -43,6 +86,77 @@ const Advice = () => {
       answered: false
     }
   ];
+
+  if (setupMode) {
+    return (
+      <MobileLayout>
+        <Header title="Expert Help - Setup" />
+        <div className="container p-4 space-y-6">
+          <Card>
+            <CardContent className="p-6 space-y-4">
+              <h2 className="font-semibold text-lg">Set Up Email Service</h2>
+              <p className="text-sm text-muted-foreground">
+                To enable users to submit questions to your team, please configure EmailJS service credentials.
+                For production, it's recommended to set these as environment variables.
+              </p>
+              
+              <form onSubmit={handleSetupSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <label htmlFor="serviceId" className="text-sm font-medium">EmailJS Service ID</label>
+                  <Input 
+                    id="serviceId"
+                    value={emailServiceSetup.serviceId}
+                    onChange={(e) => setEmailServiceSetup({...emailServiceSetup, serviceId: e.target.value})}
+                    placeholder="e.g., service_xxxxxxx"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label htmlFor="templateId" className="text-sm font-medium">EmailJS Template ID</label>
+                  <Input 
+                    id="templateId"
+                    value={emailServiceSetup.templateId}
+                    onChange={(e) => setEmailServiceSetup({...emailServiceSetup, templateId: e.target.value})}
+                    placeholder="e.g., template_xxxxxxx"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label htmlFor="userId" className="text-sm font-medium">EmailJS User ID (Public Key)</label>
+                  <Input 
+                    id="userId"
+                    value={emailServiceSetup.userId}
+                    onChange={(e) => setEmailServiceSetup({...emailServiceSetup, userId: e.target.value})}
+                    placeholder="e.g., user_xxxxxxx"
+                    required
+                  />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-brand text-black hover:bg-brand/90"
+                >
+                  Save Configuration
+                </Button>
+                
+                <div className="text-xs text-muted-foreground p-2 bg-secondary rounded-md">
+                  <p className="font-medium">Instructions:</p>
+                  <ol className="list-decimal pl-4 space-y-1 mt-1">
+                    <li>Create a free account at <a href="https://www.emailjs.com/" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">EmailJS</a></li>
+                    <li>Create a service (connecting to your email)</li>
+                    <li>Create an email template with variables {{question}}, {{timestamp}}, etc.</li>
+                    <li>Copy the Service ID, Template ID, and User ID (Public Key)</li>
+                  </ol>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </MobileLayout>
+    );
+  }
 
   return (
     <MobileLayout>
