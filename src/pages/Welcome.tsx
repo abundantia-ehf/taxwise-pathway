@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -48,6 +48,14 @@ const Welcome = () => {
               <p className="text-base text-white/70">
                 Let's begin your path to legally paying zero taxes.
               </p>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="flex justify-center mt-4"
+              >
+                <ArrowDown className="text-brand animate-bounce" size={24} />
+              </motion.div>
             </motion.div>
           </div>
           
