@@ -9,7 +9,6 @@ import TaxAmountStep from './questionnaire/TaxAmountStep';
 import EmploymentTypeStep from './questionnaire/EmploymentTypeStep';
 import TaxFamiliarityStep from './questionnaire/TaxFamiliarityStep';
 import TaxGoalStep from './questionnaire/TaxGoalStep';
-import ConfirmationScreen from './questionnaire/ConfirmationScreen';
 import ProgressHeader from './questionnaire/ProgressHeader';
 
 const Questionnaire = () => {
@@ -17,17 +16,17 @@ const Questionnaire = () => {
   const [data, setData] = useState<QuestionnaireData>({});
   const navigate = useNavigate();
   
-  // Total steps in the questionnaire including confirmation
-  const totalSteps = 7; // Introduction + 5 questions + confirmation
+  // Total number of questions (excluding introduction)
+  const totalQuestions = 5;
   
   const handleNext = () => {
-    if (step < totalSteps - 1) {
+    if (step < QuestionnaireScreen.TaxGoal) {
       setStep(step + 1);
     } else {
       // Save data to storage
       localStorage.setItem('questionnaireData', JSON.stringify(data));
-      // Navigate to the next page in the flow
-      navigate('/onboarding');
+      // Navigate to the confirmation screen (now a separate route)
+      navigate('/questionnaire/confirmation');
     }
   };
   
@@ -38,7 +37,9 @@ const Questionnaire = () => {
   return (
     <MobileLayout hideNavigation>
       <div className="flex flex-col h-screen">
-        {step > 0 && step < 6 && <ProgressHeader currentStep={step} totalSteps={totalSteps - 2} />}
+        {step > 0 && step <= QuestionnaireScreen.TaxGoal && 
+          <ProgressHeader currentStep={step} totalSteps={totalQuestions} />
+        }
         
         <div className="flex-1 flex flex-col overflow-hidden">
           {step === QuestionnaireScreen.Introduction && <IntroductionStep onNext={handleNext} />}
@@ -47,7 +48,6 @@ const Questionnaire = () => {
           {step === QuestionnaireScreen.EmploymentType && <EmploymentTypeStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.TaxFamiliarity && <TaxFamiliarityStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.TaxGoal && <TaxGoalStep data={data} updateData={updateData} onNext={handleNext} />}
-          {step === QuestionnaireScreen.Confirmation && <ConfirmationScreen />}
         </div>
       </div>
     </MobileLayout>

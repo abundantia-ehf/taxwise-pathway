@@ -16,5 +16,4 @@ export enum QuestionnaireScreen {
   EmploymentType = 3,
   TaxFamiliarity = 4,
   TaxGoal = 5,
-  Confirmation = 6,
 }
