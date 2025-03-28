@@ -67,7 +67,7 @@ const PaywallScreen = () => {
         className="flex flex-col h-full"
       >
         {/* Top section with brand gradient background */}
-        <div className="bg-gradient-to-br from-black to-zinc-900 px-6 py-6 pb-16">
+        <div className="bg-gradient-to-br from-black to-zinc-900 px-0 py-6 pb-16">
           {/* Logo */}
           <div className="flex justify-center mb-4">
             <img 
@@ -78,30 +78,30 @@ const PaywallScreen = () => {
           </div>
           
           {/* Main headline */}
-          <div className="text-center mb-3">
+          <div className="text-center mb-3 px-6">
             <h1 className="text-2xl font-bold mb-2 text-white">Pay less tax, <span className="border-b-4 border-[#ea384c]">legally</span></h1>
             <p className="text-sm text-white/80">
               Join thousands of users who have legally reduced their tax rate, often to 0%
             </p>
           </div>
           
-          {/* Testimonial carousel */}
-          <div className="relative w-full overflow-hidden">
-            <Carousel 
-              className="w-full" 
-              opts={{
-                align: "center",
-                containScroll: false,
-                loop: true,
-                dragFree: false,
-                slidesToScroll: 1,
-              }}
-              onSlideChange={setCurrentSlide}
-              currentSlide={currentSlide}
-            >
-              <CarouselContent className="-ml-2 overflow-visible">
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="pl-2 basis-[85%] transition-all duration-300">
+          {/* Testimonial carousel - removed the outer div with overflow-hidden */}
+          <Carousel 
+            className="w-full" 
+            opts={{
+              align: "center",
+              containScroll: false,
+              loop: true,
+              dragFree: false,
+              slidesToScroll: 1,
+            }}
+            onSlideChange={setCurrentSlide}
+            currentSlide={currentSlide}
+          >
+            <CarouselContent className="-ml-0 overflow-visible">
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="pl-0 basis-[85%] transition-all duration-300">
+                  <div className="mx-2">
                     <div className="bg-white rounded-xl p-4 shadow-lg h-[160px] flex flex-col">
                       {/* Centered name and flag */}
                       <div className="flex justify-center mb-1">
@@ -119,14 +119,14 @@ const PaywallScreen = () => {
                         ))}
                       </div>
                     </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-          </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
           
           {/* Carousel indicators */}
-          <div className="flex justify-center mt-4 space-x-2">
+          <div className="flex justify-center mt-4 space-x-2 px-6">
             {testimonials.map((_, index) => (
               <button
                 key={index}
