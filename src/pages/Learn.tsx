@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -60,10 +59,12 @@ const courseModules: Module[] = [
     videos: [
       { id: 'video-3-1', title: 'XI. What We Aim To Achieve', duration: '16:30', completed: false, locked: true },
       { id: 'video-3-2', title: 'XII. Offshore Companies', duration: '18:45', completed: false, locked: true },
-      { id: 'video-3-3', title: 'XIII.', duration: '15:20', completed: false, locked: true },
-      { id: 'video-3-4', title: 'XIV.', duration: '14:10', completed: false, locked: true },
-      { id: 'video-3-5', title: 'XV.', duration: '12:55', completed: false, locked: true },
-      { id: 'video-3-6', title: 'XVI.', duration: '17:40', completed: false, locked: true },
+      { id: 'video-3-3', title: 'XIII. Offshore Structure Examples', duration: '15:20', completed: false, locked: true },
+      { id: 'video-3-4', title: 'XIV. Localize and Disconnect', duration: '14:10', completed: false, locked: true },
+      { id: 'video-3-5', title: 'XV. Setting Up An Offshore Company', duration: '12:55', completed: false, locked: true },
+      { id: 'video-3-6', title: 'XVI. Banking and Payment Processing', duration: '17:40', completed: false, locked: true },
+      { id: 'video-3-7', title: 'XVII. Legal and Accounting', duration: '14:25', completed: false, locked: true },
+      { id: 'video-3-8', title: 'XVIII. Using and Offramping Profits', duration: '19:15', completed: false, locked: true },
     ]
   },
   {
