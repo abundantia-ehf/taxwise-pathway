@@ -25,7 +25,11 @@ const PaywallScreen = () => {
         <div className="gradient-brand-subtle px-6 py-6 pb-16">
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 bg-brand rounded-lg"></div>
+            <img 
+              src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
+              alt="Untaxable Logo" 
+              className="w-12 h-12 object-cover rounded-lg"
+            />
           </div>
           
           {/* Main headline */}
@@ -38,19 +42,19 @@ const PaywallScreen = () => {
           
           {/* Testimonial card */}
           <div className="bg-white rounded-xl p-4 shadow-lg">
-            <p className="text-gray-700 text-sm mb-2">
-              "Almost all our business is global and outside Australia's borders, yet we've been paying 30% of our profits to the ATO for nearly half a decade. Now, we're paying zero tax anywhere. Payroll tax for our employees is the only thing we really have to cover now."
+            <div className="flex items-center mb-2">
+              <span className="font-medium text-sm">Anna R.</span>
+              <span className="ml-1">🇦🇺</span>
+            </div>
+            
+            <p className="text-gray-700 text-sm mb-3">
+              "Almost all our business is global and outside Australia's borders, yet we've been paying 30% of our profits to the ATO for nearly half a decade. Now, we're paying zero tax anywhere."
             </p>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <span className="font-medium text-sm">Anna R.</span>
-                <span className="ml-1">🇦🇺</span>
-              </div>
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
+            
+            <div className="flex justify-center">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+              ))}
             </div>
           </div>
         </div>
@@ -66,13 +70,13 @@ const PaywallScreen = () => {
           
           {/* Offer details */}
           <div className="text-center mb-4">
-            <h2 className="text-lg font-bold mb-2">
+            <h2 className="text-lg font-bold mb-2 text-gray-900">
               Personalized, actionable advice from tax mitigation pros
             </h2>
-            <p className="text-gray-600 text-sm mb-3">
+            <p className="text-gray-800 text-sm mb-3">
               Make a low-tax or no-tax life a reality in two weeks or less
             </p>
-            <p className="font-medium text-sm">
+            <p className="font-medium text-sm text-gray-900">
               3 day free trial, then just <span className="text-brand">$48.50 US$/month</span>
             </p>
           </div>
