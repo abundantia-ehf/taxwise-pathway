@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Handshake, ArrowDown } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 import MobileLayout from '@/components/layout/MobileLayout';
 
 const ConfirmationScreen = () => {
@@ -24,10 +25,11 @@ const ConfirmationScreen = () => {
         <div className="flex flex-col h-full px-6 py-8">
           {/* Image in the top third */}
           <div className="flex justify-center mb-8">
-            <img
+            <OptimizedImage
               src="/lovable-uploads/e73d9bd8-ca64-4f6e-a2ae-6eaae61fdb07.png"
               alt="Tax Savings Illustration"
               className="w-48 h-48 object-contain"
+              loadingHeight={192} // 48*4
             />
           </div>
           

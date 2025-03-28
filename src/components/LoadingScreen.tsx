@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface LoadingScreenProps {
   onFinished: () => void;
@@ -31,10 +32,11 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
         }}
         className="w-36 h-36 flex items-center justify-center z-10"
       >
-        <img 
+        <OptimizedImage 
           src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
           alt="Untaxable Logo" 
           className="w-full h-full object-cover rounded-md"
+          loadingHeight={144} // 36*4
         />
       </motion.div>
     </div>
