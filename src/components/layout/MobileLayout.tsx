@@ -85,10 +85,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 className={cn(
                   "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
                   active 
-                    ? cn(
-                        "text-brand",
-                        theme === 'light' ? "bg-gray-800 dark:bg-transparent" : ""
-                      ) 
+                    ? "text-brand"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -104,5 +101,14 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     </div>
   );
 };
+
+/* Original light mode navigation styling for future reference:
+active 
+  ? cn(
+      "text-brand",
+      theme === 'light' ? "bg-gray-800 dark:bg-transparent" : ""
+    ) 
+  : "text-muted-foreground hover:text-foreground"
+*/
 
 export default MobileLayout;
