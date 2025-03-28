@@ -6,7 +6,7 @@ import Header from '@/components/layout/Header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Play, Lock } from 'lucide-react';
+import { Play, Lock, Info } from 'lucide-react';
 
 interface Module {
   id: string;
@@ -98,6 +98,14 @@ const Learn = () => {
     ? courseModules 
     : courseModules.filter(module => module.id === activeTab);
 
+  const startHereVideo = {
+    id: 'start-here',
+    title: 'Start Here: Course Overview',
+    duration: '10:30',
+    completed: false,
+    locked: false
+  };
+
   return (
     <MobileLayout>
       <Header title="Learn" />
@@ -116,6 +124,38 @@ const Learn = () => {
           </div>
           
           <TabsContent value="all" className="space-y-6">
+            {/* Start Here section - only appears in All Modules tab */}
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <h2 className="font-semibold flex items-center">
+                  <Info className="h-4 w-4 mr-2 text-brand" />
+                  Start Here
+                </h2>
+              </div>
+              <Card className="border-brand/30">
+                <CardContent className="p-4">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Get familiar with the course structure and how to use this app effectively
+                  </p>
+                  <div 
+                    onClick={() => handleVideoClick('intro', startHereVideo.id, false)}
+                    className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-accent"
+                  >
+                    <div className="flex items-center">
+                      <div className="mr-3 h-10 w-10 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
+                        <Play className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{startHereVideo.title}</p>
+                        <p className="text-xs text-muted-foreground">{startHereVideo.duration}</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Regular modules */}
             {courseModules.map(module => (
               <div key={module.id} className="space-y-3">
                 <div className="flex justify-between items-center">
