@@ -66,15 +66,14 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 onClick={() => navigate(item.path)}
                 className={cn(
                   "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
-                  active 
-                    ? "text-brand" 
-                    : "text-muted-foreground hover:text-foreground"
+                  active && theme === 'light' 
+                    ? "bg-zinc-800 text-brand px-2 py-1 rounded-lg" 
+                    : active 
+                      ? "text-brand" 
+                      : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <div className={cn(
-                  "flex items-center justify-center",
-                  active && theme === 'light' ? "bg-zinc-800 p-1 rounded" : ""
-                )}>
+                <div className="flex items-center justify-center">
                   <item.icon size={20} />
                 </div>
                 <span className="text-xs mt-1">{item.label}</span>
