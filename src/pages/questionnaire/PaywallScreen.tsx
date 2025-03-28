@@ -98,9 +98,9 @@ const PaywallScreen = () => {
             onSlideChange={setCurrentSlide}
             currentSlide={currentSlide}
           >
-            <CarouselContent className="-ml-2">
+            <CarouselContent className="-ml-2 overflow-visible">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="pl-2 basis-[85%]">
+                <CarouselItem key={index} className="pl-2 basis-[85%] transition-all duration-300">
                   <div className="bg-white rounded-xl p-4 shadow-lg h-[160px] flex flex-col">
                     {/* Centered name and flag */}
                     <div className="flex justify-center mb-1">
