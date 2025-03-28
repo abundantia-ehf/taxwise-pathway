@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Handshake } from 'lucide-react';
+import { Handshake, ArrowDown } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 
 const ConfirmationScreen = () => {
@@ -36,6 +37,11 @@ const ConfirmationScreen = () => {
             <p className="text-lg">
               Based on your answers, there is a strong indication you could save a significant amount of money each year on taxes.
             </p>
+          </div>
+          
+          {/* Downward arrow (non-bouncing) */}
+          <div className="flex justify-center mb-12">
+            <ArrowDown className="text-brand" size={42} />
           </div>
           
           {/* Spacer to push the button to the bottom */}
