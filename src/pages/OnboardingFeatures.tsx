@@ -72,8 +72,8 @@ const OnboardingFeatures = () => {
 
   const handleNext = () => {
     if (currentSlide === 3) {
-      // Show rating popup or navigate to login
-      navigate('/login');
+      // Navigate to the questionnaire instead of login
+      navigate('/questionnaire');
     } else {
       setCurrentSlide((prev) => prev + 1);
     }
