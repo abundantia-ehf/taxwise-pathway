@@ -32,8 +32,6 @@ export default {
 				brand: {
 					DEFAULT: '#D1FF82',
 					muted: 'rgba(209, 255, 130, 0.3)',
-					dark: '#A0C566', // Darker variant for light mode visibility
-					light: '#F2FFDD', // Lighter variant for backgrounds in light mode
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',

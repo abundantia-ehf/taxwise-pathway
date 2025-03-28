@@ -123,27 +123,6 @@
   .card-highlight {
     @apply rounded-2xl overflow-hidden border border-white/10 dark:border-white/5 shadow-sm;
   }
-
-  /* Light mode specific styles for better contrast */
-  .icon-light-mode {
-    @apply text-brand-dark;
-  }
-
-  .dark .icon-light-mode {
-    @apply text-brand;
-  }
-  
-  .button-brand-light {
-    @apply bg-brand-dark text-white hover:bg-brand-dark/90;
-  }
-  
-  .dark .button-brand-light {
-    @apply bg-brand text-black hover:bg-brand/90;
-  }
-  
-  .bg-brand-container {
-    @apply bg-brand-light dark:bg-brand/10;
-  }
 }
 
 @layer utilities {
