@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -48,18 +47,13 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
 const HomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  // Mock state to track if user has started any lessons
   const [hasStartedLessons, setHasStartedLessons] = useState(false);
   
-  // Simulating a check to see if the user has started any lessons
   useEffect(() => {
-    // In a real app, this would check your backend/local storage
-    // For demo, let's check localStorage for a simple flag
     const lessonProgress = localStorage.getItem('lesson-progress');
     setHasStartedLessons(!!lessonProgress);
   }, []);
   
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -100,13 +94,10 @@ const HomePage = () => {
     }
   ];
 
-  // Handle navigation to the appropriate learning content
   const handleLearningNavigation = () => {
     if (hasStartedLessons) {
-      // Navigate to the user's current lesson in progress or next lesson
       navigate('/learn');
     } else {
-      // Navigate to the "Start Here" introductory video
       navigate('/video/intro/start-here');
     }
   };
@@ -114,7 +105,6 @@ const HomePage = () => {
   return (
     <MobileLayout>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
-        {/* Custom Header with Logo */}
         <Header 
           title={
             <div className="h-[28px] w-auto">
@@ -134,7 +124,6 @@ const HomePage = () => {
         />
         
         <div className="container max-w-md mx-auto px-4">
-          {/* Learning Progress Section - conditionally show Get Started or Continue Learning */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -167,7 +156,7 @@ const HomePage = () => {
                         <div className="flex justify-between mt-1">
                           <span className="text-xs text-muted-foreground">20% complete</span>
                           <button 
-                            className="text-xs font-medium text-brand hover:underline flex items-center"
+                            className={`text-xs font-medium text-brand hover:underline flex items-center ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
                           >
                             Continue <ArrowRight size={12} className="ml-1" />
                           </button>
@@ -180,7 +169,7 @@ const HomePage = () => {
                           Begin your tax optimization journey with our introductory lesson
                         </p>
                         <button 
-                          className="text-xs font-medium text-brand hover:underline flex items-center mt-2"
+                          className={`text-xs font-medium text-brand hover:underline flex items-center mt-2 ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
                         >
                           Watch now <ArrowRight size={12} className="ml-1" />
                         </button>
@@ -192,7 +181,6 @@ const HomePage = () => {
             </Card>
           </motion.div>
 
-          {/* Main Navigation Section */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-4">Explore</h2>
             <motion.div 
@@ -214,7 +202,6 @@ const HomePage = () => {
             </motion.div>
           </div>
 
-          {/* Quick Stats Section */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
