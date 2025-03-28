@@ -96,7 +96,7 @@ const HomePage = () => {
         {/* Custom Header with Logo */}
         <Header 
           title={
-            <div className="h-[24px] w-auto">
+            <div className="h-[28px] w-auto">
               <img 
                 src={theme === 'dark' 
                   ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
@@ -104,6 +104,7 @@ const HomePage = () => {
                 } 
                 alt="Untaxable Logo" 
                 className="h-full w-auto object-contain"
+                style={{ maxHeight: "28px" }}
               />
             </div>
           } 
