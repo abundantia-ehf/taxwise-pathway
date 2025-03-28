@@ -5,4 +5,5 @@ export interface QuestionnaireData {
   taxAmount?: string;
   employmentType?: string;
   taxFamiliarity?: string;
+  taxGoal?: string;
 }
