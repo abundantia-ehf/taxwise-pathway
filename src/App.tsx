@@ -11,6 +11,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 // Pages
 import LoadingPage from "./pages/LoadingPage";
 import Welcome from "./pages/Welcome";
+import OnboardingFeatures from "./pages/OnboardingFeatures";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Onboarding from "./pages/Onboarding";
@@ -41,6 +42,7 @@ const App = () => (
               
               {/* Public routes */}
               <Route path="/welcome" element={<Welcome />} />
+              <Route path="/onboarding-features" element={<OnboardingFeatures />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               
