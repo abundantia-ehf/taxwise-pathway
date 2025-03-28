@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -6,12 +7,15 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle, RefreshCw } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from "sonner";
+import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 
 const Subscribe = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
   const navigate = useNavigate();
   const { hasSubscription, startSubscription } = useAuth();
+  const { theme } = useTheme();
   
   useEffect(() => {
     if (hasSubscription) {
@@ -63,6 +67,12 @@ const Subscribe = () => {
     "Cancel anytime during trial"
   ];
 
+  const brandBgClass = theme === 'dark' ? 'bg-brand/10' : 'bg-brand-light';
+  const checkCircleClass = theme === 'dark' ? 'text-brand' : 'text-brand-dark';
+  const primaryButtonClass = theme === 'dark' 
+    ? 'bg-brand text-black hover:bg-brand/90' 
+    : 'bg-brand-dark text-white hover:bg-brand-dark/90';
+
   if (hasSubscription) {
     return (
       <MobileLayout hideNavigation>
@@ -77,7 +87,7 @@ const Subscribe = () => {
           </div>
           
           <div className="rounded-lg border overflow-hidden">
-            <div className="p-6 bg-brand/10 border-b">
+            <div className={cn("p-6 border-b", brandBgClass)}>
               <div className="text-center space-y-2">
                 <h2 className="text-xl font-semibold">Premium Plan</h2>
                 <div className="flex items-center justify-center">
@@ -95,7 +105,7 @@ const Subscribe = () => {
               <ul className="space-y-3">
                 {features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-brand mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className={cn("h-5 w-5 mr-2 mt-0.5 flex-shrink-0", checkCircleClass)} />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -105,7 +115,7 @@ const Subscribe = () => {
           
           <Button
             onClick={() => navigate('/learn')}
-            className="w-full py-6 bg-brand text-black hover:bg-brand/90"
+            className={cn("w-full py-6", primaryButtonClass)}
           >
             Continue to Content
           </Button>
@@ -131,7 +141,7 @@ const Subscribe = () => {
         </div>
         
         <div className="rounded-lg border overflow-hidden">
-          <div className="p-6 bg-brand/10 border-b">
+          <div className={cn("p-6 border-b", brandBgClass)}>
             <div className="text-center space-y-2">
               <h2 className="text-xl font-semibold">Premium Plan</h2>
               <div className="flex items-center justify-center">
@@ -149,7 +159,7 @@ const Subscribe = () => {
             <ul className="space-y-3">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-brand mr-2 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className={cn("h-5 w-5 mr-2 mt-0.5 flex-shrink-0", checkCircleClass)} />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -160,7 +170,7 @@ const Subscribe = () => {
         <Button
           onClick={handleSubscribe}
           disabled={isProcessing || isRestoring}
-          className="w-full py-6 bg-brand text-black hover:bg-brand/90"
+          className={cn("w-full py-6", primaryButtonClass)}
         >
           {isProcessing ? 'Processing...' : 'Start 3-Day Free Trial'}
         </Button>
