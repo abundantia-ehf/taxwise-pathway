@@ -73,14 +73,11 @@ const courseModules: Module[] = [
     description: 'Global tax optimization strategies for entrepreneurs',
     progress: 0,
     videos: [
-      { id: 'video-4-1', title: 'Foreign Earned Income Exclusion', duration: '19:15', completed: false, locked: true },
-      { id: 'video-4-2', title: 'Offshore Company Structures', duration: '22:30', completed: false, locked: true },
-      { id: 'video-4-3', title: 'International Tax Treaties', duration: '17:45', completed: false, locked: true },
-      { id: 'video-4-4', title: 'Puerto Rico Tax Incentives', duration: '15:20', completed: false, locked: true },
-      { id: 'video-4-5', title: 'Digital Nomad Taxation', duration: '16:40', completed: false, locked: true },
-      { id: 'video-4-6', title: 'Foreign Tax Credits', duration: '14:10', completed: false, locked: true },
-      { id: 'video-4-7', title: 'Asset Protection Abroad', duration: '18:55', completed: false, locked: true },
-      { id: 'video-4-8', title: 'Exit Tax Planning', duration: '21:20', completed: false, locked: true },
+      { id: 'video-4-1', title: 'The Big U.S. Tax Problem', duration: '19:15', completed: false, locked: true },
+      { id: 'video-4-2', title: 'Reducing Personal Tax Liability (FTC and FEIE)', duration: '22:30', completed: false, locked: true },
+      { id: 'video-4-3', title: 'GILTI, Subpart F, CFC Laws', duration: '17:45', completed: false, locked: true },
+      { id: 'video-4-4', title: 'Reducing Corporate Tax Liability', duration: '15:20', completed: false, locked: true },
+      { id: 'video-4-5', title: 'The Nuclear Option (Renouncing)', duration: '16:40', completed: false, locked: true },
     ]
   },
 ];
