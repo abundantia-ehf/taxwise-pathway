@@ -69,7 +69,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                   active 
                     ? cn(
                         "text-brand",
-                        theme === 'light' ? "bg-gray-200 dark:bg-transparent" : ""
+                        theme === 'light' ? "bg-gray-800 dark:bg-transparent" : ""
                       ) 
                     : "text-muted-foreground hover:text-foreground"
                 )}
