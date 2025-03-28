@@ -36,7 +36,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
       path: '/ai-help',
     },
     {
-      label: 'Advice',
+      label: 'Expert Help',
       icon: MessagesSquare,
       path: '/advice',
     },
