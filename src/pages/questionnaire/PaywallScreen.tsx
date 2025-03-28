@@ -42,8 +42,9 @@ const PaywallScreen = () => {
           
           {/* Testimonial card */}
           <div className="bg-white rounded-xl p-4 shadow-lg">
-            <div className="flex items-center mb-2">
-              <span className="font-medium text-sm">Anna R.</span>
+            {/* Centered name and flag */}
+            <div className="flex justify-center mb-2">
+              <span className="font-medium text-sm text-[#1A1F2C]">Anna R.</span>
               <span className="ml-1">🇦🇺</span>
             </div>
             
