@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -57,12 +58,12 @@ const courseModules: Module[] = [
     description: 'Leverage real estate investments for significant tax benefits',
     progress: 0,
     videos: [
-      { id: 'video-3-1', title: 'Real Estate Depreciation', duration: '16:30', completed: false, locked: true },
-      { id: 'video-3-2', title: '1031 Exchanges Explained', duration: '18:45', completed: false, locked: true },
-      { id: 'video-3-3', title: 'Real Estate Professional Status', duration: '15:20', completed: false, locked: true },
-      { id: 'video-3-4', title: 'Opportunity Zone Investing', duration: '14:10', completed: false, locked: true },
-      { id: 'video-3-5', title: 'Short-Term Rentals', duration: '12:55', completed: false, locked: true },
-      { id: 'video-3-6', title: 'Cost Segregation Studies', duration: '17:40', completed: false, locked: true },
+      { id: 'video-3-1', title: 'XI. What We Aim To Achieve', duration: '16:30', completed: false, locked: true },
+      { id: 'video-3-2', title: 'XII. Offshore Companies', duration: '18:45', completed: false, locked: true },
+      { id: 'video-3-3', title: 'XIII.', duration: '15:20', completed: false, locked: true },
+      { id: 'video-3-4', title: 'XIV.', duration: '14:10', completed: false, locked: true },
+      { id: 'video-3-5', title: 'XV.', duration: '12:55', completed: false, locked: true },
+      { id: 'video-3-6', title: 'XVI.', duration: '17:40', completed: false, locked: true },
     ]
   },
   {
