@@ -116,6 +116,15 @@ const Onboarding = () => {
     <MobileLayout hideNavigation>
       <div className="flex flex-col min-h-screen">
         <div className="p-4 border-b">
+          {/* Added logo at the top */}
+          <div className="w-full flex justify-center mb-4">
+            <img 
+              src="/lovable-uploads/3a8c1801-15f3-4359-956c-fb0125f565f9.png" 
+              alt="Untaxable Logo" 
+              className="h-8 object-contain"
+            />
+          </div>
+          
           <Progress value={progress} className="h-2" />
           <div className="flex justify-between mt-2 text-sm text-muted-foreground">
             <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
