@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
@@ -50,10 +51,15 @@ const Advice = () => {
       <div className="container p-4 space-y-6">
         <Card>
           <CardContent className="p-6 space-y-4">
-            <h2 className="font-semibold text-lg flex items-center">
-              <MessageSquare className="h-5 w-5 mr-2 text-brand" />
-              Ask an Untaxable Pro
-            </h2>
+            <div className="space-y-1">
+              <h2 className="font-semibold text-lg flex items-center">
+                <MessageSquare className="h-5 w-5 mr-2 text-brand" />
+                Ask an Untaxable Pro
+              </h2>
+              <p className="text-xs text-muted-foreground">
+                Limited to 1 submission per 24 hours
+              </p>
+            </div>
             
             <p className="text-xs text-muted-foreground">
               Get personal tax help from our Untaxable pros. Please be as detailed as possible with your question, providing as much info as possible (location, type of income, industry, taxes previously paid, etc.) for the best response. Responses typically arrive within 24-72 hours, depending on the complexity of your question.
