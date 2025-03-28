@@ -33,10 +33,10 @@ const Questionnaire = () => {
   
   return (
     <MobileLayout hideNavigation>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col h-screen">
         {step > 0 && <ProgressHeader currentStep={step} totalSteps={totalSteps} />}
         
-        <div className="flex-1 p-6 flex flex-col">
+        <div className="flex-1 flex flex-col overflow-hidden">
           {step === 0 && <IntroductionStep onNext={handleNext} />}
           {step === 1 && <CountryStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === 2 && <TaxAmountStep data={data} updateData={updateData} onNext={handleNext} />}

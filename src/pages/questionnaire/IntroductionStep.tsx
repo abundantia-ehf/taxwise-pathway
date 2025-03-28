@@ -13,15 +13,22 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center justify-center h-full space-y-8 text-center"
+      className="flex flex-col items-center justify-between h-full py-8 px-4 text-center"
     >
-      <h1 className="text-2xl font-bold">Take the Untaxable survey so we can better serve you with a low-tax plan</h1>
-      <p className="text-muted-foreground">Let's start by learning more about your situation.</p>
-      <div className="flex items-center space-x-2 text-brand">
-        <Clock className="h-5 w-5" />
-        <span>Takes 1 minute</span>
+      <div className="flex-1" />
+      
+      <div className="space-y-6 max-w-md">
+        <h1 className="text-2xl font-bold">Take the Untaxable survey so we can better serve you with a low-tax plan</h1>
+        <p className="text-muted-foreground">Let's start by learning more about your situation.</p>
+        <div className="flex items-center justify-center space-x-2 text-brand">
+          <Clock className="h-5 w-5" />
+          <span>Takes 1 minute</span>
+        </div>
       </div>
-      <div className="mt-auto w-full">
+      
+      <div className="flex-1" />
+      
+      <div className="w-full max-w-md mt-4">
         <Button 
           onClick={onNext} 
           className="w-full py-6 bg-brand text-black hover:bg-brand/90"
