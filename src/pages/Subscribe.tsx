@@ -5,10 +5,12 @@ import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Subscribe = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+  const { startSubscription } = useAuth();
   
   const handleSubscribe = () => {
     setIsProcessing(true);
@@ -17,6 +19,7 @@ const Subscribe = () => {
     setTimeout(() => {
       setIsProcessing(false);
       // Would integrate with Superwall/Stripe here
+      startSubscription();
       navigate('/learn');
     }, 2000);
   };

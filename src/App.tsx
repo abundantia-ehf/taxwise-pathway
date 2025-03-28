@@ -45,30 +45,14 @@ const App = () => (
               <Route path="/onboarding-features" element={<OnboardingFeatures />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              
-              {/* Auth required routes */}
-              <Route 
-                path="/onboarding" 
-                element={
-                  <ProtectedRoute>
-                    <Onboarding />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/subscribe" 
-                element={
-                  <ProtectedRoute>
-                    <Subscribe />
-                  </ProtectedRoute>
-                } 
-              />
+              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/subscribe" element={<Subscribe />} />
               
               {/* Protected routes requiring subscription */}
               <Route 
                 path="/learn" 
                 element={
-                  <ProtectedRoute requireSubscription requireOnboarding>
+                  <ProtectedRoute requireSubscription>
                     <Learn />
                   </ProtectedRoute>
                 } 
@@ -76,7 +60,7 @@ const App = () => (
               <Route 
                 path="/video/:moduleId/:videoId" 
                 element={
-                  <ProtectedRoute requireSubscription requireOnboarding>
+                  <ProtectedRoute requireSubscription>
                     <VideoPlayer />
                   </ProtectedRoute>
                 } 
@@ -84,7 +68,7 @@ const App = () => (
               <Route 
                 path="/ai-help" 
                 element={
-                  <ProtectedRoute requireSubscription requireOnboarding>
+                  <ProtectedRoute requireSubscription>
                     <AIHelp />
                   </ProtectedRoute>
                 } 
@@ -92,7 +76,7 @@ const App = () => (
               <Route 
                 path="/support" 
                 element={
-                  <ProtectedRoute requireSubscription requireOnboarding>
+                  <ProtectedRoute requireSubscription>
                     <Support />
                   </ProtectedRoute>
                 } 

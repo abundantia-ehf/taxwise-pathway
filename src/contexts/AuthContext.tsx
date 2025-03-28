@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { toast } from "sonner";
 
@@ -25,6 +24,7 @@ interface AuthContextType {
   signup: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
   completeOnboarding: () => void;
+  startSubscription: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,11 +32,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasAnonymousSubscription, setHasAnonymousSubscription] = useState(false);
 
-  // Mock data - would connect to backend service
   useEffect(() => {
-    // Simulate loading user data
     const savedUser = localStorage.getItem('untaxable-user');
+    const hasSubscription = localStorage.getItem('untaxable-subscription') === 'true';
+    
+    setHasAnonymousSubscription(hasSubscription);
     
     setTimeout(() => {
       if (savedUser) {
@@ -49,10 +51,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      // Mock login - would call an API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Simulated successful login response
       const mockUser: User = {
         id: '123',
         email,
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         subscription: {
           status: 'trial',
           startDate: new Date(),
-          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         },
         onboardingCompleted: false
       };
@@ -79,10 +79,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signup = async (email: string, password: string, name: string) => {
     try {
       setIsLoading(true);
-      // Mock signup - would call an API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Simulated successful signup response
       const mockUser: User = {
         id: '123',
         email,
@@ -90,7 +88,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         subscription: {
           status: 'trial',
           startDate: new Date(),
-          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         },
         onboardingCompleted: false
       };
@@ -123,8 +121,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // Derive subscription status
-  const hasSubscription = !!user?.subscription && (user.subscription.status === 'active' || user.subscription.status === 'trial');
+  const startSubscription = () => {
+    setHasAnonymousSubscription(true);
+    localStorage.setItem('untaxable-subscription', 'true');
+    toast.success("Subscription activated!");
+  };
+
+  const hasSubscription = !!user?.subscription && (user.subscription.status === 'active' || user.subscription.status === 'trial') || hasAnonymousSubscription;
   const isTrialActive = !!user?.subscription && user.subscription.status === 'trial' && user.subscription.trialEndDate ? new Date(user.subscription.trialEndDate) > new Date() : false;
 
   return (
@@ -138,7 +141,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         login, 
         signup, 
         logout,
-        completeOnboarding
+        completeOnboarding,
+        startSubscription
       }}
     >
       {children}
