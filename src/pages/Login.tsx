@@ -83,7 +83,7 @@ const Login = () => {
           {/* Text and buttons */}
           <div className="pb-12 space-y-6">
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-2">You're on your way to 0%</h3>
+              <h3 className="text-2xl font-unitext font-bold mb-2">You're on your way to 0%</h3>
               <p className="text-white/70">Create an account to continue</p>
             </div>
             
