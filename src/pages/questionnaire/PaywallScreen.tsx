@@ -34,7 +34,7 @@ const PaywallScreen = () => {
           
           {/* Main headline */}
           <div className="text-center mb-3">
-            <h1 className="text-2xl font-bold mb-2">Pay less tax, legally</h1>
+            <h1 className="text-2xl font-bold mb-2">Pay less tax, <span className="border-b-2 border-[#ea384c]">legally</span></h1>
             <p className="text-sm">
               Join thousands of users who have legally reduced their tax rate, often to 0%
             </p>
@@ -72,13 +72,13 @@ const PaywallScreen = () => {
           {/* Offer details */}
           <div className="text-center mb-4">
             <h2 className="text-lg font-bold mb-2 text-gray-900">
-              Personalized, actionable advice from tax mitigation pros
+              Personalized help from tax mitigation pros
             </h2>
             <p className="text-gray-800 text-sm mb-3">
               Make a low-tax or no-tax life a reality in two weeks or less
             </p>
             <p className="font-medium text-sm text-gray-900">
-              3 day free trial, then just <span className="text-brand">$48.50 US$/month</span>
+              3 day free trial, then just <span className="text-black bg-brand px-1 rounded">$48.50 US$/month</span>
             </p>
           </div>
           
