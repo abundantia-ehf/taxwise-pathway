@@ -75,7 +75,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
       </main>
 
       {!hideNavigation && (
-        <nav className="fixed bottom-0 left-0 right-0 border-t bg-background/80 backdrop-blur-md flex justify-between items-center px-2 py-2 z-50">
+        <nav className="fixed bottom-0 left-0 right-0 border-t bg-[#1A1F2C] backdrop-blur-md flex justify-between items-center px-2 py-2 z-50">
           {navigationItems.map((item) => {
             const active = isActive(item.path);
             return (
