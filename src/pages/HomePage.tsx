@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
@@ -48,6 +48,16 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
 const HomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  // Mock state to track if user has started any lessons
+  const [hasStartedLessons, setHasStartedLessons] = useState(false);
+  
+  // Simulating a check to see if the user has started any lessons
+  useEffect(() => {
+    // In a real app, this would check your backend/local storage
+    // For demo, let's check localStorage for a simple flag
+    const lessonProgress = localStorage.getItem('lesson-progress');
+    setHasStartedLessons(!!lessonProgress);
+  }, []);
   
   // Animation variants
   const containerVariants = {
@@ -90,6 +100,17 @@ const HomePage = () => {
     }
   ];
 
+  // Handle navigation to the appropriate learning content
+  const handleLearningNavigation = () => {
+    if (hasStartedLessons) {
+      // Navigate to the user's current lesson in progress or next lesson
+      navigate('/learn');
+    } else {
+      // Navigate to the "Start Here" introductory video
+      navigate('/video/intro/start-here');
+    }
+  };
+
   return (
     <MobileLayout>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
@@ -113,40 +134,58 @@ const HomePage = () => {
         />
         
         <div className="container max-w-md mx-auto px-4">
-          {/* Recent Progress Section */}
+          {/* Learning Progress Section - conditionally show Get Started or Continue Learning */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-8 mt-4"
           >
-            <h2 className="text-lg font-semibold mb-4 flex items-center">
-              Continue Learning 
+            <h2 className="text-lg font-semibold mb-4 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
+              {hasStartedLessons ? "Continue Learning" : "Get Started"} 
               <ArrowRight 
                 size={18} 
                 className={`ml-1 ${theme === 'dark' ? 'text-brand' : 'text-foreground'}`} 
               />
             </h2>
-            <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
+            <Card 
+              className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} cursor-pointer`}
+              onClick={handleLearningNavigation}
+            >
               <CardContent className="p-4">
                 <div className="flex items-center">
                   <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-4">
                     <BookOpen size={24} className="text-brand" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium">Foundations of Tax Optimization</h3>
-                    <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
-                      <div className="h-2 bg-brand rounded-full" style={{ width: '20%' }}></div>
-                    </div>
-                    <div className="flex justify-between mt-1">
-                      <span className="text-xs text-muted-foreground">20% complete</span>
-                      <button 
-                        onClick={() => navigate('/learn')}
-                        className="text-xs font-medium text-brand hover:underline flex items-center"
-                      >
-                        Continue <ArrowRight size={12} className="ml-1" />
-                      </button>
-                    </div>
+                    {hasStartedLessons ? (
+                      <>
+                        <h3 className="font-medium">Foundations of Tax Optimization</h3>
+                        <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
+                          <div className="h-2 bg-brand rounded-full" style={{ width: '20%' }}></div>
+                        </div>
+                        <div className="flex justify-between mt-1">
+                          <span className="text-xs text-muted-foreground">20% complete</span>
+                          <button 
+                            className="text-xs font-medium text-brand hover:underline flex items-center"
+                          >
+                            Continue <ArrowRight size={12} className="ml-1" />
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <h3 className="font-medium">Start Here: Course Overview</h3>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Begin your tax optimization journey with our introductory lesson
+                        </p>
+                        <button 
+                          className="text-xs font-medium text-brand hover:underline flex items-center mt-2"
+                        >
+                          Watch now <ArrowRight size={12} className="ml-1" />
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </CardContent>
