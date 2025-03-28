@@ -54,7 +54,7 @@ const Login = () => {
             <img 
               src="/lovable-uploads/bce91dd7-e69e-4ac6-a7c0-a42f182b9eda.png" 
               alt="Untaxable Logo" 
-              className="h-8" 
+              className="h-8 rounded-md" 
             />
           </div>
           
@@ -69,7 +69,7 @@ const Login = () => {
                       <img 
                         src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
                         alt="Untaxable Logo" 
-                        className="w-full h-full object-cover" 
+                        className="w-full h-full object-cover rounded-lg" 
                       />
                     </div>
                     <p className="text-xs text-white/70">Untaxable App</p>
