@@ -50,7 +50,7 @@ const Login = () => {
           className="h-screen flex flex-col"
         >
           {/* Logo */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-12">
             <img 
               src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
               alt="Untaxable Logo" 
@@ -59,7 +59,7 @@ const Login = () => {
           </div>
           
           {/* Phone illustration */}
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center mb-12">
             <div className="relative w-56 h-[400px] rounded-3xl border-4 border-gray-800 bg-zinc-900 p-2 shadow-xl">
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-20 h-3 bg-black rounded-full"></div>
               <div className="h-full rounded-2xl overflow-hidden border border-gray-800">
