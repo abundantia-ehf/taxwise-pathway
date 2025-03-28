@@ -86,42 +86,44 @@ const PaywallScreen = () => {
           </div>
           
           {/* Testimonial carousel */}
-          <Carousel 
-            className="w-full" 
-            opts={{
-              align: "center",
-              containScroll: false,
-              loop: true,
-              dragFree: false,
-              slidesToScroll: 1,
-            }}
-            onSlideChange={setCurrentSlide}
-            currentSlide={currentSlide}
-          >
-            <CarouselContent className="-ml-2 overflow-visible">
-              {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="pl-2 basis-[85%] transition-all duration-300">
-                  <div className="bg-white rounded-xl p-4 shadow-lg h-[160px] flex flex-col">
-                    {/* Centered name and flag */}
-                    <div className="flex justify-center mb-1">
-                      <span className="font-medium text-sm text-[#1A1F2C]">{testimonial.name}</span>
-                      <span className="ml-1">{testimonial.flag}</span>
+          <div className="relative w-full overflow-hidden">
+            <Carousel 
+              className="w-full" 
+              opts={{
+                align: "center",
+                containScroll: false,
+                loop: true,
+                dragFree: false,
+                slidesToScroll: 1,
+              }}
+              onSlideChange={setCurrentSlide}
+              currentSlide={currentSlide}
+            >
+              <CarouselContent className="-ml-2 overflow-visible">
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="pl-2 basis-[85%] transition-all duration-300">
+                    <div className="bg-white rounded-xl p-4 shadow-lg h-[160px] flex flex-col">
+                      {/* Centered name and flag */}
+                      <div className="flex justify-center mb-1">
+                        <span className="font-medium text-sm text-[#1A1F2C]">{testimonial.name}</span>
+                        <span className="ml-1">{testimonial.flag}</span>
+                      </div>
+                      
+                      <p className="text-gray-700 text-sm mb-2 flex-grow">
+                        {testimonial.text}
+                      </p>
+                      
+                      <div className="flex justify-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
                     </div>
-                    
-                    <p className="text-gray-700 text-sm mb-2 flex-grow">
-                      {testimonial.text}
-                    </p>
-                    
-                    <div className="flex justify-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
           
           {/* Carousel indicators */}
           <div className="flex justify-center mt-4 space-x-2">
