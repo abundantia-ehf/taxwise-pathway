@@ -31,13 +31,11 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
         }}
         className="w-36 h-36 flex items-center justify-center z-10"
       >
-        <div className="rounded-xl overflow-hidden bg-black/50 p-3 backdrop-blur-sm shadow-lg border border-white/5">
-          <img 
-            src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
-            alt="Untaxable Logo" 
-            className="w-full h-full object-cover rounded-md"
-          />
-        </div>
+        <img 
+          src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
+          alt="Untaxable Logo" 
+          className="w-full h-full object-cover rounded-md"
+        />
       </motion.div>
     </div>
   );
