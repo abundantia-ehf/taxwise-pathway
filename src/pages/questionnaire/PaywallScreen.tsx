@@ -101,7 +101,7 @@ const PaywallScreen = () => {
             <CarouselContent className="-ml-0 overflow-visible">
               {testimonials.map((testimonial, index) => (
                 <CarouselItem key={index} className="pl-0 basis-[85%] transition-all duration-300">
-                  <div className="mx-2">
+                  <div className={`mx-2 ${currentSlide !== index ? 'opacity-50 blur-sm' : ''}`}>
                     <div className="bg-white rounded-xl p-4 shadow-lg h-[160px] flex flex-col">
                       {/* Centered name and flag */}
                       <div className="flex justify-center mb-1">
