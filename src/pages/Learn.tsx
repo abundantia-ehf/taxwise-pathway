@@ -44,13 +44,11 @@ const courseModules: Module[] = [
     description: 'Optimize your business structure to legally minimize taxes',
     progress: 0,
     videos: [
-      { id: 'video-2-1', title: 'Comparing Business Entities', duration: '14:10', completed: false, locked: true },
-      { id: 'video-2-2', title: 'S-Corporation Strategies', duration: '17:50', completed: false, locked: true },
-      { id: 'video-2-3', title: 'LLC Tax Advantages', duration: '13:25', completed: false, locked: true },
-      { id: 'video-2-4', title: 'Business Deduction Mastery', duration: '19:30', completed: false, locked: true },
-      { id: 'video-2-5', title: 'Hiring Family Members', duration: '12:45', completed: false, locked: true },
-      { id: 'video-2-6', title: 'Home Office Deductions', duration: '10:20', completed: false, locked: true },
-      { id: 'video-2-7', title: 'Vehicle Expense Strategies', duration: '11:50', completed: false, locked: true },
+      { id: 'video-2-1', title: 'VI. Understanding Tax Residency', duration: '14:10', completed: false, locked: true },
+      { id: 'video-2-2', title: 'VII. Tax Residency Examples', duration: '17:50', completed: false, locked: true },
+      { id: 'video-2-3', title: 'VIII. Changing Tax Residency', duration: '13:25', completed: false, locked: true },
+      { id: 'video-2-4', title: 'IX. Corporate Tax Residency', duration: '19:30', completed: false, locked: true },
+      { id: 'video-2-5', title: 'X. Controlled Foreign Corporation (CFC) Laws', duration: '12:45', completed: false, locked: true },
     ]
   },
   {
