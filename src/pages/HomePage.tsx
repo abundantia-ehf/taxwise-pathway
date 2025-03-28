@@ -95,14 +95,14 @@ const HomePage = () => {
         <div className="container max-w-md mx-auto px-4">
           {/* Header with Logo and Theme Toggle */}
           <div className="flex justify-between items-center py-4">
-            {/* Logo - moved to left */}
+            {/* Logo - moved to left, removed text */}
             <motion.div 
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               className="flex items-center"
             >
-              <div className="w-10 h-10 mr-2">
+              <div className="w-10 h-10">
                 <img 
                   src={theme === 'dark' 
                     ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
@@ -112,24 +112,25 @@ const HomePage = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-lg font-semibold">Untaxable</span>
             </motion.div>
             
-            {/* Theme Toggle - added to right */}
+            {/* Theme Toggle - updated to match other pages */}
             <motion.div
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               className="flex items-center"
             >
-              <div className="flex items-center space-x-2">
-                <Sun size={16} className={theme === 'light' ? 'text-brand' : 'text-muted-foreground'} />
-                <Switch
-                  checked={theme === 'dark'}
-                  onCheckedChange={toggleTheme}
-                />
-                <Moon size={16} className={theme === 'dark' ? 'text-brand' : 'text-muted-foreground'} />
-              </div>
+              <button
+                onClick={toggleTheme}
+                className="rounded-md p-2 hover:bg-accent"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-[1.2rem] w-[1.2rem]" />
+                ) : (
+                  <Moon className="h-[1.2rem] w-[1.2rem]" />
+                )}
+              </button>
             </motion.div>
           </div>
           
