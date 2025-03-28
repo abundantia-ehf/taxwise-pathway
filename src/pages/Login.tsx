@@ -52,7 +52,7 @@ const Login = () => {
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <img 
-              src="/lovable-uploads/bce91dd7-e69e-4ac6-a7c0-a42f182b9eda.png" 
+              src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
               alt="Untaxable Logo" 
               className="h-8 rounded" 
             />
