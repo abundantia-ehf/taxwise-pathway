@@ -77,24 +77,26 @@ const PaywallScreen = () => {
           <Carousel 
             className="w-full" 
             opts={{
-              align: "start",
+              align: "center",
               containScroll: false,
               loop: true,
+              dragFree: false,
+              slidesToScroll: 1,
             }}
             onSlideChange={setCurrentSlide}
             currentSlide={currentSlide}
           >
             <CarouselContent className="-ml-2">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="pl-2 md:basis-full basis-4/5">
-                  <div className="bg-white rounded-xl p-4 shadow-lg">
+                <CarouselItem key={index} className="pl-2 basis-[85%]">
+                  <div className="bg-white rounded-xl p-4 shadow-lg h-[175px] flex flex-col">
                     {/* Centered name and flag */}
                     <div className="flex justify-center mb-2">
                       <span className="font-medium text-sm text-[#1A1F2C]">{testimonial.name}</span>
                       <span className="ml-1">{testimonial.flag}</span>
                     </div>
                     
-                    <p className="text-gray-700 text-sm mb-3">
+                    <p className="text-gray-700 text-sm mb-3 flex-grow">
                       {testimonial.text}
                     </p>
                     
