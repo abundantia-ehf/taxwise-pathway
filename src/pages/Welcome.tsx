@@ -19,10 +19,10 @@ const Welcome = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center justify-between h-full"
+          className="flex flex-col items-center justify-center h-full"
         >
           {/* Logo section */}
-          <div className="pt-8 flex flex-col items-center space-y-8 w-full">
+          <div className="flex flex-col items-center space-y-8 w-full">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -58,22 +58,22 @@ const Welcome = () => {
             >
               <ArrowDown className="text-brand animate-bounce" size={42} />
             </motion.div>
-          </div>
-          
-          {/* Bottom section with button */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.5 }}
-            className="w-full pb-8"
-          >
-            <Button 
-              className="w-full py-5 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
-              onClick={() => navigate('/onboarding-features')}
+            
+            {/* Button now positioned with equal spacing */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+              className="w-full mt-40"
             >
-              Get Started <ArrowRight className="ml-1" size={18} />
-            </Button>
-          </motion.div>
+              <Button 
+                className="w-full py-5 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
+                onClick={() => navigate('/onboarding-features')}
+              >
+                Get Started <ArrowRight className="ml-1" size={18} />
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>
