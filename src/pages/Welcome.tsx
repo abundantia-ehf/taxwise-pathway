@@ -48,14 +48,15 @@ const Welcome = () => {
               <p className="text-base text-white/70">
                 Let's begin your path to legally paying zero taxes.
               </p>
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-                className="flex justify-center mt-24"
-              >
-                <ArrowDown className="text-brand animate-bounce" size={42} />
-              </motion.div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="flex justify-center mt-40"
+            >
+              <ArrowDown className="text-brand animate-bounce" size={42} />
             </motion.div>
           </div>
           
