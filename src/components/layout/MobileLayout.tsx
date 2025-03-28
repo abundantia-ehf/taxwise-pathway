@@ -66,7 +66,12 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 onClick={() => navigate(item.path)}
                 className={cn(
                   "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
-                  active ? "text-brand" : "text-muted-foreground hover:text-foreground"
+                  active 
+                    ? cn(
+                        "text-brand",
+                        theme === 'light' ? "bg-gray-200 dark:bg-transparent" : ""
+                      ) 
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <div className="flex items-center justify-center">
