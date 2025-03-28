@@ -46,14 +46,14 @@ const Advice = () => {
 
   return (
     <MobileLayout>
-      <Header title="Ask Tax Professionals" />
+      <Header title="Expert Help" />
       
       <div className="container p-4 space-y-6">
         <Card>
           <CardContent className="p-6 space-y-4">
             <h2 className="font-semibold text-lg flex items-center">
               <MessageSquare className="h-5 w-5 mr-2 text-brand" />
-              Ask a Tax Professional
+              Ask an Untaxable Pro
             </h2>
             
             <p className="text-sm text-muted-foreground">
