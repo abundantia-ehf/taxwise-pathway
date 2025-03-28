@@ -39,15 +39,6 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
           />
         </div>
       </motion.div>
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="absolute bottom-20 text-white/70 text-sm"
-      >
-        Loading amazing content...
-      </motion.div>
     </div>
   );
 };
