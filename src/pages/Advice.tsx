@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
@@ -55,8 +56,8 @@ const Advice = () => {
               Ask an Untaxable Pro
             </h2>
             
-            <p className="text-sm text-muted-foreground">
-              Get personalized tax advice from our Untaxable pros. Please be as detailed as possible with your question, providing as much info as possible (location, type of income, industry, taxes previously paid, etc.) for the best response. Responses typically arrive within 24-72 hours, depending on the complexity of your question.
+            <p className="text-xs text-muted-foreground">
+              Get personal tax help from our Untaxable pros. Please be as detailed as possible with your question, providing as much info as possible (location, type of income, industry, taxes previously paid, etc.) for the best response. Responses typically arrive within 24-72 hours, depending on the complexity of your question.
             </p>
             
             <form onSubmit={handleSubmit} className="space-y-4">
