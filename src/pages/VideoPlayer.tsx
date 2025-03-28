@@ -7,14 +7,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Play, CheckCircle } from 'lucide-react';
+import WistiaPlayer from '@/components/video/WistiaPlayer';
 
-// Mock video data
+// Updated video data model with Wistia support
 const getVideoData = (moduleId: string, videoId: string) => {
   return {
     id: videoId,
     title: 'Understanding Tax Brackets',
     description: 'Learn how tax brackets work and strategies to optimize your income to stay in lower brackets.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    wistiaId: 'abc123xyz', // Example Wistia ID - replace with your actual Wistia video ID
+    useWistia: true, // Flag to indicate whether to use Wistia or regular video player
     transcript: `Welcome to the first video in our Untaxable course. Today we're going to be talking about understanding tax brackets. 
 
 Tax brackets are ranges of income that are taxed at specific rates. The U.S. uses a progressive tax system, which means that the tax rate increases as your income increases.
@@ -67,17 +70,24 @@ const VideoPlayer = () => {
       <Header title={video.title} showBack />
       
       <div className="container p-0">
-        {/* Video Player */}
+        {/* Video Player - conditionally render Wistia or standard player */}
         <div className="relative aspect-video bg-black w-full">
-          <video
-            className="w-full h-full object-contain"
-            controls
-            onEnded={handleVideoEnd}
-            poster="/placeholder.svg"
-          >
-            <source src={video.videoUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          {video.useWistia && video.wistiaId ? (
+            <WistiaPlayer 
+              videoId={video.wistiaId}
+              onEnd={handleVideoEnd}
+            />
+          ) : (
+            <video
+              className="w-full h-full object-contain"
+              controls
+              onEnded={handleVideoEnd}
+              poster="/placeholder.svg"
+            >
+              <source src={video.videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
         </div>
         
         <div className="p-4">
