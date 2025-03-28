@@ -7,7 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Clock, Lock, Globe, DollarSign, Euro, PoundSterling, Yen, Ruble, ArrowRight } from 'lucide-react';
+import { Clock, Lock, Globe, DollarSign, Euro, PoundSterling } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 
 // Types for questionnaire data
@@ -57,8 +57,8 @@ const CurrencyIcon = () => {
     <DollarSign key="dollar" className="h-10 w-10 text-brand" />,
     <Euro key="euro" className="h-10 w-10 text-brand" />,
     <PoundSterling key="pound" className="h-10 w-10 text-brand" />,
-    <Yen key="yen" className="h-10 w-10 text-brand" />,
-    <Ruble key="ruble" className="h-10 w-10 text-brand" />
+    <DollarSign key="yen" className="h-10 w-10 text-brand" />, // Using DollarSign as fallback for Yen
+    <DollarSign key="ruble" className="h-10 w-10 text-brand" /> // Using DollarSign as fallback for Ruble
   ];
   
   useEffect(() => {
