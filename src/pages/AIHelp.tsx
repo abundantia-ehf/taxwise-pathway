@@ -14,6 +14,8 @@ interface Message {
   timestamp: Date;
 }
 
+const MAX_CHARS = 1000;
+
 const AIHelp = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -33,6 +35,14 @@ const AIHelp = () => {
   
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Limit input to MAX_CHARS characters
+    if (value.length <= MAX_CHARS) {
+      setInput(value);
+    }
   };
   
   const handleSendMessage = () => {
@@ -136,26 +146,35 @@ const AIHelp = () => {
               e.preventDefault();
               handleSendMessage();
             }}
-            className="flex items-center space-x-2"
+            className="flex flex-col space-y-2"
           >
-            <Input
-              placeholder="Ask your tax questions..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="flex-1"
-            />
-            <Button 
-              type="submit" 
-              size="icon"
-              disabled={!input.trim() || isTyping}
-              className="bg-brand text-black hover:bg-brand/90"
-            >
-              <Send className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Input
+                placeholder="Ask your tax questions..."
+                value={input}
+                onChange={handleInputChange}
+                className="flex-1"
+                maxLength={MAX_CHARS}
+              />
+              <Button 
+                type="submit" 
+                size="icon"
+                disabled={!input.trim() || isTyping}
+                className="bg-brand text-black hover:bg-brand/90"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <div className="flex justify-between items-center px-1">
+              <p className="text-xs text-muted-foreground">
+                {input.length} / {MAX_CHARS} characters
+              </p>
+              <p className="text-xs text-muted-foreground">
+                AI often gets things wrong. Please only use this for quick, general advice.
+              </p>
+            </div>
           </form>
-          <p className="text-xs text-muted-foreground mt-2 text-center">
-            AI often gets things wrong. Please only use this for quick, general advice. Use the Expert Help tab below to confirm your questions with an Untaxable pro.
-          </p>
         </div>
       </div>
     </MobileLayout>
