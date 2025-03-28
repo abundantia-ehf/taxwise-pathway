@@ -10,29 +10,20 @@ interface FeatureSlideProps {
   icon: React.ReactNode;
   title: string;
   description: string;
-  index: number;
-  currentSlide: number;
 }
 
-const FeatureSlide = ({ icon, title, description, index, currentSlide }: FeatureSlideProps) => {
-  const isActive = index === currentSlide;
-  
+const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col items-center space-y-6"
-    >
+    <div className="flex flex-col items-center space-y-6">
       <div className="w-48 h-48 rounded-full bg-brand/10 flex items-center justify-center">
         {icon}
       </div>
       
       <div className="text-center space-y-2 max-w-xs">
-        <h2 className="text-2xl font-bold">{title}</h2>
+        <h2 className="text-2xl font-unitext font-bold">{title}</h2>
         <p className="text-white/70">{description}</p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -96,11 +87,11 @@ const OnboardingFeatures = () => {
       
       <div className="container max-w-md mx-auto px-4 py-12 h-screen flex flex-col">
         <div className="flex-1 flex items-center justify-center">
-          <Carousel className="w-full" setApi={(api) => {
-            api?.on('select', () => {
-              setCurrentSlide(api.selectedScrollSnap());
-            });
-          }}>
+          <Carousel className="w-full" 
+            defaultSlideSize={100}
+            onSlideChange={setCurrentSlide}
+            currentSlide={currentSlide}
+          >
             <CarouselContent>
               {features.map((feature, index) => (
                 <CarouselItem key={index} className="flex items-center justify-center">
@@ -108,8 +99,6 @@ const OnboardingFeatures = () => {
                     icon={feature.icon}
                     title={feature.title}
                     description={feature.description}
-                    index={index}
-                    currentSlide={currentSlide}
                   />
                 </CarouselItem>
               ))}
@@ -124,7 +113,7 @@ const OnboardingFeatures = () => {
                 key={dot}
                 className={`w-2.5 h-2.5 rounded-full ${
                   currentSlide === dot ? 'bg-brand' : 'bg-white/30'
-                } transition-colors`}
+                } transition-colors cursor-pointer`}
                 onClick={() => setCurrentSlide(dot)}
               />
             ))}
@@ -135,9 +124,9 @@ const OnboardingFeatures = () => {
             onClick={handleNext}
           >
             {currentSlide < 3 ? (
-              <>Next <ArrowRight size={18} /></>
+              <>Next <ArrowRight size={18} className="ml-1" /></>
             ) : (
-              <>Rate Us <Star size={18} /></>
+              <>Rate Us <Star size={18} className="ml-1" /></>
             )}
           </Button>
         </div>
