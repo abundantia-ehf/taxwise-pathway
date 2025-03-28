@@ -1,5 +1,5 @@
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BookOpen, Bot, MessagesSquare, Settings, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -13,7 +13,25 @@ interface MobileLayoutProps {
 const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { theme } = useTheme();
+  const { theme, forceDarkMode, resetThemeForce } = useTheme();
+  
+  // Check if the current route is part of the onboarding flow
+  const isOnboardingRoute = 
+    location.pathname === '/welcome' ||
+    location.pathname === '/onboarding-features' ||
+    location.pathname === '/questionnaire' ||
+    location.pathname.startsWith('/questionnaire/') ||
+    location.pathname === '/onboarding' ||
+    location.pathname === '/subscribe';
+  
+  // Force dark mode for onboarding routes
+  useEffect(() => {
+    if (isOnboardingRoute) {
+      forceDarkMode();
+    } else {
+      resetThemeForce();
+    }
+  }, [isOnboardingRoute, forceDarkMode, resetThemeForce]);
   
   const isActive = (path: string) => {
     return location.pathname === path;

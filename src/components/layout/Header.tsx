@@ -18,6 +18,19 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  
+  // Check if the current route is part of the onboarding flow
+  const isOnboardingRoute = 
+    location.pathname === '/welcome' ||
+    location.pathname === '/onboarding-features' ||
+    location.pathname === '/questionnaire' ||
+    location.pathname.startsWith('/questionnaire/') ||
+    location.pathname === '/onboarding' ||
+    location.pathname === '/subscribe';
+  
+  // Only show theme toggle if explicitly allowed and not on onboarding routes
+  const shouldShowThemeToggle = showThemeToggle && !isOnboardingRoute;
   
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
@@ -39,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({
             )}
           </div>
           
-          {showThemeToggle && (
+          {shouldShowThemeToggle && (
             <button
               onClick={toggleTheme}
               className="rounded-md p-2 hover:bg-accent"
