@@ -154,7 +154,7 @@ const AIHelp = () => {
             </Button>
           </form>
           <p className="text-xs text-muted-foreground mt-2 text-center">
-            This AI assistant provides general tax information, not professional tax advice.
+            AI often gets things wrong. Please only use this for quick, general advice. Use the Expert Help tab below to confirm your questions with an Untaxable pro.
           </p>
         </div>
       </div>
