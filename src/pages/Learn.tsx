@@ -132,7 +132,7 @@ const Learn = () => {
                   Start Here
                 </h2>
               </div>
-              <Card className="border-brand/30">
+              <Card className="border-2 border-primary dark:border-brand/30">
                 <CardContent className="p-4">
                   <p className="text-sm text-muted-foreground mb-4">
                     Get familiar with the course structure and how to use this app effectively
