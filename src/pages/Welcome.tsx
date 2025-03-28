@@ -22,7 +22,7 @@ const Welcome = () => {
           className="flex flex-col items-center justify-between h-full"
         >
           {/* Logo section */}
-          <div className="pt-8 flex flex-col items-center space-y-4 w-full">
+          <div className="pt-8 flex flex-col items-center space-y-8 w-full">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
