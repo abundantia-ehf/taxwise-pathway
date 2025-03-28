@@ -35,7 +35,7 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
           <img 
             src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
             alt="Untaxable Logo" 
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover rounded-md"
           />
         </div>
       </motion.div>

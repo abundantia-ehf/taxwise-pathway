@@ -27,12 +27,12 @@ const Welcome = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="w-24 h-24 p-2 rounded-3xl bg-black flex items-center justify-center border border-white/10 shadow-lg"
+              className="w-24 h-24 p-2 rounded-2xl bg-black flex items-center justify-center border border-white/10 shadow-lg"
             >
               <img 
                 src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
                 alt="Untaxable Logo" 
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-cover rounded-xl"
               />
             </motion.div>
             
