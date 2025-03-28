@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Star, Flag, ArrowRight } from 'lucide-react';
+import { Star, ArrowRight } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
+import { useAuth } from '@/contexts/AuthContext';
+import { toast } from "sonner";
 import {
   Carousel,
   CarouselContent,
@@ -41,10 +43,20 @@ const testimonials: Testimonial[] = [
 const PaywallScreen = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const { startSubscription } = useAuth();
 
   const handleContinue = () => {
-    // Will be updated with Superwall/payment integration in the future
-    navigate('/subscribe');
+    setIsProcessing(true);
+    
+    // Simulate subscription process
+    setTimeout(() => {
+      setIsProcessing(false);
+      // Would integrate with Superwall/Stripe here
+      startSubscription();
+      navigate('/learn');
+      toast.success("Your free trial has started!");
+    }, 2000);
   };
 
   return (
@@ -154,9 +166,14 @@ const PaywallScreen = () => {
           {/* Action button */}
           <Button 
             onClick={handleContinue}
+            disabled={isProcessing}
             className="w-full py-6 bg-brand text-black hover:bg-brand/90"
           >
-            Continue <ArrowRight size={16} className="ml-1" />
+            {isProcessing ? (
+              <>Processing...</>
+            ) : (
+              <>Start 3-Day Free Trial <ArrowRight size={16} className="ml-1" /></>
+            )}
           </Button>
           
           {/* No commitment text */}
