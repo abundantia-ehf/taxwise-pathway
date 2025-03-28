@@ -3,9 +3,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, MessageSquare, Headset, ArrowRight } from 'lucide-react';
+import { BookOpen, MessageSquare, Headset, ArrowRight, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
+import { Switch } from '@/components/ui/switch';
 
 interface NavigationCardProps {
   title: string;
@@ -45,7 +46,7 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   
   // Animation variants
   const containerVariants = {
@@ -91,29 +92,53 @@ const HomePage = () => {
   return (
     <MobileLayout>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
-        <div className="container max-w-md mx-auto px-4 py-3">
-          {/* Logo Section - reduced padding */}
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center mb-4"
-          >
-            <div className="w-28 h-28">
-              <img 
-                src="/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
-                alt="Untaxable Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </motion.div>
+        <div className="container max-w-md mx-auto px-4">
+          {/* Header with Logo and Theme Toggle */}
+          <div className="flex justify-between items-center py-4">
+            {/* Logo - moved to left */}
+            <motion.div 
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center"
+            >
+              <div className="w-10 h-10 mr-2">
+                <img 
+                  src={theme === 'dark' 
+                    ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
+                    : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png"
+                  } 
+                  alt="Untaxable Logo" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="text-lg font-semibold">Untaxable</span>
+            </motion.div>
+            
+            {/* Theme Toggle - added to right */}
+            <motion.div
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center"
+            >
+              <div className="flex items-center space-x-2">
+                <Sun size={16} className={theme === 'light' ? 'text-brand' : 'text-muted-foreground'} />
+                <Switch
+                  checked={theme === 'dark'}
+                  onCheckedChange={toggleTheme}
+                />
+                <Moon size={16} className={theme === 'dark' ? 'text-brand' : 'text-muted-foreground'} />
+              </div>
+            </motion.div>
+          </div>
           
           {/* Recent Progress Section */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-8"
+            className="mb-8 mt-4"
           >
             <h2 className="text-lg font-semibold mb-4">Continue Learning</h2>
             <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
