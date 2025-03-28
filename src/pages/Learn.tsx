@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -24,11 +23,10 @@ interface Video {
   locked: boolean;
 }
 
-// Mock data for course modules
 const courseModules: Module[] = [
   {
     id: 'module-1',
-    title: 'Foundations of Tax Optimization',
+    title: 'Groundwork',
     description: 'Learn the basic principles of legal tax reduction strategies',
     progress: 20,
     videos: [
@@ -42,7 +40,7 @@ const courseModules: Module[] = [
   },
   {
     id: 'module-2',
-    title: 'Business Structures for Tax Minimization',
+    title: 'Tax Residency',
     description: 'Optimize your business structure to legally minimize taxes',
     progress: 0,
     videos: [
@@ -57,7 +55,7 @@ const courseModules: Module[] = [
   },
   {
     id: 'module-3',
-    title: 'Real Estate Tax Strategies',
+    title: 'Offshoring',
     description: 'Leverage real estate investments for significant tax benefits',
     progress: 0,
     videos: [
@@ -71,7 +69,7 @@ const courseModules: Module[] = [
   },
   {
     id: 'module-4',
-    title: 'Advanced International Strategies',
+    title: 'For U.S. Citizens',
     description: 'Global tax optimization strategies for entrepreneurs',
     progress: 0,
     videos: [
@@ -93,7 +91,6 @@ const Learn = () => {
   
   const handleVideoClick = (moduleId: string, videoId: string, locked: boolean) => {
     if (locked) {
-      // Show locked message or prompt to unlock
       return;
     }
     navigate(`/video/${moduleId}/${videoId}`);
@@ -114,7 +111,7 @@ const Learn = () => {
               <TabsTrigger value="all">All Modules</TabsTrigger>
               {courseModules.map(module => (
                 <TabsTrigger key={module.id} value={module.id}>
-                  {module.title.split(' ')[0]}
+                  {module.title}
                 </TabsTrigger>
               ))}
             </TabsList>
