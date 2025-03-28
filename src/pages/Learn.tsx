@@ -30,12 +30,12 @@ const courseModules: Module[] = [
     description: 'Learn the basic principles of legal tax reduction strategies',
     progress: 20,
     videos: [
-      { id: 'video-1-1', title: 'Understanding Tax Brackets', duration: '9:45', completed: true, locked: false },
-      { id: 'video-1-2', title: 'Legal vs. Illegal Tax Avoidance', duration: '12:30', completed: false, locked: false },
-      { id: 'video-1-3', title: 'Tax-Advantaged Accounts', duration: '15:20', completed: false, locked: false },
-      { id: 'video-1-4', title: 'Itemized Deductions Deep Dive', duration: '18:15', completed: false, locked: false },
-      { id: 'video-1-5', title: 'Tax Credits You Need to Know', duration: '14:10', completed: false, locked: false },
-      { id: 'video-1-6', title: 'Tax Planning Timeline', duration: '11:45', completed: false, locked: false },
+      { id: 'video-1-1', title: '0. Disclaimer', duration: '9:45', completed: true, locked: false },
+      { id: 'video-1-2', title: 'I. Don\'t Skip', duration: '12:30', completed: false, locked: false },
+      { id: 'video-1-3', title: 'II. Why Taxation is B.S.', duration: '15:20', completed: false, locked: false },
+      { id: 'video-1-4', title: 'III. Keeping It Legal (Evasion vs. Avoidance)', duration: '18:15', completed: false, locked: false },
+      { id: 'video-1-5', title: 'IV. Simplify, Always', duration: '14:10', completed: false, locked: false },
+      { id: 'video-1-6', title: 'V. For Employees', duration: '11:45', completed: false, locked: false },
     ]
   },
   {
