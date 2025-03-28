@@ -29,12 +29,8 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
       <CardContent className="p-6">
         <div className="flex flex-col space-y-3">
           <div className="flex justify-between items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-              theme === 'dark' ? 'bg-brand/20' : 'bg-brand/30'
-            }`}>
-              <div className={theme === 'dark' ? 'text-brand' : 'brand-icon-light'}>
-                {icon}
-              </div>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
+              {icon}
             </div>
             <ArrowRight size={18} className="text-muted-foreground" />
           </div>
@@ -77,26 +73,26 @@ const HomePage = () => {
     {
       title: "Learn",
       description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} />,
+      icon: <BookOpen size={20} className="text-brand" />,
       path: "/learn"
     },
     {
       title: "Ask Our AI",
       description: "Get instant answers to your tax questions from our AI assistant",
-      icon: <MessageSquare size={20} />,
+      icon: <MessageSquare size={20} className="text-brand" />,
       path: "/ai-help"
     },
     {
       title: "Ask a Human",
       description: "Schedule a consultation with our tax experts",
-      icon: <Headset size={20} />,
+      icon: <Headset size={20} className="text-brand" />,
       path: "/support"
     }
   ];
 
   return (
     <MobileLayout>
-      <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'light-mode-gradient'}`}>
+      <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
         {/* Custom Header with Logo */}
         <Header 
           title={
@@ -116,7 +112,7 @@ const HomePage = () => {
           showThemeToggle={true}
         />
         
-        <div className="container max-w-md mx-auto px-4 relative z-10">
+        <div className="container max-w-md mx-auto px-4">
           {/* Recent Progress Section */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -128,10 +124,8 @@ const HomePage = () => {
             <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <div className={`h-12 w-12 rounded-lg flex items-center justify-center mr-4 ${
-                    theme === 'dark' ? 'bg-brand/20' : 'bg-brand/30'
-                  }`}>
-                    <BookOpen size={24} className={theme === 'dark' ? 'text-brand' : 'brand-icon-light'} />
+                  <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-4">
+                    <BookOpen size={24} className="text-brand" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-medium">Foundations of Tax Optimization</h3>
