@@ -35,22 +35,24 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
       
       <h2 className="text-xl font-semibold mb-6">What best describes how you make money?</h2>
       
-      <RadioGroup
-        value={data.employmentType}
-        onValueChange={(value) => updateData('employmentType', value)}
-        className="space-y-3 mb-6"
-      >
-        {options.map((option) => (
-          <div key={option} className="flex items-center space-x-2 border rounded-lg p-4">
-            <RadioGroupItem value={option} id={`employment-${option}`} className="border-2" />
-            <Label htmlFor={`employment-${option}`} className="flex-1 cursor-pointer font-normal">
-              {option}
-            </Label>
-          </div>
-        ))}
-      </RadioGroup>
+      <div className="flex-1 overflow-y-auto">
+        <RadioGroup
+          value={data.employmentType}
+          onValueChange={(value) => updateData('employmentType', value)}
+          className="space-y-2 mb-6"
+        >
+          {options.map((option) => (
+            <div key={option} className="flex items-center space-x-2 border rounded-lg p-3">
+              <RadioGroupItem value={option} id={`employment-${option}`} className="border-2" />
+              <Label htmlFor={`employment-${option}`} className="flex-1 cursor-pointer font-normal">
+                {option}
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
+      </div>
       
-      <div className="mt-auto pt-6">
+      <div className="mt-6 pt-4">
         <Button 
           onClick={onNext} 
           disabled={!data.employmentType}
