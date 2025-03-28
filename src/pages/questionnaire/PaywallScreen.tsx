@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Star, ArrowRight } from 'lucide-react';
+import { Star, ArrowRight, RefreshCw } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from "sonner";
@@ -44,7 +44,15 @@ const PaywallScreen = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
-  const { startSubscription } = useAuth();
+  const [isRestoring, setIsRestoring] = useState(false);
+  const { hasSubscription, startSubscription } = useAuth();
+
+  // If user already has a subscription, redirect to home
+  React.useEffect(() => {
+    if (hasSubscription) {
+      navigate('/home');
+    }
+  }, [hasSubscription, navigate]);
 
   const handleContinue = () => {
     setIsProcessing(true);
@@ -56,6 +64,27 @@ const PaywallScreen = () => {
       startSubscription();
       navigate('/home');
       toast.success("Your free trial has started!");
+    }, 2000);
+  };
+
+  const handleRestorePurchase = () => {
+    setIsRestoring(true);
+    
+    // Simulate restore process
+    setTimeout(() => {
+      setIsRestoring(false);
+      
+      // This would typically check with the payment provider if the user has an active subscription
+      // For demonstration, we'll sometimes pretend they have one, sometimes not
+      const hasExistingSubscription = Math.random() > 0.5;
+      
+      if (hasExistingSubscription) {
+        startSubscription();
+        navigate('/home');
+        toast.success("Your subscription has been restored!");
+      } else {
+        toast.error("No previous subscription found.");
+      }
     }, 2000);
   };
 
@@ -168,13 +197,30 @@ const PaywallScreen = () => {
           {/* Action button */}
           <Button 
             onClick={handleContinue}
-            disabled={isProcessing}
+            disabled={isProcessing || isRestoring}
             className="w-full py-6 bg-brand text-black hover:bg-brand/90"
           >
             {isProcessing ? (
               <>Processing...</>
             ) : (
               <>Start 3-Day Free Trial <ArrowRight size={16} className="ml-1" /></>
+            )}
+          </Button>
+          
+          {/* Restore purchase button */}
+          <Button 
+            onClick={handleRestorePurchase}
+            disabled={isProcessing || isRestoring}
+            variant="ghost" 
+            className="mt-3"
+          >
+            {isRestoring ? (
+              <>Checking subscription status...</>
+            ) : (
+              <>
+                <RefreshCw size={14} className="mr-1" />
+                Restore Purchase
+              </>
             )}
           </Button>
           
