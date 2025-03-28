@@ -18,7 +18,7 @@ const CountryStep: React.FC<CountryStepProps> = ({ data, updateData, onNext }) =
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col h-full"
+      className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
         <Globe className="h-10 w-10 text-brand" />
