@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -60,7 +60,7 @@ const TaxRateScreen = () => {
               onClick={handleContinue}
               className="w-full py-6 bg-brand text-black hover:bg-brand/90"
             >
-              Let's do it →
+              Let's do it <ArrowRight className="ml-1" size={16} />
             </Button>
           </div>
         </div>

@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Star, Flag } from 'lucide-react';
+import { Star, Flag, ArrowRight } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 
 const PaywallScreen = () => {
@@ -90,7 +90,7 @@ const PaywallScreen = () => {
             onClick={handleContinue}
             className="w-full py-6 bg-brand text-black hover:bg-brand/90"
           >
-            Continue →
+            Continue <ArrowRight size={16} className="ml-1" />
           </Button>
         </div>
       </motion.div>
