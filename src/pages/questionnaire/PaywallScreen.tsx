@@ -156,6 +156,11 @@ const PaywallScreen = () => {
           >
             Continue <ArrowRight size={16} className="ml-1" />
           </Button>
+          
+          {/* No commitment text */}
+          <p className="text-center text-gray-500 text-xs mt-2">
+            No commitment, cancel any time.
+          </p>
         </div>
       </motion.div>
     </MobileLayout>
