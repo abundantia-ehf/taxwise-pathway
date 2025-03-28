@@ -33,18 +33,18 @@ const TaxRateScreen = () => {
         animate={{ opacity: 1 }}
         className="flex flex-col h-full"
       >
-        <div className="flex flex-col h-full px-6 py-8">
+        <div className="flex flex-col h-full px-6 py-8 justify-center">
           {/* X symbol at the top */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-12">
             <div className="w-24 h-24 flex items-center justify-center rounded-full border-4 border-red-500">
               <X size={64} className="text-red-500" />
             </div>
           </div>
           
           {/* Message about tax rate reduction */}
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-semibold mb-3">
-              Based on your answers, we could get your tax rate down to
+          <div className="text-center mb-12">
+            <h2 className="text-lg mb-3">
+              Based on your answers, you could get a legal tax rate of
             </h2>
             <p className="text-4xl font-bold text-red-500">
               {targetRate}
