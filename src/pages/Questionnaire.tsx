@@ -7,7 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Clock, Lock, Globe, DollarSign, Euro, PoundSterling } from 'lucide-react';
+import { Clock, Lock, Globe, DollarSign, Euro, PoundSterling, ArrowRight } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 
 // Types for questionnaire data
