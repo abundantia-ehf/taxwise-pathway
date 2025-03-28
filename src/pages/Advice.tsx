@@ -82,6 +82,10 @@ const Advice = () => {
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Question'}
               </Button>
+              
+              <p className="text-xs text-muted-foreground text-center mt-2">
+                By submitting your question, you accept answers provided are general feedback only. The risk is always on you for all actions carried out in relation to your taxes.
+              </p>
             </form>
           </CardContent>
         </Card>
