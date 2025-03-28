@@ -17,7 +17,11 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
   }, [onFinished]);
 
   return (
-    <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-gradient-to-br from-black to-black/90 flex items-center justify-center z-50">
+      {/* Decorative circles */}
+      <div className="absolute top-10 left-10 w-24 h-24 rounded-full bg-brand/5 blur-xl"></div>
+      <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-brand/10 blur-xl"></div>
+      
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -25,15 +29,24 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
           duration: 0.5, 
           ease: "easeOut",
         }}
-        className="w-32 h-32 flex items-center justify-center"
+        className="w-36 h-36 flex items-center justify-center z-10"
       >
-        <div className="rounded-xl overflow-hidden">
+        <div className="rounded-xl overflow-hidden bg-black/50 p-3 backdrop-blur-sm shadow-lg border border-white/5">
           <img 
             src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
             alt="Untaxable Logo" 
             className="w-full h-full object-cover"
           />
         </div>
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        className="absolute bottom-20 text-white/70 text-sm"
+      >
+        Loading amazing content...
       </motion.div>
     </div>
   );
