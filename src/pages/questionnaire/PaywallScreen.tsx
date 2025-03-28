@@ -75,7 +75,7 @@ const PaywallScreen = () => {
               Get help from tax mitigation pros
             </h2>
             <p className="text-gray-800 text-sm mb-3">
-              Make a low-tax or no-tax life a reality in two weeks or less
+              Make a low-tax life your reality in under two weeks
             </p>
             <p className="font-medium text-sm text-gray-900">
               3 day free trial, then just <span className="text-black bg-brand px-1 rounded font-bold">$48.50 US$/month</span>
