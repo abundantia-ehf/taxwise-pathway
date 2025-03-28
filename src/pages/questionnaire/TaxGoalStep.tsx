@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, ArrowRight } from 'lucide-react';
+import { Target, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -29,7 +29,7 @@ const TaxGoalStep: React.FC<TaxGoalStepProps> = ({ data, updateData, onNext }) =
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <FileText className="h-10 w-10 text-brand" />
+        <Target className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-semibold mb-6">What is your primary goal with legal tax optimization?</h2>
