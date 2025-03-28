@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -95,18 +94,15 @@ const Onboarding = () => {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
   
   const handleNext = () => {
-    // Save the answer
     setAnswers({
       ...answers,
       [currentQuestion.id]: selectedOption!
     });
     
-    // Move to next question or finish
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOption(null);
     } else {
-      // Complete onboarding
       completeOnboarding();
       navigate('/subscribe');
     }
@@ -115,13 +111,12 @@ const Onboarding = () => {
   return (
     <MobileLayout hideNavigation>
       <div className="flex flex-col min-h-screen">
-        <div className="p-4 border-b">
-          {/* Updated logo to use the provided white logo */}
+        <div className="p-4 border-b bg-black">
           <div className="w-full flex justify-center mb-4">
             <img 
-              src="/lovable-uploads/bce91dd7-e69e-4ac6-a7c0-a42f182b9eda.png" 
+              src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
               alt="Untaxable Logo" 
-              className="h-10 object-contain"
+              className="h-12 object-contain"
             />
           </div>
           
