@@ -49,12 +49,12 @@ const Login = () => {
           transition={{ duration: 0.6 }}
           className="h-full flex flex-col justify-between"
         >
-          {/* Logo */}
+          {/* Logo - increased size by 50% */}
           <div className="flex justify-center mb-4">
             <img 
               src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
               alt="Untaxable Logo" 
-              className="h-6" 
+              className="h-9" /* Changed from h-6 to h-9 (50% increase) */
             />
           </div>
           
