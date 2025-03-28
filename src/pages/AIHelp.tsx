@@ -139,7 +139,7 @@ const AIHelp = () => {
             className="flex items-center space-x-2"
           >
             <Input
-              placeholder="Ask about tax strategies..."
+              placeholder="Ask your tax questions..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="flex-1"
