@@ -115,8 +115,8 @@ const Onboarding = () => {
         <div className="p-4 border-b bg-black">
           <div className="w-full flex justify-center mb-4">
             <img 
-              src="/lovable-uploads/3a8c1801-15f3-4359-956c-fb0125f565f9.png" 
-              alt="Untaxable White Logo" 
+              src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
+              alt="Untaxable Logo" 
               className="h-10 object-contain"
             />
           </div>
