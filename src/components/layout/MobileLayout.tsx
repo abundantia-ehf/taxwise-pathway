@@ -49,14 +49,14 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
       path: '/learn',
     },
     {
-      label: 'AI Help',
-      icon: Bot,
-      path: '/ai-help',
-    },
-    {
       label: 'Expert Help',
       icon: MessagesSquare,
       path: '/advice',
+    },
+    {
+      label: 'AI Help',
+      icon: Bot,
+      path: '/ai-help',
     },
     {
       label: 'Settings',
