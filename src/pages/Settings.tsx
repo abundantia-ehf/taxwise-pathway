@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { User, CircleDollarSign, Bell, Lock, LogOut, Moon, Sun, HelpCircle, FileText, MessageSquare } from 'lucide-react';
+import { CircleDollarSign, Bell, LogOut, Moon, Sun, HelpCircle, FileText, MessageSquare } from 'lucide-react';
 
 const Settings = () => {
   const { user, logout } = useAuth();
@@ -58,16 +58,16 @@ const Settings = () => {
   
   const faqItems = [
     {
+      question: "Are the tax strategies legal?",
+      answer: "Yes, to the best of our knowledge. However, while we aim to provide completely legal and accurate tax information up to the current moment, it is your responsibility to check the validity of any information in this app. The end liability for your tax will always fall on you."
+    },
+    {
       question: "How long is the free trial?",
       answer: "The free trial lasts for 3 days, giving you access to all premium features. You'll be billed at the regular rate after the trial period unless you cancel."
     },
     {
       question: "Can I cancel my subscription anytime?",
       answer: "Yes, you can cancel your subscription at any time. If you cancel during your trial period, you won't be charged. If you cancel after the trial, you'll still have access until the end of your billing period."
-    },
-    {
-      question: "Are the tax strategies legal?",
-      answer: "Absolutely. All strategies taught in Untaxable focus on legal tax avoidance, not tax evasion. We teach you to work within the existing tax code to minimize your tax burden legally."
     },
     {
       question: "Do I need accounting knowledge?",
@@ -79,7 +79,7 @@ const Settings = () => {
     },
     {
       question: "Are the strategies applicable outside the US?",
-      answer: "Most of our content focuses on US tax strategies. We do offer a dedicated international section, but specific applicability will vary by country."
+      answer: "Most of our content is dedicated for a global audience, and should work for almost anyone. However, we have a dedicated module in the Learn section just for US citizens."
     },
   ];
 
@@ -88,109 +88,11 @@ const Settings = () => {
       <Header title="Settings" />
       
       <div className="container p-4 space-y-6">
-        <Tabs defaultValue="profile">
+        <Tabs defaultValue="help">
           <TabsList className="w-full mb-4">
-            <TabsTrigger value="profile" className="flex-1">Profile</TabsTrigger>
             <TabsTrigger value="help" className="flex-1">Help & FAQ</TabsTrigger>
+            <TabsTrigger value="profile" className="flex-1">Profile</TabsTrigger>
           </TabsList>
-          
-          <TabsContent value="profile" className="space-y-6">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <div className="h-16 w-16 rounded-full bg-brand/20 flex items-center justify-center mr-4">
-                    <User className="h-8 w-8" />
-                  </div>
-                  <div>
-                    <h2 className="font-semibold text-lg">{user?.name || 'User'}</h2>
-                    <p className="text-sm text-muted-foreground">{user?.email}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <CircleDollarSign className="h-5 w-5 mr-2 text-brand" />
-                    <h3 className="font-medium">Subscription</h3>
-                  </div>
-                  <span className="text-sm px-2 py-1 rounded-full bg-brand/20">
-                    {isTrialActive ? 'Trial' : user?.subscription?.status || 'Inactive'}
-                  </span>
-                </div>
-                
-                {isTrialActive && (
-                  <div className="bg-secondary p-3 rounded-md text-sm">
-                    <p>Your trial ends on {formatDate(user?.subscription?.trialEndDate)}</p>
-                  </div>
-                )}
-                
-                <Button 
-                  variant="outline" 
-                  className="w-full"
-                  onClick={() => navigate('/subscribe')}
-                >
-                  {isTrialActive ? 'Subscribe Now' : 'Manage Subscription'}
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <div className="space-y-4">
-              <h3 className="font-medium px-1">Settings</h3>
-              
-              <Card>
-                <CardContent className="p-0">
-                  <div className="flex items-center justify-between p-4">
-                    <div className="flex items-center">
-                      {theme === 'dark' ? (
-                        <Moon className="h-5 w-5 mr-2" />
-                      ) : (
-                        <Sun className="h-5 w-5 mr-2" />
-                      )}
-                      <Label htmlFor="dark-mode" className="cursor-pointer">Dark Mode</Label>
-                    </div>
-                    <Switch
-                      id="dark-mode"
-                      checked={theme === 'dark'}
-                      onCheckedChange={toggleTheme}
-                    />
-                  </div>
-                  
-                  <Separator />
-                  
-                  <div className="flex items-center justify-between p-4">
-                    <div className="flex items-center">
-                      <Bell className="h-5 w-5 mr-2" />
-                      <Label htmlFor="notifications" className="cursor-pointer">Push Notifications</Label>
-                    </div>
-                    <Switch id="notifications" defaultChecked />
-                  </div>
-                  
-                  <Separator />
-                  
-                  <Button
-                    variant="ghost"
-                    className="w-full flex items-center justify-start p-4 h-auto rounded-none"
-                    onClick={() => navigate('/change-password')}
-                  >
-                    <Lock className="h-5 w-5 mr-2" />
-                    <span>Change Password</span>
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              <Button
-                variant="outline"
-                className="w-full flex items-center justify-center"
-                onClick={logout}
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                <span>Log Out</span>
-              </Button>
-            </div>
-          </TabsContent>
           
           <TabsContent value="help" className="space-y-6">
             <div className="grid gap-4">
@@ -224,7 +126,7 @@ const Settings = () => {
                   Course Content Questions
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  For questions about course content, please use the AI Assistant or fill out the form below.
+                  For specific questions about course content, or general support, please fill out the form below.
                 </p>
               </div>
               
@@ -294,6 +196,79 @@ const Settings = () => {
                   </Button>
                 </form>
               </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="profile" className="space-y-6">
+            <Card>
+              <CardContent className="p-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <CircleDollarSign className="h-5 w-5 mr-2 text-brand" />
+                    <h3 className="font-medium">Subscription</h3>
+                  </div>
+                  <span className="text-sm px-2 py-1 rounded-full bg-brand/20">
+                    {isTrialActive ? 'Trial' : user?.subscription?.status || 'Inactive'}
+                  </span>
+                </div>
+                
+                {isTrialActive && (
+                  <div className="bg-secondary p-3 rounded-md text-sm">
+                    <p>Your trial ends on {formatDate(user?.subscription?.trialEndDate)}</p>
+                  </div>
+                )}
+                
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => navigate('/subscribe')}
+                >
+                  {isTrialActive ? 'Subscribe Now' : 'Manage Subscription'}
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <div className="space-y-4">
+              <h3 className="font-medium px-1">Settings</h3>
+              
+              <Card>
+                <CardContent className="p-0">
+                  <div className="flex items-center justify-between p-4">
+                    <div className="flex items-center">
+                      {theme === 'dark' ? (
+                        <Moon className="h-5 w-5 mr-2" />
+                      ) : (
+                        <Sun className="h-5 w-5 mr-2" />
+                      )}
+                      <Label htmlFor="dark-mode" className="cursor-pointer">Dark Mode</Label>
+                    </div>
+                    <Switch
+                      id="dark-mode"
+                      checked={theme === 'dark'}
+                      onCheckedChange={toggleTheme}
+                    />
+                  </div>
+                  
+                  <Separator />
+                  
+                  <div className="flex items-center justify-between p-4">
+                    <div className="flex items-center">
+                      <Bell className="h-5 w-5 mr-2" />
+                      <Label htmlFor="notifications" className="cursor-pointer">Push Notifications</Label>
+                    </div>
+                    <Switch id="notifications" defaultChecked />
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Button
+                variant="outline"
+                className="w-full flex items-center justify-center"
+                onClick={logout}
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                <span>Log Out</span>
+              </Button>
             </div>
           </TabsContent>
         </Tabs>
