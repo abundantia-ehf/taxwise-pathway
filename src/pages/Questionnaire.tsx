@@ -6,6 +6,8 @@ import { QuestionnaireData } from '@/types/questionnaire';
 import IntroductionStep from './questionnaire/IntroductionStep';
 import CountryStep from './questionnaire/CountryStep';
 import TaxAmountStep from './questionnaire/TaxAmountStep';
+import EmploymentTypeStep from './questionnaire/EmploymentTypeStep';
+import TaxFamiliarityStep from './questionnaire/TaxFamiliarityStep';
 import ProgressHeader from './questionnaire/ProgressHeader';
 
 const Questionnaire = () => {
@@ -14,7 +16,7 @@ const Questionnaire = () => {
   const navigate = useNavigate();
   
   // Total steps in the questionnaire
-  const totalSteps = 3; // Introduction + 2 questions
+  const totalSteps = 5; // Introduction + 4 questions
   
   const handleNext = () => {
     if (step < totalSteps - 1) {
@@ -40,6 +42,8 @@ const Questionnaire = () => {
           {step === 0 && <IntroductionStep onNext={handleNext} />}
           {step === 1 && <CountryStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === 2 && <TaxAmountStep data={data} updateData={updateData} onNext={handleNext} />}
+          {step === 3 && <EmploymentTypeStep data={data} updateData={updateData} onNext={handleNext} />}
+          {step === 4 && <TaxFamiliarityStep data={data} updateData={updateData} onNext={handleNext} />}
         </div>
       </div>
     </MobileLayout>

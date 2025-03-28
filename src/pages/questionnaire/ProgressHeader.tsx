@@ -9,7 +9,7 @@ interface ProgressHeaderProps {
 
 const ProgressHeader: React.FC<ProgressHeaderProps> = ({ currentStep, totalSteps }) => {
   // Calculate progress percentage
-  const progress = ((currentStep + 1) / totalSteps) * 100;
+  const progress = ((currentStep) / (totalSteps - 1)) * 100;
 
   return (
     <div className="p-4 bg-black border-b">
