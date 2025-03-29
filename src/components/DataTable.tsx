@@ -68,6 +68,17 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
     });
   }
   
+  // Function to clean column headers for display
+  const getDisplayColumnName = (columnName: string, tableTitle: string) => {
+    if (tableTitle === "Offshore Districts") {
+      // Remove the "(from Global Tax Rates)" text from column headers
+      if (columnName.includes("(from Global Tax Rates)")) {
+        return columnName.replace(" (from Global Tax Rates)", "");
+      }
+    }
+    return columnName;
+  };
+  
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -84,7 +95,7 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
             <TableHeader>
               <TableRow>
                 {columns.map((column) => (
-                  <TableHead key={column}>{column}</TableHead>
+                  <TableHead key={column}>{getDisplayColumnName(column, title)}</TableHead>
                 ))}
               </TableRow>
             </TableHeader>
