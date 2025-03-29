@@ -1,73 +1,46 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, Database, MessagesSquare, ArrowRight, ChevronDown } from 'lucide-react';
+import { BookOpen, Database, MessagesSquare, ArrowRight, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Switch } from '@/components/ui/switch';
 import Header from '@/components/layout/Header';
-import { 
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 
-interface StackedCardProps {
+interface NavigationCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
   onClick: () => void;
-  isOpen: boolean;
-  onToggle: () => void;
 }
 
-const StackedCard = ({ 
-  title, 
-  description, 
-  icon, 
-  onClick, 
-  isOpen, 
-  onToggle 
-}: StackedCardProps) => {
+const NavigationCard = ({ title, description, icon, onClick }: NavigationCardProps) => {
   const { theme } = useTheme();
   
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={onToggle}
-      className={`mb-3 border rounded-lg transition-all overflow-hidden ${
+    <Card 
+      className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${
         theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'
-      } ${isOpen ? 'shadow-md' : ''}`}
+      }`}
+      onClick={onClick}
     >
-      <CollapsibleTrigger className="w-full p-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20 mr-3`}>
+      <CardContent className="p-6">
+        <div className="flex flex-col space-y-3">
+          <div className="flex justify-between items-center">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
               {icon}
             </div>
-            <h3 className="font-semibold text-lg text-left">{title}</h3>
+            <ArrowRight size={18} className="text-muted-foreground" />
           </div>
-          <ChevronDown 
-            size={18} 
-            className={`text-muted-foreground transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} 
-          />
-        </div>
-      </CollapsibleTrigger>
-      <CollapsibleContent>
-        <div className="px-4 pb-4 pt-0">
-          <div className="pl-[52px]"> {/* This aligns with the icon + spacing */}
-            <p className="text-sm text-muted-foreground mb-3">{description}</p>
-            <button 
-              onClick={onClick}
-              className="flex items-center text-sm font-medium text-brand hover:underline"
-            >
-              Open <ArrowRight size={14} className="ml-1" />
-            </button>
+          
+          <div>
+            <h3 className="font-semibold text-lg">{title}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{description}</p>
           </div>
         </div>
-      </CollapsibleContent>
-    </Collapsible>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -75,7 +48,6 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const [hasStartedLessons, setHasStartedLessons] = useState(false);
-  const [openCard, setOpenCard] = useState<string | null>("learn"); // Default open card
   
   useEffect(() => {
     const lessonProgress = localStorage.getItem('lesson-progress');
@@ -92,43 +64,42 @@ const HomePage = () => {
     }
   };
   
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.5 }
+    }
+  };
+  
+  const navigationItems = [
+    {
+      title: "Learn",
+      description: "Access our comprehensive tax optimization course modules",
+      icon: <BookOpen size={20} className="text-brand" />,
+      path: "/learn"
+    },
+    {
+      title: "Ask an Untaxable Pro",
+      description: "Schedule a consultation with our tax experts",
+      icon: <MessagesSquare size={20} className="text-brand" />,
+      path: "/support"
+    },
+    {
+      title: "Tax Databases",
+      description: "Access our collection of tax optimization databases and resources",
+      icon: <Database size={20} className="text-brand" />,
+      path: "/data"
+    }
+  ];
+
   const handleLearningNavigation = () => {
     if (hasStartedLessons) {
       navigate('/learn');
     } else {
       navigate('/video/intro/start-here');
     }
-  };
-
-  const navigationItems = [
-    {
-      id: "learn",
-      title: "Learn",
-      description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} className="text-brand" />,
-      path: "/learn",
-      onClick: () => navigate("/learn")
-    },
-    {
-      id: "support",
-      title: "Ask an Untaxable Pro",
-      description: "Schedule a consultation with our tax experts",
-      icon: <MessagesSquare size={20} className="text-brand" />,
-      path: "/support",
-      onClick: () => navigate("/support")
-    },
-    {
-      id: "data",
-      title: "Tax Databases",
-      description: "Access our collection of tax optimization databases and resources",
-      icon: <Database size={20} className="text-brand" />,
-      path: "/data",
-      onClick: () => navigate("/data")
-    }
-  ];
-
-  const toggleCard = (id: string) => {
-    setOpenCard(openCard === id ? null : id);
   };
 
   return (
@@ -216,27 +187,18 @@ const HomePage = () => {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="space-y-1"
+              className="grid gap-4"
             >
-              <AnimatePresence>
-                {navigationItems.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <StackedCard
-                      title={item.title}
-                      description={item.description}
-                      icon={item.icon}
-                      onClick={item.onClick}
-                      isOpen={openCard === item.id}
-                      onToggle={() => toggleCard(item.id)}
-                    />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+              {navigationItems.map((item, index) => (
+                <motion.div key={item.title} variants={itemVariants}>
+                  <NavigationCard
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                    onClick={() => navigate(item.path)}
+                  />
+                </motion.div>
+              ))}
             </motion.div>
           </div>
 
