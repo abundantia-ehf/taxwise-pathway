@@ -4,7 +4,7 @@ import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ChevronRight, Flag, Building, CircleDollarSign, Luggage, Database } from 'lucide-react';
+import { ChevronRight, Flag, Building, CircleDollarSign, Luggage, Database, AlertCircle } from 'lucide-react';
 import AirtableSetup from '@/components/AirtableSetup';
 import { getAirtableCredentials, fetchAirtableData } from '@/utils/airtable';
 import { Button } from '@/components/ui/button';
@@ -54,6 +54,7 @@ const Data = () => {
   const [showSetup, setShowSetup] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   
   // Check if Airtable is connected on component mount
   useEffect(() => {
@@ -69,7 +70,7 @@ const Data = () => {
       icon: <CircleDollarSign size={24} className="text-brand" />,
       recordCount: 195,
       lastUpdated: 'Oct 15, 2023',
-      airtableTable: 'Global Tax Rates' // Make sure this matches your exact table name in Airtable
+      airtableTable: 'Global Tax Rates'
     },
     {
       id: '2',
@@ -78,7 +79,7 @@ const Data = () => {
       icon: <Building size={24} className="text-brand" />,
       recordCount: 45,
       lastUpdated: 'Nov 8, 2023',
-      airtableTable: 'Offshore Locales' // Make sure this matches your exact table name in Airtable
+      airtableTable: 'Offshore Locales'
     },
     {
       id: '3',
@@ -87,7 +88,7 @@ const Data = () => {
       icon: <Luggage size={24} className="text-brand" />,
       recordCount: 32,
       lastUpdated: 'Sep 22, 2023',
-      airtableTable: 'Digital Nomad Visas' // Make sure this matches your exact table name in Airtable
+      airtableTable: 'Digital Nomad Visas'
     },
     {
       id: '4',
@@ -96,12 +97,13 @@ const Data = () => {
       icon: <Flag size={24} className="text-brand" />,
       recordCount: 68,
       lastUpdated: 'Dec 3, 2023',
-      airtableTable: 'US Tax Treaties' // Make sure this matches your exact table name in Airtable
+      airtableTable: 'US Tax Treaties'
     }
   ];
   
   const handleOpenDataSource = async (id: string) => {
     console.log(`Opening data source with ID: ${id}`);
+    setErrorMessage(null);
     
     const dataSource = dataSources.find(source => source.id === id);
     if (!dataSource) return;
@@ -114,19 +116,22 @@ const Data = () => {
     
     setIsLoading(true);
     try {
-      // Use the airtableTable property directly, don't add any additional path elements
       const data = await fetchAirtableData(dataSource.airtableTable);
       console.log(`Fetched ${data.length} records from ${dataSource.title}`);
       
       if (data.length === 0) {
-        toast.warning(`No records found in "${dataSource.title}" table. Please verify the table name exists in your Airtable base.`);
+        const errorMsg = `No records found in "${dataSource.title}" table. Please verify the table name exists in your Airtable base.`;
+        setErrorMessage(errorMsg);
+        toast.warning(errorMsg);
       } else {
         toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
+        // In a real app, you'd now navigate to a detail view with this data
       }
-      // In a real app, you'd now navigate to a detail view with this data
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("Failed to load data. Check that your table name is correct.");
+      const errorMsg = "Failed to load data. Check your Base ID and table name.";
+      setErrorMessage(errorMsg);
+      toast.error(errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -135,6 +140,7 @@ const Data = () => {
   const handleSetupComplete = () => {
     setShowSetup(false);
     setIsConnected(true);
+    setErrorMessage(null);
   };
 
   return (
@@ -155,7 +161,10 @@ const Data = () => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                onClick={() => setShowSetup(true)}
+                onClick={() => {
+                  setShowSetup(true);
+                  setErrorMessage(null);
+                }}
               >
                 <Database size={16} className="mr-2" /> 
                 Manage Connection
@@ -171,6 +180,26 @@ const Data = () => {
               </Button>
             )}
           </div>
+          
+          {errorMessage && (
+            <Card className={`border ${theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 'border-amber-200 bg-amber-50'} p-4 mb-4`}>
+              <div className="flex items-start">
+                <AlertCircle size={18} className="text-amber-500 mr-2 mt-0.5" />
+                <div>
+                  <h4 className="font-medium text-amber-500">Connection Issue</h4>
+                  <p className="text-sm">{errorMessage}</p>
+                  <p className="text-sm mt-2">
+                    Make sure:
+                    <ul className="list-disc pl-5 mt-1 space-y-1">
+                      <li>Your Base ID is correct</li>
+                      <li>The table name matches exactly in your Airtable base</li>
+                      <li>Your access token has permission to access this base</li>
+                    </ul>
+                  </p>
+                </div>
+              </div>
+            </Card>
+          )}
           
           {showSetup ? (
             <AirtableSetup onSetupComplete={handleSetupComplete} />

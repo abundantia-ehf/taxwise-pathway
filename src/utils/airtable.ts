@@ -34,10 +34,10 @@ export const fetchAirtableData = async (tableName: string): Promise<any[]> => {
   }
   
   try {
-    // This is the corrected URL format for Airtable API
-    // The table name should be used directly, not as part of the path
+    // Fix: Use the correct Airtable API URL format - only baseId and tableName
+    // No additional table ID is needed in the path
     const response = await fetch(
-      `https://api.airtable.com/v0/${credentials.baseId}/${tableName}`,
+      `https://api.airtable.com/v0/${credentials.baseId}/${encodeURIComponent(tableName)}`,
       {
         headers: {
           Authorization: `Bearer ${credentials.apiKey}`,
