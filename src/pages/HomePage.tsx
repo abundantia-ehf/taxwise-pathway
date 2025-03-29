@@ -14,18 +14,35 @@ interface NavigationCardProps {
   description: string;
   icon: React.ReactNode;
   onClick: () => void;
+  index: number; // Added index prop to determine gradient style
 }
 
-const NavigationCard = ({ title, description, icon, onClick }: NavigationCardProps) => {
+const NavigationCard = ({ title, description, icon, onClick, index }: NavigationCardProps) => {
   const { theme } = useTheme();
+  
+  // Different gradient styles based on the card index
+  const gradientStyles = [
+    // First card - diagonal gradient
+    theme === 'dark'
+      ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-brand/20'
+      : 'border-zinc-200 bg-gradient-to-br from-white via-brand/20 to-brand/40',
+    
+    // Second card - horizontal gradient
+    theme === 'dark'
+      ? 'border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-800 to-brand/25'
+      : 'border-zinc-200 bg-gradient-to-r from-white via-brand/30 to-brand/50',
+    
+    // Third card - radial gradient with vertical component
+    theme === 'dark'
+      ? 'border-zinc-800 bg-gradient-to-bl from-brand/10 via-zinc-800 to-zinc-900'
+      : 'border-zinc-200 bg-gradient-to-bl from-brand/30 via-brand/20 to-white',
+  ];
+  
+  const cardStyle = gradientStyles[index % gradientStyles.length];
   
   return (
     <Card 
-      className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${
-        theme === 'dark' 
-          ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-brand/20' 
-          : 'border-zinc-200 bg-gradient-to-br from-white via-brand/20 to-brand/40'
-      }`}
+      className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${cardStyle}`}
       onClick={onClick}
     >
       <CardContent className="p-6">
@@ -199,6 +216,7 @@ const HomePage = () => {
                     description={item.description}
                     icon={item.icon}
                     onClick={() => navigate(item.path)}
+                    index={index} // Pass the index to determine gradient style
                   />
                 </motion.div>
               ))}
