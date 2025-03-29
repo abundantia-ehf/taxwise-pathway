@@ -77,7 +77,7 @@ const Data = () => {
     },
     {
       id: '2',
-      title: 'Offshore Locales 2',
+      title: 'Offshore Districts',
       description: 'Information on business-friendly jurisdictions and their tax benefits',
       icon: <Building size={24} className="text-brand" />,
       recordCount: 45,
