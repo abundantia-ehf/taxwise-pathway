@@ -48,6 +48,9 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
     if (title === "Global Tax Rates") {
       // Filter out Flag, Audit August 2024, and Offshore Districts Database columns
       return !["Flag", "Audit August 2024", "Offshore Districts Database"].includes(column);
+    } else if (title === "Digital Nomad Visas") {
+      // Filter out Notes, Tax Incentives Available, and Notes 2 columns
+      return !["Notes", "Tax Incentives Available", "Notes 2"].includes(column);
     }
     return true;
   });
@@ -80,6 +83,13 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
       // Remove the "(from Global Tax Rates)" text from column headers
       if (columnName.includes("(from Global Tax Rates)")) {
         return columnName.replace(" (from Global Tax Rates)", "");
+      }
+    } else if (tableTitle === "Digital Nomad Visas") {
+      // Rename specific columns for Digital Nomad Visas
+      if (columnName === "Assignee") {
+        return "Continent";
+      } else if (columnName === "Status") {
+        return "Visa";
       }
     }
     return columnName;
