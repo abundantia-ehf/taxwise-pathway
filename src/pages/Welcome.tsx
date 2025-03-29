@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown } from 'lucide-react';
+import Globe from '@/components/Globe';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Welcome = () => {
           className="flex flex-col items-center justify-center h-full"
         >
           {/* Logo section */}
-          <div className="flex flex-col items-center space-y-8 w-full">
+          <div className="flex flex-col items-center space-y-4 w-full mt-8">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -34,6 +35,16 @@ const Welcome = () => {
                 alt="Untaxable Logo" 
                 className="w-full h-full object-cover rounded-xl"
               />
+            </motion.div>
+            
+            {/* Globe component - added here */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="w-full mt-4"
+            >
+              <Globe />
             </motion.div>
             
             <motion.div 
@@ -54,17 +65,17 @@ const Welcome = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="flex justify-center mt-40"
+              className="flex justify-center mt-8"
             >
               <ArrowDown className="text-brand animate-bounce" size={42} />
             </motion.div>
             
-            {/* Button now positioned with equal spacing */}
+            {/* Button now positioned with more space below */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.5 }}
-              className="w-full mt-40"
+              className="w-full mt-8"
             >
               <Button 
                 className="w-full py-5 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
