@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -32,9 +31,9 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
       ? 'border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-800 to-brand/25'
       : 'border-zinc-200 bg-gradient-to-r from-white via-brand/30 to-brand/50',
     
-    // Third card - radial gradient with vertical component
+    // Third card - radial gradient with circular pattern (updated dark mode only)
     theme === 'dark'
-      ? 'border-zinc-800 bg-gradient-to-bl from-brand/10 via-zinc-800 to-zinc-900'
+      ? 'border-zinc-800 bg-gradient-to-tr from-brand/15 via-zinc-800/90 to-zinc-900'
       : 'border-zinc-200 bg-gradient-to-bl from-brand/30 via-brand/20 to-white',
   ];
   
