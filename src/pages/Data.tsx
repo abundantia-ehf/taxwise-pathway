@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
@@ -76,8 +77,8 @@ const Data = () => {
       title: 'Global Tax Rates',
       description: 'Comprehensive database of tax rates across different countries',
       icon: <CircleDollarSign size={24} className="text-brand" />,
-      recordCount: 195,
-      lastUpdated: 'Oct 15, 2023',
+      recordCount: 214,
+      lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Global Tax Rates'
     },
     {
@@ -85,8 +86,8 @@ const Data = () => {
       title: 'Offshore Districts',
       description: 'Information on business-friendly jurisdictions and their tax benefits',
       icon: <Building size={24} className="text-brand" />,
-      recordCount: 45,
-      lastUpdated: 'Nov 8, 2023',
+      recordCount: 36,
+      lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Offshore Districts'
     },
     {
@@ -94,8 +95,8 @@ const Data = () => {
       title: 'Digital Nomad Visas',
       description: 'Details on countries offering special visas for remote workers',
       icon: <Luggage size={24} className="text-brand" />,
-      recordCount: 32,
-      lastUpdated: 'Sep 22, 2023',
+      recordCount: 48,
+      lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Digital Nomad Visas'
     }
   ];
