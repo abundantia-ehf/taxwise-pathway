@@ -3,7 +3,7 @@ import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ChevronRight, Flag, Building, CircleDollarSign, Luggage, Database, AlertCircle } from 'lucide-react';
+import { ChevronRight, Building, CircleDollarSign, Luggage, Database, AlertCircle } from 'lucide-react';
 import AirtableSetup from '@/components/AirtableSetup';
 import { getAirtableCredentials, fetchAirtableData, isAirtableConfigured } from '@/utils/airtable';
 import { Button } from '@/components/ui/button';
@@ -97,15 +97,6 @@ const Data = () => {
       recordCount: 32,
       lastUpdated: 'Sep 22, 2023',
       airtableTable: 'Digital Nomad Visas'
-    },
-    {
-      id: '4',
-      title: 'U.S. Tax Treaties',
-      description: 'Information on tax treaties between the US and other countries',
-      icon: <Flag size={24} className="text-brand" />,
-      recordCount: 68,
-      lastUpdated: 'Dec 3, 2023',
-      airtableTable: 'US Tax Treaties'
     }
   ];
   
