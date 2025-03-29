@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ChevronRight, Flag, Building, CircleDollarSign, Luggage, Database, AlertCircle } from 'lucide-react';
 import AirtableSetup from '@/components/AirtableSetup';
-import { getAirtableCredentials, fetchAirtableData } from '@/utils/airtable';
+import { getAirtableCredentials, fetchAirtableData, isAirtableConfigured } from '@/utils/airtable';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import DataTable from '@/components/DataTable';
@@ -58,11 +58,17 @@ const Data = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [selectedData, setSelectedData] = useState<any[] | null>(null);
   const [selectedDataTitle, setSelectedDataTitle] = useState<string>('');
+  const [needsConfiguration, setNeedsConfiguration] = useState(false);
   
   // Check if Airtable is connected on component mount
   useEffect(() => {
     const credentials = getAirtableCredentials();
     setIsConnected(!!credentials);
+    setNeedsConfiguration(!isAirtableConfigured());
+    
+    if (!isAirtableConfigured()) {
+      setErrorMessage("Admin needs to configure Airtable credentials in the source code");
+    }
   }, []);
   
   const dataSources = [
@@ -112,8 +118,13 @@ const Data = () => {
     if (!dataSource) return;
     
     if (!isConnected) {
-      toast.error("Please connect to Airtable first");
-      setShowSetup(true);
+      if (needsConfiguration) {
+        toast.error("Airtable credentials not configured by admin");
+        setErrorMessage("Administrator needs to configure Airtable credentials in the source code");
+      } else {
+        toast.error("Please connect to Airtable first");
+        setShowSetup(true);
+      }
       return;
     }
     
@@ -127,16 +138,12 @@ const Data = () => {
         setErrorMessage(errorMsg);
         toast.warning(errorMsg);
       } else {
-        // Remove success toast notification
-        // toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
-        
-        // Set the selected data to display it
         setSelectedData(data);
         setSelectedDataTitle(dataSource.title);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      const errorMsg = "Failed to load data. Check your Base ID and table name.";
+      const errorMsg = "Failed to load data. Check your Airtable configuration.";
       setErrorMessage(errorMsg);
       toast.error(errorMsg);
     } finally {
@@ -172,7 +179,16 @@ const Data = () => {
                   </p>
                 </div>
                 
-                {isConnected ? (
+                {needsConfiguration ? (
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    disabled
+                  >
+                    <Database size={16} className="mr-2" /> 
+                    Admin Setup Required
+                  </Button>
+                ) : isConnected ? (
                   <Button 
                     variant="outline" 
                     size="sm" 
@@ -201,22 +217,23 @@ const Data = () => {
                   <div className="flex items-start">
                     <AlertCircle size={18} className="text-amber-500 mr-2 mt-0.5" />
                     <div>
-                      <h4 className="font-medium text-amber-500">Connection Issue</h4>
+                      <h4 className="font-medium text-amber-500">Configuration Issue</h4>
                       <p className="text-sm">{errorMessage}</p>
-                      <p className="text-sm mt-2">
-                        Make sure:
-                        <ul className="list-disc pl-5 mt-1 space-y-1">
-                          <li>Your Base ID is correct</li>
-                          <li>The table name matches exactly in your Airtable base</li>
-                          <li>Your access token has permission to access this base</li>
-                        </ul>
-                      </p>
+                      {needsConfiguration && (
+                        <p className="text-sm mt-2">
+                          The administrator needs to:
+                          <ul className="list-disc pl-5 mt-1 space-y-1">
+                            <li>Set the default Airtable API key and Base ID in the source code</li>
+                            <li>Ensure the configured base has all required tables</li>
+                          </ul>
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Card>
               )}
               
-              {showSetup ? (
+              {showSetup && !needsConfiguration ? (
                 <AirtableSetup onSetupComplete={handleSetupComplete} />
               ) : (
                 <>
@@ -237,9 +254,11 @@ const Data = () => {
               <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-4 mt-8`}>
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground">
-                    {isConnected 
-                      ? "Your Airtable databases are connected. Click on a database to view its contents." 
-                      : "Connect to Airtable to access your custom tax optimization databases."}
+                    {needsConfiguration 
+                      ? "This feature requires administrator configuration to work properly."
+                      : isConnected 
+                        ? "Your Airtable databases are connected. Click on a database to view its contents." 
+                        : "Connect to Airtable to access your custom tax optimization databases."}
                   </p>
                 </div>
               </Card>
