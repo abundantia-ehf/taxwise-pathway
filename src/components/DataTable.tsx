@@ -45,8 +45,9 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
   // Extract column headers from the first record's fields
   const columns = Object.keys(data[0].fields || {}).filter(column => {
     // Filter out specific columns based on the table title
-    if (title === "Global Tax Rates" && column === "Flag") {
-      return false;
+    if (title === "Global Tax Rates") {
+      // Filter out Flag, Audit August 2024, and Offshore Districts Database columns
+      return !["Flag", "Audit August 2024", "Offshore Districts Database"].includes(column);
     }
     return true;
   });
