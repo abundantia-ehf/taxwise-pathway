@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -64,73 +63,6 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
   );
 };
 
-// Decorative geometric shapes component
-const BackgroundDecorations = () => {
-  const { theme } = useTheme();
-  
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Large hexagon shape */}
-      <div 
-        className={`absolute -top-24 -right-24 w-64 h-64 
-          ${theme === 'dark' 
-            ? 'border-brand/10 opacity-15' 
-            : 'border-brand/30 opacity-20'} 
-          border-[1.5px] rounded-3xl rotate-45`}
-      />
-      
-      {/* Circles pattern */}
-      <div 
-        className={`absolute bottom-40 -left-20 w-40 h-40 rounded-full 
-          ${theme === 'dark' 
-            ? 'border-brand/10 opacity-15' 
-            : 'border-brand/20 opacity-15'} 
-          border-[1.5px]`}
-      />
-      
-      <div 
-        className={`absolute bottom-20 -left-40 w-60 h-60 rounded-full 
-          ${theme === 'dark' 
-            ? 'border-brand/10 opacity-10' 
-            : 'border-brand/15 opacity-10'} 
-          border-[1.5px]`}
-      />
-      
-      {/* Dotted grid pattern in bottom-right corner */}
-      <div className="absolute bottom-0 right-0 w-40 h-40 flex flex-wrap">
-        {[...Array(25)].map((_, index) => (
-          <div 
-            key={index} 
-            className={`w-2 h-2 m-3 rounded-full 
-              ${theme === 'dark' 
-                ? 'bg-brand/10' 
-                : 'bg-brand/15'}`}
-          />
-        ))}
-      </div>
-      
-      {/* Abstract lines - top left */}
-      <div 
-        className={`absolute top-20 left-4 w-20 h-[1.5px] 
-          ${theme === 'dark' ? 'bg-brand/10' : 'bg-brand/20'} 
-          transform -rotate-45`}
-      />
-      
-      <div 
-        className={`absolute top-28 left-10 w-16 h-[1.5px] 
-          ${theme === 'dark' ? 'bg-brand/10' : 'bg-brand/20'} 
-          transform rotate-45`}
-      />
-      
-      <div 
-        className={`absolute top-36 left-6 w-12 h-[1.5px] 
-          ${theme === 'dark' ? 'bg-brand/10' : 'bg-brand/20'} 
-          transform -rotate-45`}
-      />
-    </div>
-  );
-};
-
 const HomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -191,10 +123,7 @@ const HomePage = () => {
 
   return (
     <MobileLayout>
-      <div className={`min-h-screen relative ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
-        {/* Add the background decorations */}
-        <BackgroundDecorations />
-        
+      <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
         <Header 
           title={
             <div className="h-[28px] w-auto">
@@ -213,7 +142,7 @@ const HomePage = () => {
           showThemeToggle={true}
         />
         
-        <div className="container max-w-md mx-auto px-4 relative z-10">
+        <div className="container max-w-md mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
