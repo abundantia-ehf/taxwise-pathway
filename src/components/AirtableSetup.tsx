@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { saveAirtableCredentials, getAirtableCredentials } from '@/utils/airtable';
 import { toast } from 'sonner';
+import { ExternalLink } from 'lucide-react';
 
 interface AirtableSetupProps {
   onSetupComplete: () => void;
@@ -13,16 +14,16 @@ interface AirtableSetupProps {
 
 const AirtableSetup = ({ onSetupComplete }: AirtableSetupProps) => {
   const savedCredentials = getAirtableCredentials();
-  const [apiKey, setApiKey] = useState(savedCredentials?.apiKey || '');
+  const [token, setToken] = useState(savedCredentials?.apiKey || '');
   const [baseId, setBaseId] = useState(savedCredentials?.baseId || '');
 
   const handleSave = () => {
-    if (!apiKey || !baseId) {
-      toast.error("Please provide both API key and Base ID");
+    if (!token || !baseId) {
+      toast.error("Please provide both Access Token and Base ID");
       return;
     }
 
-    saveAirtableCredentials(apiKey, baseId);
+    saveAirtableCredentials(token, baseId);
     toast.success("Airtable credentials saved");
     onSetupComplete();
   };
@@ -32,21 +33,29 @@ const AirtableSetup = ({ onSetupComplete }: AirtableSetupProps) => {
       <CardContent className="p-6 space-y-4">
         <h3 className="text-lg font-medium">Connect to Airtable</h3>
         <p className="text-sm text-muted-foreground">
-          Enter your Airtable API key and Base ID to connect your databases
+          Enter your Airtable Personal Access Token and Base ID to connect your databases
         </p>
         
         <div className="space-y-3">
           <div className="space-y-2">
-            <Label htmlFor="apiKey">API Key</Label>
+            <Label htmlFor="token">Personal Access Token</Label>
             <Input 
-              id="apiKey" 
-              placeholder="Enter your Airtable API key" 
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
+              id="token" 
+              placeholder="Enter your Airtable Personal Access Token" 
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
               type="password"
             />
-            <p className="text-xs text-muted-foreground">
-              Find your API key in your Airtable account settings
+            <p className="text-xs text-muted-foreground flex items-center">
+              <span>Create a token in your Airtable account settings</span>
+              <a 
+                href="https://airtable.com/create/tokens" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-brand inline-flex items-center ml-1 hover:underline"
+              >
+                <ExternalLink size={12} className="ml-1" />
+              </a>
             </p>
           </div>
           
@@ -58,8 +67,16 @@ const AirtableSetup = ({ onSetupComplete }: AirtableSetupProps) => {
               value={baseId}
               onChange={(e) => setBaseId(e.target.value)}
             />
-            <p className="text-xs text-muted-foreground">
-              Find your Base ID in the API documentation of your Airtable base
+            <p className="text-xs text-muted-foreground flex items-center">
+              <span>Find your Base ID in the API documentation of your Airtable base</span>
+              <a 
+                href="https://airtable.com/api" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-brand inline-flex items-center ml-1 hover:underline"
+              >
+                <ExternalLink size={12} className="ml-1" />
+              </a>
             </p>
           </div>
           
