@@ -1,39 +1,46 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
-import { ArrowUpRight, Bell, User, BookOpen, Database, MessagesSquare, Menu } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { BookOpen, Database, MessagesSquare, ArrowRight, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
+import { Switch } from '@/components/ui/switch';
 import Header from '@/components/layout/Header';
-import { cn } from '@/lib/utils';
 
-interface StatCardProps {
+interface NavigationCardProps {
   title: string;
-  value: string | number;
-  subtitle: string;
-  onClick?: () => void;
+  description: string;
+  icon: React.ReactNode;
+  onClick: () => void;
 }
 
-const StatCard = ({ title, value, subtitle, onClick }: StatCardProps) => {
+const NavigationCard = ({ title, description, icon, onClick }: NavigationCardProps) => {
   const { theme } = useTheme();
   
   return (
-    <div 
-      className={`w-[48%] p-4 rounded-2xl ${theme === 'dark' ? 'bg-zinc-900' : 'bg-white'} cursor-pointer`}
+    <Card 
+      className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${
+        theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'
+      }`}
       onClick={onClick}
     >
-      <div className="flex justify-between items-start mb-2">
-        <span className="text-sm text-muted-foreground">{title}</span>
-        <ArrowUpRight size={16} className="text-muted-foreground" />
-      </div>
-      <div className="mb-1">
-        <span className="text-3xl font-semibold">{value}</span>
-      </div>
-      <div className="text-xs text-muted-foreground">
-        {subtitle}
-      </div>
-    </div>
+      <CardContent className="p-6">
+        <div className="flex flex-col space-y-3">
+          <div className="flex justify-between items-center">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
+              {icon}
+            </div>
+            <ArrowRight size={18} className="text-muted-foreground" />
+          </div>
+          
+          <div>
+            <h3 className="font-semibold text-lg">{title}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{description}</p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -65,6 +72,27 @@ const HomePage = () => {
       transition: { duration: 0.5 }
     }
   };
+  
+  const navigationItems = [
+    {
+      title: "Learn",
+      description: "Access our comprehensive tax optimization course modules",
+      icon: <BookOpen size={20} className="text-brand" />,
+      path: "/learn"
+    },
+    {
+      title: "Ask an Untaxable Pro",
+      description: "Schedule a consultation with our tax experts",
+      icon: <MessagesSquare size={20} className="text-brand" />,
+      path: "/support"
+    },
+    {
+      title: "Tax Databases",
+      description: "Access our collection of tax optimization databases and resources",
+      icon: <Database size={20} className="text-brand" />,
+      path: "/data"
+    }
+  ];
 
   const handleLearningNavigation = () => {
     if (hasStartedLessons) {
@@ -76,181 +104,123 @@ const HomePage = () => {
 
   return (
     <MobileLayout>
-      <div className={cn(
-        "min-h-screen",
-        theme === 'dark' ? 'bg-background' : 'bg-gray-50'
-      )}>
-        <div className="p-6">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <div>
+      <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
+        <Header 
+          title={
+            <div className="h-[28px] w-auto">
               <img 
                 src={theme === 'dark' 
                   ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
                   : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png"
                 } 
                 alt="Untaxable Logo" 
-                className="h-8 w-auto object-contain"
+                className="h-full w-auto object-contain"
+                style={{ maxHeight: "28px" }}
               />
             </div>
-            <div className="flex gap-3">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-zinc-800' : 'bg-gray-100'}`}>
-                <Bell size={20} className="text-foreground" />
-              </div>
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-zinc-800' : 'bg-gray-100'}`}>
-                <User size={20} className="text-foreground" />
-              </div>
-            </div>
-          </div>
-
-          {/* Page Title */}
-          <div className="mb-10">
-            <h1 className="text-4xl font-bold mb-1">Tax Overview</h1>
-            <p className="text-muted-foreground">Welcome to your tax optimization dashboard</p>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="mb-10 space-y-6">
-            <div className="flex justify-between gap-4">
-              <StatCard 
-                title="Lessons Completed" 
-                value="3" 
-                subtitle="Keep learning"
-                onClick={() => navigate('/learn')}
-              />
-              <StatCard 
-                title="Tax Rate" 
-                value="28%" 
-                subtitle="Potential to reduce"
-                onClick={() => navigate('/data')}
-              />
-            </div>
-            <div className="flex justify-between gap-4">
-              <StatCard 
-                title="Questions Asked" 
-                value="3" 
-                subtitle="Need more help?"
-                onClick={() => navigate('/advice')}
-              />
-              <StatCard 
-                title="Potential Savings" 
-                value="$12k" 
-                subtitle="Yearly estimate"
-                onClick={() => navigate('/data')}
-              />
-            </div>
-          </div>
-
-          {/* Tax Optimization Chart */}
+          } 
+          showBack={false}
+          showThemeToggle={true}
+        />
+        
+        <div className="container max-w-md mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className={cn(
-              "relative rounded-3xl overflow-hidden p-6 h-56 mb-8",
-              theme === 'dark' ? 'bg-zinc-900' : 'bg-white'
-            )}
-            onClick={() => navigate('/data')}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-8 mt-4"
           >
-            <div className="flex justify-between items-start mb-2">
-              <div>
-                <h3 className="text-xl font-semibold">Tax Reduction Target</h3>
-              </div>
-              <div className={cn(
-                "w-10 h-10 rounded-full flex items-center justify-center",
-                theme === 'dark' ? 'bg-white' : 'bg-black'
-              )}>
-                <ArrowUpRight 
-                  size={18} 
-                  className={theme === 'dark' ? 'text-black' : 'text-white'} 
-                />
-              </div>
-            </div>
-            
-            {/* Chart visualization - simplified for the example */}
-            <div className="mt-4 h-24 relative">
-              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-brand/20 to-transparent rounded-lg"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-10 flex items-end">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <div 
-                    key={i} 
-                    className="flex-1 mx-1 rounded-t-md bg-brand" 
-                    style={{ 
-                      height: `${Math.random() * 80 + 20}%`,
-                      opacity: i % 2 === 0 ? 0.6 : 1
-                    }} 
-                  />
-                ))}
-              </div>
-              <div className="absolute top-0 left-0 right-0 h-full">
-                <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
-                  <path 
-                    d="M0,50 C80,30 150,80 300,20 L400,20 L400,100 L0,100 Z" 
-                    fill="none" 
-                    stroke="#D1FF82" 
-                    strokeWidth="2"
-                  />
-                </svg>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Main Actions */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="space-y-4"
-          >
-            <div
-              className={cn(
-                "p-5 rounded-2xl flex items-center cursor-pointer",
-                theme === 'dark' ? 'bg-zinc-900 hover:bg-zinc-800' : 'bg-white hover:bg-gray-50'
-              )}
+            <h2 className="text-lg font-semibold mb-4 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
+              {hasStartedLessons ? "Continue Learning" : "Get Started"} 
+              <ArrowRight 
+                size={18} 
+                className={`ml-1 ${theme === 'dark' ? 'text-brand' : 'text-foreground'}`} 
+              />
+            </h2>
+            <Card 
+              className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} cursor-pointer`}
               onClick={handleLearningNavigation}
             >
-              <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mr-4">
-                <BookOpen size={20} className="text-brand" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">{hasStartedLessons ? "Continue Learning" : "Start Learning"}</h3>
-                <p className="text-sm text-muted-foreground">Access tax optimization course modules</p>
-              </div>
-              <ArrowUpRight size={18} className="text-muted-foreground" />
-            </div>
+              <CardContent className="p-4">
+                <div className="flex items-center">
+                  <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-4">
+                    <BookOpen size={24} className="text-brand" />
+                  </div>
+                  <div className="flex-1">
+                    {hasStartedLessons ? (
+                      <>
+                        <h3 className="font-medium">Foundations of Tax Optimization</h3>
+                        <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
+                          <div className="h-2 bg-brand rounded-full" style={{ width: '20%' }}></div>
+                        </div>
+                        <div className="flex justify-between mt-1">
+                          <span className="text-xs text-muted-foreground">20% complete</span>
+                          <button 
+                            className={`text-xs font-medium text-brand hover:underline flex items-center ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
+                          >
+                            Continue <ArrowRight size={12} className="ml-1" />
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <h3 className="font-medium">Start Here: Course Overview</h3>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Begin your tax optimization journey with our introductory lesson
+                        </p>
+                        <button 
+                          className={`text-xs font-medium text-brand hover:underline flex items-center mt-2 ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
+                        >
+                          Watch now <ArrowRight size={12} className="ml-1" />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-            <div
-              className={cn(
-                "p-5 rounded-2xl flex items-center cursor-pointer",
-                theme === 'dark' ? 'bg-zinc-900 hover:bg-zinc-800' : 'bg-white hover:bg-gray-50'
-              )}
-              onClick={() => navigate('/advice')}
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold mb-4">Explore</h2>
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid gap-4"
             >
-              <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mr-4">
-                <MessagesSquare size={20} className="text-brand" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">Ask an Expert</h3>
-                <p className="text-sm text-muted-foreground">Get answers from tax professionals</p>
-              </div>
-              <ArrowUpRight size={18} className="text-muted-foreground" />
-            </div>
+              {navigationItems.map((item, index) => (
+                <motion.div key={item.title} variants={itemVariants}>
+                  <NavigationCard
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                    onClick={() => navigate(item.path)}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
 
-            <div
-              className={cn(
-                "p-5 rounded-2xl flex items-center cursor-pointer",
-                theme === 'dark' ? 'bg-zinc-900 hover:bg-zinc-800' : 'bg-white hover:bg-gray-50'
-              )}
-              onClick={() => navigate('/data')}
-            >
-              <div className="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mr-4">
-                <Database size={20} className="text-brand" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">Tax Databases</h3>
-                <p className="text-sm text-muted-foreground">Explore tax optimization resources</p>
-              </div>
-              <ArrowUpRight size={18} className="text-muted-foreground" />
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <h2 className="text-lg font-semibold mb-4">Your Untaxable Journey</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
+                <CardContent className="p-4 text-center">
+                  <h3 className="text-3xl font-bold text-brand">3</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Questions Answered</p>
+                </CardContent>
+              </Card>
+              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
+                <CardContent className="p-4 text-center">
+                  <h3 className="text-3xl font-bold text-brand">3</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Lessons Completed</p>
+                </CardContent>
+              </Card>
             </div>
           </motion.div>
         </div>
