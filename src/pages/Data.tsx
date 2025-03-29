@@ -4,17 +4,18 @@ import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Database, ChevronRight } from 'lucide-react';
+import { ChevronRight, Flag, Building, Passport, CircleDollarSign } from 'lucide-react';
 
 interface DataSourceProps {
   title: string;
   description: string;
   recordCount: number;
   lastUpdated: string;
+  icon: React.ReactNode;
   onClick: () => void;
 }
 
-const DataSource = ({ title, description, recordCount, lastUpdated, onClick }: DataSourceProps) => {
+const DataSource = ({ title, description, recordCount, lastUpdated, icon, onClick }: DataSourceProps) => {
   const { theme } = useTheme();
   
   return (
@@ -25,7 +26,7 @@ const DataSource = ({ title, description, recordCount, lastUpdated, onClick }: D
       <CardContent className="p-4">
         <div className="flex items-center">
           <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-4">
-            <Database size={24} className="text-brand" />
+            {icon}
           </div>
           <div className="flex-1">
             <div className="flex justify-between items-start">
@@ -50,24 +51,35 @@ const Data = () => {
   const dataSources = [
     {
       id: '1',
-      title: 'Tax Strategies Database',
-      description: 'Comprehensive collection of legal tax minimization strategies',
-      recordCount: 128,
+      title: 'Global Tax Rates',
+      description: 'Comprehensive database of tax rates across different countries',
+      icon: <CircleDollarSign size={24} className="text-brand" />,
+      recordCount: 195,
       lastUpdated: 'Oct 15, 2023'
     },
     {
       id: '2',
-      title: 'Case Studies',
-      description: 'Real-world examples of successful tax optimizations',
+      title: 'Offshore Locales',
+      description: 'Information on business-friendly jurisdictions and their tax benefits',
+      icon: <Building size={24} className="text-brand" />,
       recordCount: 45,
       lastUpdated: 'Nov 8, 2023'
     },
     {
       id: '3',
-      title: 'Tax Code References',
-      description: 'Relevant tax code citations and explanations',
-      recordCount: 312,
+      title: 'Digital Nomad Visas',
+      description: 'Details on countries offering special visas for remote workers',
+      icon: <Passport size={24} className="text-brand" />,
+      recordCount: 32,
       lastUpdated: 'Sep 22, 2023'
+    },
+    {
+      id: '4',
+      title: 'US Tax Treaties',
+      description: 'Information on tax treaties between the US and other countries',
+      icon: <Flag size={24} className="text-brand" />,
+      recordCount: 68,
+      lastUpdated: 'Dec 3, 2023'
     }
   ];
   
@@ -96,6 +108,7 @@ const Data = () => {
               description={source.description}
               recordCount={source.recordCount}
               lastUpdated={source.lastUpdated}
+              icon={source.icon}
               onClick={() => handleOpenDataSource(source.id)}
             />
           ))}
