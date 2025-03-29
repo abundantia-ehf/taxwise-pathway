@@ -12,6 +12,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { OptimizedImage } from './ui/optimized-image';
 
 interface DataTableProps {
   data: any[];
@@ -67,28 +68,45 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
                     if (Array.isArray(value)) {
                       // If it's an array of objects (like attachments or linked records)
                       if (value.length > 0 && typeof value[0] === 'object') {
-                        // For attachments with URLs
-                        if (value[0].url) {
+                        // For attachments with URLs - Add proper null checks
+                        if (value[0] && value[0].url) {
                           displayValue = (
-                            <img 
+                            <OptimizedImage 
                               src={value[0].url} 
                               alt={value[0].filename || 'Image'} 
                               className="h-8 w-auto"
+                              fallback={<div className="h-8 w-8 bg-muted flex items-center justify-center text-xs">No img</div>}
                             />
                           );
-                        } else if (value[0].id) {
+                        } else if (value[0] && value[0].id) {
                           // For linked records, just show the count
                           displayValue = `${value.length} linked records`;
                         } else {
-                          displayValue = JSON.stringify(value).substring(0, 50);
+                          // Safely stringify the array
+                          try {
+                            displayValue = JSON.stringify(value).substring(0, 50);
+                            if (displayValue.length >= 50) displayValue += '...';
+                          } catch (e) {
+                            displayValue = 'Complex data';
+                          }
                         }
                       } else {
                         // For simple arrays, join with commas
                         displayValue = value.join(', ');
                       }
                     } else if (value && typeof value === 'object') {
-                      // For objects, stringify them
-                      displayValue = JSON.stringify(value).substring(0, 50);
+                      // For objects, safely stringify them
+                      try {
+                        displayValue = JSON.stringify(value).substring(0, 50);
+                        if (displayValue.length >= 50) displayValue += '...';
+                      } catch (e) {
+                        displayValue = 'Complex data';
+                      }
+                    }
+                    
+                    // Final null check to ensure we always have something to display
+                    if (displayValue === null || displayValue === undefined) {
+                      displayValue = '';
                     }
                     
                     return (
