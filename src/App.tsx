@@ -15,6 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 // Eager loading for critical paths
 import LoadingPage from "./pages/LoadingPage";
 import Welcome from "./pages/Welcome";
+import Learn from "./pages/Learn"; // Eagerly load the Learn component
 
 // Lazy loading for other routes
 const OnboardingFeatures = React.lazy(() => import("./pages/OnboardingFeatures"));
@@ -27,7 +28,6 @@ const Signup = React.lazy(() => import("./pages/Signup"));
 const Onboarding = React.lazy(() => import("./pages/Onboarding"));
 const Subscribe = React.lazy(() => import("./pages/Subscribe"));
 const HomePage = React.lazy(() => import("./pages/HomePage"));
-const Learn = React.lazy(() => import("./pages/Learn"));
 const VideoPlayer = React.lazy(() => import("./pages/VideoPlayer"));
 const Data = React.lazy(() => import("./pages/Data"));
 const Advice = React.lazy(() => import("./pages/Advice"));
