@@ -24,7 +24,7 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
       className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${
         theme === 'dark' 
           ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-brand/20' 
-          : 'border-zinc-200 bg-gradient-to-br from-white via-brand/5 to-brand/25'
+          : 'border-zinc-200 bg-gradient-to-br from-white via-brand/20 to-brand/40'
       }`}
       onClick={onClick}
     >
