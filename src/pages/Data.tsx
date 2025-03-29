@@ -95,7 +95,7 @@ const Data = () => {
     },
     {
       id: '4',
-      title: 'US Tax Treaties',
+      title: 'U.S. Tax Treaties',
       description: 'Information on tax treaties between the US and other countries',
       icon: <Flag size={24} className="text-brand" />,
       recordCount: 68,
