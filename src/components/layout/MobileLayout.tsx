@@ -1,15 +1,9 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { BookOpen, Database, MessagesSquare, Settings, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
-import { 
-  HomeIcon, 
-  BookIcon, 
-  MessageIcon, 
-  DatabaseIcon, 
-  SettingsIcon 
-} from '@/components/ui/icons';
 
 interface MobileLayoutProps {
   children: ReactNode;
@@ -46,27 +40,27 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
   const navigationItems = [
     {
       label: 'Home',
-      icon: HomeIcon,
+      icon: Home,
       path: '/home',
     },
     {
       label: 'Learn',
-      icon: BookIcon,
+      icon: BookOpen,
       path: '/learn',
     },
     {
       label: 'Expert Help',
-      icon: MessageIcon,
+      icon: MessagesSquare,
       path: '/advice',
     },
     {
       label: 'Data',
-      icon: DatabaseIcon,
+      icon: Database,
       path: '/data',
     },
     {
       label: 'Settings',
-      icon: SettingsIcon,
+      icon: Settings,
       path: '/settings',
     },
   ];
@@ -96,7 +90,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 )}
               >
                 <div className="flex items-center justify-center">
-                  <item.icon size={20} strokeWidth={active ? 2 : 1.5} />
+                  <item.icon size={20} />
                 </div>
                 <span className="text-xs mt-1">{item.label}</span>
               </button>
@@ -107,5 +101,14 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     </div>
   );
 };
+
+/* Original light mode navigation styling for future reference:
+active 
+  ? cn(
+      "text-brand",
+      theme === 'light' ? "bg-gray-800 dark:bg-transparent" : ""
+    ) 
+  : "text-muted-foreground hover:text-foreground"
+*/
 
 export default MobileLayout;

@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ChevronLeftIcon, MoonIcon, SunIcon } from '@/components/ui/icons';
+import { Moon, Sun } from 'lucide-react';
 
 interface HeaderProps {
   title: string | React.ReactNode;
@@ -41,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({
                 onClick={() => navigate(-1)}
                 className="mr-2 rounded-md p-1 hover:bg-accent"
               >
-                <ChevronLeftIcon className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5" />
               </button>
             )}
             {typeof title === 'string' ? (
@@ -57,9 +58,9 @@ const Header: React.FC<HeaderProps> = ({
               className="rounded-md p-2 hover:bg-accent"
             >
               {theme === 'dark' ? (
-                <SunIcon className="h-[1.2rem] w-[1.2rem]" />
+                <Sun className="h-[1.2rem] w-[1.2rem]" />
               ) : (
-                <MoonIcon className="h-[1.2rem] w-[1.2rem]" />
+                <Moon className="h-[1.2rem] w-[1.2rem]" />
               )}
             </button>
           )}
