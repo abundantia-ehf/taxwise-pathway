@@ -1,7 +1,6 @@
-
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Database, MessagesSquare, Settings2, Home } from 'lucide-react';
+import { BookOpen, Server, MessagesSquare, Settings2, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +14,6 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
   const navigate = useNavigate();
   const { theme, forceDarkMode, resetThemeForce } = useTheme();
   
-  // Check if the current route is part of the onboarding flow
   const isOnboardingRoute = 
     location.pathname === '/welcome' ||
     location.pathname === '/onboarding-features' ||
@@ -24,7 +22,6 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     location.pathname === '/onboarding' ||
     location.pathname === '/subscribe';
   
-  // Force dark mode for onboarding routes
   useEffect(() => {
     if (isOnboardingRoute) {
       forceDarkMode();
@@ -55,12 +52,12 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'Data',
-      icon: Database,
+      icon: Server,
       path: '/data',
     },
     {
       label: 'Settings',
-      icon: Settings2, // Changed from Settings to Settings2
+      icon: Settings2,
       path: '/settings',
     },
   ];
