@@ -4,7 +4,7 @@ import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ChevronRight, Building, CircleDollarSign, Luggage, Database, AlertCircle } from 'lucide-react';
+import { ChevronRight, Building, CircleDollarSign, Flag, Database, AlertCircle } from 'lucide-react';
 import AirtableSetup from '@/components/AirtableSetup';
 import { getAirtableCredentials, fetchAirtableData, isAirtableConfigured } from '@/utils/airtable';
 import { Button } from '@/components/ui/button';
@@ -94,7 +94,7 @@ const Data = () => {
       id: '3',
       title: 'Digital Nomad Visas',
       description: 'Details on countries offering special visas for remote workers',
-      icon: <Luggage size={24} className="text-brand" />,
+      icon: <Flag size={24} className="text-brand" />,
       recordCount: 48,
       lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Digital Nomad Visas'
