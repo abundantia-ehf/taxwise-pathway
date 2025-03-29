@@ -54,11 +54,17 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
   
   // Sort data alphabetically by country name for Global Tax Rates and Offshore Districts
   const sortedData = [...data];
-  if (title === "Global Tax Rates" || title === "Offshore Districts") {
+  if (title === "Global Tax Rates") {
     sortedData.sort((a, b) => {
       const countryA = a.fields["Country"] || "";
       const countryB = b.fields["Country"] || "";
       return countryA.localeCompare(countryB);
+    });
+  } else if (title === "Offshore Districts") {
+    sortedData.sort((a, b) => {
+      const nameA = a.fields["Name"] || "";
+      const nameB = b.fields["Name"] || "";
+      return nameA.localeCompare(nameB);
     });
   }
   
