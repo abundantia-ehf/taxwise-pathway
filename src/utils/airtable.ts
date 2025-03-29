@@ -1,3 +1,4 @@
+
 import { toast } from "sonner";
 
 interface AirtableConfig {
@@ -7,8 +8,8 @@ interface AirtableConfig {
 
 // Default credentials that should be set by the admin
 const DEFAULT_CREDENTIALS: AirtableConfig = {
-  token: "", // Admin should replace with actual Airtable Personal Access Token
-  baseId: "", // Admin should replace with actual Airtable Base ID
+  token: "patgtHs5g87et7WbT.fa61e35ca0ec9e8c3570d86019815699cafcda929a4eb9c443c8ec1144726659", // Admin's Airtable Personal Access Token
+  baseId: "appA9UwMCmIHPaeQs", // Admin's Airtable Base ID
 };
 
 // Admin-only credentials mode is enabled by default
