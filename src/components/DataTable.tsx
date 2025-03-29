@@ -52,7 +52,7 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
     return true;
   });
   
-  // Sort data alphabetically by country name for Global Tax Rates and Offshore Districts
+  // Sort data alphabetically by country name for Global Tax Rates, Offshore Districts, and Digital Nomad Visas
   const sortedData = [...data];
   if (title === "Global Tax Rates") {
     sortedData.sort((a, b) => {
@@ -61,6 +61,12 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
       return countryA.localeCompare(countryB);
     });
   } else if (title === "Offshore Districts") {
+    sortedData.sort((a, b) => {
+      const nameA = a.fields["Name"] || "";
+      const nameB = b.fields["Name"] || "";
+      return nameA.localeCompare(nameB);
+    });
+  } else if (title === "Digital Nomad Visas") {
     sortedData.sort((a, b) => {
       const nameA = a.fields["Name"] || "";
       const nameB = b.fields["Name"] || "";
