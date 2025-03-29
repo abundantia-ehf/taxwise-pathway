@@ -68,14 +68,19 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
   return (
     <div className={cn(
       "flex flex-col min-h-screen w-full overflow-hidden",
-      theme === 'dark' ? 'bg-background text-foreground' : 'bg-background text-foreground'
+      theme === 'dark' ? 'bg-zinc-950 text-foreground' : 'bg-gray-50 text-foreground'
     )}>
-      <main className="flex-1 overflow-y-auto pb-16">
+      <main className="flex-1 overflow-y-auto pb-20">
         {children}
       </main>
 
       {!hideNavigation && (
-        <nav className="fixed bottom-0 left-0 right-0 border-t bg-[#121212] backdrop-blur-md flex justify-between items-center px-2 py-2 z-50">
+        <nav className={cn(
+          "fixed bottom-4 left-4 right-4 rounded-full border-t flex justify-between items-center px-4 py-3 z-50",
+          theme === 'dark' 
+            ? 'bg-zinc-900 border-zinc-800' 
+            : 'bg-white border-gray-200 shadow-sm'
+        )}>
           {navigationItems.map((item) => {
             const active = isActive(item.path);
             return (
@@ -83,16 +88,15 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 key={item.path}
                 onClick={() => navigate(item.path)}
                 className={cn(
-                  "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
+                  "flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all",
                   active 
-                    ? "text-brand"
+                    ? "text-brand bg-brand/10"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <div className="flex items-center justify-center">
                   <item.icon size={20} />
                 </div>
-                <span className="text-xs mt-1">{item.label}</span>
               </button>
             );
           })}
@@ -101,14 +105,5 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     </div>
   );
 };
-
-/* Original light mode navigation styling for future reference:
-active 
-  ? cn(
-      "text-brand",
-      theme === 'light' ? "bg-gray-800 dark:bg-transparent" : ""
-    ) 
-  : "text-muted-foreground hover:text-foreground"
-*/
 
 export default MobileLayout;
