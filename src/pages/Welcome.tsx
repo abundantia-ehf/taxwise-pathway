@@ -131,7 +131,7 @@ const Welcome = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       
       {/* Dot Matrix World Map */}
-      <div className="w-full mb-4 pt-6 px-6">
+      <div className="w-full pt-6 px-6">
         <DotMatrixWorldMap />
       </div>
       
@@ -143,7 +143,7 @@ const Welcome = () => {
           className="flex flex-col items-center justify-center"
         >
           {/* Logo section */}
-          <div className="flex flex-col items-center space-y-8 w-full mt-8">
+          <div className="flex flex-col items-center space-y-8 w-full mt-12">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
