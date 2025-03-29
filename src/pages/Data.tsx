@@ -9,6 +9,7 @@ import AirtableSetup from '@/components/AirtableSetup';
 import { getAirtableCredentials, fetchAirtableData } from '@/utils/airtable';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import DataTable from '@/components/DataTable';
 
 interface DataSourceProps {
   title: string;
@@ -55,6 +56,8 @@ const Data = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [selectedData, setSelectedData] = useState<any[] | null>(null);
+  const [selectedDataTitle, setSelectedDataTitle] = useState<string>('');
   
   // Check if Airtable is connected on component mount
   useEffect(() => {
@@ -125,7 +128,9 @@ const Data = () => {
         toast.warning(errorMsg);
       } else {
         toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
-        // In a real app, you'd now navigate to a detail view with this data
+        // Set the selected data to display it
+        setSelectedData(data);
+        setSelectedDataTitle(dataSource.title);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -142,6 +147,12 @@ const Data = () => {
     setIsConnected(true);
     setErrorMessage(null);
   };
+  
+  const handleBackToList = () => {
+    setSelectedData(null);
+    setSelectedDataTitle('');
+    setErrorMessage(null);
+  };
 
   return (
     <MobileLayout>
@@ -149,85 +160,95 @@ const Data = () => {
       
       <div className="container max-w-md mx-auto px-4 py-6">
         <div className="space-y-4">
-          <div className="mb-6 flex justify-between items-center">
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Databases</h2>
-              <p className="text-sm text-muted-foreground">
-                Access our collection of tax optimization databases and resources
-              </p>
-            </div>
-            
-            {isConnected ? (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => {
-                  setShowSetup(true);
-                  setErrorMessage(null);
-                }}
-              >
-                <Database size={16} className="mr-2" /> 
-                Manage Connection
-              </Button>
-            ) : (
-              <Button 
-                variant="default" 
-                size="sm" 
-                onClick={() => setShowSetup(true)}
-              >
-                <Database size={16} className="mr-2" /> 
-                Connect to Airtable
-              </Button>
-            )}
-          </div>
-          
-          {errorMessage && (
-            <Card className={`border ${theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 'border-amber-200 bg-amber-50'} p-4 mb-4`}>
-              <div className="flex items-start">
-                <AlertCircle size={18} className="text-amber-500 mr-2 mt-0.5" />
+          {!selectedData ? (
+            <>
+              <div className="mb-6 flex justify-between items-center">
                 <div>
-                  <h4 className="font-medium text-amber-500">Connection Issue</h4>
-                  <p className="text-sm">{errorMessage}</p>
-                  <p className="text-sm mt-2">
-                    Make sure:
-                    <ul className="list-disc pl-5 mt-1 space-y-1">
-                      <li>Your Base ID is correct</li>
-                      <li>The table name matches exactly in your Airtable base</li>
-                      <li>Your access token has permission to access this base</li>
-                    </ul>
+                  <h2 className="text-lg font-semibold mb-2">Databases</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Access our collection of tax optimization databases and resources
                   </p>
                 </div>
+                
+                {isConnected ? (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => {
+                      setShowSetup(true);
+                      setErrorMessage(null);
+                    }}
+                  >
+                    <Database size={16} className="mr-2" /> 
+                    Manage Connection
+                  </Button>
+                ) : (
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    onClick={() => setShowSetup(true)}
+                  >
+                    <Database size={16} className="mr-2" /> 
+                    Connect to Airtable
+                  </Button>
+                )}
               </div>
-            </Card>
-          )}
-          
-          {showSetup ? (
-            <AirtableSetup onSetupComplete={handleSetupComplete} />
-          ) : (
-            <>
-              {dataSources.map(source => (
-                <DataSource
-                  key={source.id}
-                  title={source.title}
-                  description={source.description}
-                  recordCount={source.recordCount}
-                  lastUpdated={source.lastUpdated}
-                  icon={source.icon}
-                  onClick={() => handleOpenDataSource(source.id)}
-                />
-              ))}
+              
+              {errorMessage && (
+                <Card className={`border ${theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 'border-amber-200 bg-amber-50'} p-4 mb-4`}>
+                  <div className="flex items-start">
+                    <AlertCircle size={18} className="text-amber-500 mr-2 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-amber-500">Connection Issue</h4>
+                      <p className="text-sm">{errorMessage}</p>
+                      <p className="text-sm mt-2">
+                        Make sure:
+                        <ul className="list-disc pl-5 mt-1 space-y-1">
+                          <li>Your Base ID is correct</li>
+                          <li>The table name matches exactly in your Airtable base</li>
+                          <li>Your access token has permission to access this base</li>
+                        </ul>
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              )}
+              
+              {showSetup ? (
+                <AirtableSetup onSetupComplete={handleSetupComplete} />
+              ) : (
+                <>
+                  {dataSources.map(source => (
+                    <DataSource
+                      key={source.id}
+                      title={source.title}
+                      description={source.description}
+                      recordCount={source.recordCount}
+                      lastUpdated={source.lastUpdated}
+                      icon={source.icon}
+                      onClick={() => handleOpenDataSource(source.id)}
+                    />
+                  ))}
+                </>
+              )}
+              
+              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-4 mt-8`}>
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground">
+                    {isConnected 
+                      ? "Your Airtable databases are connected. Click on a database to view its contents." 
+                      : "Connect to Airtable to access your custom tax optimization databases."}
+                  </p>
+                </div>
+              </Card>
             </>
+          ) : (
+            <DataTable 
+              data={selectedData} 
+              title={selectedDataTitle} 
+              onBack={handleBackToList} 
+            />
           )}
-          
-          <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-4 mt-8`}>
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground">
-                {isConnected 
-                  ? "Your Airtable databases are connected. Click on a database to view its contents." 
-                  : "Connect to Airtable to access your custom tax optimization databases."}
-              </p>
-            </div>
-          </Card>
         </div>
       </div>
     </MobileLayout>
