@@ -52,9 +52,9 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
     return true;
   });
   
-  // Sort data alphabetically by country name for Global Tax Rates
+  // Sort data alphabetically by country name for Global Tax Rates and Offshore Districts
   const sortedData = [...data];
-  if (title === "Global Tax Rates") {
+  if (title === "Global Tax Rates" || title === "Offshore Districts") {
     sortedData.sort((a, b) => {
       const countryA = a.fields["Country"] || "";
       const countryB = b.fields["Country"] || "";
