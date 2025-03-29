@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRightIcon, ArrowDownIcon } from '@/components/ui/icons';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const Welcome = () => {
               transition={{ delay: 0.8, duration: 0.5 }}
               className="flex justify-center mt-40"
             >
-              <ArrowDown className="text-brand animate-bounce" size={42} />
+              <ArrowDownIcon className="text-brand animate-bounce" size={42} strokeWidth={1.5} />
             </motion.div>
             
             {/* Button now positioned with equal spacing */}
@@ -70,7 +70,7 @@ const Welcome = () => {
                 className="w-full py-5 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
                 onClick={() => navigate('/onboarding-features')}
               >
-                Get Started <ArrowRight className="ml-1" size={18} />
+                Get Started <ArrowRightIcon className="ml-1" size={18} />
               </Button>
             </motion.div>
           </div>
