@@ -1,48 +1,20 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, Database, MessagesSquare, ArrowRight, Moon, Sun } from 'lucide-react';
+import { BookOpen, Database, MessagesSquare, Settings, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
-import { Switch } from '@/components/ui/switch';
 import Header from '@/components/layout/Header';
 
-interface NavigationCardProps {
+interface NavigationSpoke {
   title: string;
   description: string;
   icon: React.ReactNode;
-  onClick: () => void;
+  path: string;
+  color: string;
 }
-
-const NavigationCard = ({ title, description, icon, onClick }: NavigationCardProps) => {
-  const { theme } = useTheme();
-  
-  return (
-    <Card 
-      className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${
-        theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'
-      }`}
-      onClick={onClick}
-    >
-      <CardContent className="p-6">
-        <div className="flex flex-col space-y-3">
-          <div className="flex justify-between items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
-              {icon}
-            </div>
-            <ArrowRight size={18} className="text-muted-foreground" />
-          </div>
-          
-          <div>
-            <h3 className="font-semibold text-lg">{title}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{description}</p>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -54,46 +26,6 @@ const HomePage = () => {
     setHasStartedLessons(!!lessonProgress);
   }, []);
   
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.1
-      } 
-    }
-  };
-  
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { duration: 0.5 }
-    }
-  };
-  
-  const navigationItems = [
-    {
-      title: "Learn",
-      description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} className="text-brand" />,
-      path: "/learn"
-    },
-    {
-      title: "Ask an Untaxable Pro",
-      description: "Schedule a consultation with our tax experts",
-      icon: <MessagesSquare size={20} className="text-brand" />,
-      path: "/support"
-    },
-    {
-      title: "Tax Databases",
-      description: "Access our collection of tax optimization databases and resources",
-      icon: <Database size={20} className="text-brand" />,
-      path: "/data"
-    }
-  ];
-
   const handleLearningNavigation = () => {
     if (hasStartedLessons) {
       navigate('/learn');
@@ -102,8 +34,40 @@ const HomePage = () => {
     }
   };
 
+  // Navigation spokes data
+  const navigationSpokes: NavigationSpoke[] = [
+    {
+      title: "Learn",
+      description: "Access our tax optimization courses",
+      icon: <BookOpen size={24} className="text-white" />,
+      path: "/learn",
+      color: "bg-gradient-to-br from-purple-500 to-purple-700"
+    },
+    {
+      title: "Ask an Expert",
+      description: "Get help from our tax experts",
+      icon: <MessagesSquare size={24} className="text-white" />,
+      path: "/advice",
+      color: "bg-gradient-to-br from-blue-500 to-blue-700"
+    },
+    {
+      title: "Data",
+      description: "Tax optimization resources",
+      icon: <Database size={24} className="text-white" />,
+      path: "/data",
+      color: "bg-gradient-to-br from-emerald-500 to-emerald-700"
+    },
+    {
+      title: "Settings",
+      description: "Manage your account",
+      icon: <Settings size={24} className="text-white" />,
+      path: "/settings",
+      color: "bg-gradient-to-br from-gray-500 to-gray-700"
+    }
+  ];
+
   return (
-    <MobileLayout>
+    <MobileLayout hideNavigation={true}>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
         <Header 
           title={
@@ -123,20 +87,25 @@ const HomePage = () => {
           showThemeToggle={true}
         />
         
-        <div className="container max-w-md mx-auto px-4">
+        <div className="container max-w-md mx-auto px-4 pb-12">
+          {/* Greeting Section */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-8 mt-4"
+            transition={{ duration: 0.5 }}
+            className="mt-6 mb-8"
           >
-            <h2 className="text-lg font-semibold mb-4 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
-              {hasStartedLessons ? "Continue Learning" : "Get Started"} 
-              <ArrowRight 
-                size={18} 
-                className={`ml-1 ${theme === 'dark' ? 'text-brand' : 'text-foreground'}`} 
-              />
-            </h2>
+            <h1 className="text-2xl font-bold">Welcome to Untaxable</h1>
+            <p className="text-muted-foreground">Your path to zero taxes starts here</p>
+          </motion.div>
+
+          {/* Continue Learning Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-10"
+          >
             <Card 
               className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} cursor-pointer`}
               onClick={handleLearningNavigation}
@@ -149,30 +118,20 @@ const HomePage = () => {
                   <div className="flex-1">
                     {hasStartedLessons ? (
                       <>
-                        <h3 className="font-medium">Foundations of Tax Optimization</h3>
+                        <h3 className="font-medium">Continue Learning</h3>
                         <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
                           <div className="h-2 bg-brand rounded-full" style={{ width: '20%' }}></div>
                         </div>
                         <div className="flex justify-between mt-1">
                           <span className="text-xs text-muted-foreground">20% complete</span>
-                          <button 
-                            className={`text-xs font-medium text-brand hover:underline flex items-center ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
-                          >
-                            Continue <ArrowRight size={12} className="ml-1" />
-                          </button>
                         </div>
                       </>
                     ) : (
                       <>
-                        <h3 className="font-medium">Start Here: Course Overview</h3>
+                        <h3 className="font-medium">Start Your Tax Journey</h3>
                         <p className="text-xs text-muted-foreground mt-1">
-                          Begin your tax optimization journey with our introductory lesson
+                          Begin with our introductory lesson
                         </p>
-                        <button 
-                          className={`text-xs font-medium text-brand hover:underline flex items-center mt-2 ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
-                        >
-                          Watch now <ArrowRight size={12} className="ml-1" />
-                        </button>
                       </>
                     )}
                   </div>
@@ -181,33 +140,50 @@ const HomePage = () => {
             </Card>
           </motion.div>
 
-          <div className="mb-8">
-            <h2 className="text-lg font-semibold mb-4">Explore</h2>
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="grid gap-4"
+          {/* Hub and Spoke Navigation */}
+          <div className="relative">
+            {/* Central Hub */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="w-20 h-20 rounded-full bg-brand flex items-center justify-center mx-auto mb-10 shadow-lg"
+              onClick={() => navigate('/home')}
             >
-              {navigationItems.map((item, index) => (
-                <motion.div key={item.title} variants={itemVariants}>
-                  <NavigationCard
-                    title={item.title}
-                    description={item.description}
-                    icon={item.icon}
-                    onClick={() => navigate(item.path)}
-                  />
+              <Home size={30} className="text-white" />
+            </motion.div>
+
+            {/* Spokes */}
+            <div className="grid grid-cols-2 gap-4">
+              {navigationSpokes.map((spoke, index) => (
+                <motion.div
+                  key={spoke.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  onClick={() => navigate(spoke.path)}
+                  className="cursor-pointer"
+                >
+                  <div className={`rounded-xl ${spoke.color} p-4 h-full shadow-md transition-transform duration-200 hover:scale-105`}>
+                    <div className="rounded-full w-10 h-10 flex items-center justify-center bg-white/20 mb-3">
+                      {spoke.icon}
+                    </div>
+                    <h3 className="font-semibold text-white text-lg">{spoke.title}</h3>
+                    <p className="text-white/80 text-xs mt-1">{spoke.description}</p>
+                  </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
+          {/* Stats Cards */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="mt-10"
           >
-            <h2 className="text-lg font-semibold mb-4">Your Untaxable Journey</h2>
+            <h2 className="text-lg font-semibold mb-4">Your Progress</h2>
             <div className="grid grid-cols-2 gap-4">
               <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
                 <CardContent className="p-4 text-center">
