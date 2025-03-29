@@ -8,34 +8,58 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/layout/Header';
 
-interface ExpandableCardProps {
+interface StackedCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
   onNavigate: () => void;
   expanded: boolean;
   onToggle: () => void;
+  index: number;
+  totalCards: number;
   color?: string;
 }
 
-const ExpandableCard = ({ 
+const StackedCard = ({ 
   title, 
   description, 
   icon, 
   onNavigate, 
   expanded, 
   onToggle,
+  index,
+  totalCards,
   color = "brand" 
-}: ExpandableCardProps) => {
+}: StackedCardProps) => {
   const { theme } = useTheme();
+  
+  const isTopCard = index === 0;
+  const offset = expanded ? 0 : index * 8; // Offset for stack effect
+  const scale = expanded ? 1 : 1 - (index * 0.03); // Subtle scale for stack effect
+  const zIndex = totalCards - index;
   
   return (
     <motion.div
       layout
-      className="w-full mb-3"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      className="w-full absolute"
+      style={{ 
+        zIndex,
+        top: 0,
+        left: 0,
+        right: 0
+      }}
+      initial={false}
+      animate={{ 
+        y: expanded && isTopCard ? 0 : offset,
+        scale,
+        opacity: expanded ? 1 : (1 - (index * 0.1)),
+      }}
+      transition={{ 
+        type: "spring", 
+        stiffness: 300, 
+        damping: 30,
+        duration: 0.3 
+      }}
     >
       <Card 
         className={`relative overflow-hidden transition-all cursor-pointer border ${
@@ -48,12 +72,14 @@ const ExpandableCard = ({
             <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-${color}/20`}>
               {icon}
             </div>
-            <motion.div
-              animate={{ rotate: expanded ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ChevronUp size={18} className="text-muted-foreground" />
-            </motion.div>
+            {isTopCard && (
+              <motion.div
+                animate={{ rotate: expanded ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ChevronUp size={18} className="text-muted-foreground" />
+              </motion.div>
+            )}
           </div>
           
           <div>
@@ -62,7 +88,7 @@ const ExpandableCard = ({
           </div>
           
           <AnimatePresence>
-            {expanded && (
+            {expanded && isTopCard && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -227,12 +253,9 @@ const HomePage = () => {
 
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-4">Explore</h2>
-            <motion.div
-              className="space-y-0"
-              layout
-            >
-              {navigationItems.map((item) => (
-                <ExpandableCard
+            <div className="relative" style={{ height: expandedCard ? '280px' : '180px' }}>
+              {navigationItems.map((item, index) => (
+                <StackedCard
                   key={item.title}
                   title={item.title}
                   description={item.description}
@@ -240,10 +263,15 @@ const HomePage = () => {
                   onNavigate={() => navigate(item.path)}
                   expanded={expandedCard === item.title}
                   onToggle={() => toggleCard(item.title)}
+                  index={expandedCard === item.title ? 0 : 
+                         expandedCard === null ? index : 
+                         navigationItems.findIndex(i => i.title === expandedCard) === index ? 0 :
+                         index < navigationItems.findIndex(i => i.title === expandedCard) ? index + 1 : index}
+                  totalCards={navigationItems.length}
                   color={item.color}
                 />
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
