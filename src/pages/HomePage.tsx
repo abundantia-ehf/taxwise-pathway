@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -21,7 +22,9 @@ const NavigationCard = ({ title, description, icon, onClick }: NavigationCardPro
   return (
     <Card 
       className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${
-        theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'
+        theme === 'dark' 
+          ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-brand/20' 
+          : 'border-zinc-200 bg-gradient-to-br from-white via-gray-50 to-brand/10'
       }`}
       onClick={onClick}
     >
