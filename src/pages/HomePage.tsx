@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -17,7 +16,6 @@ interface StackedCardProps {
   onToggle: () => void;
   index: number;
   totalCards: number;
-  color?: string;
 }
 
 const StackedCard = ({ 
@@ -25,52 +23,49 @@ const StackedCard = ({
   description, 
   icon, 
   onNavigate, 
-  expanded, 
+  expanded,
   onToggle,
   index,
   totalCards,
-  color = "brand" 
 }: StackedCardProps) => {
   const { theme } = useTheme();
   
-  const isTopCard = index === 0;
-  const offset = expanded ? 0 : index * 8; // Offset for stack effect
-  const scale = expanded ? 1 : 1 - (index * 0.03); // Subtle scale for stack effect
-  const zIndex = totalCards - index;
+  const isTopCard = expanded;
+  const baseOffset = 100; // Base offset from bottom of screen
+  const stackOffset = 8; // Offset between cards in stack
+  const yOffset = expanded ? 0 : baseOffset + (index * stackOffset);
+  const scale = expanded ? 1 : 1 - (index * 0.02);
+  const zIndex = expanded ? 50 : totalCards - index;
   
   return (
     <motion.div
       layout
-      className="w-full absolute"
+      className="w-full absolute bottom-0 left-0 right-0"
       style={{ 
         zIndex,
-        top: 0,
-        left: 0,
-        right: 0
       }}
       initial={false}
       animate={{ 
-        y: expanded && isTopCard ? 0 : offset,
+        y: yOffset,
         scale,
-        opacity: expanded ? 1 : (1 - (index * 0.1)),
+        opacity: expanded ? 1 : 0.9 - (index * 0.1),
       }}
       transition={{ 
         type: "spring", 
         stiffness: 300, 
         damping: 30,
-        duration: 0.3 
       }}
     >
       <Card 
-        className={`relative overflow-hidden transition-all cursor-pointer border ${
-          theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'
-        } ${expanded ? 'shadow-lg' : ''}`}
+        className={`relative overflow-hidden transition-all cursor-pointer border mb-2
+          ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} 
+          ${expanded ? 'shadow-lg rounded-t-xl rounded-b-none' : 'rounded-xl'}`}
         onClick={onToggle}
       >
         <CardContent className="p-6">
           <div className="flex justify-between items-center mb-3">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-${color}/20`}>
-              {icon}
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-brand/20">
+              {React.cloneElement(icon as React.ReactElement, { className: 'text-brand' })}
             </div>
             {isTopCard && (
               <motion.div
@@ -88,7 +83,7 @@ const StackedCard = ({
           </div>
           
           <AnimatePresence>
-            {expanded && isTopCard && (
+            {expanded && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -144,23 +139,20 @@ const HomePage = () => {
     {
       title: "Learn",
       description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} className="text-brand" />,
+      icon: <BookOpen size={20} />,
       path: "/learn",
-      color: "brand"
     },
     {
       title: "Ask an Untaxable Pro",
       description: "Schedule a consultation with our tax experts",
-      icon: <MessagesSquare size={20} className="text-purple-500" />,
+      icon: <MessagesSquare size={20} />,
       path: "/advice",
-      color: "purple-500"
     },
     {
       title: "Tax Databases",
       description: "Access our collection of tax optimization databases and resources",
-      icon: <Server size={20} className="text-blue-500" />,
+      icon: <Server size={20} />,
       path: "/data",
-      color: "blue-500"
     }
   ];
 
@@ -251,7 +243,7 @@ const HomePage = () => {
             </Card>
           </motion.div>
 
-          <div className="mb-8">
+          <div className="mb-24">
             <h2 className="text-lg font-semibold mb-4">Explore</h2>
             <div className="relative" style={{ height: expandedCard ? '280px' : '180px' }}>
               {navigationItems.map((item, index) => (
@@ -263,12 +255,8 @@ const HomePage = () => {
                   onNavigate={() => navigate(item.path)}
                   expanded={expandedCard === item.title}
                   onToggle={() => toggleCard(item.title)}
-                  index={expandedCard === item.title ? 0 : 
-                         expandedCard === null ? index : 
-                         navigationItems.findIndex(i => i.title === expandedCard) === index ? 0 :
-                         index < navigationItems.findIndex(i => i.title === expandedCard) ? index + 1 : index}
+                  index={index}
                   totalCards={navigationItems.length}
-                  color={item.color}
                 />
               ))}
             </div>
