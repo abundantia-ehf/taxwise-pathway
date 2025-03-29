@@ -9,11 +9,10 @@ const Welcome = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-800 to-zinc-900 text-white overflow-hidden">
-      {/* Enhanced decorative elements */}
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-brand/10 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-brand/15 blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-zinc-800/30 blur-3xl"></div>
+    <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       
       <div className="container max-w-md mx-auto px-6 py-4 h-screen relative z-10">
         <motion.div 
