@@ -35,7 +35,12 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
   }
   
   // Extract column headers from the first record's fields
-  const columns = Object.keys(data[0].fields || {});
+  let columns = Object.keys(data[0].fields || {});
+  
+  // Filter out specific columns based on the table title
+  if (title === "Global Tax Rates") {
+    columns = columns.filter(column => column !== "Flag");
+  }
   
   return (
     <div className="space-y-4">
