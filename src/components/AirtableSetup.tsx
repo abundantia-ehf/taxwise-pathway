@@ -14,7 +14,7 @@ interface AirtableSetupProps {
 
 const AirtableSetup = ({ onSetupComplete }: AirtableSetupProps) => {
   const savedCredentials = getAirtableCredentials();
-  const [token, setToken] = useState(savedCredentials?.apiKey || '');
+  const [token, setToken] = useState(savedCredentials?.token || '');
   const [baseId, setBaseId] = useState(savedCredentials?.baseId || '');
   const needsConfiguration = !isAirtableConfigured();
 
@@ -25,7 +25,7 @@ const AirtableSetup = ({ onSetupComplete }: AirtableSetupProps) => {
     }
     
     if (!token || !baseId) {
-      toast.error("Please provide both Access Token and Base ID");
+      toast.error("Please provide both Personal Access Token and Base ID");
       return;
     }
 

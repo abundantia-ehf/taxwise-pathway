@@ -1,24 +1,24 @@
 import { toast } from "sonner";
 
 interface AirtableConfig {
-  apiKey: string;
+  token: string;
   baseId: string;
 }
 
 // Default credentials that should be set by the admin
 const DEFAULT_CREDENTIALS: AirtableConfig = {
-  apiKey: "", // Admin should replace with actual Airtable API key
+  token: "", // Admin should replace with actual Airtable Personal Access Token
   baseId: "", // Admin should replace with actual Airtable Base ID
 };
 
-// Check if the app should use admin-provided credentials only
-const ADMIN_ONLY_CREDENTIALS = true; // Set to true to use only the DEFAULT_CREDENTIALS
+// Admin-only credentials mode is enabled by default
+const ADMIN_ONLY_CREDENTIALS = true;
 
-// Store Airtable credentials in localStorage
-export const saveAirtableCredentials = (apiKey: string, baseId: string) => {
-  // Only save if allowed (not in admin-only mode or the user is an admin)
+// Store Airtable credentials in localStorage (only used if admin mode is disabled)
+export const saveAirtableCredentials = (token: string, baseId: string) => {
+  // Only save if allowed (not in admin-only mode)
   if (!ADMIN_ONLY_CREDENTIALS) {
-    localStorage.setItem('airtable_api_key', apiKey);
+    localStorage.setItem('airtable_token', token);
     localStorage.setItem('airtable_base_id', baseId);
   }
 };
@@ -27,26 +27,26 @@ export const saveAirtableCredentials = (apiKey: string, baseId: string) => {
 export const getAirtableCredentials = (): AirtableConfig | null => {
   // If in admin-only mode, return the default credentials
   if (ADMIN_ONLY_CREDENTIALS) {
-    return DEFAULT_CREDENTIALS.apiKey && DEFAULT_CREDENTIALS.baseId
+    return DEFAULT_CREDENTIALS.token && DEFAULT_CREDENTIALS.baseId
       ? DEFAULT_CREDENTIALS
       : null;
   }
   
   // Otherwise, try to get from localStorage
-  const apiKey = localStorage.getItem('airtable_api_key');
+  const token = localStorage.getItem('airtable_token');
   const baseId = localStorage.getItem('airtable_base_id');
   
-  if (!apiKey || !baseId) {
+  if (!token || !baseId) {
     return null;
   }
   
-  return { apiKey, baseId };
+  return { token, baseId };
 };
 
 // Check if Airtable credentials are configured by admin
 export const isAirtableConfigured = (): boolean => {
   if (ADMIN_ONLY_CREDENTIALS) {
-    return Boolean(DEFAULT_CREDENTIALS.apiKey && DEFAULT_CREDENTIALS.baseId);
+    return Boolean(DEFAULT_CREDENTIALS.token && DEFAULT_CREDENTIALS.baseId);
   }
   return true; // User will be asked to configure if needed
 };
@@ -68,7 +68,7 @@ export const fetchAirtableData = async (tableName: string): Promise<any[]> => {
     
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${credentials.apiKey}`,
+        Authorization: `Bearer ${credentials.token}`,
       },
     });
     
