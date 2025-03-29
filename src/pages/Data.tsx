@@ -127,7 +127,9 @@ const Data = () => {
         setErrorMessage(errorMsg);
         toast.warning(errorMsg);
       } else {
-        toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
+        // Remove success toast notification
+        // toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
+        
         // Set the selected data to display it
         setSelectedData(data);
         setSelectedDataTitle(dataSource.title);
