@@ -74,12 +74,12 @@ const Data = () => {
     },
     {
       id: '2',
-      title: 'Offshore Locales',
+      title: 'Offshore Districts',
       description: 'Information on business-friendly jurisdictions and their tax benefits',
       icon: <Building size={24} className="text-brand" />,
       recordCount: 45,
       lastUpdated: 'Nov 8, 2023',
-      airtableTable: 'Offshore Locales'
+      airtableTable: 'Offshore Districts'
     },
     {
       id: '3',
