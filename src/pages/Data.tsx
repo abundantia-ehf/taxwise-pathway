@@ -69,7 +69,7 @@ const Data = () => {
       icon: <CircleDollarSign size={24} className="text-brand" />,
       recordCount: 195,
       lastUpdated: 'Oct 15, 2023',
-      airtableTable: 'Global Tax Rates'
+      airtableTable: 'Global Tax Rates' // Make sure this matches your exact table name in Airtable
     },
     {
       id: '2',
@@ -78,7 +78,7 @@ const Data = () => {
       icon: <Building size={24} className="text-brand" />,
       recordCount: 45,
       lastUpdated: 'Nov 8, 2023',
-      airtableTable: 'Offshore Locales'
+      airtableTable: 'Offshore Locales' // Make sure this matches your exact table name in Airtable
     },
     {
       id: '3',
@@ -87,7 +87,7 @@ const Data = () => {
       icon: <Luggage size={24} className="text-brand" />,
       recordCount: 32,
       lastUpdated: 'Sep 22, 2023',
-      airtableTable: 'Digital Nomad Visas'
+      airtableTable: 'Digital Nomad Visas' // Make sure this matches your exact table name in Airtable
     },
     {
       id: '4',
@@ -96,7 +96,7 @@ const Data = () => {
       icon: <Flag size={24} className="text-brand" />,
       recordCount: 68,
       lastUpdated: 'Dec 3, 2023',
-      airtableTable: 'US Tax Treaties'
+      airtableTable: 'US Tax Treaties' // Make sure this matches your exact table name in Airtable
     }
   ];
   
@@ -114,13 +114,19 @@ const Data = () => {
     
     setIsLoading(true);
     try {
+      // Use the airtableTable property directly, don't add any additional path elements
       const data = await fetchAirtableData(dataSource.airtableTable);
       console.log(`Fetched ${data.length} records from ${dataSource.title}`);
-      toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
+      
+      if (data.length === 0) {
+        toast.warning(`No records found in "${dataSource.title}" table. Please verify the table name exists in your Airtable base.`);
+      } else {
+        toast.success(`Loaded ${data.length} records from ${dataSource.title}`);
+      }
       // In a real app, you'd now navigate to a detail view with this data
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("Failed to load data");
+      toast.error("Failed to load data. Check that your table name is correct.");
     } finally {
       setIsLoading(false);
     }

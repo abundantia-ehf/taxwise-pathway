@@ -34,8 +34,10 @@ export const fetchAirtableData = async (tableName: string): Promise<any[]> => {
   }
   
   try {
+    // This is the corrected URL format for Airtable API
+    // The table name should be used directly, not as part of the path
     const response = await fetch(
-      `https://api.airtable.com/v0/${credentials.baseId}/${encodeURIComponent(tableName)}`,
+      `https://api.airtable.com/v0/${credentials.baseId}/${tableName}`,
       {
         headers: {
           Authorization: `Bearer ${credentials.apiKey}`,
@@ -44,6 +46,8 @@ export const fetchAirtableData = async (tableName: string): Promise<any[]> => {
     );
     
     if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Airtable API error:", errorData);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
