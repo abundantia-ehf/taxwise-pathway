@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, Bot, MessagesSquare, ArrowRight, Moon, Sun } from 'lucide-react';
+import { BookOpen, Database, MessagesSquare, ArrowRight, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
@@ -82,16 +81,16 @@ const HomePage = () => {
       path: "/learn"
     },
     {
-      title: "Ask Our AI",
-      description: "Get instant answers to your tax questions from our AI assistant",
-      icon: <Bot size={20} className="text-brand" />,
-      path: "/ai-help"
-    },
-    {
       title: "Ask an Untaxable Pro",
       description: "Schedule a consultation with our tax experts",
       icon: <MessagesSquare size={20} className="text-brand" />,
       path: "/support"
+    },
+    {
+      title: "Tax Databases",
+      description: "Access our collection of tax optimization databases and resources",
+      icon: <Database size={20} className="text-brand" />,
+      path: "/data"
     }
   ];
 
