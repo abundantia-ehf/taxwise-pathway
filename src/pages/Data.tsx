@@ -4,7 +4,7 @@ import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ChevronRight, Flag, Building, CircleDollarSign } from 'lucide-react';
+import { ChevronRight, Flag, Building, CircleDollarSign, Luggage } from 'lucide-react';
 
 interface DataSourceProps {
   title: string;
@@ -69,7 +69,7 @@ const Data = () => {
       id: '3',
       title: 'Digital Nomad Visas',
       description: 'Details on countries offering special visas for remote workers',
-      icon: <Flag size={24} className="text-brand" />, /* Replaced Passport with Flag as an alternative */
+      icon: <Luggage size={24} className="text-brand" />,
       recordCount: 32,
       lastUpdated: 'Sep 22, 2023'
     },
