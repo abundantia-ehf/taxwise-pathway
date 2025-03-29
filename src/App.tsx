@@ -29,7 +29,7 @@ const Subscribe = React.lazy(() => import("./pages/Subscribe"));
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const Learn = React.lazy(() => import("./pages/Learn"));
 const VideoPlayer = React.lazy(() => import("./pages/VideoPlayer"));
-const AIHelp = React.lazy(() => import("./pages/AIHelp"));
+const Data = React.lazy(() => import("./pages/Data"));
 const Advice = React.lazy(() => import("./pages/Advice"));
 const Settings = React.lazy(() => import("./pages/Settings"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -103,10 +103,10 @@ const App = () => (
                   } 
                 />
                 <Route 
-                  path="/ai-help" 
+                  path="/data" 
                   element={
                     <ProtectedRoute requireSubscription>
-                      <AIHelp />
+                      <Data />
                     </ProtectedRoute>
                   } 
                 />

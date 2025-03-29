@@ -1,7 +1,7 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Bot, MessagesSquare, Settings, Home } from 'lucide-react';
+import { BookOpen, Database, MessagesSquare, Settings, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -54,9 +54,9 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
       path: '/advice',
     },
     {
-      label: 'AI Help',
-      icon: Bot,
-      path: '/ai-help',
+      label: 'Data',
+      icon: Database,
+      path: '/data',
     },
     {
       label: 'Settings',
