@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
@@ -188,28 +187,7 @@ const Data = () => {
                     <Database size={16} className="mr-2" /> 
                     Admin Setup Required
                   </Button>
-                ) : isConnected ? (
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={() => {
-                      setShowSetup(true);
-                      setErrorMessage(null);
-                    }}
-                  >
-                    <Database size={16} className="mr-2" /> 
-                    Manage Connection
-                  </Button>
-                ) : (
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    onClick={() => setShowSetup(true)}
-                  >
-                    <Database size={16} className="mr-2" /> 
-                    Connect to Airtable
-                  </Button>
-                )}
+                ) : null}
               </div>
               
               {errorMessage && (
@@ -256,9 +234,7 @@ const Data = () => {
                   <p className="text-sm text-muted-foreground">
                     {needsConfiguration 
                       ? "This feature requires administrator configuration to work properly."
-                      : isConnected 
-                        ? "Your Airtable databases are connected. Click on a database to view its contents." 
-                        : "Connect to Airtable to access your custom tax optimization databases."}
+                      : "Access your tax optimization databases with secure administrator-managed authentication."}
                   </p>
                 </div>
               </Card>
