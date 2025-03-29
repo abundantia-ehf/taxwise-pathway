@@ -52,6 +52,16 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
     return true;
   });
   
+  // Sort data alphabetically by country name for Global Tax Rates
+  const sortedData = [...data];
+  if (title === "Global Tax Rates") {
+    sortedData.sort((a, b) => {
+      const countryA = a.fields["Country"] || "";
+      const countryB = b.fields["Country"] || "";
+      return countryA.localeCompare(countryB);
+    });
+  }
+  
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -73,7 +83,7 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((record) => (
+              {sortedData.map((record) => (
                 <TableRow key={record.id}>
                   {columns.map((column) => {
                     const value = record.fields[column];
