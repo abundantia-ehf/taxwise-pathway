@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   Table, 
   TableHeader, 
@@ -22,6 +22,14 @@ interface DataTableProps {
 
 const DataTable = ({ data, title, onBack }: DataTableProps) => {
   const { theme } = useTheme();
+  
+  // Log the data to check what columns are available
+  useEffect(() => {
+    if (data && data.length > 0) {
+      console.log(`Data columns for ${title}:`, Object.keys(data[0].fields || {}));
+      console.log(`Sample record:`, data[0].fields);
+    }
+  }, [data, title]);
   
   // Early return if there's no data
   if (!data || data.length === 0) {
