@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -168,9 +169,9 @@
     @apply border-white/5;
   }
   
-  /* Updated solid background classes for icon containers with better contrast */
+  /* Adding solid background classes for icon containers */
   .icon-bg {
-    @apply bg-brand text-black;
+    @apply bg-brand text-white;
   }
   
   .dark .icon-bg {
