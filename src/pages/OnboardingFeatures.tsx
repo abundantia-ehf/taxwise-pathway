@@ -50,7 +50,7 @@ const AnimatedCounter = () => {
     if (count <= displayValue) return;
     
     const animateToNewValue = () => {
-      const diff = count - displayValue; // Define the diff variable here
+      const diff = count - displayValue;
       
       if (displayValue < count) {
         setDisplayValue(prevValue => {
