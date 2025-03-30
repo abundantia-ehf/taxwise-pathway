@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, PhilippinePeso, SwissFranc } from 'lucide-react';
+import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, IndianRupee, SwissFranc, SaudiRiyal } from 'lucide-react';
 import { initializeCurrencyHighlighter } from '@/components/questionnaire/CurrencyHighlighter';
 
 const CurrencyIcon = () => {
@@ -20,16 +20,18 @@ const CurrencyIcon = () => {
     { Icon: PoundSterling, id: 3 },
     { Icon: JapaneseYen, id: 4 },
     { Icon: RussianRuble, id: 5 },
-    { Icon: PhilippinePeso, id: 6 },
+    { Icon: IndianRupee, id: 6 },
     { Icon: SwissFranc, id: 7 },
+    { Icon: SaudiRiyal, id: 8 },
     // Duplicate for seamless scrolling
-    { Icon: DollarSign, id: 8 },
-    { Icon: Euro, id: 9 },
-    { Icon: PoundSterling, id: 10 },
-    { Icon: JapaneseYen, id: 11 },
-    { Icon: RussianRuble, id: 12 },
-    { Icon: PhilippinePeso, id: 13 },
-    { Icon: SwissFranc, id: 14 }
+    { Icon: DollarSign, id: 9 },
+    { Icon: Euro, id: 10 },
+    { Icon: PoundSterling, id: 11 },
+    { Icon: JapaneseYen, id: 12 },
+    { Icon: RussianRuble, id: 13 },
+    { Icon: IndianRupee, id: 14 },
+    { Icon: SwissFranc, id: 15 },
+    { Icon: SaudiRiyal, id: 16 }
   ];
 
   return (
