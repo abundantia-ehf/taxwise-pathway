@@ -21,8 +21,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				headline: ['Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif'],
-				unitext: ['Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif'],
+				headline: ['Space Grotesk', 'sans-serif'],
+				unitext: ['Space Grotesk', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
