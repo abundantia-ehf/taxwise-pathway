@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Clock, Lock, Check } from 'lucide-react';
+import ScrollingIcons from '@/components/questionnaire/ScrollingIcons';
 
 interface IntroductionStepProps {
   onNext: () => void;
@@ -13,7 +14,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center justify-between h-full py-8 px-4 text-center"
+      className="flex flex-col items-center justify-between h-full py-8 px-4 text-center overflow-hidden"
     >
       <div className="flex-1 max-h-24" />
       
@@ -24,6 +25,8 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
           <span className="text-sm">Takes 1 minute</span>
         </div>
       </div>
+      
+      <ScrollingIcons />
       
       <div className="flex-1" />
       
