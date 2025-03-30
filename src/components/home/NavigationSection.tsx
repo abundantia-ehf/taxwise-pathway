@@ -29,23 +29,24 @@ const NavigationSection = () => {
     }
   };
   
+  // Removed color property from icons to allow our new styling to take effect
   const navigationItems = [
     {
       title: "Learn",
       description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} className={theme === 'greyscale' ? "text-white" : "text-brand"} />,
+      icon: <BookOpen size={20} />,
       path: "/learn"
     },
     {
       title: "Ask an Untaxable Pro",
       description: "Schedule a consultation with our tax experts",
-      icon: <MessagesSquare size={20} className={theme === 'greyscale' ? "text-white" : "text-brand"} />,
+      icon: <MessagesSquare size={20} />,
       path: "/support"
     },
     {
       title: "Tax Databases",
       description: "Access our collection of tax optimization databases and resources",
-      icon: <Database size={20} className={theme === 'greyscale' ? "text-white" : "text-brand"} />,
+      icon: <Database size={20} />,
       path: "/data"
     }
   ];

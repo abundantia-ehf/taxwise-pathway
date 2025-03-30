@@ -47,6 +47,11 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
     ? 'bg-zinc-700' 
     : 'bg-brand';
   
+  // Updated icon color - using dark text for light/dark modes to contrast with green background
+  const iconColorClass = theme === 'greyscale'
+    ? 'text-white' // Keep white for greyscale
+    : 'text-zinc-900'; // Use near-black for both light and dark mode
+  
   // Arrow background color
   const arrowBgClass = theme === 'dark' || theme === 'greyscale' 
     ? 'bg-zinc-800' 
@@ -68,7 +73,10 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
             <div className="flex items-center -space-x-2">
               {/* Main icon with increased size (20% larger) */}
               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${iconBgClass} z-10`} style={{ width: '48px', height: '48px' }}>
-                {icon}
+                {/* Apply the updated icon color class to ensure icon is visible */}
+                <div className={iconColorClass}>
+                  {icon}
+                </div>
               </div>
               
               {/* Arrow icon underneath */}
