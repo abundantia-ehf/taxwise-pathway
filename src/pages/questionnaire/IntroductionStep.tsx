@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Clock, Lock, ArrowRight } from 'lucide-react';
+import { Clock, Lock, Check } from 'lucide-react';
 
 interface IntroductionStepProps {
   onNext: () => void;
@@ -15,11 +15,10 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       animate={{ opacity: 1 }}
       className="flex flex-col items-center justify-between h-full py-8 px-4 text-center"
     >
-      <div className="flex-1" />
+      <div className="flex-1 max-h-16" />
       
-      <div className="space-y-6 max-w-md">
-        <h1 className="text-2xl font-headline">Take the Untaxable survey so we can better serve you with a low-tax plan</h1>
-        <p className="text-muted-foreground">Let's start by learning more about your situation.</p>
+      <div className="space-y-4 max-w-md">
+        <h1 className="text-xl font-headline">Let's start by understanding your current tax situation.</h1>
         <div className="flex items-center justify-center space-x-2 text-brand">
           <Clock className="h-5 w-5" />
           <span>Takes 1 minute</span>
@@ -33,7 +32,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
           onClick={onNext} 
           className="w-full py-6 bg-brand text-black hover:bg-brand/90"
         >
-          Take the survey <ArrowRight className="ml-1" size={16} />
+          Got it <Check className="ml-1" size={16} />
         </Button>
         <div className="flex items-center justify-center mt-4 text-xs text-muted-foreground">
           <Lock className="h-3 w-3 mr-1" />
