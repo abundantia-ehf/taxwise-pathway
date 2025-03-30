@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -8,6 +7,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import Header from '@/components/layout/Header';
+import GreetingQuote from '@/components/home/GreetingQuote';
+import { Separator } from '@/components/ui/separator';
 
 interface NavigationCardProps {
   title: string;
@@ -149,6 +150,15 @@ const HomePage = () => {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <GreetingQuote />
+            <Separator className="mb-4" />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-8 mt-4"
           >
@@ -156,7 +166,7 @@ const HomePage = () => {
               {hasStartedLessons ? "Continue Learning" : "Get Started"} 
               <ArrowRight 
                 size={18} 
-                className={`ml-1 ${theme === 'dark' ? 'text-brand' : 'text-foreground'}`} 
+                className="ml-1 text-brand" 
               />
             </h2>
             <Card 
