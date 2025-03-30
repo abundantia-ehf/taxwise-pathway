@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Montserrat font with explicit semibold (600) weight */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+/* Remove Google Font import for Montserrat since we're using system Impact font */
 
 @layer base {
   :root {
@@ -108,10 +107,9 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Explicitly set all headings to use Montserrat Semibold with !important */
+  /* Force Impact font for headings with !important to override any conflicts */
   h1, h2, h3, h4, h5, h6, .font-headline {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 600 !important; /* Force semibold */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
     letter-spacing: -0.015em;
   }
 
