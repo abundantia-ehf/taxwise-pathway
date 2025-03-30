@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, Database, MessagesSquare, ArrowRight, Moon, Sun } from 'lucide-react';
+import { BookOpen, Database, MessagesSquare, ArrowRight, Moon, Sun, DoorOpen } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
@@ -192,7 +192,11 @@ const HomePage = () => {
               <CardContent className="p-4">
                 <div className="flex items-center">
                   <div className={`h-12 w-12 rounded-lg ${theme === 'greyscale' ? "bg-zinc-700" : "bg-brand/20"} flex items-center justify-center mr-4`}>
-                    <BookOpen size={24} className={theme === 'greyscale' ? "text-white" : "text-brand"} />
+                    {hasStartedLessons ? (
+                      <BookOpen size={24} className={theme === 'greyscale' ? "text-white" : "text-brand"} />
+                    ) : (
+                      <DoorOpen size={24} className={theme === 'greyscale' ? "text-white" : "text-brand"} />
+                    )}
                   </div>
                   <div className="flex-1">
                     {hasStartedLessons ? (
