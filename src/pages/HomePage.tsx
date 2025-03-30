@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -50,7 +51,9 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
             <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
               {icon}
             </div>
-            <ArrowRight size={18} className="text-muted-foreground" />
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-200'}`}>
+              <ArrowRight size={16} className="text-muted-foreground" />
+            </div>
           </div>
           
           <div>
