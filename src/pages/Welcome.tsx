@@ -13,6 +13,60 @@ const Welcome = () => {
   const fullText = "Become Untaxable.";
   const typingSpeed = 100; // milliseconds per character
   const typingIndex = useRef(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const arrowAnimationRef = useRef<number | null>(null);
+  const arrowRef = useRef<HTMLDivElement | null>(null);
+
+  // Create audio element
+  useEffect(() => {
+    audioRef.current = new Audio('/dink-sound.mp3');
+    audioRef.current.volume = 0.2; // Set volume to 20%
+    
+    return () => {
+      if (arrowAnimationRef.current) {
+        cancelAnimationFrame(arrowAnimationRef.current);
+      }
+    };
+  }, []);
+
+  // Handle the dink sound effect for the bouncing arrow
+  useEffect(() => {
+    if (!showArrow || !arrowRef.current) return;
+    
+    let previousY = 0;
+    let isMovingDown = true;
+    
+    const checkArrowPosition = () => {
+      if (!arrowRef.current || !showArrow) return;
+      
+      const currentY = arrowRef.current.getBoundingClientRect().y;
+      
+      // If arrow was moving down and now it's moving up, it means it hit the bottom
+      if (isMovingDown && currentY < previousY) {
+        isMovingDown = false;
+        if (audioRef.current) {
+          // Clone and play to allow overlapping sounds if bounce is fast
+          audioRef.current.currentTime = 0;
+          audioRef.current.play().catch(err => console.log("Audio play error:", err));
+        }
+      } else if (!isMovingDown && currentY > previousY) {
+        // Now moving down again
+        isMovingDown = true;
+      }
+      
+      previousY = currentY;
+      arrowAnimationRef.current = requestAnimationFrame(checkArrowPosition);
+    };
+    
+    // Start the animation frame loop
+    arrowAnimationRef.current = requestAnimationFrame(checkArrowPosition);
+    
+    return () => {
+      if (arrowAnimationRef.current) {
+        cancelAnimationFrame(arrowAnimationRef.current);
+      }
+    };
+  }, [showArrow]);
 
   useEffect(() => {
     if (typingIndex.current < fullText.length) {
@@ -92,6 +146,7 @@ const Welcome = () => {
             </motion.div>
             
             <motion.div
+              ref={arrowRef}
               initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: showArrow ? 1 : 0, y: 0 }}
               transition={{ duration: 0.5 }}
