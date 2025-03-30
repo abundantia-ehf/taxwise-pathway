@@ -13,7 +13,7 @@ interface FeatureSlideProps {
 
 const AnimatedCounter = () => {
   const calculateCurrentCount = () => {
-    const startDate = new Date('2023-04-01T00:00:00Z').getTime();
+    const startDate = new Date('2025-03-30T12:00:00Z').getTime();
     const initialValue = 99320600;
     const now = Date.now();
     const elapsedMs = now - startDate;
@@ -112,21 +112,25 @@ const AnimatedCounter = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative mb-1">
-        <div className="absolute -inset-4 bg-brand/20 blur-lg rounded-xl"></div>
-        <div className="relative flex items-center bg-zinc-900/70 backdrop-blur-sm py-3 px-2 rounded-xl border border-brand/30 shadow-lg shadow-brand/10">
-          <span className="text-brand text-4xl md:text-6xl font-mono font-bold mr-1">$</span>
-          <div className="flex">
+      <div className="relative mb-2">
+        <div className="absolute -inset-2 bg-gradient-to-br from-brand/30 to-purple-500/20 blur-lg rounded-xl"></div>
+        <div className="relative flex items-center justify-center py-4 px-4 rounded-xl bg-black/50 backdrop-blur-md border border-brand/20 shadow-xl">
+          <span className="text-brand text-5xl md:text-7xl font-bold mr-2">$</span>
+          <div className="grid grid-flow-col gap-1">
             {individualDigits.map((digit, index) => (
-              <div key={index} className="relative mx-0.5">
-                <div className="bg-zinc-800 border border-zinc-700 w-8 md:w-10 h-12 md:h-16 flex items-center justify-center rounded-md overflow-hidden shadow-inner">
-                  <span className="font-mono text-4xl md:text-6xl font-bold text-brand">
-                    {digit}
-                  </span>
+              <div key={index} className="relative">
+                <div className="flex flex-col items-center">
+                  <div className="h-1 w-full bg-zinc-700/50 rounded-t-sm"></div>
+                  <div className="bg-gradient-to-b from-zinc-800 to-zinc-900 w-9 md:w-12 h-14 md:h-18 flex items-center justify-center rounded overflow-hidden shadow-inner border border-zinc-700/50">
+                    <span className="font-mono text-5xl md:text-7xl font-bold bg-gradient-to-b from-brand to-green-300 bg-clip-text text-transparent">
+                      {digit}
+                    </span>
+                  </div>
+                  <div className="h-1 w-full bg-zinc-700/50 rounded-b-sm"></div>
                 </div>
                 {(withCommas.length - index) % 4 === 0 && index !== individualDigits.length - 1 && (
                   <div className="absolute -right-2 top-1/2 transform -translate-y-1/2">
-                    <span className="text-white/40 text-xl">,</span>
+                    <span className="text-white/60 text-3xl font-bold">,</span>
                   </div>
                 )}
               </div>
