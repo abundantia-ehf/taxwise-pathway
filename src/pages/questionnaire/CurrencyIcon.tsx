@@ -26,7 +26,7 @@ const CurrencyIcon = () => {
     { Icon: SaudiRiyalIcon, id: 8 }, // Using our custom Saudi Riyal icon
     // Duplicate for seamless scrolling
     { Icon: DollarSign, id: 9 },
-    { Icon: Euro, id: 10 },
+    { Icon: Euro, id: 10 }, // Keeping the Euro icon here
     { Icon: PoundSterling, id: 11 },
     { Icon: JapaneseYen, id: 12 },
     { Icon: RussianRuble, id: 13 },
