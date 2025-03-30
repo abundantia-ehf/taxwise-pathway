@@ -36,7 +36,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
         </Button>
         <div className="flex items-center justify-center mt-4 text-xs text-muted-foreground">
           <Lock className="h-3 w-3 mr-1" />
-          <span>Your answers are anonymous and will not be shared</span>
+          <span>Your answers are anonymous</span>
         </div>
       </div>
     </motion.div>
