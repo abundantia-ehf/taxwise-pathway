@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CurrencyIcon } from './CurrencyIcon';
+import CurrencyIcon from './CurrencyIcon';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface TaxAmountStepProps {
