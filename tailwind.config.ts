@@ -21,8 +21,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				unitext: ['Open Sans', 'sans-serif'], // Using Open Sans for headlines
-				headline: ['Open Sans', 'sans-serif'], // Adding a specific headline font
+				unitext: ['Montserrat', 'sans-serif'], // Changed to Montserrat
+				headline: ['Montserrat', 'sans-serif'], // Changed to Montserrat
 			},
 			colors: {
 				border: 'hsl(var(--border))',

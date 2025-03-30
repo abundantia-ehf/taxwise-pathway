@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Open Sans font for headlines - a more symmetrical sans-serif font */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+/* Import Montserrat font for headlines and Inter for body text */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -110,8 +110,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; /* Semibold */
     letter-spacing: -0.015em;
   }
 
