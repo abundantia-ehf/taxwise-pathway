@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -108,15 +109,7 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
 				'slide-up': 'slide-up 0.4s ease-out'
-			},
-			transform: {
-				'perspective-800': 'perspective(800px)',
-				'perspective-1000': 'perspective(1000px)',
-				'perspective-1200': 'perspective(1200px)',
-			},
-			transformOrigin: {
-				'center-center': 'center center',
-			},
+			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

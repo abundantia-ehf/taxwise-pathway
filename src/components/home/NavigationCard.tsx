@@ -57,26 +57,12 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
     ? 'bg-zinc-800' 
     : 'bg-zinc-200';
   
-  // Isometric transformation classes
-  const isometricTransform = 'transform perspective-[800px] rotate-x-[10deg] rotate-y-[-10deg]';
-  const hoverEffect = 'hover:rotate-x-[5deg] hover:rotate-y-[-5deg] hover:translate-y-[-5px] hover:shadow-xl';
-  
   return (
     <Card 
-      className={cn(
-        `relative overflow-hidden cursor-pointer border transition-all duration-300`,
-        cardStyle,
-        isometricTransform,
-        hoverEffect,
-        // Add depth with shadows based on theme
-        theme === 'dark' || theme === 'greyscale' 
-          ? 'shadow-[5px_5px_15px_rgba(0,0,0,0.5)]' 
-          : 'shadow-[5px_5px_15px_rgba(0,0,0,0.2)]'
-      )}
+      className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${cardStyle}`}
       onClick={onClick}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10 pointer-events-none"></div>
-      <CardContent className="p-4 relative z-10">
+      <CardContent className="p-4">
         <div className="flex flex-col">
           {/* Card Header Row - contains heading and icons */}
           <div className="flex justify-between items-center mb-2">
@@ -86,11 +72,7 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
             {/* Icons section - both on the right side with overlap */}
             <div className="flex items-center -space-x-2">
               {/* Main icon with increased size (20% larger) */}
-              <div className={cn(
-                `w-12 h-12 rounded-full flex items-center justify-center ${iconBgClass} z-10`,
-                // Add a subtle 3D effect to the icon circle
-                'shadow-[2px_2px_3px_rgba(0,0,0,0.2)]'
-              )} style={{ width: '48px', height: '48px' }}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${iconBgClass} z-10`} style={{ width: '48px', height: '48px' }}>
                 {/* Apply the updated icon color class to ensure icon is visible */}
                 <div className={iconColorClass}>
                   {icon}
@@ -98,11 +80,7 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
               </div>
               
               {/* Arrow icon underneath */}
-              <div className={cn(
-                `w-12 h-12 rounded-full flex items-center justify-center ${arrowBgClass} z-0`,
-                // Add a subtle 3D effect to the arrow circle
-                'shadow-[1px_1px_2px_rgba(0,0,0,0.15)]'
-              )} style={{ width: '48px', height: '48px' }}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${arrowBgClass} z-0`} style={{ width: '48px', height: '48px' }}>
                 <ArrowRight size={19.2} className="text-muted-foreground" />
               </div>
             </div>
