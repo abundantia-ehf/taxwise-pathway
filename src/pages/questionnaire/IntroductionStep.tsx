@@ -15,7 +15,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       animate={{ opacity: 1 }}
       className="flex flex-col items-center justify-between h-full py-8 px-4 text-center"
     >
-      <div className="flex-1 max-h-20" />
+      <div className="flex-1 max-h-24" />
       
       <div className="space-y-4 max-w-md px-4">
         <h1 className="text-lg font-headline">Let's start by understanding your current tax situation.</h1>
@@ -30,7 +30,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       <div className="w-full max-w-md mt-4">
         <Button 
           onClick={onNext} 
-          className="w-full py-6 bg-brand text-black hover:bg-brand/90"
+          className="w-[90%] mx-auto py-6 bg-brand text-black hover:bg-brand/90"
         >
           Got it <Check className="ml-1" size={16} />
         </Button>
