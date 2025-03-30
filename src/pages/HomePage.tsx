@@ -53,6 +53,11 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
     ? 'bg-zinc-700/50' 
     : 'bg-brand/20';
   
+  // Updated arrow background color based on theme
+  const arrowBgClass = theme === 'dark' || theme === 'greyscale' 
+    ? 'bg-zinc-800' 
+    : 'bg-zinc-200';
+  
   return (
     <Card 
       className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${cardStyle}`}
@@ -61,17 +66,23 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
       <CardContent className="p-4">
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${iconBgClass}`}>
-              {icon}
+            <div>
+              <h3 className="font-headline font-semibold text-lg">{title}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{description}</p>
             </div>
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${theme === 'dark' || theme === 'greyscale' ? 'bg-zinc-800' : 'bg-zinc-200'}`}>
-              <ArrowRight size={16} className="text-muted-foreground" />
+            
+            {/* Moved both icons to the right side with overlap */}
+            <div className="flex items-center -space-x-2">
+              {/* Main icon with increased size (24px → 28.8px = 20% increase) */}
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${iconBgClass} z-10`} style={{ width: '48px', height: '48px' }}>
+                {icon}
+              </div>
+              
+              {/* Arrow icon with increased size and positioned underneath */}
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${arrowBgClass} z-0`} style={{ width: '48px', height: '48px' }}>
+                <ArrowRight size={19.2} className="text-muted-foreground" />
+              </div>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="font-headline font-semibold text-lg">{title}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{description}</p>
           </div>
         </div>
       </CardContent>
