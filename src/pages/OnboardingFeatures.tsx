@@ -13,9 +13,15 @@ interface FeatureSlideProps {
 
 const AnimatedCounter = () => {
   const calculateCurrentCount = () => {
-    const startDate = new Date('2023-01-01T00:00:00Z').getTime(); // Fixed start date
+    const startDate = new Date('2025-03-30T12:00:00Z').getTime(); // Start from 12 noon GMT on March 30th 2025
     const initialValue = 99320600;
     const now = Date.now();
+    
+    // If current time is before the start date, return initial value
+    if (now < startDate) {
+      return initialValue;
+    }
+    
     const elapsedMs = Math.max(0, now - startDate);
     const elapsedTenSeconds = Math.floor(elapsedMs / 10000);
     return initialValue + (elapsedTenSeconds * 21);
