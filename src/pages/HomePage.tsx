@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -125,7 +126,7 @@ const HomePage = () => {
 
   return (
     <MobileLayout>
-      <div className={`min-h-screen ${theme === 'dark' ? 'bg-background' : 'bg-gray-50'}`}>
+      <div className="min-h-screen bg-background">
         <Header 
           title={
             <div className="h-[28px] w-auto">
@@ -159,7 +160,7 @@ const HomePage = () => {
               />
             </h2>
             <Card 
-              className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} cursor-pointer`}
+              className="border cursor-pointer"
               onClick={handleLearningNavigation}
             >
               <CardContent className="p-4">
@@ -177,7 +178,7 @@ const HomePage = () => {
                         <div className="flex justify-between mt-1">
                           <span className="text-xs text-muted-foreground">20% complete</span>
                           <button 
-                            className={`text-xs font-medium text-brand hover:underline flex items-center ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
+                            className="text-xs font-medium text-brand hover:underline flex items-center"
                           >
                             Continue <ArrowRight size={12} className="ml-1" />
                           </button>
@@ -190,7 +191,7 @@ const HomePage = () => {
                           Begin your tax optimization journey with our introductory lesson
                         </p>
                         <button 
-                          className={`text-xs font-medium text-brand hover:underline flex items-center mt-2 ${theme === 'light' ? 'bg-gray-800 px-2 py-1 rounded' : ''}`}
+                          className="text-xs font-medium text-brand hover:underline flex items-center mt-2"
                         >
                           Watch now <ArrowRight size={12} className="ml-1" />
                         </button>
@@ -228,16 +229,17 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
+            className="mb-8"
           >
             <h2 className="text-lg font-semibold mb-4">Your Untaxable Journey</h2>
             <div className="grid grid-cols-2 gap-4">
-              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
+              <Card className="border">
                 <CardContent className="p-4 text-center">
                   <h3 className="text-3xl font-bold text-brand">3</h3>
                   <p className="text-xs text-muted-foreground mt-1">Questions Answered</p>
                 </CardContent>
               </Card>
-              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
+              <Card className="border">
                 <CardContent className="p-4 text-center">
                   <h3 className="text-3xl font-bold text-brand">3</h3>
                   <p className="text-xs text-muted-foreground mt-1">Lessons Completed</p>
