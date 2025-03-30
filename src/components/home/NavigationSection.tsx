@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Presentation, MessageCircle, GridCheck } from 'lucide-react';
+import { Presentation, MessageCircle, Grid2x2Check } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import NavigationCard from './NavigationCard';
@@ -46,7 +46,7 @@ const NavigationSection = () => {
     {
       title: "Tax Databases",
       description: "Access our world class databases on global tax rates and offshore tax havens",
-      icon: <GridCheck size={20} />,
+      icon: <Grid2x2Check size={20} />,
       path: "/data"
     }
   ];
