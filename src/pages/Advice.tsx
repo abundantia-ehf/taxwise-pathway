@@ -48,9 +48,9 @@ const Advice = () => {
     <MobileLayout>
       <Header title="Expert Help" />
       
-      <div className="container p-4 space-y-6">
+      <div className="container p-3 space-y-4">
         <Card>
-          <CardContent className="p-6 space-y-4">
+          <CardContent className="p-4 space-y-3">
             <div className="space-y-1">
               <h2 className="font-semibold text-lg flex items-center">
                 <MessageSquare className="h-5 w-5 mr-2 text-brand" />
@@ -65,8 +65,8 @@ const Advice = () => {
               Get personal tax help from our Untaxable pros. Please be as detailed as possible with your question, providing as much info as possible (location, type of income, industry, taxes previously paid, etc.) for the best response. Responses typically arrive within 24-72 hours, depending on the complexity of your question.
             </p>
             
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="space-y-1">
                 <label htmlFor="question" className="text-sm font-medium">
                   Your Tax Question
                 </label>
@@ -96,12 +96,12 @@ const Advice = () => {
         </Card>
         
         {previousQuestions.length > 0 && (
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h3 className="font-medium px-1">Previous Questions</h3>
             
             {previousQuestions.map((item) => (
               <Card key={item.id}>
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="p-3 space-y-2">
                   <div className="flex justify-between items-start">
                     <h4 className="font-medium flex items-start">
                       <User className="h-4 w-4 mr-2 text-brand mt-1 flex-shrink-0" />

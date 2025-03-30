@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -68,8 +69,8 @@ const Subscribe = () => {
       <MobileLayout hideNavigation>
         <Header title="Subscription" />
         
-        <div className="container max-w-md p-6 space-y-8">
-          <div className="space-y-3 text-center">
+        <div className="container max-w-md p-4 space-y-6">
+          <div className="space-y-2 text-center">
             <h1 className="text-2xl font-bold">You're Already Subscribed</h1>
             <p className="text-muted-foreground">
               You have full access to all Untaxable premium features
@@ -77,7 +78,7 @@ const Subscribe = () => {
           </div>
           
           <div className="rounded-lg border overflow-hidden">
-            <div className="p-6 bg-brand/10 border-b">
+            <div className="p-4 bg-brand/10 border-b">
               <div className="text-center space-y-2">
                 <h2 className="text-xl font-semibold">Premium Plan</h2>
                 <div className="flex items-center justify-center">
@@ -90,9 +91,9 @@ const Subscribe = () => {
               </div>
             </div>
             
-            <div className="p-6 space-y-4">
+            <div className="p-4 space-y-3">
               <h3 className="font-medium">Your benefits:</h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {features.map((feature, index) => (
                   <li key={index} className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-brand mr-2 mt-0.5 flex-shrink-0" />
@@ -105,7 +106,7 @@ const Subscribe = () => {
           
           <Button
             onClick={() => navigate('/learn')}
-            className="w-full py-6 bg-brand text-black hover:bg-brand/90"
+            className="w-full py-5 bg-brand text-black hover:bg-brand/90"
           >
             Continue to Content
           </Button>
@@ -122,8 +123,8 @@ const Subscribe = () => {
     <MobileLayout hideNavigation>
       <Header title="Subscription" />
       
-      <div className="container max-w-md p-6 space-y-8">
-        <div className="space-y-3 text-center">
+      <div className="container max-w-md p-4 space-y-6">
+        <div className="space-y-2 text-center">
           <h1 className="text-2xl font-bold">Unlock the Full Experience</h1>
           <p className="text-muted-foreground">
             Start your 3-day free trial and get full access to all content
@@ -131,7 +132,7 @@ const Subscribe = () => {
         </div>
         
         <div className="rounded-lg border overflow-hidden">
-          <div className="p-6 bg-brand/10 border-b">
+          <div className="p-4 bg-brand/10 border-b">
             <div className="text-center space-y-2">
               <h2 className="text-xl font-semibold">Premium Plan</h2>
               <div className="flex items-center justify-center">
@@ -144,9 +145,9 @@ const Subscribe = () => {
             </div>
           </div>
           
-          <div className="p-6 space-y-4">
+          <div className="p-4 space-y-3">
             <h3 className="font-medium">What you'll get:</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-brand mr-2 mt-0.5 flex-shrink-0" />
@@ -160,7 +161,7 @@ const Subscribe = () => {
         <Button
           onClick={handleSubscribe}
           disabled={isProcessing || isRestoring}
-          className="w-full py-6 bg-brand text-black hover:bg-brand/90"
+          className="w-full py-5 bg-brand text-black hover:bg-brand/90"
         >
           {isProcessing ? 'Processing...' : 'Start 3-Day Free Trial'}
         </Button>
@@ -169,7 +170,7 @@ const Subscribe = () => {
           onClick={handleRestorePurchase}
           disabled={isProcessing || isRestoring}
           variant="ghost" 
-          className="w-full mt-3"
+          className="w-full mt-2"
         >
           {isRestoring ? (
             <>Checking subscription status...</>

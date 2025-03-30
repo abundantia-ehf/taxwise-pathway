@@ -28,9 +28,9 @@ const DataSource = ({ title, description, recordCount, lastUpdated, icon, onClic
       className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} hover:shadow-md transition-all cursor-pointer`}
       onClick={onClick}
     >
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex items-center">
-          <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-4">
+          <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-3">
             {icon}
           </div>
           <div className="flex-1">
@@ -158,13 +158,13 @@ const Data = () => {
     <MobileLayout>
       <Header title="Data" />
       
-      <div className="container max-w-md mx-auto px-4 py-6">
-        <div className="space-y-4">
+      <div className="container max-w-md mx-auto px-3 py-4">
+        <div className="space-y-3">
           {!selectedData ? (
             <>
-              <div className="mb-6 flex justify-between items-center">
+              <div className="mb-4 flex justify-between items-center">
                 <div>
-                  <h2 className="text-lg font-semibold mb-2">Databases</h2>
+                  <h2 className="text-lg font-semibold mb-1">Databases</h2>
                   <p className="text-sm text-muted-foreground">
                     Access our collection of tax optimization databases and resources
                   </p>
@@ -183,7 +183,7 @@ const Data = () => {
               </div>
               
               {errorMessage && (
-                <Card className={`border ${theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 'border-amber-200 bg-amber-50'} p-4 mb-4`}>
+                <Card className={`border ${theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 'border-amber-200 bg-amber-50'} p-3 mb-3`}>
                   <div className="flex items-start">
                     <AlertCircle size={18} className="text-amber-500 mr-2 mt-0.5" />
                     <div>
@@ -221,7 +221,7 @@ const Data = () => {
                 </>
               )}
               
-              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-4 mt-8`}>
+              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-3 mt-5`}>
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground">
                     {needsConfiguration 

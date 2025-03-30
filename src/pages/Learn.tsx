@@ -28,10 +28,10 @@ const Learn = () => {
     <MobileLayout>
       <Header title="Learn" />
       
-      <div className="container p-4">
+      <div className="container p-3">
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
           <div className="overflow-x-auto pb-2">
-            <TabsList className="w-auto inline-flex mb-4">
+            <TabsList className="w-auto inline-flex mb-3">
               <TabsTrigger value="all">All Modules</TabsTrigger>
               {courseModules.map(module => (
                 <TabsTrigger key={module.id} value={module.id}>
@@ -41,9 +41,9 @@ const Learn = () => {
             </TabsList>
           </div>
           
-          <TabsContent value="all" className="space-y-6">
+          <TabsContent value="all" className="space-y-4">
             {/* Start Here section - only appears in All Modules tab */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <h2 className="font-semibold flex items-center">
                   <Info className="h-4 w-4 mr-2 text-brand" />
@@ -51,8 +51,8 @@ const Learn = () => {
                 </h2>
               </div>
               <Card className="border-2 border-primary dark:border-brand/30">
-                <CardContent className="p-4">
-                  <p className="text-sm text-muted-foreground mb-4">
+                <CardContent className="p-3">
+                  <p className="text-sm text-muted-foreground mb-3">
                     Get familiar with the course structure and how to use this app effectively
                   </p>
                   <div 
@@ -75,16 +75,16 @@ const Learn = () => {
             
             {/* Regular modules */}
             {courseModules.map(module => (
-              <div key={module.id} className="space-y-3">
+              <div key={module.id} className="space-y-2">
                 <div className="flex justify-between items-center">
                   <h2 className="font-semibold">{module.title}</h2>
                   <span className="text-sm text-muted-foreground">{module.progress}% Complete</span>
                 </div>
                 <Progress value={module.progress} className="h-2" />
                 <Card>
-                  <CardContent className="p-4">
-                    <p className="text-sm text-muted-foreground mb-4">{module.description}</p>
-                    <div className="space-y-3">
+                  <CardContent className="p-3">
+                    <p className="text-sm text-muted-foreground mb-3">{module.description}</p>
+                    <div className="space-y-2">
                       {module.videos.slice(0, 3).map(video => (
                         <div 
                           key={video.id}
@@ -134,8 +134,8 @@ const Learn = () => {
           </TabsContent>
           
           {courseModules.map(module => (
-            <TabsContent key={module.id} value={module.id} className="space-y-4">
-              <div className="space-y-3">
+            <TabsContent key={module.id} value={module.id} className="space-y-3">
+              <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <h2 className="font-semibold">{module.title}</h2>
                   <span className="text-sm text-muted-foreground">{module.progress}% Complete</span>
@@ -144,7 +144,7 @@ const Learn = () => {
                 <p className="text-sm text-muted-foreground">{module.description}</p>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {module.videos.map(video => (
                   <div 
                     key={video.id}
