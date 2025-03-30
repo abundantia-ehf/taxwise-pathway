@@ -72,10 +72,10 @@ const Start = () => {
       {/* Sign-up card */}
       <motion.div 
         ref={cardRef}
-        className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/40 backdrop-blur-sm border-2 border-white/20 p-6 pt-8"
+        className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/30 backdrop-blur-[2px] border-2 border-white/20 p-6 pt-8"
         drag="y"
         dragControls={dragControls}
-        dragConstraints={{ top: 0, bottom: 400 }}
+        dragConstraints={{ top: 0, bottom: 300 }}
         dragElastic={0.1}
         onDragEnd={handleDragEnd}
         animate={{ 
