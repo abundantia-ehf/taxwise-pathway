@@ -76,7 +76,7 @@ const AnimatedCounter = () => {
     <div className="flex flex-col items-center">
       <div className="flex items-center">
         <CircleDollarSign className="text-brand h-6 w-6 mr-2 mt-1" />
-        <span className="text-5xl md:text-6xl font-semibold font-sans text-white">
+        <span className="text-5xl md:text-6xl font-semibold font-unitext text-white">
           {formatNumberWithCommas(displayValue)}
         </span>
       </div>
