@@ -29,28 +29,18 @@ export function initializeCurrencyHighlighter() {
     });
   };
   
-  // Set up the observer and event listeners
-  const setupObservers = () => {
-    // For scrolling animation
-    window.addEventListener('scroll', highlightCenterIcons);
-    
-    // Also check periodically for animation movements
-    const interval = setInterval(highlightCenterIcons, 100);
-    
-    // Clean up function
-    return () => {
-      window.removeEventListener('scroll', highlightCenterIcons);
-      clearInterval(interval);
-    };
+  // Set up event listeners
+  window.addEventListener('scroll', highlightCenterIcons);
+  
+  // Check periodically for animation movements
+  const interval = setInterval(highlightCenterIcons, 100);
+  
+  // Initial check
+  highlightCenterIcons();
+  
+  // Return a cleanup function that directly removes the listeners
+  return () => {
+    window.removeEventListener('scroll', highlightCenterIcons);
+    clearInterval(interval);
   };
-  
-  // Initialize when the component is mounted
-  document.addEventListener('DOMContentLoaded', setupObservers);
-  
-  // Also initialize immediately for cases where DOMContentLoaded already fired
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setupObservers();
-  }
-  
-  return setupObservers;
 }
