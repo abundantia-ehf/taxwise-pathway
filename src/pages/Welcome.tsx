@@ -42,7 +42,7 @@ const Welcome = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="text-center space-y-2"
             >
-              <h1 className="text-3xl font-unitext font-bold tracking-tight">
+              <h1 className="text-3xl font-headline font-semibold tracking-tight">
                 Become Untaxable
               </h1>
               <p className="text-base text-white/70">
