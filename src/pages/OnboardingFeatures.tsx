@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -49,6 +50,8 @@ const AnimatedCounter = () => {
     if (count <= displayValue) return;
     
     const animateToNewValue = () => {
+      const diff = count - displayValue; // Define the diff variable here
+      
       if (displayValue < count) {
         setDisplayValue(prevValue => {
           if (diff <= 5) {
