@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Star, ArrowRight, RefreshCw } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 import { toast } from "sonner";
 import {
   Carousel,
@@ -46,6 +48,7 @@ const PaywallScreen = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
   const { hasSubscription, startSubscription } = useAuth();
+  const { theme } = useTheme();
 
   // If user already has a subscription, redirect to home
   React.useEffect(() => {
@@ -108,13 +111,21 @@ const PaywallScreen = () => {
           
           {/* Main headline */}
           <div className="text-center mb-3 px-6">
-            <h1 className="text-2xl font-bold mb-2 text-white">Pay less tax, <span className="border-b-4 border-[#ea384c]">legally</span></h1>
+            <h1 className="text-2xl font-bold mb-2 text-white">
+              Pay less tax, 
+              <span className={cn(
+                "border-b-4", 
+                theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
+              )}>
+                legally
+              </span>
+            </h1>
             <p className="text-sm text-white/80">
               Join thousands of users who have legally reduced their tax rate, often to 0%
             </p>
           </div>
           
-          {/* Testimonial carousel - removed the outer div with overflow-hidden */}
+          {/* Testimonial carousel */}
           <Carousel 
             className="w-full" 
             opts={{
@@ -144,7 +155,12 @@ const PaywallScreen = () => {
                       
                       <div className="flex justify-center">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className={cn(
+                            "h-3 w-3", 
+                            theme === 'greyscale' 
+                              ? "fill-gray-500 text-gray-500" 
+                              : "fill-yellow-400 text-yellow-400"
+                          )} />
                         ))}
                       </div>
                     </div>
@@ -173,7 +189,10 @@ const PaywallScreen = () => {
         <div className="bg-white rounded-t-3xl -mt-8 px-6 py-6 flex-1 flex flex-col">
           {/* Pro badge */}
           <div className="flex justify-center mb-3">
-            <div className="bg-[#1A1F2C] text-white px-4 flex items-center justify-center h-7 rounded-md text-xs font-semibold">
+            <div className={cn(
+              "px-4 flex items-center justify-center h-7 rounded-md text-xs font-semibold",
+              theme === 'greyscale' ? "bg-gray-800 text-white" : "bg-[#1A1F2C] text-white"
+            )}>
               UNTAXABLE PRO
             </div>
           </div>
@@ -187,7 +206,13 @@ const PaywallScreen = () => {
               Make a low-tax life your reality in under two weeks
             </p>
             <p className="font-medium text-sm text-gray-900">
-              3 day free trial, then just <span className="text-black bg-brand px-1 rounded font-bold">$48.50 US$/month</span>
+              3 day free trial, then just 
+              <span className={cn(
+                "px-1 rounded font-bold",
+                theme === 'greyscale' ? "text-black bg-gray-300" : "text-black bg-brand"
+              )}>
+                $48.50 US$/month
+              </span>
             </p>
           </div>
           
@@ -198,7 +223,12 @@ const PaywallScreen = () => {
           <Button 
             onClick={handleContinue}
             disabled={isProcessing || isRestoring}
-            className="w-full py-6 bg-brand text-black hover:bg-brand/90"
+            className={cn(
+              "w-full py-6",
+              theme === 'greyscale' 
+                ? "bg-gray-300 text-black hover:bg-gray-400" 
+                : "bg-brand text-black hover:bg-brand/90"
+            )}
           >
             {isProcessing ? (
               <>Processing...</>

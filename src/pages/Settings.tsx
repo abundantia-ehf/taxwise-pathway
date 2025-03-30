@@ -14,6 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 import { CircleDollarSign, Bell, Moon, Sun, Contrast, HelpCircle, FileText, MessageSquare, AlertTriangle } from 'lucide-react';
 
 const Settings = () => {
@@ -128,7 +129,10 @@ const Settings = () => {
               {faqItems.map((item, index) => (
                 <div key={index} className="rounded-lg border p-4">
                   <h3 className="font-medium flex items-center">
-                    <HelpCircle className="h-4 w-4 mr-2 text-brand" />
+                    <HelpCircle className={cn(
+                      "h-4 w-4 mr-2", 
+                      theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                    )} />
                     {item.question}
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground">
@@ -141,7 +145,10 @@ const Settings = () => {
             <div className="space-y-3 mt-4">
               <div className="rounded-lg border p-4 space-y-2">
                 <h3 className="font-medium flex items-center">
-                  <CircleDollarSign className="h-4 w-4 mr-2 text-brand" />
+                  <CircleDollarSign className={cn(
+                    "h-4 w-4 mr-2", 
+                    theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                  )} />
                   Billing Issues
                 </h3>
                 <p className="text-sm text-muted-foreground">
@@ -151,7 +158,10 @@ const Settings = () => {
               
               <div className="rounded-lg border p-4 space-y-2">
                 <h3 className="font-medium flex items-center">
-                  <FileText className="h-4 w-4 mr-2 text-brand" />
+                  <FileText className={cn(
+                    "h-4 w-4 mr-2", 
+                    theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                  )} />
                   Course Content Questions
                 </h3>
                 <p className="text-sm text-muted-foreground">
@@ -161,7 +171,10 @@ const Settings = () => {
               
               <div className="rounded-lg border p-4 space-y-4">
                 <h3 className="font-medium flex items-center">
-                  <MessageSquare className="h-4 w-4 mr-2 text-brand" />
+                  <MessageSquare className={cn(
+                    "h-4 w-4 mr-2", 
+                    theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                  )} />
                   Contact Support
                 </h3>
                 
@@ -218,7 +231,12 @@ const Settings = () => {
                   
                   <Button 
                     type="submit" 
-                    className="w-full bg-brand text-black hover:bg-brand/90"
+                    className={cn(
+                      "w-full",
+                      theme === 'greyscale' 
+                        ? "bg-gray-300 text-black hover:bg-gray-400" 
+                        : "bg-brand text-black hover:bg-brand/90"
+                    )}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -233,10 +251,16 @@ const Settings = () => {
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <CircleDollarSign className="h-5 w-5 mr-2 text-brand" />
+                    <CircleDollarSign className={cn(
+                      "h-5 w-5 mr-2", 
+                      theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                    )} />
                     <h3 className="font-medium">Subscription</h3>
                   </div>
-                  <span className="text-sm px-2 py-1 rounded-full bg-brand/20">
+                  <span className={cn(
+                    "text-sm px-2 py-1 rounded-full",
+                    theme === 'greyscale' ? "bg-gray-500/20" : "bg-brand/20"
+                  )}>
                     {isTrialActive ? 'Trial' : user?.subscription?.status || 'Inactive'}
                   </span>
                 </div>
