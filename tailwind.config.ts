@@ -21,7 +21,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				unitext: ['Inter', 'sans-serif'], // Using Inter as a replacement for Unitext
+				unitext: ['Open Sans', 'sans-serif'], // Using Open Sans for headlines
+				headline: ['Open Sans', 'sans-serif'], // Adding a specific headline font
 			},
 			colors: {
 				border: 'hsl(var(--border))',

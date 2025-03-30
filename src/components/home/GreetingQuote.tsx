@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 // Array of quotes about taxation, freedom, etc.
@@ -45,11 +46,11 @@ const GreetingQuote = () => {
   }, []);
 
   return (
-    <div className="text-center py-4 px-6 mb-4">
-      <h2 className="text-xl font-semibold mb-2">{greeting}</h2>
+    <div className="text-center py-3 px-6 mb-3">
+      <h2 className="text-xl font-semibold mb-1">{greeting}</h2>
       <div className="flex items-start mx-auto max-w-xs sm:max-w-sm md:max-w-md">
         <div>
-          <p className="text-xs text-muted-foreground italic">{quote.quote}</p>
+          <p className="text-xs text-muted-foreground italic">"{ quote.quote }"</p>
           <p className="text-xs text-right mt-1 font-medium">— {quote.author}</p>
         </div>
       </div>

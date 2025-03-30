@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -45,8 +46,8 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
       className={`relative overflow-hidden hover:shadow-md transition-all cursor-pointer border ${cardStyle}`}
       onClick={onClick}
     >
-      <CardContent className="p-6">
-        <div className="flex flex-col space-y-3">
+      <CardContent className="p-4">
+        <div className="flex flex-col space-y-2">
           <div className="flex justify-between items-center">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
               {icon}
@@ -158,9 +159,9 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-8 mt-4"
+            className="mb-5 mt-3"
           >
-            <h2 className="text-lg font-semibold mb-4 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
+            <h2 className="text-lg font-semibold mb-3 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
               {hasStartedLessons ? "Continue Learning" : "Get Started"} 
               <ArrowRight 
                 size={18} 
@@ -212,13 +213,13 @@ const HomePage = () => {
             </Card>
           </motion.div>
 
-          <div className="mb-8">
-            <h2 className="text-lg font-semibold mb-4">Explore</h2>
+          <div className="mb-5">
+            <h2 className="text-lg font-semibold mb-3">Explore</h2>
             <motion.div 
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid gap-4"
+              className="grid gap-3"
             >
               {navigationItems.map((item, index) => (
                 <motion.div key={item.title} variants={itemVariants}>
@@ -238,10 +239,10 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mb-8"
+            className="mb-5"
           >
-            <h2 className="text-lg font-semibold mb-4">Your Untaxable Journey</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <h2 className="text-lg font-semibold mb-3">Your Untaxable Journey</h2>
+            <div className="grid grid-cols-2 gap-3">
               <Card className="border">
                 <CardContent className="p-4 text-center">
                   <h3 className="text-3xl font-bold text-brand">3</h3>
