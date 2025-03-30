@@ -26,7 +26,7 @@ const ScrollingIcons = () => {
       <div className="flex animate-scroll">
         {icons.map(({ id, Icon }) => (
           <div key={id} className="mx-6 flex-shrink-0">
-            <Icon className="h-12 w-12 text-gray-400/60" strokeWidth={1.5} />
+            <Icon className="h-12 w-12 text-gray-600" strokeWidth={1.5} />
           </div>
         ))}
       </div>
