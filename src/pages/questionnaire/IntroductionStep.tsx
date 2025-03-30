@@ -14,10 +14,8 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center justify-between h-full py-8 px-4 text-center overflow-hidden"
+      className="flex flex-col items-center justify-center h-full py-8 px-4 text-center overflow-hidden"
     >
-      <div className="flex-1 max-h-16" />
-      
       <div className="space-y-4 max-w-md px-4 mb-6">
         <h1 className="text-lg font-headline">Let's start by understanding your current tax situation.</h1>
         <div className="flex items-center justify-center space-x-2 text-brand">
@@ -28,10 +26,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       
       <ScrollingIcons />
       
-      {/* Reduced the spacer's max-height by about 10% of screen height */}
-      <div className="flex-1 max-h-5" />
-      
-      <div className="w-full max-w-md mt-4">
+      <div className="w-full max-w-md mt-6">
         <Button 
           onClick={onNext} 
           className="w-[90%] mx-auto py-6 bg-brand text-black hover:bg-brand/90"

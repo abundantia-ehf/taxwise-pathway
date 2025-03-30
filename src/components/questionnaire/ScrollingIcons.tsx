@@ -22,7 +22,7 @@ const ScrollingIcons = () => {
   ];
 
   return (
-    <div className="w-screen -mx-4 overflow-hidden my-6">
+    <div className="w-screen -mx-4 overflow-hidden my-4">
       <div className="flex animate-scroll">
         {icons.map(({ id, Icon }) => (
           <div key={id} className="mx-6 flex-shrink-0">
