@@ -55,7 +55,7 @@ const Start = () => {
         muted
         loop
         playsInline
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-40' : 'opacity-0'}`}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-60' : 'opacity-0'}`}
       >
         <source src="/start-background.mp4" type="video/mp4" />
         {/* Fallback image if video fails to load */}
@@ -66,43 +66,23 @@ const Start = () => {
         />
       </video>
       
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
-      
-      {/* Content */}
-      <div className="container relative z-10 mx-auto flex h-screen max-w-md flex-col justify-between px-6 py-10 text-white">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex justify-center"
-        >
-          <img 
-            src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
-            alt="Untaxable Logo" 
-            className="w-20 h-20 object-cover rounded-xl"
-          />
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-center space-y-3"
-        >
-          <h1 className="text-3xl font-bold">Become Untaxable</h1>
-          <p className="text-lg text-white/80">
-            Your path to legally paying zero taxes starts now
-          </p>
-        </motion.div>
-        
+      {/* Sign-up card */}
+      <div className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/50 backdrop-blur-md p-6 pt-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="space-y-4 pb-6"
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="flex flex-col items-center"
         >
-          <div className="space-y-3">
+          {/* Small logo */}
+          <img 
+            src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
+            alt="Untaxable Logo" 
+            className="w-14 h-14 mb-8 rounded-xl"
+          />
+          
+          {/* Login buttons */}
+          <div className="w-full space-y-4 mb-4">
             {isPlatformIOS && (
               <Button 
                 className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-medium flex items-center justify-center gap-2"
@@ -135,7 +115,8 @@ const Start = () => {
             </Button>
           </div>
           
-          <p className="text-xs text-center text-white/50">
+          {/* Terms text */}
+          <p className="text-xs text-center text-white/50 mt-2">
             By continuing, you agree to our Terms & Privacy Policy
           </p>
         </motion.div>
