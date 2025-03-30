@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Quote } from 'lucide-react';
 
@@ -62,7 +63,9 @@ const GreetingQuote = () => {
   useEffect(() => {
     // Select quote based on the day of the year
     const today = new Date();
-    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (24 * 60 * 60 * 1000));
+    const startOfYear = new Date(today.getFullYear(), 0, 0);
+    const diff = today.getTime() - startOfYear.getTime();
+    const dayOfYear = Math.floor(diff / (24 * 60 * 60 * 1000));
     const quoteIndex = dayOfYear % quotes.length;
     setQuote(quotes[quoteIndex]);
   }, []);
