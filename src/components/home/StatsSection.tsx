@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 const StatsSection = () => {
   const { theme } = useTheme();
@@ -16,15 +17,27 @@ const StatsSection = () => {
     >
       <h2 className="text-lg font-headline font-semibold mb-3">Your Untaxable Journey</h2>
       <div className="grid grid-cols-2 gap-3">
-        <Card className="border">
+        <Card className={cn(
+          "border",
+          theme === 'greyscale' ? "border-zinc-700" : ""
+        )}>
           <CardContent className="p-4 text-center">
-            <h3 className={`text-3xl font-headline font-semibold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
+            <h3 className={cn(
+              "text-3xl font-headline font-semibold",
+              theme === 'greyscale' ? "text-white" : "text-brand"
+            )}>3</h3>
             <p className="text-xs text-muted-foreground mt-1">Questions Answered</p>
           </CardContent>
         </Card>
-        <Card className="border">
+        <Card className={cn(
+          "border",
+          theme === 'greyscale' ? "border-zinc-700" : ""
+        )}>
           <CardContent className="p-4 text-center">
-            <h3 className={`text-3xl font-headline font-semibold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
+            <h3 className={cn(
+              "text-3xl font-headline font-semibold",
+              theme === 'greyscale' ? "text-white" : "text-brand"
+            )}>3</h3>
             <p className="text-xs text-muted-foreground mt-1">Lessons Completed</p>
           </CardContent>
         </Card>

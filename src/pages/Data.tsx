@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
@@ -25,14 +26,19 @@ const DataSource = ({ title, description, recordCount, lastUpdated, icon, onClic
   
   return (
     <Card 
-      className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} hover:shadow-md transition-all cursor-pointer`}
+      className={cn(
+        "border hover:shadow-md transition-all cursor-pointer",
+        theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 
+        theme === 'greyscale' ? 'border-zinc-700 bg-zinc-800/50' : 
+        'border-zinc-200 bg-white'
+      )}
       onClick={onClick}
     >
       <CardContent className="p-3">
         <div className="flex items-center">
           <div className={cn(
             "h-12 w-12 rounded-lg flex items-center justify-center mr-3",
-            theme === 'greyscale' ? "bg-gray-700/50" : "bg-brand/20"
+            theme === 'greyscale' ? "bg-gray-700" : "bg-brand/20"
           )}>
             {icon}
           </div>
@@ -186,11 +192,19 @@ const Data = () => {
               </div>
               
               {errorMessage && (
-                <Card className={`border ${theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 'border-amber-200 bg-amber-50'} p-3 mb-3`}>
+                <Card className={cn(
+                  "p-3 mb-3 border",
+                  theme === 'dark' ? 'border-amber-800 bg-amber-950/50' : 
+                  theme === 'greyscale' ? 'border-gray-600 bg-gray-700/50' : 
+                  'border-amber-200 bg-amber-50'
+                )}>
                   <div className="flex items-start">
-                    <AlertCircle size={18} className="text-amber-500 mr-2 mt-0.5" />
+                    <AlertCircle size={18} className={theme === 'greyscale' ? "text-gray-400 mr-2 mt-0.5" : "text-amber-500 mr-2 mt-0.5"} />
                     <div>
-                      <h4 className="font-medium text-amber-500">Configuration Issue</h4>
+                      <h4 className={cn(
+                        "font-medium",
+                        theme === 'greyscale' ? "text-gray-300" : "text-amber-500"
+                      )}>Configuration Issue</h4>
                       <p className="text-sm">{errorMessage}</p>
                       {needsConfiguration && (
                         <p className="text-sm mt-2">
@@ -224,7 +238,12 @@ const Data = () => {
                 </>
               )}
               
-              <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-3 mt-5`}>
+              <Card className={cn(
+                "p-3 mt-5 border",
+                theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 
+                theme === 'greyscale' ? 'border-zinc-700 bg-zinc-800/50' : 
+                'border-zinc-200 bg-white'
+              )}>
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground">
                     {needsConfiguration 

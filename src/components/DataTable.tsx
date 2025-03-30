@@ -13,6 +13,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { OptimizedImage } from './ui/optimized-image';
+import { cn } from '@/lib/utils';
 
 interface DataTableProps {
   data: any[];
@@ -34,7 +35,12 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
   // Early return if there's no data
   if (!data || data.length === 0) {
     return (
-      <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'} p-4`}>
+      <Card className={cn(
+        "border p-4",
+        theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 
+        theme === 'greyscale' ? 'border-zinc-700 bg-zinc-800/50' : 
+        'border-zinc-200 bg-white'
+      )}>
         <CardContent className="p-4 text-center">
           <p className="text-muted-foreground">No data available</p>
         </CardContent>
@@ -105,19 +111,26 @@ const DataTable = ({ data, title, onBack }: DataTableProps) => {
         </Button>
       </div>
       
-      <Card className={`border ${theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 'border-zinc-200 bg-white'}`}>
+      <Card className={cn(
+        "border",
+        theme === 'dark' ? 'border-zinc-800 bg-zinc-900/50' : 
+        theme === 'greyscale' ? 'border-zinc-700 bg-zinc-800/50' : 
+        'border-zinc-200 bg-white'
+      )}>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow>
+              <TableRow className={theme === 'greyscale' ? 'border-zinc-700' : ''}>
                 {columns.map((column) => (
-                  <TableHead key={column}>{getDisplayColumnName(column, title)}</TableHead>
+                  <TableHead key={column} className={theme === 'greyscale' ? 'text-gray-300' : ''}>
+                    {getDisplayColumnName(column, title)}
+                  </TableHead>
                 ))}
               </TableRow>
             </TableHeader>
             <TableBody>
               {sortedData.map((record) => (
-                <TableRow key={record.id}>
+                <TableRow key={record.id} className={theme === 'greyscale' ? 'border-zinc-700 hover:bg-zinc-700/50' : ''}>
                   {columns.map((column) => {
                     const value = record.fields[column];
                     let displayValue = value;
