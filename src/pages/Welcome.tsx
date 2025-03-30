@@ -8,6 +8,8 @@ import { ArrowRight, ArrowDown } from 'lucide-react';
 const Welcome = () => {
   const navigate = useNavigate();
   const [displayText, setDisplayText] = useState('');
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
   const fullText = "Become Untaxable.";
   const typingSpeed = 100; // milliseconds per character
   const typingIndex = useRef(0);
@@ -25,6 +27,20 @@ const Welcome = () => {
       }, typingSpeed);
       
       return () => clearTimeout(typingTimer);
+    } else {
+      // When typing is complete, show the subtitle
+      const subtitleTimer = setTimeout(() => {
+        setShowSubtitle(true);
+        
+        // After subtitle fade-in, show the arrow
+        const arrowTimer = setTimeout(() => {
+          setShowArrow(true);
+        }, 500); // 500ms after subtitle appears
+        
+        return () => clearTimeout(arrowTimer);
+      }, 300); // Short delay after typing finishes
+      
+      return () => clearTimeout(subtitleTimer);
     }
   }, [displayText, fullText]);
 
@@ -64,20 +80,24 @@ const Welcome = () => {
             >
               <h1 className="text-3xl font-headline">
                 {displayText}
-                <span className={`inline-block w-[2px] h-[1.2em] ml-[2px] bg-brand ${typingIndex.current >= fullText.length ? 'animate-pulse' : 'opacity-0'}`}></span>
               </h1>
-              <p className="text-base text-white/70">
-                Let's begin your path to legally paying zero taxes.
-              </p>
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showSubtitle ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-base text-white/70"
+              >
+                Your path to legally paying zero taxes starts now
+              </motion.p>
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              animate={{ opacity: showArrow ? 1 : 0, y: showArrow ? 0 : -10 }}
+              transition={{ duration: 0.5 }}
               className="flex justify-center mt-40"
             >
-              <ArrowDown className="text-brand animate-bounce" size={42} />
+              {showArrow && <ArrowDown className="text-brand animate-bounce" size={42} />}
             </motion.div>
             
             {/* Button now positioned with equal spacing */}
