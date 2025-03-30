@@ -32,10 +32,10 @@ const Welcome = () => {
       const subtitleTimer = setTimeout(() => {
         setShowSubtitle(true);
         
-        // After subtitle fade-in, show the arrow
+        // After subtitle fade-in and 1 second delay, show the arrow
         const arrowTimer = setTimeout(() => {
           setShowArrow(true);
-        }, 500); // 500ms after subtitle appears
+        }, 1000); // 1 second after subtitle appears (changed from 500ms)
         
         return () => clearTimeout(arrowTimer);
       }, 300); // Short delay after typing finishes
@@ -92,12 +92,12 @@ const Welcome = () => {
             </motion.div>
             
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: showArrow ? 1 : 0, y: showArrow ? 0 : -10 }}
+              initial={{ opacity: 0, y: 0 }}
+              animate={{ opacity: showArrow ? 1 : 0, y: 0 }}
               transition={{ duration: 0.5 }}
               className="flex justify-center mt-40"
             >
-              {showArrow && <ArrowDown className="text-brand animate-bounce" size={42} />}
+              <ArrowDown className="text-brand animate-bounce" size={42} />
             </motion.div>
             
             {/* Button now positioned with equal spacing */}
