@@ -106,12 +106,12 @@ const Welcome = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: showElements ? 1 : 0.8, opacity: showElements ? 1 : 0 }}
               transition={{ duration: 0.5 }}
-              className="w-10 h-10" // Changed from w-20 h-20 to w-10 h-10 (50% smaller)
+              className="w-15 h-15" // Changed from w-10 h-10 to w-15 h-15
             >
               <img 
                 src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
                 alt="Untaxable Logo" 
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-cover rounded-md" // Changed from rounded-xl to rounded-md for slightly reduced corner radius
               />
             </motion.div>
             
