@@ -32,15 +32,15 @@ const Header: React.FC<HeaderProps> = ({
   // Only show theme toggle if explicitly allowed and not on onboarding routes
   const shouldShowThemeToggle = showThemeToggle && !isOnboardingRoute;
   
-  // Select the appropriate icon based on the theme
+  // Select the appropriate icon based on the current theme
   const getThemeIcon = () => {
     switch (theme) {
       case 'dark':
-        return <Sun className="h-[1.2rem] w-[1.2rem]" />;
-      case 'light':
-        return <Contrast className="h-[1.2rem] w-[1.2rem]" />;
-      case 'greyscale':
         return <Moon className="h-[1.2rem] w-[1.2rem]" />;
+      case 'light':
+        return <Sun className="h-[1.2rem] w-[1.2rem]" />;
+      case 'greyscale':
+        return <Contrast className="h-[1.2rem] w-[1.2rem]" />;
       default:
         return <Sun className="h-[1.2rem] w-[1.2rem]" />;
     }

@@ -83,7 +83,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 className={cn(
                   "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
                   active 
-                    ? "text-brand"
+                    ? theme === 'greyscale' ? "text-white" : "text-brand"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
