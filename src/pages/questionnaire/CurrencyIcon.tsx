@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, IndianRupee, SwissFranc, CircleDollarSign } from 'lucide-react';
+import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, IndianRupee, SwissFranc } from 'lucide-react';
 import { initializeCurrencyHighlighter } from '@/components/questionnaire/CurrencyHighlighter';
 
 const CurrencyIcon = () => {
@@ -22,7 +22,7 @@ const CurrencyIcon = () => {
     { Icon: RussianRuble, id: 5 },
     { Icon: IndianRupee, id: 6 },
     { Icon: SwissFranc, id: 7 },
-    { Icon: CircleDollarSign, id: 8 }, // Using CircleDollarSign as a substitute for Saudi Riyal
+    { Icon: Euro, id: 8 }, // Using Euro as a substitute for SaudiRiyal since it's not available
     // Duplicate for seamless scrolling
     { Icon: DollarSign, id: 9 },
     { Icon: Euro, id: 10 },
@@ -31,7 +31,7 @@ const CurrencyIcon = () => {
     { Icon: RussianRuble, id: 13 },
     { Icon: IndianRupee, id: 14 },
     { Icon: SwissFranc, id: 15 },
-    { Icon: CircleDollarSign, id: 16 } // Using CircleDollarSign as a substitute
+    { Icon: Euro, id: 16 } // Using Euro as a substitute for SaudiRiyal
   ];
 
   return (

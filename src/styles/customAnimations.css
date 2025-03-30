@@ -41,7 +41,7 @@
   color: #D1FF82 !important;
 }
 
-/* Center highlight effect using CSS with doubled duration (now 2.4s) */
+/* Center highlight effect using CSS with doubled duration */
 @keyframes highlight-center {
   0%, 100% {
     color: var(--text-gray, #4B5563);
@@ -53,5 +53,5 @@
 
 /* Add a special class for the currency icon container to be used with JavaScript */
 .center-highlight .currency-icon {
-  animation: highlight-center 2.4s ease-in-out; /* Doubled again from 1.2s to 2.4s */
+  animation: highlight-center 1.2s ease-in-out; /* Doubled from 0.6s to 1.2s */
 }

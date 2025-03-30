@@ -14,11 +14,11 @@ const ProgressHeader: React.FC<ProgressHeaderProps> = ({ currentStep, totalSteps
   return (
     <div className="p-4 bg-black border-b">
       <div className="h-4 w-full bg-secondary/30 relative overflow-hidden rounded-full">
-        {/* Hazard stripes in the background - with even closer lines */}
+        {/* Hazard stripes in the background - with closer lines */}
         <div className="absolute inset-0 w-full h-full" 
           style={{ 
-            backgroundImage: 'repeating-linear-gradient(45deg, #2a2a2a 0px, #2a2a2a 3px, #1a1a1a 3px, #1a1a1a 6px)',
-            backgroundSize: '8px 8px'
+            backgroundImage: 'repeating-linear-gradient(45deg, #2a2a2a 0px, #2a2a2a 5px, #1a1a1a 5px, #1a1a1a 10px)',
+            backgroundSize: '14px 14px'
           }}>
         </div>
         {/* Progress bar */}
