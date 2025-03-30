@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -48,12 +47,12 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
   
   const cardStyle = gradientStyles[index % gradientStyles.length];
   
-  // Icon background color based on theme
+  // Updated icon background colors to be solid, not semi-transparent
   const iconBgClass = theme === 'greyscale' 
-    ? 'bg-zinc-700/50' 
-    : 'bg-brand/20';
+    ? 'bg-zinc-700' 
+    : 'bg-brand';
   
-  // Updated arrow background color based on theme
+  // Updated arrow background color to be solid, not semi-transparent
   const arrowBgClass = theme === 'dark' || theme === 'greyscale' 
     ? 'bg-zinc-800' 
     : 'bg-zinc-200';
@@ -64,26 +63,28 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
       onClick={onClick}
     >
       <CardContent className="p-4">
-        <div className="flex flex-col space-y-2">
-          <div className="flex justify-between items-center">
-            <div>
-              <h3 className="font-headline font-semibold text-lg">{title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{description}</p>
-            </div>
+        <div className="flex flex-col">
+          {/* Card Header Row - contains heading and icons */}
+          <div className="flex justify-between items-center mb-2">
+            {/* Heading with increased font size (50% larger) */}
+            <h3 className="font-headline font-semibold text-2xl">{title}</h3>
             
-            {/* Moved both icons to the right side with overlap */}
+            {/* Icons section - both on the right side with overlap */}
             <div className="flex items-center -space-x-2">
-              {/* Main icon with increased size (24px → 28.8px = 20% increase) */}
+              {/* Main icon with increased size (20% larger) */}
               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${iconBgClass} z-10`} style={{ width: '48px', height: '48px' }}>
                 {icon}
               </div>
               
-              {/* Arrow icon with increased size and positioned underneath */}
+              {/* Arrow icon underneath */}
               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${arrowBgClass} z-0`} style={{ width: '48px', height: '48px' }}>
                 <ArrowRight size={19.2} className="text-muted-foreground" />
               </div>
             </div>
           </div>
+          
+          {/* Description text appears below the heading and icons */}
+          <p className="text-sm text-muted-foreground mt-1">{description}</p>
         </div>
       </CardContent>
     </Card>

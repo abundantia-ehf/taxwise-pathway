@@ -168,6 +168,19 @@
   .greyscale .card-highlight {
     @apply border-white/5;
   }
+  
+  /* Adding solid background classes for icon containers */
+  .icon-bg {
+    @apply bg-brand text-white;
+  }
+  
+  .dark .icon-bg {
+    @apply bg-zinc-800 text-brand;
+  }
+  
+  .greyscale .icon-bg {
+    @apply bg-zinc-700 text-white;
+  }
 }
 
 @layer utilities {
