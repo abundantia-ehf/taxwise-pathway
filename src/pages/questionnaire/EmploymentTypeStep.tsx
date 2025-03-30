@@ -43,7 +43,7 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
           <button
             key={option}
             onClick={() => handleSelect(option)}
-            className={`w-full p-4 text-left bg-white border rounded-lg shadow-[0_4px_0_0_rgba(209,255,130,0.8)] transition-all hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(209,255,130,0.8)] ${
+            className={`w-full p-4 text-left bg-white text-black border rounded-lg shadow-[4px_4px_0_0_rgba(209,255,130,0.8)] transition-all hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0_0_rgba(209,255,130,0.8)] ${
               data.employmentType === option ? 'border-brand bg-brand/10' : 'border-gray-200'
             }`}
           >
