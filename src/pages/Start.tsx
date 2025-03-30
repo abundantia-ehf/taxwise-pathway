@@ -1,10 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Mail } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 const Start = () => {
   const [isPlatformIOS, setIsPlatformIOS] = useState(false);
@@ -48,23 +48,14 @@ const Start = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black">
-      {/* Background video */}
-      <video
-        id="bg-video"
-        autoPlay
-        muted
-        loop
-        playsInline
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-60' : 'opacity-0'}`}
-      >
-        <source src="/start-background.mp4" type="video/mp4" />
-        {/* Fallback image if video fails to load */}
-        <img 
-          src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
-          alt="Untaxable Background" 
-          className="absolute inset-0 h-full w-full object-cover opacity-20" 
+      {/* Background placeholder image instead of video */}
+      <div className="absolute inset-0 h-full w-full">
+        <OptimizedImage
+          src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2960&auto=format&fit=crop"
+          alt="Background Landscape"
+          className="h-full w-full object-cover opacity-70"
         />
-      </video>
+      </div>
       
       {/* Sign-up card */}
       <div className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/50 backdrop-blur-md p-6 pt-8">
@@ -74,11 +65,11 @@ const Start = () => {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="flex flex-col items-center"
         >
-          {/* Small logo */}
+          {/* White Untaxable logo */}
           <img 
-            src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
+            src="/lovable-uploads/b89fefba-9fdf-4996-a4e2-72b71b30db58.png" 
             alt="Untaxable Logo" 
-            className="w-14 h-14 mb-8 rounded-xl"
+            className="w-14 h-14 mb-8"
           />
           
           {/* Login buttons */}
