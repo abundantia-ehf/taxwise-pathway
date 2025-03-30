@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -20,7 +19,7 @@ const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
       </div>
       
       <div className="text-center space-y-1 max-w-xs">
-        <h2 className="text-xl font-unitext font-bold">{title}</h2>
+        <h2 className="text-xl font-headline">{title}</h2>
         <p className="text-sm text-white/70">{description}</p>
       </div>
     </div>
@@ -72,7 +71,6 @@ const OnboardingFeatures = () => {
 
   const handleNext = () => {
     if (currentSlide === 3) {
-      // Navigate to the questionnaire instead of login
       navigate('/questionnaire');
     } else {
       setCurrentSlide((prev) => prev + 1);
@@ -81,7 +79,6 @@ const OnboardingFeatures = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
-      {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       

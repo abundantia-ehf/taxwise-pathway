@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,8 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				unitext: ['Montserrat', 'sans-serif'], // Changed to Montserrat
-				headline: ['Montserrat', 'sans-serif'], // Changed to Montserrat
+				headline: ['Montserrat', 'sans-serif'],
+				unitext: ['Montserrat', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
