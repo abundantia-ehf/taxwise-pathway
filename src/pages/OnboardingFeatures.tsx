@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -12,33 +11,20 @@ interface FeatureSlideProps {
 }
 
 const AnimatedCounter = () => {
-  const calculateCurrentCount = () => {
-    const startDate = new Date('2025-03-30T12:00:00Z').getTime();
-    const initialValue = 99320600;
-    const now = Date.now();
-    const elapsedMs = now - startDate;
-    const elapsedTenSeconds = Math.floor(elapsedMs / 10000);
-    return initialValue + (elapsedTenSeconds * 21);
-  };
-
-  const [count, setCount] = useState(calculateCurrentCount());
-  const [displayValue, setDisplayValue] = useState(0);
+  const initialValue = 99320600;
+  const incrementAmount = 21;
+  
+  const [count, setCount] = useState(initialValue);
+  const [displayValue, setDisplayValue] = useState(initialValue);
   const lastUpdateRef = useRef<number>(Date.now());
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const initialValue = calculateCurrentCount();
-    setCount(initialValue);
-    setDisplayValue(initialValue);
-    
     intervalRef.current = setInterval(() => {
-      const newValue = calculateCurrentCount();
-      if (newValue > count) {
-        setCount(newValue);
-        lastUpdateRef.current = Date.now();
-      }
-    }, 1000);
-
+      setCount(prevCount => prevCount + incrementAmount);
+      lastUpdateRef.current = Date.now();
+    }, 10000);
+    
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
