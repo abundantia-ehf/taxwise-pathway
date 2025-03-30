@@ -11,17 +11,24 @@ interface FeatureSlideProps {
 }
 
 const AnimatedCounter = () => {
-  const initialValue = 99320600;
-  const incrementAmount = 21;
-  
-  const [count, setCount] = useState(initialValue);
-  const [displayValue, setDisplayValue] = useState(initialValue);
+  const calculateCurrentCount = () => {
+    const startDate = new Date('2023-01-01T00:00:00Z').getTime(); // Fixed start date
+    const initialValue = 99320600;
+    const now = Date.now();
+    const elapsedMs = Math.max(0, now - startDate);
+    const elapsedTenSeconds = Math.floor(elapsedMs / 10000);
+    return initialValue + (elapsedTenSeconds * 21);
+  };
+
+  const [count, setCount] = useState(calculateCurrentCount());
+  const [displayValue, setDisplayValue] = useState(calculateCurrentCount());
   const lastUpdateRef = useRef<number>(Date.now());
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Update count every 10 seconds
     intervalRef.current = setInterval(() => {
-      setCount(prevCount => prevCount + incrementAmount);
+      setCount(calculateCurrentCount());
       lastUpdateRef.current = Date.now();
     }, 10000);
     
@@ -53,49 +60,18 @@ const AnimatedCounter = () => {
     requestAnimationFrame(animateToNewValue);
   }, [count, displayValue]);
 
-  const formatNumberToDigits = (num: number) => {
-    const formatted = num.toLocaleString('en-US', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-    
-    const withoutCommas = formatted.replace(/,/g, '');
-    
-    return {
-      individualDigits: withoutCommas.split(''),
-      withCommas: formatted
-    };
+  // Format number with commas
+  const formatNumberWithCommas = (num: number): string => {
+    return num.toLocaleString('en-US');
   };
-
-  const { individualDigits, withCommas } = formatNumberToDigits(displayValue);
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative mb-2">
-        <div className="absolute -inset-1 bg-gradient-to-br from-brand/30 to-purple-500/20 blur-lg rounded-xl"></div>
-        <div className="relative flex items-center justify-center py-3 px-3 rounded-xl bg-black/50 backdrop-blur-md border border-brand/20 shadow-xl">
-          <span className="text-brand text-4xl md:text-5xl font-bold mr-1">$</span>
-          <div className="grid grid-flow-col gap-0.5">
-            {individualDigits.map((digit, index) => (
-              <div key={index} className="relative">
-                <div className="flex flex-col items-center">
-                  <div className="h-0.5 w-full bg-zinc-700/50 rounded-t-sm"></div>
-                  <div className="bg-gradient-to-b from-zinc-800 to-zinc-900 w-6 md:w-8 h-10 md:h-12 flex items-center justify-center rounded overflow-hidden shadow-inner border border-zinc-700/50">
-                    <span className="font-mono text-3xl md:text-4xl font-bold bg-gradient-to-b from-brand to-green-300 bg-clip-text text-transparent">
-                      {digit}
-                    </span>
-                  </div>
-                  <div className="h-0.5 w-full bg-zinc-700/50 rounded-b-sm"></div>
-                </div>
-                {(withCommas.length - index) % 4 === 0 && index !== individualDigits.length - 1 && (
-                  <div className="absolute -right-1.5 top-1/2 transform -translate-y-1/2">
-                    <span className="text-white/60 text-xl font-bold">,</span>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="flex items-center">
+        <span className="text-brand text-xl font-semibold font-sans mt-1 mr-1">$</span>
+        <span className="text-4xl md:text-5xl font-semibold font-sans text-white">
+          {formatNumberWithCommas(displayValue)}
+        </span>
       </div>
       <div className="text-sm text-white/70 mt-2 font-medium">Total tax savings by Untaxable users</div>
     </div>
