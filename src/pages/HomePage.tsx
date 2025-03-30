@@ -9,34 +9,6 @@ import GreetingQuote from '@/components/home/GreetingQuote';
 import NavigationSection from '@/components/home/NavigationSection';
 import LearningSection from '@/components/home/LearningSection';
 
-const TypewriterText = ({ text }: { text: string }) => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timer = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-        
-        // Add haptic feedback if available
-        if ('vibrate' in navigator) {
-          navigator.vibrate(10); // subtle 10ms vibration
-        }
-      }, 100); // adjust timing as needed
-      
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, text]);
-  
-  return (
-    <h1 className="text-2xl font-headline mb-2">
-      {displayedText}
-      <span className="animate-pulse">|</span>
-    </h1>
-  );
-};
-
 const HomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -86,9 +58,6 @@ const HomePage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mb-4">
-              <TypewriterText text="Become Untaxable." />
-            </div>
             <GreetingQuote />
           </motion.div>
           
