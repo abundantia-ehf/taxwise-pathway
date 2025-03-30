@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -11,7 +12,113 @@ interface FeatureSlideProps {
   description: string;
 }
 
+const AnimatedCounter = () => {
+  const [count, setCount] = useState(99320600);
+  const [displayValue, setDisplayValue] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUpdateRef = useRef<number>(Date.now());
+
+  // Initialize the counter and set up intervals
+  useEffect(() => {
+    // Animation from 0 to initial value
+    const duration = 2000; // 2 seconds for initial animation
+    const startTime = Date.now();
+    const initialValue = 99320600;
+    lastUpdateRef.current = startTime;
+
+    const animateToInitial = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const currentValue = Math.floor(progress * initialValue);
+      
+      setDisplayValue(currentValue);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateToInitial);
+      } else {
+        setIsAnimating(false);
+        setDisplayValue(initialValue);
+        setCount(initialValue);
+      }
+    };
+
+    requestAnimationFrame(animateToInitial);
+
+    // Set up interval to increment by $21 every 10 seconds
+    intervalRef.current = setInterval(() => {
+      setCount(prevCount => {
+        const newValue = prevCount + 21;
+        lastUpdateRef.current = Date.now();
+        return newValue;
+      });
+      setIsAnimating(true);
+    }, 10000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  // Animate the count change when count updates
+  useEffect(() => {
+    if (!isAnimating) return;
+    
+    const animateChange = () => {
+      const elapsed = Date.now() - lastUpdateRef.current;
+      const duration = 1000; // 1 second for increment animation
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const startValue = count - 21; // Starting from previous value
+      const changeAmount = 21 * progress;
+      const currentValue = Math.floor(startValue + changeAmount);
+      
+      setDisplayValue(currentValue);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateChange);
+      } else {
+        setIsAnimating(false);
+        setDisplayValue(count);
+      }
+    };
+
+    if (count > displayValue) {
+      requestAnimationFrame(animateChange);
+    }
+  }, [count, displayValue, isAnimating]);
+
+  const formatNumber = (num: number) => {
+    return `$${num.toLocaleString('en-US')}`;
+  };
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="font-mono text-4xl md:text-5xl font-bold text-brand">
+        {formatNumber(displayValue)}
+      </div>
+      <div className="text-xs text-white/60 mt-2">Total tax savings by Untaxable users</div>
+    </div>
+  );
+};
+
 const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
+  // First slide shows the counter instead of the icon
+  if (title === "Start Paying Less Today") {
+    return (
+      <div className="flex flex-col items-center space-y-4">
+        <AnimatedCounter />
+        
+        <div className="text-center space-y-1 max-w-xs">
+          <h2 className="text-xl font-headline">{title}</h2>
+          <p className="text-sm text-white/70">{description}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center space-y-4">
       <div className="w-36 h-36 rounded-full bg-brand/10 flex items-center justify-center">
