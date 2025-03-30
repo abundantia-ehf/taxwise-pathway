@@ -152,7 +152,7 @@ const Welcome = () => {
               transition={{ duration: 0.5 }}
               className="flex justify-center mt-40"
             >
-              <ArrowDown className="text-brand animate-bounce" size={42} />
+              <ArrowDown className="text-brand animate-bounce-slow" size={42} />
             </motion.div>
             
             {/* Button now positioned with equal spacing */}
