@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, IndianRupee, SwissFranc } from 'lucide-react';
 import { initializeCurrencyHighlighter } from '@/components/questionnaire/CurrencyHighlighter';
+import SaudiRiyalIcon from '@/components/icons/SaudiRiyalIcon';
 
 const CurrencyIcon = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -22,7 +23,7 @@ const CurrencyIcon = () => {
     { Icon: RussianRuble, id: 5 },
     { Icon: IndianRupee, id: 6 },
     { Icon: SwissFranc, id: 7 },
-    { Icon: Euro, id: 8 }, // Using Euro as a substitute for SaudiRiyal since it's not available
+    { Icon: SaudiRiyalIcon, id: 8 }, // Using our custom Saudi Riyal icon
     // Duplicate for seamless scrolling
     { Icon: DollarSign, id: 9 },
     { Icon: Euro, id: 10 },
@@ -31,7 +32,7 @@ const CurrencyIcon = () => {
     { Icon: RussianRuble, id: 13 },
     { Icon: IndianRupee, id: 14 },
     { Icon: SwissFranc, id: 15 },
-    { Icon: Euro, id: 16 } // Using Euro as a substitute for SaudiRiyal
+    { Icon: SaudiRiyalIcon, id: 16 } // Using our custom Saudi Riyal icon
   ];
 
   return (
