@@ -18,7 +18,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
     >
       <div className="flex-1 max-h-24" />
       
-      <div className="space-y-4 max-w-md px-4">
+      <div className="space-y-4 max-w-md px-4 mb-10">
         <h1 className="text-lg font-headline">Let's start by understanding your current tax situation.</h1>
         <div className="flex items-center justify-center space-x-2 text-brand">
           <Clock className="h-4 w-4" />
