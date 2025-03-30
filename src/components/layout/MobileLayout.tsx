@@ -1,7 +1,7 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Server, MessagesSquare, Settings2, Home } from 'lucide-react';
+import { BookOpen, Server, MessageSquare, Settings2, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -48,7 +48,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'Expert Help',
-      icon: MessagesSquare,
+      icon: MessageSquare, // Changed from MessagesSquare to MessageSquare
       path: '/advice',
     },
     {
@@ -81,16 +81,16 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 key={item.path}
                 onClick={() => navigate(item.path)}
                 className={cn(
-                  "flex flex-col items-center justify-center w-1/5 py-1 px-1 rounded-lg transition-all",
+                  "flex items-center justify-center w-1/5 py-2 px-1 rounded-lg transition-all",
                   active 
                     ? theme === 'greyscale' ? "text-white" : "text-brand"
                     : "text-muted-foreground hover:text-foreground"
                 )}
+                aria-label={item.label}
               >
                 <div className="flex items-center justify-center">
-                  <item.icon size={20} />
+                  <item.icon size={24} /> {/* Increased icon size from 20 to 24 */}
                 </div>
-                <span className="text-xs mt-1">{item.label}</span>
               </button>
             );
           })}
