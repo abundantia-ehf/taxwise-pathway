@@ -15,13 +15,13 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       animate={{ opacity: 1 }}
       className="flex flex-col items-center justify-between h-full py-8 px-4 text-center"
     >
-      <div className="flex-1 max-h-16" />
+      <div className="flex-1 max-h-20" />
       
-      <div className="space-y-4 max-w-md">
-        <h1 className="text-xl font-headline">Let's start by understanding your current tax situation.</h1>
+      <div className="space-y-4 max-w-md px-4">
+        <h1 className="text-lg font-headline">Let's start by understanding your current tax situation.</h1>
         <div className="flex items-center justify-center space-x-2 text-brand">
-          <Clock className="h-5 w-5" />
-          <span>Takes 1 minute</span>
+          <Clock className="h-4 w-4" />
+          <span className="text-sm">Takes 1 minute</span>
         </div>
       </div>
       
