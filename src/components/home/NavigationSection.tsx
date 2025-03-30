@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Presentation, MessageCircle, Grid2x2Check } from 'lucide-react';
+import { Presentation, MessageSquare, Grid2x2Check } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import NavigationCard from './NavigationCard';
@@ -29,7 +28,6 @@ const NavigationSection = () => {
     }
   };
   
-  // Updated icons and descriptions as requested
   const navigationItems = [
     {
       title: "Learn",
@@ -40,7 +38,7 @@ const NavigationSection = () => {
     {
       title: "Ask Untaxable",
       description: "Get answers from an Untaxable Pro on your tax situation for personal guidance",
-      icon: <MessageCircle size={20} />,
+      icon: <MessageSquare size={20} />,
       path: "/support"
     },
     {

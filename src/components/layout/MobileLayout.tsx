@@ -1,7 +1,7 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Presentation, Grid2x2Check, MessageCircle, Settings2, Home } from 'lucide-react';
+import { Presentation, Grid2x2Check, MessageSquare, Settings2, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -49,7 +49,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'Ask Untaxable',
-      icon: MessageCircle,
+      icon: MessageSquare,
       path: '/advice',
     },
     {
