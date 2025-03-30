@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -17,7 +16,6 @@ const Welcome = () => {
   const arrowAnimationRef = useRef<number | null>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
 
-  // Create audio element
   useEffect(() => {
     audioRef.current = new Audio('/dink-sound.mp3');
     audioRef.current.volume = 0.2; // Set volume to 20%
@@ -29,7 +27,6 @@ const Welcome = () => {
     };
   }, []);
 
-  // Handle the dink sound effect for the bouncing arrow
   useEffect(() => {
     if (!showArrow || !arrowRef.current) return;
     
@@ -41,16 +38,13 @@ const Welcome = () => {
       
       const currentY = arrowRef.current.getBoundingClientRect().y;
       
-      // If arrow was moving down and now it's moving up, it means it hit the bottom
       if (isMovingDown && currentY < previousY) {
         isMovingDown = false;
         if (audioRef.current) {
-          // Clone and play to allow overlapping sounds if bounce is fast
           audioRef.current.currentTime = 0;
           audioRef.current.play().catch(err => console.log("Audio play error:", err));
         }
       } else if (!isMovingDown && currentY > previousY) {
-        // Now moving down again
         isMovingDown = true;
       }
       
@@ -58,7 +52,6 @@ const Welcome = () => {
       arrowAnimationRef.current = requestAnimationFrame(checkArrowPosition);
     };
     
-    // Start the animation frame loop
     arrowAnimationRef.current = requestAnimationFrame(checkArrowPosition);
     
     return () => {
@@ -74,25 +67,22 @@ const Welcome = () => {
         setDisplayText(fullText.substring(0, typingIndex.current + 1));
         typingIndex.current += 1;
         
-        // Trigger vibration if available (only on devices that support it)
         if (navigator.vibrate) {
-          navigator.vibrate(10); // 10ms subtle vibration
+          navigator.vibrate(10);
         }
       }, typingSpeed);
       
       return () => clearTimeout(typingTimer);
     } else {
-      // When typing is complete, show the subtitle
       const subtitleTimer = setTimeout(() => {
         setShowSubtitle(true);
         
-        // After subtitle fade-in and 1 second delay, show the arrow
         const arrowTimer = setTimeout(() => {
           setShowArrow(true);
-        }, 1000); // 1 second after subtitle appears (changed from 500ms)
+        }, 1000);
         
         return () => clearTimeout(arrowTimer);
-      }, 300); // Short delay after typing finishes
+      }, 300);
       
       return () => clearTimeout(subtitleTimer);
     }
@@ -100,7 +90,6 @@ const Welcome = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
-      {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
       
@@ -111,7 +100,6 @@ const Welcome = () => {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center justify-center h-full"
         >
-          {/* Logo section */}
           <div className="flex flex-col items-center space-y-8 w-full">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
@@ -145,22 +133,23 @@ const Welcome = () => {
               </motion.p>
             </motion.div>
             
-            <motion.div
-              ref={arrowRef}
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: showArrow ? 1 : 0, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex justify-center mt-40"
-            >
-              <ArrowDown className="text-brand animate-bounce-slow" size={42} />
-            </motion.div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <motion.div
+                ref={arrowRef}
+                initial={{ opacity: 0, y: 0 }}
+                animate={{ opacity: showArrow ? 1 : 0, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex justify-center my-12"
+              >
+                <ArrowDown className="text-brand animate-bounce-slow" size={42} />
+              </motion.div>
+            </div>
             
-            {/* Button now positioned with equal spacing */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.5 }}
-              className="w-full mt-40"
+              className="w-full"
             >
               <Button 
                 className="w-full py-5 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
