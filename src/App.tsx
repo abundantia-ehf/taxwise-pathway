@@ -15,6 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 // Eager loading for critical paths
 import LoadingPage from "./pages/LoadingPage";
 import Welcome from "./pages/Welcome";
+import Start from "./pages/Start";
 import Learn from "./pages/Learn"; // Eagerly load the Learn component
 
 // Lazy loading for other routes
@@ -59,10 +60,11 @@ const App = () => (
           <BrowserRouter>
             <Suspense fallback={<PageLoader />}>
               <Routes>
-                {/* Initial route redirects to loading */}
-                <Route path="/" element={<Navigate to="/loading" />} />
+                {/* Initial route now redirects to start */}
+                <Route path="/" element={<Navigate to="/start" />} />
                 
-                {/* Loading page */}
+                {/* Auth routes */}
+                <Route path="/start" element={<Start />} />
                 <Route path="/loading" element={<LoadingPage />} />
                 
                 {/* Public routes */}

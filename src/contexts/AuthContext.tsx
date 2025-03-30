@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { toast } from "sonner";
 
@@ -5,6 +6,8 @@ interface User {
   id: string;
   email: string;
   name?: string;
+  photoUrl?: string;
+  provider?: 'email' | 'google' | 'apple';
   subscription?: {
     status: 'trial' | 'active' | 'canceled' | 'expired';
     trialEndDate?: Date;
@@ -22,6 +25,8 @@ interface AuthContextType {
   isTrialActive: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string, name: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
+  loginWithApple: () => Promise<void>;
   logout: () => void;
   completeOnboarding: () => void;
   startSubscription: () => void;
@@ -56,7 +61,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const mockUser: User = {
         id: '123',
         email,
-        name: 'Demo User',
+        name: email.split('@')[0],
+        provider: 'email',
         subscription: {
           status: 'trial',
           startDate: new Date(),
@@ -85,6 +91,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         id: '123',
         email,
         name,
+        provider: 'email',
         subscription: {
           status: 'trial',
           startDate: new Date(),
@@ -99,6 +106,65 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       toast.error("Signup failed. Please try again.");
       console.error('Signup error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    try {
+      setIsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const mockUser: User = {
+        id: '456',
+        email: 'user@gmail.com',
+        name: 'Google User',
+        photoUrl: 'https://lh3.googleusercontent.com/a/default-user',
+        provider: 'google',
+        subscription: {
+          status: 'trial',
+          startDate: new Date(),
+          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        },
+        onboardingCompleted: false
+      };
+      
+      setUser(mockUser);
+      localStorage.setItem('untaxable-user', JSON.stringify(mockUser));
+      toast.success("Google login successful!");
+    } catch (error) {
+      toast.error("Google login failed. Please try again.");
+      console.error('Google login error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loginWithApple = async () => {
+    try {
+      setIsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const mockUser: User = {
+        id: '789',
+        email: 'user@icloud.com',
+        name: 'Apple User',
+        provider: 'apple',
+        subscription: {
+          status: 'trial',
+          startDate: new Date(),
+          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        },
+        onboardingCompleted: false
+      };
+      
+      setUser(mockUser);
+      localStorage.setItem('untaxable-user', JSON.stringify(mockUser));
+      toast.success("Apple login successful!");
+    } catch (error) {
+      toast.error("Apple login failed. Please try again.");
+      console.error('Apple login error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -140,6 +206,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isTrialActive,
         login, 
         signup, 
+        loginWithGoogle,
+        loginWithApple,
         logout,
         completeOnboarding,
         startSubscription
