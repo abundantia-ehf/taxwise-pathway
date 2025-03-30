@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ArrowRight, Star } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 interface FeatureSlideProps {
   icon: React.ReactNode;
@@ -23,40 +22,19 @@ const AnimatedCounter = () => {
 
   const [count, setCount] = useState(calculateCurrentCount());
   const [displayValue, setDisplayValue] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(true);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastUpdateRef = useRef<number>(Date.now());
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const duration = 2000;
-    const startTime = Date.now();
     const initialValue = calculateCurrentCount();
-    lastUpdateRef.current = startTime;
-
-    const animateToInitial = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const currentValue = Math.floor(progress * initialValue);
-      
-      setDisplayValue(currentValue);
-      
-      if (progress < 1) {
-        requestAnimationFrame(animateToInitial);
-      } else {
-        setIsAnimating(false);
-        setDisplayValue(initialValue);
-        setCount(initialValue);
-      }
-    };
-
-    requestAnimationFrame(animateToInitial);
-
+    setCount(initialValue);
+    setDisplayValue(initialValue);
+    
     intervalRef.current = setInterval(() => {
       const newValue = calculateCurrentCount();
       if (newValue > count) {
         setCount(newValue);
         lastUpdateRef.current = Date.now();
-        setIsAnimating(true);
       }
     }, 1000);
 
@@ -68,31 +46,23 @@ const AnimatedCounter = () => {
   }, []);
 
   useEffect(() => {
-    if (!isAnimating) return;
+    if (count <= displayValue) return;
     
-    const animateChange = () => {
-      const elapsed = Date.now() - lastUpdateRef.current;
-      const duration = 1000;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      const previousValue = count - (count % 21 === 0 ? 21 : count % 21);
-      const changeAmount = (count - previousValue) * progress;
-      const currentValue = Math.floor(previousValue + changeAmount);
-      
-      setDisplayValue(currentValue);
-      
-      if (progress < 1) {
-        requestAnimationFrame(animateChange);
-      } else {
-        setIsAnimating(false);
-        setDisplayValue(count);
+    const animateToNewValue = () => {
+      if (displayValue < count) {
+        setDisplayValue(prevValue => {
+          if (diff <= 5) {
+            return count;
+          }
+          return prevValue + Math.max(1, Math.floor(diff / 10));
+        });
+        
+        requestAnimationFrame(animateToNewValue);
       }
     };
 
-    if (count > displayValue) {
-      requestAnimationFrame(animateChange);
-    }
-  }, [count, displayValue, isAnimating]);
+    requestAnimationFrame(animateToNewValue);
+  }, [count, displayValue]);
 
   const formatNumberToDigits = (num: number) => {
     const formatted = num.toLocaleString('en-US', {
