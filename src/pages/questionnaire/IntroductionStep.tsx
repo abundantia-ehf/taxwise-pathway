@@ -28,8 +28,8 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       
       <ScrollingIcons />
       
-      {/* Reduced the max-height by about 30% again from 11 to 7.7 */}
-      <div className="flex-1 max-h-[7.7rem]" />
+      {/* Reduced the max-height by about 30% from 16 to 11 */}
+      <div className="flex-1 max-h-11" />
       
       <div className="w-full max-w-md mt-4">
         <Button 
