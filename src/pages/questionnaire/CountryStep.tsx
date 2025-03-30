@@ -24,7 +24,7 @@ const CountryStep: React.FC<CountryStepProps> = ({ data, updateData, onNext }) =
         <Globe className="h-10 w-10 text-brand" />
       </div>
       
-      <h2 className="text-xl font-semibold mb-6">Where do you live?</h2>
+      <h2 className="text-xl font-headline font-semibold mb-6">Where do you live?</h2>
       
       <div className="mb-6">
         <Select 

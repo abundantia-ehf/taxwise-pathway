@@ -33,7 +33,7 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
         <FileText className="h-10 w-10 text-brand" />
       </div>
       
-      <h2 className="text-xl font-semibold mb-6">What best describes how you make money?</h2>
+      <h2 className="text-xl font-headline font-semibold mb-6">What best describes how you make money?</h2>
       
       <div className="flex-1 overflow-y-auto">
         <RadioGroup

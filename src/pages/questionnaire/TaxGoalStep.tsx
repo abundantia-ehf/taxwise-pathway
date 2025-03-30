@@ -32,7 +32,7 @@ const TaxGoalStep: React.FC<TaxGoalStepProps> = ({ data, updateData, onNext }) =
         <Target className="h-10 w-10 text-brand" />
       </div>
       
-      <h2 className="text-xl font-semibold mb-6">What is your primary goal with legal tax optimization?</h2>
+      <h2 className="text-xl font-headline font-semibold mb-6">What is your primary goal with legal tax optimization?</h2>
       
       <div className="flex-1 overflow-y-auto">
         <RadioGroup

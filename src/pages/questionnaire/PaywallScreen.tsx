@@ -111,7 +111,7 @@ const PaywallScreen = () => {
           
           {/* Main headline */}
           <div className="text-center mb-3 px-6">
-            <h1 className="text-2xl font-bold mb-2 text-white">
+            <h1 className="text-2xl font-headline font-semibold mb-2 text-white">
               Pay less tax, 
               <span className={cn(
                 "border-b-4", 
@@ -199,7 +199,7 @@ const PaywallScreen = () => {
           
           {/* Offer details */}
           <div className="text-center mb-4">
-            <h2 className="text-lg font-bold mb-2 text-gray-900">
+            <h2 className="text-lg font-headline font-semibold mb-2 text-gray-900">
               Get help from tax mitigation pros
             </h2>
             <p className="text-gray-800 text-sm mb-3">

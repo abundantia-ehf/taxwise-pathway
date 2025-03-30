@@ -51,11 +51,11 @@ const TaxRateScreen = () => {
           
           {/* Message about tax rate reduction */}
           <div className="text-center mb-12">
-            <h2 className="text-lg mb-3">
+            <h2 className="text-lg font-headline font-semibold mb-3">
               Based on your answers, you could get a legal tax rate of
             </h2>
             <p className={cn(
-              "text-4xl font-bold",
+              "text-4xl font-headline font-semibold",
               theme === 'greyscale' ? "text-gray-300" : "text-red-500"
             )}>
               {targetRate}

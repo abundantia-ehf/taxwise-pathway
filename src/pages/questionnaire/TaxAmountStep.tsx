@@ -25,7 +25,7 @@ const TaxAmountStep: React.FC<TaxAmountStepProps> = ({ data, updateData, onNext 
         <CurrencyIcon />
       </div>
       
-      <h2 className="text-xl font-semibold mb-6">How much did you pay in taxes last year?</h2>
+      <h2 className="text-xl font-headline font-semibold mb-6">How much did you pay in taxes last year?</h2>
       
       <RadioGroup
         value={data.taxAmount}

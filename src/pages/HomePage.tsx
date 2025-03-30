@@ -70,7 +70,7 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
           </div>
           
           <div>
-            <h3 className="font-semibold text-lg">{title}</h3>
+            <h3 className="font-headline font-semibold text-lg">{title}</h3>
             <p className="text-sm text-muted-foreground mt-1">{description}</p>
           </div>
         </div>
@@ -177,7 +177,7 @@ const HomePage = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-5 mt-3"
           >
-            <h2 className="text-lg font-semibold mb-3 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
+            <h2 className="text-lg font-headline font-semibold mb-3 flex items-center cursor-pointer" onClick={handleLearningNavigation}>
               {hasStartedLessons ? "Continue Learning" : "Get Started"} 
               <ArrowRight 
                 size={18} 
@@ -197,7 +197,7 @@ const HomePage = () => {
                   <div className="flex-1">
                     {hasStartedLessons ? (
                       <>
-                        <h3 className="font-medium">Foundations of Tax Optimization</h3>
+                        <h3 className="font-headline font-semibold">Foundations of Tax Optimization</h3>
                         <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
                           <div className={`h-2 ${theme === 'greyscale' ? "bg-gray-400" : "bg-brand"} rounded-full`} style={{ width: '20%' }}></div>
                         </div>
@@ -212,7 +212,7 @@ const HomePage = () => {
                       </>
                     ) : (
                       <>
-                        <h3 className="font-medium">Start Here: Course Overview</h3>
+                        <h3 className="font-headline font-semibold">Start Here: Course Overview</h3>
                         <p className="text-xs text-muted-foreground mt-1">
                           Begin your tax optimization journey with our introductory lesson
                         </p>
@@ -230,7 +230,7 @@ const HomePage = () => {
           </motion.div>
 
           <div className="mb-5">
-            <h2 className="text-lg font-semibold mb-3">Explore</h2>
+            <h2 className="text-lg font-headline font-semibold mb-3">Explore</h2>
             <motion.div 
               variants={containerVariants}
               initial="hidden"
@@ -257,17 +257,17 @@ const HomePage = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mb-5"
           >
-            <h2 className="text-lg font-semibold mb-3">Your Untaxable Journey</h2>
+            <h2 className="text-lg font-headline font-semibold mb-3">Your Untaxable Journey</h2>
             <div className="grid grid-cols-2 gap-3">
               <Card className="border">
                 <CardContent className="p-4 text-center">
-                  <h3 className={`text-3xl font-bold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
+                  <h3 className={`text-3xl font-headline font-semibold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
                   <p className="text-xs text-muted-foreground mt-1">Questions Answered</p>
                 </CardContent>
               </Card>
               <Card className="border">
                 <CardContent className="p-4 text-center">
-                  <h3 className={`text-3xl font-bold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
+                  <h3 className={`text-3xl font-headline font-semibold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
                   <p className="text-xs text-muted-foreground mt-1">Lessons Completed</p>
                 </CardContent>
               </Card>
