@@ -103,7 +103,7 @@ const Start = () => {
           <div className="w-full space-y-4 mb-4">
             {isPlatformIOS && (
               <Button 
-                className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-medium flex items-center justify-center gap-2"
+                className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-sans flex items-center justify-center gap-2"
                 onClick={handleAppleSignIn}
               >
                 <div className="flex items-center justify-center w-5 h-5">
@@ -116,7 +116,7 @@ const Start = () => {
             )}
             
             <Button 
-              className="w-full py-4 bg-white text-black hover:bg-white/90 shadow-md shadow-white/20 font-medium flex items-center justify-center gap-2"
+              className="w-full py-4 bg-white text-black hover:bg-white/90 shadow-md shadow-white/20 font-sans flex items-center justify-center gap-2"
               onClick={handleGoogleSignIn}
             >
               <div className="flex items-center justify-center w-5 h-5">
@@ -129,7 +129,7 @@ const Start = () => {
             
             <Button 
               variant="outline" 
-              className="w-full py-4 border-white/20 bg-white/5 text-white hover:bg-white/10 font-medium flex items-center justify-center gap-2"
+              className="w-full py-4 border-white/20 bg-white/5 text-white hover:bg-white/10 font-sans flex items-center justify-center gap-2"
               onClick={handleEmailSignIn}
             >
               <div className="flex items-center justify-center w-5 h-5">
@@ -140,7 +140,7 @@ const Start = () => {
           </div>
           
           {/* Terms text */}
-          <p className="text-xs text-center text-white/50 mt-2">
+          <p className="text-xs text-center text-white/50 mt-2 font-sans">
             By continuing, you agree to our Terms & Privacy Policy
           </p>
         </motion.div>
