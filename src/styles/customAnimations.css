@@ -13,3 +13,45 @@
 .animate-bounce-slow {
   animation: bounce-slow 1.5s infinite;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 2));
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+  width: max-content;
+}
+
+/* Add center highlight effect for currency icons */
+.currency-icon {
+  transition: color 0.3s ease-in-out;
+}
+
+.icon-highlight {
+  position: relative;
+}
+
+.icon-highlight:hover .currency-icon {
+  color: #D1FF82 !important;
+}
+
+/* Center highlight effect using CSS */
+@keyframes highlight-center {
+  0%, 100% {
+    color: var(--text-gray, #4B5563);
+  }
+  50% {
+    color: var(--brand-color, #D1FF82);
+  }
+}
+
+/* Add a special class for the currency icon container to be used with JavaScript */
+.center-highlight .currency-icon {
+  animation: highlight-center 0.6s ease-in-out;
+}

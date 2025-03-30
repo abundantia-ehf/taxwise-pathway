@@ -23,7 +23,7 @@ const TaxAmountStep: React.FC<TaxAmountStepProps> = ({ data, updateData, onNext 
       animate={{ opacity: 1 }}
       className="flex flex-col h-full px-6 py-8"
     >
-      <div className="flex justify-center mb-6">
+      <div className="mb-6">
         <CurrencyIcon />
       </div>
       
