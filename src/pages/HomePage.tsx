@@ -8,7 +8,6 @@ import Header from '@/components/layout/Header';
 import GreetingQuote from '@/components/home/GreetingQuote';
 import NavigationSection from '@/components/home/NavigationSection';
 import LearningSection from '@/components/home/LearningSection';
-import StatsSection from '@/components/home/StatsSection';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -68,8 +67,8 @@ const HomePage = () => {
           />
 
           <NavigationSection />
-
-          <StatsSection />
+          
+          {/* StatsSection has been removed as requested */}
         </div>
       </div>
     </MobileLayout>

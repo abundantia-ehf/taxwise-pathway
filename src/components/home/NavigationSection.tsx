@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Database, MessagesSquare } from 'lucide-react';
+import { Presentation, MessageCircle, GridCheck } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import NavigationCard from './NavigationCard';
@@ -29,24 +29,24 @@ const NavigationSection = () => {
     }
   };
   
-  // Removed color property from icons to allow our new styling to take effect
+  // Updated icons and descriptions as requested
   const navigationItems = [
     {
       title: "Learn",
-      description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} />,
+      description: "Learn how to achieve a 0% tax rate legally in the Untaxable course with 12+ hours of in-depth training",
+      icon: <Presentation size={20} />,
       path: "/learn"
     },
     {
-      title: "Ask an Untaxable Pro",
-      description: "Schedule a consultation with our tax experts",
-      icon: <MessagesSquare size={20} />,
+      title: "Ask Untaxable",
+      description: "Get answers from an Untaxable Pro on your tax situation for personal guidance",
+      icon: <MessageCircle size={20} />,
       path: "/support"
     },
     {
       title: "Tax Databases",
-      description: "Access our collection of tax optimization databases and resources",
-      icon: <Database size={20} />,
+      description: "Access our world class databases on global tax rates and offshore tax havens",
+      icon: <GridCheck size={20} />,
       path: "/data"
     }
   ];

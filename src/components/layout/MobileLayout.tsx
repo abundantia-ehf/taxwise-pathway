@@ -1,7 +1,7 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Server, MessageSquare, Settings2, Home } from 'lucide-react';
+import { Presentation, GridCheck, MessageCircle, Settings2, Home } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
@@ -35,6 +35,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     return location.pathname === path;
   };
 
+  // Updated navigation items with new icons
   const navigationItems = [
     {
       label: 'Home',
@@ -43,17 +44,17 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'Learn',
-      icon: BookOpen,
+      icon: Presentation,
       path: '/learn',
     },
     {
-      label: 'Expert Help',
-      icon: MessageSquare, // Changed from MessagesSquare to MessageSquare
+      label: 'Ask Untaxable',
+      icon: MessageCircle,
       path: '/advice',
     },
     {
       label: 'Data',
-      icon: Server,
+      icon: GridCheck,
       path: '/data',
     },
     {
@@ -89,7 +90,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 aria-label={item.label}
               >
                 <div className="flex items-center justify-center">
-                  <item.icon size={24} /> {/* Increased icon size from 20 to 24 */}
+                  <item.icon size={24} />
                 </div>
               </button>
             );
