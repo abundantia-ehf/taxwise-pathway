@@ -143,11 +143,11 @@
   }
   
   .gradient-brand {
-    @apply bg-gradient-to-br from-[#D1FF82] to-[#A0C566];
+    @apply bg-gradient-to-b from-[#D1FF82] to-[#A0C566];
   }
 
   .greyscale .gradient-brand {
-    @apply bg-gradient-to-br from-gray-200 to-gray-400;
+    @apply bg-gradient-to-b from-gray-200 to-gray-400;
   }
   
   .gradient-brand-subtle {

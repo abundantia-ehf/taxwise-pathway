@@ -21,25 +21,36 @@ interface NavigationCardProps {
 const NavigationCard = ({ title, description, icon, onClick, index }: NavigationCardProps) => {
   const { theme } = useTheme();
   
-  // Different gradient styles based on the card index
+  // Different gradient styles based on the card index and theme
   const gradientStyles = [
     // First card - diagonal gradient
-    theme === 'dark'
-      ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-brand/20'
-      : 'border-zinc-200 bg-gradient-to-br from-white via-brand/20 to-brand/40',
+    theme === 'greyscale'
+      ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700'
+      : theme === 'dark'
+        ? 'border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-800 to-brand/20'
+        : 'border-zinc-200 bg-gradient-to-br from-white via-brand/20 to-brand/40',
     
     // Second card - horizontal gradient
-    theme === 'dark'
-      ? 'border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-800 to-brand/25'
-      : 'border-zinc-200 bg-gradient-to-r from-white via-brand/30 to-brand/50',
+    theme === 'greyscale'
+      ? 'border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700'
+      : theme === 'dark'
+        ? 'border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-800 to-brand/25'
+        : 'border-zinc-200 bg-gradient-to-r from-white via-brand/30 to-brand/50',
     
-    // Third card - radial gradient with circular pattern (updated dark mode only)
-    theme === 'dark'
-      ? 'border-zinc-800 bg-gradient-to-tr from-brand/15 via-zinc-800/90 to-zinc-900'
-      : 'border-zinc-200 bg-gradient-to-bl from-brand/30 via-brand/20 to-white',
+    // Third card - radial gradient
+    theme === 'greyscale'
+      ? 'border-zinc-800 bg-gradient-to-tr from-zinc-800 via-zinc-800/90 to-zinc-900'
+      : theme === 'dark'
+        ? 'border-zinc-800 bg-gradient-to-tr from-brand/15 via-zinc-800/90 to-zinc-900'
+        : 'border-zinc-200 bg-gradient-to-bl from-brand/30 via-brand/20 to-white',
   ];
   
   const cardStyle = gradientStyles[index % gradientStyles.length];
+  
+  // Icon background color based on theme
+  const iconBgClass = theme === 'greyscale' 
+    ? 'bg-zinc-700/50' 
+    : 'bg-brand/20';
   
   return (
     <Card 
@@ -49,10 +60,10 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
       <CardContent className="p-4">
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-brand/20`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${iconBgClass}`}>
               {icon}
             </div>
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-200'}`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${theme === 'dark' || theme === 'greyscale' ? 'bg-zinc-800' : 'bg-zinc-200'}`}>
               <ArrowRight size={16} className="text-muted-foreground" />
             </div>
           </div>
@@ -100,19 +111,19 @@ const HomePage = () => {
     {
       title: "Learn",
       description: "Access our comprehensive tax optimization course modules",
-      icon: <BookOpen size={20} className="text-brand" />,
+      icon: <BookOpen size={20} className={theme === 'greyscale' ? "text-white" : "text-brand"} />,
       path: "/learn"
     },
     {
       title: "Ask an Untaxable Pro",
       description: "Schedule a consultation with our tax experts",
-      icon: <MessagesSquare size={20} className="text-brand" />,
+      icon: <MessagesSquare size={20} className={theme === 'greyscale' ? "text-white" : "text-brand"} />,
       path: "/support"
     },
     {
       title: "Tax Databases",
       description: "Access our collection of tax optimization databases and resources",
-      icon: <Database size={20} className="text-brand" />,
+      icon: <Database size={20} className={theme === 'greyscale' ? "text-white" : "text-brand"} />,
       path: "/data"
     }
   ];
@@ -125,6 +136,13 @@ const HomePage = () => {
     }
   };
 
+  // Determine the logo path based on theme
+  const logoPath = theme === 'greyscale' 
+    ? "/lovable-uploads/bce91dd7-e69e-4ac6-a7c0-a42f182b9eda.png" // Use a greyscale logo
+    : theme === 'dark' 
+      ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
+      : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png";
+
   return (
     <MobileLayout>
       <div className="min-h-screen bg-background">
@@ -132,10 +150,7 @@ const HomePage = () => {
           title={
             <div className="h-[28px] w-auto">
               <img 
-                src={theme === 'dark' 
-                  ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
-                  : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png"
-                } 
+                src={logoPath}
                 alt="Untaxable Logo" 
                 className="h-full w-auto object-contain"
                 style={{ maxHeight: "28px" }}
@@ -165,7 +180,7 @@ const HomePage = () => {
               {hasStartedLessons ? "Continue Learning" : "Get Started"} 
               <ArrowRight 
                 size={18} 
-                className="ml-1 text-brand" 
+                className={`ml-1 ${theme === 'greyscale' ? "text-white" : "text-brand"}`} 
               />
             </h2>
             
@@ -175,20 +190,20 @@ const HomePage = () => {
             >
               <CardContent className="p-4">
                 <div className="flex items-center">
-                  <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-4">
-                    <BookOpen size={24} className="text-brand" />
+                  <div className={`h-12 w-12 rounded-lg ${theme === 'greyscale' ? "bg-zinc-700" : "bg-brand/20"} flex items-center justify-center mr-4`}>
+                    <BookOpen size={24} className={theme === 'greyscale' ? "text-white" : "text-brand"} />
                   </div>
                   <div className="flex-1">
                     {hasStartedLessons ? (
                       <>
                         <h3 className="font-medium">Foundations of Tax Optimization</h3>
                         <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
-                          <div className="h-2 bg-brand rounded-full" style={{ width: '20%' }}></div>
+                          <div className={`h-2 ${theme === 'greyscale' ? "bg-white" : "bg-brand"} rounded-full`} style={{ width: '20%' }}></div>
                         </div>
                         <div className="flex justify-between mt-1">
                           <span className="text-xs text-muted-foreground">20% complete</span>
                           <button 
-                            className="text-xs font-medium text-brand hover:underline flex items-center"
+                            className={`text-xs font-medium ${theme === 'greyscale' ? "text-white" : "text-brand"} hover:underline flex items-center`}
                           >
                             Continue <ArrowRight size={12} className="ml-1" />
                           </button>
@@ -201,7 +216,7 @@ const HomePage = () => {
                           Begin your tax optimization journey with our introductory lesson
                         </p>
                         <button 
-                          className="text-xs font-medium text-brand hover:underline flex items-center mt-2"
+                          className={`text-xs font-medium ${theme === 'greyscale' ? "text-white" : "text-brand"} hover:underline flex items-center mt-2`}
                         >
                           Watch now <ArrowRight size={12} className="ml-1" />
                         </button>
@@ -228,7 +243,7 @@ const HomePage = () => {
                     description={item.description}
                     icon={item.icon}
                     onClick={() => navigate(item.path)}
-                    index={index} // Pass the index to determine gradient style
+                    index={index}
                   />
                 </motion.div>
               ))}
@@ -245,13 +260,13 @@ const HomePage = () => {
             <div className="grid grid-cols-2 gap-3">
               <Card className="border">
                 <CardContent className="p-4 text-center">
-                  <h3 className="text-3xl font-bold text-brand">3</h3>
+                  <h3 className={`text-3xl font-bold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
                   <p className="text-xs text-muted-foreground mt-1">Questions Answered</p>
                 </CardContent>
               </Card>
               <Card className="border">
                 <CardContent className="p-4 text-center">
-                  <h3 className="text-3xl font-bold text-brand">3</h3>
+                  <h3 className={`text-3xl font-bold ${theme === 'greyscale' ? "text-white" : "text-brand"}`}>3</h3>
                   <p className="text-xs text-muted-foreground mt-1">Lessons Completed</p>
                 </CardContent>
               </Card>
