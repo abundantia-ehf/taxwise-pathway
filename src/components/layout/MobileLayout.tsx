@@ -1,9 +1,10 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Server, MessageSquare, Settings2, Home } from 'lucide-react';
+import { BookOpen, Server, MessageSquare, Settings2 } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
+import CustomHomeIcon from '../icons/CustomHomeIcon';
 
 interface MobileLayoutProps {
   children: ReactNode;
@@ -38,7 +39,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
   const navigationItems = [
     {
       label: 'Home',
-      icon: Home,
+      icon: CustomHomeIcon, // Using our custom home icon instead of the Lucide Home
       path: '/home',
     },
     {
@@ -48,7 +49,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     },
     {
       label: 'Expert Help',
-      icon: MessageSquare, // Changed from MessagesSquare to MessageSquare
+      icon: MessageSquare,
       path: '/advice',
     },
     {
@@ -89,7 +90,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
                 aria-label={item.label}
               >
                 <div className="flex items-center justify-center">
-                  <item.icon size={24} /> {/* Increased icon size from 20 to 24 */}
+                  <item.icon size={24} />
                 </div>
               </button>
             );
