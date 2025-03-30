@@ -47,10 +47,8 @@ const NavigationCard = ({ title, description, icon, onClick, index }: Navigation
   
   const cardStyle = gradientStyles[index % gradientStyles.length];
   
-  // Updated icon background colors to be solid, not semi-transparent
-  const iconBgClass = theme === 'greyscale' 
-    ? 'bg-zinc-700' 
-    : 'bg-brand';
+  // Using the icon-bg utility class for consistent styling across the app
+  const iconBgClass = 'icon-bg';
   
   // Updated arrow background color to be solid, not semi-transparent
   const arrowBgClass = theme === 'dark' || theme === 'greyscale' 
