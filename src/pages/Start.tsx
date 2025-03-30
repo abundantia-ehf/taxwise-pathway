@@ -99,8 +99,8 @@ const Start = () => {
             className="w-7 h-7 mb-8"
           />
           
-          {/* Login buttons - now with 85% width of container */}
-          <div className="w-[85%] mx-auto space-y-4 mb-4">
+          {/* Login buttons - now with 90% width of container */}
+          <div className="w-[90%] mx-auto space-y-4 mb-4">
             {isPlatformIOS && (
               <Button 
                 className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-sans flex items-center justify-center gap-2 border-3 border-white/20"
