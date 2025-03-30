@@ -8,10 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from "sonner";
 import { MessageSquare, User, Clock } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 
 const Advice = () => {
   const [question, setQuestion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme } = useTheme();
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +56,10 @@ const Advice = () => {
           <CardContent className="p-4 space-y-3">
             <div className="space-y-1">
               <h2 className="font-semibold text-lg flex items-center">
-                <MessageSquare className="h-5 w-5 mr-2 text-brand" />
+                <MessageSquare className={cn(
+                  "h-5 w-5 mr-2",
+                  theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                )} />
                 Ask an Untaxable Pro
               </h2>
               <p className="text-xs text-muted-foreground">
@@ -82,7 +88,12 @@ const Advice = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-brand text-black hover:bg-brand/90"
+                className={cn(
+                  "w-full",
+                  theme === 'greyscale'
+                    ? "bg-gray-300 text-black hover:bg-gray-400"
+                    : "bg-brand text-black hover:bg-brand/90"
+                )}
                 disabled={isSubmitting || !question.trim()}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Question'}
@@ -104,7 +115,10 @@ const Advice = () => {
                 <CardContent className="p-3 space-y-2">
                   <div className="flex justify-between items-start">
                     <h4 className="font-medium flex items-start">
-                      <User className="h-4 w-4 mr-2 text-brand mt-1 flex-shrink-0" />
+                      <User className={cn(
+                        "h-4 w-4 mr-2 mt-1 flex-shrink-0",
+                        theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                      )} />
                       <span>{item.question}</span>
                     </h4>
                     <span className="text-xs text-muted-foreground flex items-center">

@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import Header from '@/components/layout/Header';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 import { ChevronRight, Building, CircleDollarSign, Flag, Database, AlertCircle } from 'lucide-react';
 import AirtableSetup from '@/components/AirtableSetup';
 import { getAirtableCredentials, fetchAirtableData, isAirtableConfigured } from '@/utils/airtable';
@@ -30,7 +30,10 @@ const DataSource = ({ title, description, recordCount, lastUpdated, icon, onClic
     >
       <CardContent className="p-3">
         <div className="flex items-center">
-          <div className="h-12 w-12 rounded-lg bg-brand/20 flex items-center justify-center mr-3">
+          <div className={cn(
+            "h-12 w-12 rounded-lg flex items-center justify-center mr-3",
+            theme === 'greyscale' ? "bg-gray-700/50" : "bg-brand/20"
+          )}>
             {icon}
           </div>
           <div className="flex-1">
@@ -76,7 +79,7 @@ const Data = () => {
       id: '1',
       title: 'Global Tax Rates',
       description: 'Comprehensive database of tax rates across different countries',
-      icon: <CircleDollarSign size={24} className="text-brand" />,
+      icon: <CircleDollarSign size={24} className={theme === 'greyscale' ? "text-gray-300" : "text-brand"} />,
       recordCount: 214,
       lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Global Tax Rates'
@@ -85,7 +88,7 @@ const Data = () => {
       id: '2',
       title: 'Offshore Districts',
       description: 'Information on business-friendly jurisdictions and their tax benefits',
-      icon: <Building size={24} className="text-brand" />,
+      icon: <Building size={24} className={theme === 'greyscale' ? "text-gray-300" : "text-brand"} />,
       recordCount: 36,
       lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Offshore Districts'
@@ -94,7 +97,7 @@ const Data = () => {
       id: '3',
       title: 'Digital Nomad Visas',
       description: 'Details on countries offering special visas for remote workers',
-      icon: <Flag size={24} className="text-brand" />,
+      icon: <Flag size={24} className={theme === 'greyscale' ? "text-gray-300" : "text-brand"} />,
       recordCount: 48,
       lastUpdated: 'Mar 28, 2025',
       airtableTable: 'Digital Nomad Visas'

@@ -8,10 +8,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Play, Lock, Info } from 'lucide-react';
 import { courseModules, startHereVideo } from '@/data/courseData';
+import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 
 const Learn = () => {
   const [activeTab, setActiveTab] = useState('all');
   const navigate = useNavigate();
+  const { theme } = useTheme();
   
   const handleVideoClick = (moduleId: string, videoId: string, locked: boolean) => {
     if (locked) {
@@ -46,11 +49,19 @@ const Learn = () => {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <h2 className="font-semibold flex items-center">
-                  <Info className="h-4 w-4 mr-2 text-brand" />
+                  <Info className={cn(
+                    "h-4 w-4 mr-2",
+                    theme === 'greyscale' ? "text-gray-300" : "text-brand"
+                  )} />
                   Start Here
                 </h2>
               </div>
-              <Card className="border-2 border-primary dark:border-brand/30">
+              <Card className={cn(
+                "border-2",
+                theme === 'greyscale' 
+                  ? "border-gray-700" 
+                  : "border-primary dark:border-brand/30"
+              )}>
                 <CardContent className="p-3">
                   <p className="text-sm text-muted-foreground mb-3">
                     Get familiar with the course structure and how to use this app effectively
@@ -60,7 +71,10 @@ const Learn = () => {
                     className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-accent"
                   >
                     <div className="flex items-center">
-                      <div className="mr-3 h-10 w-10 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
+                      <div className={cn(
+                        "mr-3 h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0",
+                        theme === 'greyscale' ? "bg-gray-700" : "bg-brand/10"
+                      )}>
                         <Play className="h-4 w-4" />
                       </div>
                       <div>
@@ -92,7 +106,10 @@ const Learn = () => {
                           className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-accent"
                         >
                           <div className="flex items-center">
-                            <div className="mr-3 h-10 w-10 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
+                            <div className={cn(
+                              "mr-3 h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0",
+                              theme === 'greyscale' ? "bg-gray-700" : "bg-brand/10"
+                            )}>
                               {video.locked ? (
                                 <Lock className="h-4 w-4" />
                               ) : (
@@ -107,7 +124,12 @@ const Learn = () => {
                             </div>
                           </div>
                           {video.completed && (
-                            <span className="text-xs bg-brand/20 text-black dark:text-white px-2 py-1 rounded-full">
+                            <span className={cn(
+                              "text-xs px-2 py-1 rounded-full",
+                              theme === 'greyscale' 
+                                ? "bg-gray-700 text-white" 
+                                : "bg-brand/20 text-black dark:text-white"
+                            )}>
                               Completed
                             </span>
                           )}
@@ -152,7 +174,10 @@ const Learn = () => {
                     className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-accent"
                   >
                     <div className="flex items-center">
-                      <div className="mr-3 h-10 w-10 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
+                      <div className={cn(
+                        "mr-3 h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0",
+                        theme === 'greyscale' ? "bg-gray-700" : "bg-brand/10"
+                      )}>
                         {video.locked ? (
                           <Lock className="h-4 w-4" />
                         ) : (
@@ -167,7 +192,12 @@ const Learn = () => {
                       </div>
                     </div>
                     {video.completed && (
-                      <span className="text-xs bg-brand/20 text-black dark:text-white px-2 py-1 rounded-full">
+                      <span className={cn(
+                        "text-xs px-2 py-1 rounded-full",
+                        theme === 'greyscale' 
+                          ? "bg-gray-700 text-white" 
+                          : "bg-brand/20 text-black dark:text-white"
+                      )}>
                         Completed
                       </span>
                     )}

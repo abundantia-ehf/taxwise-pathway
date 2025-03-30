@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import Header from '@/components/layout/Header';
 import GreetingQuote from '@/components/home/GreetingQuote';
+import { cn } from '@/lib/utils';
 
 interface NavigationCardProps {
   title: string;
@@ -198,7 +199,7 @@ const HomePage = () => {
                       <>
                         <h3 className="font-medium">Foundations of Tax Optimization</h3>
                         <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
-                          <div className={`h-2 ${theme === 'greyscale' ? "bg-white" : "bg-brand"} rounded-full`} style={{ width: '20%' }}></div>
+                          <div className={`h-2 ${theme === 'greyscale' ? "bg-gray-400" : "bg-brand"} rounded-full`} style={{ width: '20%' }}></div>
                         </div>
                         <div className="flex justify-between mt-1">
                           <span className="text-xs text-muted-foreground">20% complete</span>
