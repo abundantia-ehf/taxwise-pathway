@@ -9,7 +9,7 @@ const Welcome = () => {
   const navigate = useNavigate();
   const [displayText, setDisplayText] = useState('');
   const [showSubtitle, setShowSubtitle] = useState(false);
-  const [showArrow, setShowArrow] = useState(false);
+  const [showElements, setShowElements] = useState(false);
   const fullText = "Become Untaxable.";
   const typingSpeed = 100; // milliseconds per character
   const typingIndex = useRef(0);
@@ -29,13 +29,13 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    if (!showArrow || !arrowRef.current) return;
+    if (!showElements || !arrowRef.current) return;
     
     let previousY = 0;
     let isMovingDown = true;
     
     const checkArrowPosition = () => {
-      if (!arrowRef.current || !showArrow) return;
+      if (!arrowRef.current || !showElements) return;
       
       const currentY = arrowRef.current.getBoundingClientRect().y;
       
@@ -60,7 +60,7 @@ const Welcome = () => {
         cancelAnimationFrame(arrowAnimationRef.current);
       }
     };
-  }, [showArrow]);
+  }, [showElements]);
 
   useEffect(() => {
     if (typingIndex.current < fullText.length) {
@@ -78,11 +78,11 @@ const Welcome = () => {
       const subtitleTimer = setTimeout(() => {
         setShowSubtitle(true);
         
-        const arrowTimer = setTimeout(() => {
-          setShowArrow(true);
+        const elementsTimer = setTimeout(() => {
+          setShowElements(true);
         }, 1000);
         
-        return () => clearTimeout(arrowTimer);
+        return () => clearTimeout(elementsTimer);
       }, 300);
       
       return () => clearTimeout(subtitleTimer);
@@ -104,9 +104,9 @@ const Welcome = () => {
           <div className="flex flex-col items-center space-y-8 w-full">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="w-20 h-20"
+              animate={{ scale: showElements ? 1 : 0.8, opacity: showElements ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-10 h-10" // Changed from w-20 h-20 to w-10 h-10 (50% smaller)
             >
               <img 
                 src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
@@ -138,7 +138,7 @@ const Welcome = () => {
               <motion.div
                 ref={arrowRef}
                 initial={{ opacity: 0, y: 0 }}
-                animate={{ opacity: showArrow ? 1 : 0, y: 0 }}
+                animate={{ opacity: showElements ? 1 : 0, y: 0 }}
                 transition={{ duration: 0.5 }}
                 className="flex justify-center my-7"
               >
@@ -148,8 +148,8 @@ const Welcome = () => {
             
             <motion.div 
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
+              animate={{ opacity: showElements ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
               className="w-full"
             >
               <Button 
