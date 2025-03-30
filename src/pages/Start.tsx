@@ -72,19 +72,19 @@ const Start = () => {
       {/* Sign-up card */}
       <motion.div 
         ref={cardRef}
-        className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/30 backdrop-blur-[2px] border-2 border-white/20 p-6 pt-8"
+        className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/30 backdrop-blur-[2px] border-4 border-white/20 p-6 pt-8"
         drag="y"
         dragControls={dragControls}
-        dragConstraints={{ top: 0, bottom: 300 }}
+        dragConstraints={{ top: 0, bottom: 200 }}
         dragElastic={0.1}
         onDragEnd={handleDragEnd}
         animate={{ 
-          y: isCardMinimized ? 300 : 0,
+          y: isCardMinimized ? 200 : 0,
           transition: { type: "spring", stiffness: 300, damping: 30 }
         }}
       >
         {/* Drag indicator - double width */}
-        <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-white/20 rounded-full" />
+        <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-40 h-1 bg-white/20 rounded-full" />
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ const Start = () => {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="flex flex-col items-center"
         >
-          {/* White Untaxable logo - 50% smaller */}
+          {/* White Untaxable logo - should remain visible when minimized */}
           <img 
             src="/lovable-uploads/b89fefba-9fdf-4996-a4e2-72b71b30db58.png" 
             alt="Untaxable Logo" 
