@@ -140,7 +140,7 @@ const Welcome = () => {
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: showArrow ? 1 : 0, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="flex justify-center my-9"
+                className="flex justify-center my-7"
               >
                 <ArrowDown className="text-brand animate-bounce-slow" size={50} />
               </motion.div>
