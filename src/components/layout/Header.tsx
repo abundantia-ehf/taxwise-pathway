@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, Contrast } from 'lucide-react';
 
 interface HeaderProps {
   title: string | React.ReactNode;
@@ -32,6 +32,20 @@ const Header: React.FC<HeaderProps> = ({
   // Only show theme toggle if explicitly allowed and not on onboarding routes
   const shouldShowThemeToggle = showThemeToggle && !isOnboardingRoute;
   
+  // Select the appropriate icon based on the theme
+  const getThemeIcon = () => {
+    switch (theme) {
+      case 'dark':
+        return <Sun className="h-[1.2rem] w-[1.2rem]" />;
+      case 'light':
+        return <Contrast className="h-[1.2rem] w-[1.2rem]" />;
+      case 'greyscale':
+        return <Moon className="h-[1.2rem] w-[1.2rem]" />;
+      default:
+        return <Sun className="h-[1.2rem] w-[1.2rem]" />;
+    }
+  };
+  
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container flex h-14 items-center">
@@ -57,11 +71,7 @@ const Header: React.FC<HeaderProps> = ({
               onClick={toggleTheme}
               className="rounded-md p-2 hover:bg-accent"
             >
-              {theme === 'dark' ? (
-                <Sun className="h-[1.2rem] w-[1.2rem]" />
-              ) : (
-                <Moon className="h-[1.2rem] w-[1.2rem]" />
-              )}
+              {getThemeIcon()}
             </button>
           )}
         </div>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -13,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { CircleDollarSign, Bell, Moon, Sun, HelpCircle, FileText, MessageSquare, AlertTriangle } from 'lucide-react';
+import { CircleDollarSign, Bell, Moon, Sun, Contrast, HelpCircle, FileText, MessageSquare, AlertTriangle } from 'lucide-react';
 
 const Settings = () => {
   const { user, logout } = useAuth();
@@ -57,6 +58,33 @@ const Settings = () => {
     toast.success("App data has been reset");
   };
   
+  // Get the appropriate theme icon and label
+  const getThemeIcon = () => {
+    switch (theme) {
+      case 'dark':
+        return <Moon className="h-5 w-5 mr-2" />;
+      case 'light':
+        return <Sun className="h-5 w-5 mr-2" />;
+      case 'greyscale':
+        return <Contrast className="h-5 w-5 mr-2" />;
+      default:
+        return <Moon className="h-5 w-5 mr-2" />;
+    }
+  };
+
+  const getThemeLabel = () => {
+    switch (theme) {
+      case 'dark':
+        return 'Dark Mode';
+      case 'light':
+        return 'Light Mode';
+      case 'greyscale':
+        return 'Greyscale Mode';
+      default:
+        return 'Dark Mode';
+    }
+  };
+  
   const faqItems = [
     {
       question: "Are the tax strategies legal?",
@@ -88,15 +116,15 @@ const Settings = () => {
     <MobileLayout>
       <Header title="Settings" />
       
-      <div className="container p-4 space-y-6">
+      <div className="container p-4 space-y-4">
         <Tabs defaultValue="help">
           <TabsList className="w-full mb-4">
             <TabsTrigger value="help" className="flex-1">Help & FAQ</TabsTrigger>
             <TabsTrigger value="profile" className="flex-1">Profile</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="help" className="space-y-6">
-            <div className="grid gap-4">
+          <TabsContent value="help" className="space-y-4">
+            <div className="grid gap-3">
               {faqItems.map((item, index) => (
                 <div key={index} className="rounded-lg border p-4">
                   <h3 className="font-medium flex items-center">
@@ -110,7 +138,7 @@ const Settings = () => {
               ))}
             </div>
             
-            <div className="space-y-4 mt-6">
+            <div className="space-y-3 mt-4">
               <div className="rounded-lg border p-4 space-y-2">
                 <h3 className="font-medium flex items-center">
                   <CircleDollarSign className="h-4 w-4 mr-2 text-brand" />
@@ -137,7 +165,7 @@ const Settings = () => {
                   Contact Support
                 </h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium">
                       Name
@@ -200,7 +228,7 @@ const Settings = () => {
             </div>
           </TabsContent>
           
-          <TabsContent value="profile" className="space-y-6">
+          <TabsContent value="profile" className="space-y-4">
             <Card>
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
@@ -229,25 +257,24 @@ const Settings = () => {
               </CardContent>
             </Card>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               <h3 className="font-medium px-1">Settings</h3>
               
               <Card>
                 <CardContent className="p-0">
                   <div className="flex items-center justify-between p-4">
                     <div className="flex items-center">
-                      {theme === 'dark' ? (
-                        <Moon className="h-5 w-5 mr-2" />
-                      ) : (
-                        <Sun className="h-5 w-5 mr-2" />
-                      )}
-                      <Label htmlFor="dark-mode" className="cursor-pointer">Dark Mode</Label>
+                      {getThemeIcon()}
+                      <Label htmlFor="theme-toggle" className="cursor-pointer">{getThemeLabel()}</Label>
                     </div>
-                    <Switch
-                      id="dark-mode"
-                      checked={theme === 'dark'}
-                      onCheckedChange={toggleTheme}
-                    />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 px-2"
+                      onClick={toggleTheme}
+                    >
+                      Change
+                    </Button>
                   </div>
                   
                   <Separator />

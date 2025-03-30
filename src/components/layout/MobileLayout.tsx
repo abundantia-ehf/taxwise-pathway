@@ -1,3 +1,4 @@
+
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BookOpen, Server, MessagesSquare, Settings2, Home } from 'lucide-react';
@@ -65,7 +66,7 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
   return (
     <div className={cn(
       "flex flex-col min-h-screen w-full overflow-hidden",
-      theme === 'dark' ? 'bg-background text-foreground' : 'bg-background text-foreground'
+      theme === 'dark' || theme === 'greyscale' ? 'bg-background text-foreground' : 'bg-background text-foreground'
     )}>
       <main className="flex-1 overflow-y-auto pb-16">
         {children}
@@ -98,14 +99,5 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     </div>
   );
 };
-
-/* Original light mode navigation styling for future reference:
-active 
-  ? cn(
-      "text-brand",
-      theme === 'light' ? "bg-gray-800 dark:bg-transparent" : ""
-    ) 
-  : "text-muted-foreground hover:text-foreground"
-*/
 
 export default MobileLayout;

@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { User, CircleDollarSign, Bell, Lock, LogOut, Moon, Sun } from 'lucide-react';
+import { User, CircleDollarSign, Bell, Lock, LogOut, Moon, Sun, Contrast } from 'lucide-react';
 
 const Profile = () => {
   const { user, logout } = useAuth();
@@ -30,11 +30,38 @@ const Profile = () => {
     });
   };
 
+  // Get the appropriate theme icon and label
+  const getThemeIcon = () => {
+    switch (theme) {
+      case 'dark':
+        return <Moon className="h-5 w-5 mr-2" />;
+      case 'light':
+        return <Sun className="h-5 w-5 mr-2" />;
+      case 'greyscale':
+        return <Contrast className="h-5 w-5 mr-2" />;
+      default:
+        return <Moon className="h-5 w-5 mr-2" />;
+    }
+  };
+
+  const getThemeLabel = () => {
+    switch (theme) {
+      case 'dark':
+        return 'Dark Mode';
+      case 'light':
+        return 'Light Mode';
+      case 'greyscale':
+        return 'Greyscale Mode';
+      default:
+        return 'Dark Mode';
+    }
+  };
+
   return (
     <MobileLayout>
       <Header title="Profile" />
       
-      <div className="container p-3 space-y-4">
+      <div className="container p-3 space-y-3">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center">
@@ -77,25 +104,24 @@ const Profile = () => {
           </CardContent>
         </Card>
         
-        <div className="space-y-3">
+        <div className="space-y-2">
           <h3 className="font-medium px-1">Settings</h3>
           
           <Card>
             <CardContent className="p-0">
               <div className="flex items-center justify-between p-3">
                 <div className="flex items-center">
-                  {theme === 'dark' ? (
-                    <Moon className="h-5 w-5 mr-2" />
-                  ) : (
-                    <Sun className="h-5 w-5 mr-2" />
-                  )}
-                  <Label htmlFor="dark-mode" className="cursor-pointer">Dark Mode</Label>
+                  {getThemeIcon()}
+                  <Label htmlFor="theme-toggle" className="cursor-pointer">{getThemeLabel()}</Label>
                 </div>
-                <Switch
-                  id="dark-mode"
-                  checked={theme === 'dark'}
-                  onCheckedChange={toggleTheme}
-                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 px-2"
+                  onClick={toggleTheme}
+                >
+                  Change
+                </Button>
               </div>
               
               <Separator />

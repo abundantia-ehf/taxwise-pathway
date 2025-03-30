@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-type Theme = 'dark' | 'light';
+type Theme = 'dark' | 'light' | 'greyscale';
 
 interface ThemeContextType {
   theme: Theme;
@@ -34,7 +34,15 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const toggleTheme = () => {
     if (isForced) return; // Don't allow toggling if theme is forced
     
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    let newTheme: Theme;
+    if (theme === 'dark') {
+      newTheme = 'light';
+    } else if (theme === 'light') {
+      newTheme = 'greyscale';
+    } else {
+      newTheme = 'dark';
+    }
+    
     setTheme(newTheme);
     setUserPreference(newTheme);
     localStorage.setItem('untaxable-theme', newTheme);
