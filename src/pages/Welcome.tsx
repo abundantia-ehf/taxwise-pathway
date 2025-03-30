@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -7,6 +7,26 @@ import { ArrowRight, ArrowDown } from 'lucide-react';
 
 const Welcome = () => {
   const navigate = useNavigate();
+  const [displayText, setDisplayText] = useState('');
+  const fullText = "Become Untaxable.";
+  const typingSpeed = 100; // milliseconds per character
+  const typingIndex = useRef(0);
+
+  useEffect(() => {
+    if (typingIndex.current < fullText.length) {
+      const typingTimer = setTimeout(() => {
+        setDisplayText(fullText.substring(0, typingIndex.current + 1));
+        typingIndex.current += 1;
+        
+        // Trigger vibration if available (only on devices that support it)
+        if (navigator.vibrate) {
+          navigator.vibrate(10); // 10ms subtle vibration
+        }
+      }, typingSpeed);
+      
+      return () => clearTimeout(typingTimer);
+    }
+  }, [displayText, fullText]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
@@ -43,7 +63,8 @@ const Welcome = () => {
               className="text-center space-y-2"
             >
               <h1 className="text-3xl font-headline">
-                Become Untaxable
+                {displayText}
+                <span className={`inline-block w-[2px] h-[1.2em] ml-[2px] bg-brand ${typingIndex.current >= fullText.length ? 'animate-pulse' : 'opacity-0'}`}></span>
               </h1>
               <p className="text-base text-white/70">
                 Let's begin your path to legally paying zero taxes.
