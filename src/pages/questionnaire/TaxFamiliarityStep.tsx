@@ -36,7 +36,7 @@ const TaxFamiliarityStep: React.FC<TaxFamiliarityStepProps> = ({ data, updateDat
         <BadgeDollarSign className="h-10 w-10 text-brand" />
       </div>
       
-      <h2 className="text-xl font-headline font-semibold mb-6">How familiar are you with legal low tax strategies?</h2>
+      <h2 className="text-xl font-headline">How familiar are you with legal low tax strategies?</h2>
       
       <div className="space-y-3">
         {options.map((option) => (

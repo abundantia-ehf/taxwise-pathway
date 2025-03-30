@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Montserrat font for headlines and Inter for body text */
+/* Import Montserrat font with explicit semibold (600) weight */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
@@ -109,9 +109,10 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600; /* Semibold */
+  /* Explicitly set all headings to use Montserrat Semibold */
+  h1, h2, h3, h4, h5, h6, .font-headline {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important; /* Force semibold */
     letter-spacing: -0.015em;
   }
 

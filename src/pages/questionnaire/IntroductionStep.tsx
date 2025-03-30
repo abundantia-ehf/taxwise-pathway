@@ -18,7 +18,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
       <div className="flex-1" />
       
       <div className="space-y-6 max-w-md">
-        <h1 className="text-2xl font-headline font-semibold">Take the Untaxable survey so we can better serve you with a low-tax plan</h1>
+        <h1 className="text-2xl font-headline">Take the Untaxable survey so we can better serve you with a low-tax plan</h1>
         <p className="text-muted-foreground">Let's start by learning more about your situation.</p>
         <div className="flex items-center justify-center space-x-2 text-brand">
           <Clock className="h-5 w-5" />
