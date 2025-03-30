@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -13,18 +12,25 @@ interface FeatureSlideProps {
 }
 
 const AnimatedCounter = () => {
-  const [count, setCount] = useState(99320600);
+  const calculateCurrentCount = () => {
+    const startDate = new Date('2023-04-01T00:00:00Z').getTime();
+    const initialValue = 99320600;
+    const now = Date.now();
+    const elapsedMs = now - startDate;
+    const elapsedTenSeconds = Math.floor(elapsedMs / 10000);
+    return initialValue + (elapsedTenSeconds * 21);
+  };
+
+  const [count, setCount] = useState(calculateCurrentCount());
   const [displayValue, setDisplayValue] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastUpdateRef = useRef<number>(Date.now());
 
-  // Initialize the counter and set up intervals
   useEffect(() => {
-    // Animation from 0 to initial value
-    const duration = 2000; // 2 seconds for initial animation
+    const duration = 2000;
     const startTime = Date.now();
-    const initialValue = 99320600;
+    const initialValue = calculateCurrentCount();
     lastUpdateRef.current = startTime;
 
     const animateToInitial = () => {
@@ -45,15 +51,14 @@ const AnimatedCounter = () => {
 
     requestAnimationFrame(animateToInitial);
 
-    // Set up interval to increment by $21 every 10 seconds
     intervalRef.current = setInterval(() => {
-      setCount(prevCount => {
-        const newValue = prevCount + 21;
+      const newValue = calculateCurrentCount();
+      if (newValue > count) {
+        setCount(newValue);
         lastUpdateRef.current = Date.now();
-        return newValue;
-      });
-      setIsAnimating(true);
-    }, 10000);
+        setIsAnimating(true);
+      }
+    }, 1000);
 
     return () => {
       if (intervalRef.current) {
@@ -62,18 +67,17 @@ const AnimatedCounter = () => {
     };
   }, []);
 
-  // Animate the count change when count updates
   useEffect(() => {
     if (!isAnimating) return;
     
     const animateChange = () => {
       const elapsed = Date.now() - lastUpdateRef.current;
-      const duration = 1000; // 1 second for increment animation
+      const duration = 1000;
       const progress = Math.min(elapsed / duration, 1);
       
-      const startValue = count - 21; // Starting from previous value
-      const changeAmount = 21 * progress;
-      const currentValue = Math.floor(startValue + changeAmount);
+      const previousValue = count - (count % 21 === 0 ? 21 : count % 21);
+      const changeAmount = (count - previousValue) * progress;
+      const currentValue = Math.floor(previousValue + changeAmount);
       
       setDisplayValue(currentValue);
       
@@ -90,22 +94,52 @@ const AnimatedCounter = () => {
     }
   }, [count, displayValue, isAnimating]);
 
-  const formatNumber = (num: number) => {
-    return `$${num.toLocaleString('en-US')}`;
+  const formatNumberToDigits = (num: number) => {
+    const formatted = num.toLocaleString('en-US', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+    
+    const withoutCommas = formatted.replace(/,/g, '');
+    
+    return {
+      individualDigits: withoutCommas.split(''),
+      withCommas: formatted
+    };
   };
+
+  const { individualDigits, withCommas } = formatNumberToDigits(displayValue);
 
   return (
     <div className="flex flex-col items-center">
-      <div className="font-mono text-4xl md:text-5xl font-bold text-brand">
-        {formatNumber(displayValue)}
+      <div className="relative mb-1">
+        <div className="absolute -inset-4 bg-brand/20 blur-lg rounded-xl"></div>
+        <div className="relative flex items-center bg-zinc-900/70 backdrop-blur-sm py-3 px-2 rounded-xl border border-brand/30 shadow-lg shadow-brand/10">
+          <span className="text-brand text-4xl md:text-6xl font-mono font-bold mr-1">$</span>
+          <div className="flex">
+            {individualDigits.map((digit, index) => (
+              <div key={index} className="relative mx-0.5">
+                <div className="bg-zinc-800 border border-zinc-700 w-8 md:w-10 h-12 md:h-16 flex items-center justify-center rounded-md overflow-hidden shadow-inner">
+                  <span className="font-mono text-4xl md:text-6xl font-bold text-brand">
+                    {digit}
+                  </span>
+                </div>
+                {(withCommas.length - index) % 4 === 0 && index !== individualDigits.length - 1 && (
+                  <div className="absolute -right-2 top-1/2 transform -translate-y-1/2">
+                    <span className="text-white/40 text-xl">,</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="text-xs text-white/60 mt-2">Total tax savings by Untaxable users</div>
+      <div className="text-sm text-white/70 mt-3 font-medium">Total tax savings by Untaxable users</div>
     </div>
   );
 };
 
 const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
-  // First slide shows the counter instead of the icon
   if (title === "Start Paying Less Today") {
     return (
       <div className="flex flex-col items-center space-y-4">
