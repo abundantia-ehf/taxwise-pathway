@@ -106,12 +106,12 @@ const Welcome = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: showElements ? 1 : 0.8, opacity: showElements ? 1 : 0 }}
               transition={{ duration: 0.5 }}
-              className="w-16 h-16" // Changed to w-16 h-16 - a size between w-10 and w-20
+              className="w-16 h-16"
             >
               <img 
                 src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
                 alt="Untaxable Logo" 
-                className="w-full h-full object-cover rounded-lg" // Using rounded-lg for slightly reduced corner radius
+                className="w-full h-full object-cover rounded-lg"
               />
             </motion.div>
             
@@ -154,7 +154,7 @@ const Welcome = () => {
             >
               <Button 
                 className="w-full py-5 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
-                onClick={() => navigate('/onboarding-features')}
+                onClick={() => navigate('/questionnaire')}
               >
                 Get Started <ArrowRight className="ml-1" size={18} />
               </Button>
