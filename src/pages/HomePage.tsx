@@ -8,7 +8,6 @@ import { motion } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import Header from '@/components/layout/Header';
 import GreetingQuote from '@/components/home/GreetingQuote';
-import { Separator } from '@/components/ui/separator';
 
 interface NavigationCardProps {
   title: string;
@@ -153,7 +152,6 @@ const HomePage = () => {
             transition={{ duration: 0.5 }}
           >
             <GreetingQuote />
-            <Separator className="mb-4" />
           </motion.div>
           
           <motion.div
@@ -169,6 +167,7 @@ const HomePage = () => {
                 className="ml-1 text-brand" 
               />
             </h2>
+            
             <Card 
               className="border cursor-pointer"
               onClick={handleLearningNavigation}
