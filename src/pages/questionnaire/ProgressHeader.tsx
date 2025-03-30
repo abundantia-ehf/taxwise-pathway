@@ -13,12 +13,19 @@ const ProgressHeader: React.FC<ProgressHeaderProps> = ({ currentStep, totalSteps
 
   return (
     <div className="p-4 bg-black border-b">
-      <Progress value={progress} className="h-2 bg-secondary/30">
-        <div className="h-full bg-brand" style={{ width: `${progress}%` }} />
-      </Progress>
+      <div className="h-4 w-full bg-secondary/30 relative overflow-hidden rounded-full">
+        {/* Hazard stripes in the background */}
+        <div className="absolute inset-0 w-full h-full" 
+          style={{ 
+            backgroundImage: 'repeating-linear-gradient(45deg, #2a2a2a 0px, #2a2a2a 10px, #1a1a1a 10px, #1a1a1a 20px)',
+            backgroundSize: '28px 28px'
+          }}>
+        </div>
+        {/* Progress bar */}
+        <div className="h-full bg-brand relative z-10" style={{ width: `${progress}%` }} />
+      </div>
       <div className="flex justify-between mt-2 text-sm text-muted-foreground">
         <span>Question {currentStep} of {totalSteps}</span>
-        <span>{Math.round(progress)}% Complete</span>
       </div>
     </div>
   );

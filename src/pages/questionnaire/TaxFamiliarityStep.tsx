@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BadgeDollarSign } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface TaxFamiliarityStepProps {
@@ -38,16 +37,17 @@ const TaxFamiliarityStep: React.FC<TaxFamiliarityStepProps> = ({ data, updateDat
       
       <h2 className="text-xl font-headline">How familiar are you with legal low tax strategies?</h2>
       
-      <div className="space-y-3">
+      <div className="space-y-3 mt-6">
         {options.map((option) => (
-          <Button 
+          <button
             key={option}
-            variant="outline"
-            className={`w-full py-6 text-left justify-start ${data.taxFamiliarity === option ? 'border-brand bg-brand/10' : ''}`}
             onClick={() => handleSelect(option)}
+            className={`w-full p-4 text-left bg-white border rounded-lg shadow-[0_4px_0_0_rgba(209,255,130,0.8)] transition-all hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(209,255,130,0.8)] ${
+              data.taxFamiliarity === option ? 'border-brand bg-brand/10' : 'border-gray-200'
+            }`}
           >
             {option}
-          </Button>
+          </button>
         ))}
       </div>
     </motion.div>

@@ -1,10 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
+import { FileText } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface EmploymentTypeStepProps {
@@ -23,6 +20,12 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
     'Entrepreneur'
   ];
 
+  const handleSelect = (option: string) => {
+    updateData('employmentType', option);
+    // Automatically proceed to the next step
+    onNext();
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -35,31 +38,18 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
       
       <h2 className="text-xl font-headline font-semibold mb-6">What best describes how you make money?</h2>
       
-      <div className="flex-1 overflow-y-auto">
-        <RadioGroup
-          value={data.employmentType}
-          onValueChange={(value) => updateData('employmentType', value)}
-          className="space-y-2 mb-6"
-        >
-          {options.map((option) => (
-            <div key={option} className="flex items-center space-x-2 border rounded-lg p-3">
-              <RadioGroupItem value={option} id={`employment-${option}`} className="border-2" />
-              <Label htmlFor={`employment-${option}`} className="flex-1 cursor-pointer font-normal">
-                {option}
-              </Label>
-            </div>
-          ))}
-        </RadioGroup>
-      </div>
-      
-      <div className="mt-6 pt-4">
-        <Button 
-          onClick={onNext} 
-          disabled={!data.employmentType}
-          className="w-full py-6 bg-brand text-black hover:bg-brand/90"
-        >
-          Next <ArrowRight className="ml-1" size={16} />
-        </Button>
+      <div className="space-y-3">
+        {options.map((option) => (
+          <button
+            key={option}
+            onClick={() => handleSelect(option)}
+            className={`w-full p-4 text-left bg-white border rounded-lg shadow-[0_4px_0_0_rgba(209,255,130,0.8)] transition-all hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(209,255,130,0.8)] ${
+              data.employmentType === option ? 'border-brand bg-brand/10' : 'border-gray-200'
+            }`}
+          >
+            {option}
+          </button>
+        ))}
       </div>
     </motion.div>
   );

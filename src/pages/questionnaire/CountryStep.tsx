@@ -21,7 +21,12 @@ const CountryStep: React.FC<CountryStepProps> = ({ data, updateData, onNext }) =
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <Globe className="h-10 w-10 text-brand" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <Globe className="h-10 w-10 text-brand" />
+        </motion.div>
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">Where do you live?</h2>
