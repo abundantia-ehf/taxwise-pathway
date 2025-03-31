@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, IndianRupee, SwissFranc } from 'lucide-react';
+import SaudiRiyalIcon from '@/components/icons/SaudiRiyalIcon';
 
 const CurrencyIcon = () => {
   const [currentIconIndex, setCurrentIconIndex] = useState(0);
@@ -12,7 +13,8 @@ const CurrencyIcon = () => {
     { Icon: JapaneseYen, id: 4 },
     { Icon: RussianRuble, id: 5 },
     { Icon: IndianRupee, id: 6 },
-    { Icon: SwissFranc, id: 7 }
+    { Icon: SwissFranc, id: 7 },
+    { Icon: SaudiRiyalIcon, id: 8 }
   ];
 
   useEffect(() => {
