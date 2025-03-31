@@ -15,14 +15,19 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate data with enough points to ensure overflow
-    const generateExtendedData = () => {
-      return Array.from({ length: 100 }, (_, i) => ({
-        value: Math.floor(Math.random() * 60) + 20 // Values between 20 and 80
-      }));
+    // Generate just a few data points as requested
+    const generateData = () => {
+      return [
+        { value: 45 },
+        { value: 60 },
+        { value: 30 },
+        { value: 70 },
+        { value: 40 },
+        { value: 55 },
+      ];
     };
 
-    setChartData(generateExtendedData());
+    setChartData(generateData());
     
     // Set animation complete after a delay to match the animation duration
     const timer = setTimeout(() => {
@@ -45,9 +50,9 @@ const ConfirmationScreen = () => {
         className="flex flex-col h-full"
       >
         <div className="flex flex-col h-full justify-center">
-          {/* Full-width chart container with overflow to ensure edges are reached */}
-          <div className="w-[100vw] h-[33vh] relative -mx-[1.5rem] -left-[calc(0.01px)] mb-6 overflow-hidden">
-            <div className="absolute inset-0 w-[102%] left-[-1%]">
+          {/* Chart container with edge-to-edge styling */}
+          <div className="relative h-[33vh] -mx-6 mb-6">
+            <div className="absolute inset-x-0 w-screen left-[calc(-50vw+50%)]">
               <ChartContainer 
                 config={{
                   line: {
@@ -63,12 +68,12 @@ const ConfirmationScreen = () => {
                     }
                   }
                 }}
-                className="w-full h-full"
+                className="w-full h-[33vh]"
               >
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     data={chartData}
-                    margin={{ top: 20, right: -30, left: -30, bottom: 0 }} // Negative margins to extend beyond container
+                    margin={{ top: 20, right: -50, left: -50, bottom: 0 }}
                   >
                     <defs>
                       <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
