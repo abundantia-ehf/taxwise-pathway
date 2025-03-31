@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -86,13 +87,13 @@ const OnboardingFeatures = () => {
   const features = [
     {
       icon: null,
-      title: "Average tax rate a person in the developed world pays each year",
+      title: "Average yearly tax rate in the developed world",
       description: "When sales tax, duties, indirect taxes, and hidden taxes are added to income tax.",
       showTaxRate: true
     },
     {
       icon: null,
-      title: "Estimated tax waste in the developed world each year",
+      title: "Estimated yearly tax waste in the developed world",
       description: "That's your money being lost to waste, mismanagement, or government fraud.",
       showBillion: true
     },
