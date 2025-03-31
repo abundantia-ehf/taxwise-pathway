@@ -18,7 +18,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: Fe
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
-        <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)]">
+        <div className="text-black text-6xl md:text-7xl font-black">
           42.5%
         </div>
         
@@ -34,10 +34,10 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: Fe
     return (
       <div className="flex flex-col items-center space-y-4">
         <div className="flex flex-col items-center w-full text-center">
-          <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)] mx-auto">
+          <div className="text-black text-6xl md:text-7xl font-black mx-auto">
             $785
           </div>
-          <div className="text-black text-3xl md:text-4xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)] mx-auto" style={{ width: 'min-content', letterSpacing: '0.25em' }}>
+          <div className="text-black text-3xl md:text-4xl font-black mx-auto" style={{ width: 'min-content', letterSpacing: '0.25em' }}>
             BILLION
           </div>
         </div>
