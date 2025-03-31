@@ -14,10 +14,10 @@ const UkrainianHryvniaIcon = (props: React.SVGProps<SVGSVGElement>) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M8 6h8a2 2 0 0 1 2 2v1" />
+    <path d="M12 3v18" />
+    <path d="M6 7h12" />
     <path d="M6 12h12" />
-    <path d="M14 18h-4a2 2 0 0 1 -2 -2v-1" />
-    <path d="M12 6v12" />
+    <path d="M6 16c1 3 5 3 6 0" />
   </svg>
 );
 

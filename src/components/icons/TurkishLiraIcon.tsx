@@ -14,10 +14,10 @@ const TurkishLiraIcon = (props: React.SVGProps<SVGSVGElement>) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M14 4a2 2 0 0 0-2 2v14" />
-    <path d="M8 10h8" />
-    <path d="M8 14h8" />
-    <path d="M8 18h3" />
+    <path d="M11 4v16" />
+    <path d="M16 4.5c-2 0-5 .5-5 .5" />
+    <path d="M8 10h7" />
+    <path d="M7 14h8" />
   </svg>
 );
 
