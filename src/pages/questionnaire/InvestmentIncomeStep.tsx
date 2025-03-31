@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CreditCard, Landmark, Home, BarChart4, Wallet, Ban, Coins } from 'lucide-react';
+import { Coins } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface InvestmentIncomeStepProps {
@@ -12,11 +12,11 @@ interface InvestmentIncomeStepProps {
 
 const InvestmentIncomeStep: React.FC<InvestmentIncomeStepProps> = ({ data, updateData, onNext }) => {
   const options = [
-    { value: 'None', icon: <Ban className="h-6 w-6" /> },
-    { value: '5% or less', icon: <BarChart4 className="h-6 w-6" /> },
-    { value: 'Less than half', icon: <Home className="h-6 w-6" /> },
-    { value: 'More than half', icon: <Landmark className="h-6 w-6" /> },
-    { value: 'All of it', icon: <Wallet className="h-6 w-6" /> }
+    { value: 'None' },
+    { value: '5% or less' },
+    { value: 'Less than half' },
+    { value: 'More than half' },
+    { value: 'All of it' }
   ];
 
   const handleSelect = (option: string) => {
@@ -46,12 +46,7 @@ const InvestmentIncomeStep: React.FC<InvestmentIncomeStepProps> = ({ data, updat
               data.investmentIncome === option.value ? 'border-brand bg-brand/10' : 'border-[#999]'
             }`}
           >
-            <div className="flex items-center">
-              <div className="mr-3 text-brand">
-                {option.icon}
-              </div>
-              <span>{option.value}</span>
-            </div>
+            <span>{option.value}</span>
           </button>
         ))}
       </div>
