@@ -1,4 +1,3 @@
-
 import React, { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -17,6 +16,7 @@ import LoadingPage from "./pages/LoadingPage";
 import Welcome from "./pages/Welcome";
 import Start from "./pages/Start";
 import Learn from "./pages/Learn"; // Eagerly load the Learn component
+import Paywall from "./pages/Paywall"; // Eagerly load the Paywall component
 
 // Lazy loading for other routes
 const OnboardingFeatures = React.lazy(() => import("./pages/OnboardingFeatures"));
@@ -74,6 +74,7 @@ const App = () => (
                 <Route path="/onboarding-features" element={<OnboardingFeatures />} />
                 <Route path="/proof" element={<Proof />} />
                 <Route path="/prepaywall" element={<PrePaywall />} />
+                <Route path="/paywall" element={<Paywall />} />
                 <Route path="/questionnaire" element={<Questionnaire />} />
                 <Route path="/questionnaire/confirmation" element={<ConfirmationScreen />} />
                 <Route path="/questionnaire/tax-rate" element={<TaxRateScreen />} />
