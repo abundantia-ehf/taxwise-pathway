@@ -23,7 +23,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
           42.5<span className="text-3xl md:text-4xl">%</span>
         </div>
         
-        <div className="text-center space-y-1 max-w-xs">
+        <div className="text-center space-y-2 max-w-xs">
           <h2 className="text-xl font-headline text-white">{title}</h2>
           <p className="text-sm text-white/80">{description}</p>
         </div>
@@ -43,7 +43,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
           </div>
         </div>
         
-        <div className="text-center space-y-1 max-w-xs">
+        <div className="text-center space-y-2 max-w-xs">
           <h2 className="text-xl font-headline text-white">{title}</h2>
           <p className="text-sm text-white/80">{description}</p>
         </div>
@@ -58,7 +58,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
           19.1
         </div>
         
-        <div className="text-center space-y-1 max-w-xs">
+        <div className="text-center space-y-2 max-w-xs">
           <h2 className="text-xl font-headline text-white">{title}</h2>
           <p className="text-sm text-white/80">{description}</p>
         </div>
