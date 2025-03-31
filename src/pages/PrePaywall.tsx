@@ -38,7 +38,7 @@ const PrePaywall = () => {
           </h1>
           
           <p className="text-lg mb-8 text-white/90">
-            Paying tax is optional. We'll help you achieve this legally, in as little as a few weeks.
+            Paying high tax is optional. We'll help you achieve a low-tax or no-tax structure in as little as 10 days.
           </p>
           
           <p className="text-md mb-8 text-white/80">
