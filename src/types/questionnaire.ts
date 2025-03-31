@@ -5,6 +5,8 @@ export interface QuestionnaireData {
   taxAmount?: string;
   employmentType?: string;
   taxFamiliarity?: string;
+  investmentIncome?: string;
+  foreignIncome?: string;
   taxGoal?: string;
 }
 
@@ -15,5 +17,7 @@ export enum QuestionnaireScreen {
   TaxAmount = 2,
   EmploymentType = 3,
   TaxFamiliarity = 4,
-  TaxGoal = 5,
+  InvestmentIncome = 5,
+  ForeignIncome = 6,
+  TaxGoal = 7,
 }

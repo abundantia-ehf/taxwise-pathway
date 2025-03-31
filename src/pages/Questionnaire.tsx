@@ -8,6 +8,8 @@ import CountryStep from './questionnaire/CountryStep';
 import TaxAmountStep from './questionnaire/TaxAmountStep';
 import EmploymentTypeStep from './questionnaire/EmploymentTypeStep';
 import TaxFamiliarityStep from './questionnaire/TaxFamiliarityStep';
+import InvestmentIncomeStep from './questionnaire/InvestmentIncomeStep';
+import ForeignIncomeStep from './questionnaire/ForeignIncomeStep';
 import TaxGoalStep from './questionnaire/TaxGoalStep';
 import ProgressHeader from './questionnaire/ProgressHeader';
 
@@ -17,7 +19,7 @@ const Questionnaire = () => {
   const navigate = useNavigate();
   
   // Total number of questions (excluding introduction)
-  const totalQuestions = 5;
+  const totalQuestions = 7;
   
   const handleNext = () => {
     if (step < QuestionnaireScreen.TaxGoal) {
@@ -47,6 +49,8 @@ const Questionnaire = () => {
           {step === QuestionnaireScreen.TaxAmount && <TaxAmountStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.EmploymentType && <EmploymentTypeStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.TaxFamiliarity && <TaxFamiliarityStep data={data} updateData={updateData} onNext={handleNext} />}
+          {step === QuestionnaireScreen.InvestmentIncome && <InvestmentIncomeStep data={data} updateData={updateData} onNext={handleNext} />}
+          {step === QuestionnaireScreen.ForeignIncome && <ForeignIncomeStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.TaxGoal && <TaxGoalStep data={data} updateData={updateData} onNext={handleNext} />}
         </div>
       </div>
