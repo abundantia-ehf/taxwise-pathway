@@ -101,7 +101,7 @@ const OnboardingFeatures = () => {
           <OptimizedImage 
             src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
             alt="Untaxable Logo" 
-            className="h-10 object-contain"
+            className="h-6.5 object-contain" // Changed from h-10 to h-6.5 (35% smaller)
           />
         </div>
         
