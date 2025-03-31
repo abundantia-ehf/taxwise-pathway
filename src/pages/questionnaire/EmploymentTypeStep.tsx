@@ -17,7 +17,8 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
     'Self-Employed',
     'Business Owner',
     'Investor',
-    'Entrepreneur'
+    'Entrepreneur',
+    'Multiple Income Sources'
   ];
 
   const handleSelect = (option: string) => {
