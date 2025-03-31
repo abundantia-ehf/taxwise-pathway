@@ -15,20 +15,19 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate data points with one additional point
-    const generateData = () => {
-      return [
-        { value: 45 },
-        { value: 60 },
-        { value: 30 },
-        { value: 70 },
-        { value: 40 },
-        { value: 55 },
-        { value: 65 }, // Added one more data point
-      ];
+    // Generate random data points
+    const generateRandomData = () => {
+      const dataPoints = [];
+      // Generate 7 random data points between 20 and 80
+      for (let i = 0; i < 7; i++) {
+        dataPoints.push({
+          value: Math.floor(Math.random() * 60) + 20, // Random value between 20 and 80
+        });
+      }
+      return dataPoints;
     };
 
-    setChartData(generateData());
+    setChartData(generateRandomData());
     
     // Set animation complete after a delay to match the slower animation duration (30% slower)
     const timer = setTimeout(() => {
