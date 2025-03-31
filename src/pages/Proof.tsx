@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { Card } from '@/components/ui/card';
-import { Star } from 'lucide-react';
+import { Star, Fingerprint } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useToast } from '@/hooks/use-toast';
 
 const TestimonialCard = ({ 
   name, 
@@ -22,7 +23,7 @@ const TestimonialCard = ({
   const isMobile = useIsMobile();
   
   return (
-    <Card className="bg-white rounded-lg p-3 shadow-md w-full mb-3">
+    <Card className="bg-white rounded-lg p-3 shadow-md w-full">
       <div className="flex items-center justify-center mb-2">
         <h3 className="font-semibold text-gray-800">{name}, {age}</h3>
         <span className="ml-2 text-lg">{flag}</span>
@@ -44,9 +45,22 @@ const TestimonialCard = ({
 const Proof = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { toast } = useToast();
   
   const handleContinue = () => {
-    navigate('/questionnaire/paywall');
+    if ((/iPhone|iPad|iPod|Android/i).test(navigator.userAgent)) {
+      toast({
+        title: "Rate our app",
+        description: "Enjoying Untaxable? Please take a moment to rate us.",
+        action: (
+          <Button variant="default" size="sm" onClick={() => navigate('/prepaywall')}>
+            Rate Now
+          </Button>
+        ),
+      });
+    } else {
+      navigate('/prepaywall');
+    }
   };
   
   return (
@@ -68,7 +82,7 @@ const Proof = () => {
             Pay 0% tax. Legally.
           </h1>
           
-          <div className="w-full grid gap-3 mt-6">
+          <div className="w-full grid gap-4 mt-6 mb-6">
             <TestimonialCard 
               name="Eva" 
               age={25} 
