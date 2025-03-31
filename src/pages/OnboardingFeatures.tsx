@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ArrowRight, Star, CircleDollarSign } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import DigitScroller from '@/components/DigitScroller';
 
 interface FeatureSlideProps {
   icon: React.ReactNode;
@@ -29,6 +31,7 @@ const AnimatedCounter = () => {
 
   const [startValue, setStartValue] = useState(calculateInitialValue());
   const [displayValue, setDisplayValue] = useState(calculateInitialValue());
+  const [previousDisplayValue, setPreviousDisplayValue] = useState(calculateInitialValue());
   const animationFrameRef = useRef<number | null>(null);
   const lastUpdateTimeRef = useRef<number>(Date.now());
   const targetValueRef = useRef<number>(calculateInitialValue());
@@ -39,6 +42,9 @@ const AnimatedCounter = () => {
       const now = Date.now();
       const newTargetValue = calculateInitialValue();
       targetValueRef.current = newTargetValue;
+      
+      // Store previous value before updating
+      setPreviousDisplayValue(displayValue);
       
       // Update the start value for smooth animation
       setStartValue(displayValue);
@@ -92,21 +98,30 @@ const AnimatedCounter = () => {
     return Math.floor(num).toLocaleString('en-US');
   };
 
-  // Create an array of the digits for the scrolling animation
-  const digits = formatNumberWithCommas(displayValue).split('');
+  // Get current and previous formatted values
+  const currentFormattedValue = formatNumberWithCommas(displayValue);
+  const previousFormattedValue = formatNumberWithCommas(previousDisplayValue);
+  
+  // Determine which digits are changing
+  const currentDigits = currentFormattedValue.split('');
+  const previousDigits = previousFormattedValue.split('');
 
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-end">
         <CircleDollarSign className="text-brand h-5 w-5 mr-2 mb-1" />
-        <div className="flex h-14 overflow-hidden text-5xl md:text-6xl font-semibold font-unitext text-white">
-          {digits.map((digit, index) => (
-            <div key={index} className="relative w-8 flex justify-center">
+        <div className="flex h-14 text-5xl md:text-6xl font-semibold font-unitext text-white">
+          {currentDigits.map((digit, index) => (
+            <div key={index} className="w-8 flex justify-center">
               {digit === ',' ? (
-                <span className="absolute">,</span>
+                <span>,</span>
               ) : (
-                <div className="animate-bounce-slow">
-                  <span>{digit}</span>
+                <div className="h-full w-full">
+                  <DigitScroller 
+                    digit={digit} 
+                    previousDigit={previousDigits[index] || digit}
+                    isChanging={previousDigits[index] !== digit}
+                  />
                 </div>
               )}
             </div>
