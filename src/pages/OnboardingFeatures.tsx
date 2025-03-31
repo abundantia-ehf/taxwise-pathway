@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ArrowRight, Eye, EyeClosed, Star, Flag } from 'lucide-react';
+import { ArrowRight, Eye, EyeClosed, Star } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface FeatureSlideProps {
@@ -117,16 +118,16 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
         </div>
         
         <div className="bg-white rounded-lg p-5 shadow-md w-full max-w-xs mt-4">
-          <div className="flex items-center mb-3">
+          <div className="flex items-center justify-center mb-3">
             <h3 className="font-semibold text-gray-800">Dane, 36</h3>
-            <Flag className="ml-2 h-4 w-4 text-blue-600" />
+            <span className="ml-2 text-lg">🇺🇸</span>
           </div>
           
           <p className="text-gray-700 text-sm mb-3">
             "I was instantly able to stop paying tax on $130,000 of my income via a benefit I had no idea even existed. I wish I had known about this years ago."
           </p>
           
-          <div className="flex">
+          <div className="flex justify-center">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
             ))}
