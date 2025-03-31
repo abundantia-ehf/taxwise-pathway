@@ -71,10 +71,11 @@ const PrePaywall = () => {
                   animate={{ 
                     width: '300vw', 
                     height: '300vw', 
-                    opacity: 0.9 
+                    opacity: 1 
                   }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
+                  style={{ zIndex: 20 }}
                 />
               )}
             </AnimatePresence>
