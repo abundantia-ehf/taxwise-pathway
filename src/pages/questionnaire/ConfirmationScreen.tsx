@@ -15,9 +15,10 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate 7 random points with increasing x values (added more points)
+    // Generate data points with the last ones extending beyond visible area
     const generateRandomData = () => {
-      const points = Array.from({ length: 7 }, (_, i) => ({
+      // Adding extra points to ensure it extends beyond the right edge
+      const points = Array.from({ length: 12 }, (_, i) => ({
         value: Math.floor(Math.random() * 60) + 20 // Values between 20 and 80
       }));
       return points;
@@ -46,7 +47,7 @@ const ConfirmationScreen = () => {
         className="flex flex-col h-full"
       >
         <div className="flex flex-col h-full px-6 justify-center">
-          {/* Graph visualization taking up the top third */}
+          {/* Graph visualization taking up the top third - with extra width to extend beyond screen */}
           <div className="w-full h-[33vh] -mx-6 mb-6 overflow-hidden">
             <ChartContainer 
               config={{
@@ -68,7 +69,8 @@ const ConfirmationScreen = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={chartData}
-                  margin={{ top: 20, right: -100, left: 0, bottom: 0 }}
+                  margin={{ top: 20, right: -200, left: -30, bottom: 0 }}
+                  style={{ width: '150%' }} // Making the chart wider than the container
                 >
                   <defs>
                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
