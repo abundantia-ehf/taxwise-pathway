@@ -3,9 +3,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Handshake, ArrowDown } from 'lucide-react';
-import { OptimizedImage } from '@/components/ui/optimized-image';
+import { Handshake, ArrowDown, PartyPopper } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
+import '@/styles/customAnimations.css';
 
 const ConfirmationScreen = () => {
   const navigate = useNavigate();
@@ -23,14 +23,11 @@ const ConfirmationScreen = () => {
         className="flex flex-col h-full"
       >
         <div className="flex flex-col h-full px-6 py-8">
-          {/* Image in the top third */}
+          {/* Party popper icon that pulses instead of the image */}
           <div className="flex justify-center mb-8">
-            <OptimizedImage
-              src="/lovable-uploads/e73d9bd8-ca64-4f6e-a2ae-6eaae61fdb07.png"
-              alt="Tax Savings Illustration"
-              className="w-48 h-48 object-contain"
-              loadingHeight={192} // 48*4
-            />
+            <div className="animate-pulse" style={{ animationDuration: '1.5s' }}>
+              <PartyPopper className="w-24 h-24 text-brand" />
+            </div>
           </div>
           
           {/* Message based on questionnaire answers */}
@@ -41,9 +38,9 @@ const ConfirmationScreen = () => {
             </p>
           </div>
           
-          {/* Downward arrow (non-bouncing) */}
+          {/* Bouncing downward arrow */}
           <div className="flex justify-center mb-12">
-            <ArrowDown className="text-brand" size={42} />
+            <ArrowDown className="text-brand animate-bounce-slow" size={42} />
           </div>
           
           {/* Spacer to push the button to the bottom */}
