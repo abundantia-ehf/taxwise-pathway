@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
+import '@/styles/customAnimations.css';
 
 interface ProgressHeaderProps {
   currentStep: number;
@@ -14,8 +15,9 @@ const ProgressHeader: React.FC<ProgressHeaderProps> = ({ currentStep, totalSteps
   return (
     <div className="p-4 bg-black border-b">
       <div className="h-4 w-full bg-secondary/30 relative overflow-hidden rounded-full">
-        {/* Hazard stripes in the background - with closer lines */}
-        <div className="absolute inset-0 w-full h-full" 
+        {/* Hazard stripes in the background with animation */}
+        <div 
+          className="absolute inset-0 w-full h-full animate-stripes" 
           style={{ 
             backgroundImage: 'repeating-linear-gradient(45deg, #2a2a2a 0px, #2a2a2a 5px, #1a1a1a 5px, #1a1a1a 10px)',
             backgroundSize: '14px 14px'

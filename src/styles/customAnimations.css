@@ -12,3 +12,17 @@
 .animate-bounce-slow {
   animation: bounce-slow 1.5s infinite;
 }
+
+/* Animation for moving stripes */
+@keyframes move-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 14px 0;
+  }
+}
+
+.animate-stripes {
+  animation: move-stripes 0.8s linear infinite;
+}
