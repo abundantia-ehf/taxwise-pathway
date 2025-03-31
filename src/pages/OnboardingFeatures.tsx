@@ -50,8 +50,8 @@ const OnboardingFeatures = () => {
   const features = [
     {
       icon: null,
-      title: "The average tax rate a person in the developed world pays teach year",
-      description: "When sales tax, duties, indirect taxes, and hidden taxes are added on to income tax.",
+      title: "Average tax rate a person in the developed world pays each year",
+      description: "When sales tax, duties, indirect taxes, and hidden taxes are added to income tax.",
       showTaxRate: true
     },
     {
@@ -101,7 +101,7 @@ const OnboardingFeatures = () => {
           <OptimizedImage 
             src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
             alt="Untaxable Logo" 
-            className="h-8 object-contain" // Changed from h-10 to h-8 (20% smaller)
+            className="h-8 object-contain" 
           />
         </div>
         
@@ -132,7 +132,7 @@ const OnboardingFeatures = () => {
               <div
                 key={dot}
                 className={`w-2 h-2 rounded-full ${
-                  currentSlide === dot ? 'bg-white' : 'bg-white/30'
+                  currentSlide === dot ? 'bg-white' : 'bg-white/50'
                 } transition-colors cursor-pointer`}
                 onClick={() => setCurrentSlide(dot)}
               />
