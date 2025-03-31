@@ -29,11 +29,9 @@ const CurrencyIcon = () => {
   const Icon = icons[currentIconIndex].Icon;
 
   return (
-    <div className="w-full overflow-hidden my-4">
-      <div className="flex justify-center items-center py-4">
-        <div className="icon-highlight">
-          <Icon className="h-12 w-12 text-brand currency-icon animate-pulse" strokeWidth={1.5} />
-        </div>
+    <div className="flex justify-center items-center h-10 mb-2">
+      <div className="icon-highlight">
+        <Icon className="h-10 w-10 text-brand currency-icon animate-pulse" strokeWidth={1.5} />
       </div>
     </div>
   );
