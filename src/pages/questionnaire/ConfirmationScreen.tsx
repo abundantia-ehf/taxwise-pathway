@@ -101,7 +101,7 @@ const ConfirmationScreen = () => {
           
           {/* Message based on questionnaire answers - moved down 5% with mt-[5vh] */}
           <div className="text-center mb-8 px-6 mt-[5vh]">
-            <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Input.</h2>
+            <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Answers.</h2>
             <p className="text-sm text-muted-foreground">
               Based on your input, there is a strong indication you could save a significant amount of money each year on taxes.
             </p>
