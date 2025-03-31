@@ -28,7 +28,7 @@ const TestimonialCard = ({
         <span className="ml-2 text-lg">{flag}</span>
       </div>
       
-      <p className="text-gray-700 text-xs sm:text-sm mb-2">
+      <p className="text-gray-700 text-sm sm:text-base mb-2">
         "{quote}"
       </p>
       
@@ -64,18 +64,9 @@ const Proof = () => {
         </div>
         
         <div className="flex-1 flex flex-col items-center justify-start pt-6">
-          <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold text-white">
-              Pay 0% tax
-            </h1>
-            
-            <div className="relative">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold text-white">
-                Legally.
-              </h2>
-              <div className="absolute bottom-[-6px] left-0 w-full h-2 bg-[#E63946]"></div>
-            </div>
-          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold text-white text-center">
+            Pay 0% tax. Legally.
+          </h1>
           
           <div className="w-full grid gap-3 mt-6">
             <TestimonialCard 
