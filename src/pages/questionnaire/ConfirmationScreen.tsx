@@ -99,20 +99,20 @@ const ConfirmationScreen = () => {
             </div>
           </div>
           
-          {/* Message based on questionnaire answers */}
-          <div className="text-center mb-8 px-6">
-            <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Answers.</h2>
+          {/* Message based on questionnaire answers - moved down 5% with mt-[5vh] */}
+          <div className="text-center mb-8 px-6 mt-[5vh]">
+            <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Input.</h2>
             <p className="text-sm text-muted-foreground">
-              Based on your answers, there is a strong indication you could save a significant amount of money each year on taxes.
+              Based on your input, there is a strong indication you could save a significant amount of money each year on taxes.
             </p>
           </div>
           
-          {/* Bouncing downward arrow */}
+          {/* Bouncing downward arrow - moved down 5% */}
           <div className="flex justify-center mb-8">
             <ArrowDown className="text-brand animate-bounce-slow" size={42} />
           </div>
           
-          {/* Action button */}
+          {/* Action button - moved down 5% */}
           <div className="mt-4 px-6">
             <Button 
               onClick={handleContinue}
