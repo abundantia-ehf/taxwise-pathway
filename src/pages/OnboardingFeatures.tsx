@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ArrowRight, Star, CircleDollarSign } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 
 interface FeatureSlideProps {
   icon: React.ReactNode;
@@ -87,13 +86,15 @@ const AnimatedCounter = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex items-end">
-        <CircleDollarSign className="text-brand h-5 w-5 mr-2 mb-1" />
-        <span className="text-5xl md:text-6xl font-semibold font-unitext text-white">
-          {formatNumberWithCommas(displayValue)}
-        </span>
+      <div className="rounded-xl bg-gradient-to-br from-brand/30 to-brand/10 backdrop-blur-sm p-6 border border-brand/20 shadow-lg">
+        <div className="flex items-end">
+          <span className="text-3xl md:text-4xl font-unitext text-white mb-1 mr-1">$</span>
+          <span className="text-5xl md:text-6xl font-semibold font-unitext text-white">
+            {formatNumberWithCommas(displayValue)}
+          </span>
+        </div>
+        <div className="text-sm text-white/70 mt-2 font-medium">Total tax savings by Untaxable users</div>
       </div>
-      <div className="text-sm text-white/70 mt-2 font-medium">Total tax savings by Untaxable users</div>
     </div>
   );
 };
