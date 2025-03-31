@@ -12,30 +12,62 @@ const Welcome = () => {
   const [showElements, setShowElements] = useState(false);
   const fullText = "Become Untaxable.";
   const typingSpeed = 100; // milliseconds per character
-  const typingIndex = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const arrowAnimationRef = useRef<number | null>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
-  const isInitialMount = useRef(true);
-
+  
+  // Separate initialization and animation into different effects
+  
+  // This effect runs once on mount to initialize everything
   useEffect(() => {
-    // Initialize audio and reset typing state on component mount
+    // Initialize audio
     audioRef.current = new Audio('/dink-sound.mp3');
     audioRef.current.volume = 0.2; // Set volume to 20%
     
-    // Reset typing state on mount
-    typingIndex.current = 0;
+    // Clear any existing text and reset all animation states
     setDisplayText('');
     setShowSubtitle(false);
     setShowElements(false);
     
+    // Start the typing animation with an empty string
+    let currentIndex = 0;
+    
+    const typingInterval = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setDisplayText(prev => prev + fullText.charAt(currentIndex));
+        
+        // Vibrate on each character typed
+        if (navigator.vibrate) {
+          navigator.vibrate(10);
+        }
+        
+        currentIndex += 1;
+      } else {
+        // Typing is complete, clear the interval
+        clearInterval(typingInterval);
+        
+        // Show subtitle after typing is complete
+        setTimeout(() => {
+          setShowSubtitle(true);
+          
+          // Show elements after subtitle appears
+          setTimeout(() => {
+            setShowElements(true);
+          }, 1000);
+        }, 300);
+      }
+    }, typingSpeed);
+    
+    // Clean up intervals and animation frames
     return () => {
+      clearInterval(typingInterval);
       if (arrowAnimationRef.current) {
         cancelAnimationFrame(arrowAnimationRef.current);
       }
     };
-  }, []);
+  }, []); // Empty dependency array ensures this only runs once
 
+  // This effect handles the arrow animation after elements are shown
   useEffect(() => {
     if (!showElements || !arrowRef.current) return;
     
@@ -69,38 +101,6 @@ const Welcome = () => {
       }
     };
   }, [showElements]);
-
-  // The key typing animation effect
-  useEffect(() => {
-    // Only run this effect if we haven't reached the end of the text
-    if (typingIndex.current < fullText.length) {
-      const typingTimer = setTimeout(() => {
-        setDisplayText(fullText.substring(0, typingIndex.current + 1));
-        typingIndex.current += 1;
-        
-        // Vibrate on each character typed
-        if (navigator.vibrate) {
-          navigator.vibrate(10);
-        }
-      }, typingSpeed);
-      
-      return () => clearTimeout(typingTimer);
-    } else if (typingIndex.current === fullText.length) {
-      // Show subtitle after typing is complete
-      const subtitleTimer = setTimeout(() => {
-        setShowSubtitle(true);
-        
-        // Show elements after subtitle appears
-        const elementsTimer = setTimeout(() => {
-          setShowElements(true);
-        }, 1000);
-        
-        return () => clearTimeout(elementsTimer);
-      }, 300);
-      
-      return () => clearTimeout(subtitleTimer);
-    }
-  }, [displayText, fullText]); // Important: depend on displayText to trigger rerender
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
