@@ -12,9 +12,10 @@ interface FeatureSlideProps {
   description: string;
   showTaxRate?: boolean;
   showBillion?: boolean;
+  showYears?: boolean;
 }
 
-const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: FeatureSlideProps) => {
+const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears }: FeatureSlideProps) => {
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
@@ -40,6 +41,21 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: Fe
           <div className="text-black text-3xl md:text-4xl font-black mx-auto" style={{ width: 'min-content' }}>
             BILLION
           </div>
+        </div>
+        
+        <div className="text-center space-y-1 max-w-xs">
+          <h2 className="text-xl font-headline text-white">{title}</h2>
+          <p className="text-sm text-white/80">{description}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (showYears) {
+    return (
+      <div className="flex flex-col items-center space-y-4">
+        <div className="text-black text-6xl md:text-7xl font-black">
+          19.1
         </div>
         
         <div className="text-center space-y-1 max-w-xs">
@@ -82,6 +98,12 @@ const OnboardingFeatures = () => {
       showBillion: true
     },
     {
+      icon: null,
+      title: "Years spent working just to pay tax",
+      description: "Based on the average person working a 45 year career before retirement",
+      showYears: true
+    },
+    {
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM21.2 15.4c.5.9.8 1.9.8 3.1v2M17 8a4 4 0 011.6 7.7" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -89,15 +111,6 @@ const OnboardingFeatures = () => {
       ),
       title: "Personal Help From Humans and AI",
       description: "Get personalized support from our real human tax experts as well as our ultra-intelligent tax-based AI."
-    },
-    {
-      icon: (
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 6l-10 7L2 6M4 3h16a2 2 0 012 2v14a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      title: "Massive Savings",
-      description: "The average person using Untaxable that earns $100,000 saves $21,600 the first year working with us."
     }
   ];
 
@@ -138,6 +151,7 @@ const OnboardingFeatures = () => {
                     description={feature.description}
                     showTaxRate={feature.showTaxRate}
                     showBillion={feature.showBillion}
+                    showYears={feature.showYears}
                   />
                 </CarouselItem>
               ))}
