@@ -63,6 +63,10 @@ const Welcome = () => {
   }, [showElements]);
 
   useEffect(() => {
+    // Reset state when component mounts
+    typingIndex.current = 0;
+    setDisplayText('');
+    
     if (typingIndex.current < fullText.length) {
       const typingTimer = setTimeout(() => {
         setDisplayText(fullText.substring(0, typingIndex.current + 1));
