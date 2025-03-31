@@ -1,114 +1,29 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ArrowRight, Star } from 'lucide-react';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface FeatureSlideProps {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   title: string;
   description: string;
+  showTaxRate?: boolean;
 }
 
-const AnimatedCounter = () => {
-  const calculateInitialValue = () => {
-    const startDate = new Date('2025-03-30T12:00:00Z').getTime(); // Start from 12 noon GMT on March 30th 2025
-    const initialValue = 99320600;
-    const now = Date.now();
-    
-    // If current time is before the start date, return initial value
-    if (now < startDate) {
-      return initialValue;
-    }
-    
-    const elapsedMs = Math.max(0, now - startDate);
-    const elapsedTenSeconds = Math.floor(elapsedMs / 10000);
-    return initialValue + (elapsedTenSeconds * 21);
-  };
-
-  const [displayValue, setDisplayValue] = useState(calculateInitialValue());
-  const nextValueRef = useRef(calculateInitialValue());
-  const animationFrameRef = useRef<number | null>(null);
-  const lastUpdateTimeRef = useRef<number>(Date.now());
-
-  useEffect(() => {
-    // Function to calculate the current target value
-    const calculateCurrentTarget = () => {
-      const now = Date.now();
-      const startDate = new Date('2025-03-30T12:00:00Z').getTime();
-      
-      // If current time is before the start date, return initial value
-      if (now < startDate) {
-        return 99320600;
-      }
-      
-      const elapsedMs = Math.max(0, now - startDate);
-      // Calculate exact value with fraction based on current time
-      const tenSecondsPassed = elapsedMs / 10000;
-      const wholeIntervals = Math.floor(tenSecondsPassed);
-      const partialInterval = tenSecondsPassed - wholeIntervals;
-      
-      // Base value plus complete intervals, plus partial progress to next interval
-      return 99320600 + (wholeIntervals * 21) + (partialInterval * 21);
-    };
-    
-    // Animation function that gradually updates the display value
-    const animateCounter = (timestamp: number) => {
-      // Calculate how much of the $21 to add based on elapsed time
-      const currentTarget = calculateCurrentTarget();
-      
-      // Update the display value
-      setDisplayValue(currentTarget);
-      
-      // Continue the animation
-      animationFrameRef.current = requestAnimationFrame(animateCounter);
-    };
-    
-    // Start the animation
-    animationFrameRef.current = requestAnimationFrame(animateCounter);
-    
-    // Cleanup on unmount
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, []);
-
-  // Format number with commas
-  const formatNumberWithCommas = (num: number): string => {
-    // Split into integer and decimal parts
-    const parts = num.toFixed(2).split('.');
-    const integerPart = parseInt(parts[0]).toLocaleString('en-US');
-    
-    return integerPart;
-  };
-
-  return (
-    <div className="flex flex-col items-center">
-      <div className="rounded-xl bg-gradient-to-br from-brand/30 to-brand/10 backdrop-blur-sm p-6 border border-brand/20 shadow-lg">
-        <div className="flex items-end">
-          <span className="text-3xl md:text-4xl font-unitext text-white mb-1 mr-1">$</span>
-          <span className="text-5xl md:text-6xl font-semibold font-unitext text-white">
-            {formatNumberWithCommas(displayValue)}
-          </span>
-        </div>
-        <div className="text-sm text-white/70 mt-2 font-medium">Total tax savings by Untaxable users</div>
-      </div>
-    </div>
-  );
-};
-
-const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
-  if (title === "Start Paying Less Today") {
+const FeatureSlide = ({ icon, title, description, showTaxRate }: FeatureSlideProps) => {
+  if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
-        <AnimatedCounter />
+        <div className="text-white text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(0,0,0,0.7)]">
+          42.5%
+        </div>
         
         <div className="text-center space-y-1 max-w-xs">
-          <h2 className="text-xl font-headline">{title}</h2>
-          <p className="text-sm text-white/70">{description}</p>
+          <h2 className="text-xl font-headline text-white">{title}</h2>
+          <p className="text-sm text-white/80">{description}</p>
         </div>
       </div>
     );
@@ -116,13 +31,13 @@ const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="w-36 h-36 rounded-full bg-brand/10 flex items-center justify-center">
+      <div className="w-36 h-36 rounded-full bg-white/10 flex items-center justify-center">
         {icon}
       </div>
       
       <div className="text-center space-y-1 max-w-xs">
-        <h2 className="text-xl font-headline">{title}</h2>
-        <p className="text-sm text-white/70">{description}</p>
+        <h2 className="text-xl font-headline text-white">{title}</h2>
+        <p className="text-sm text-white/80">{description}</p>
       </div>
     </div>
   );
@@ -134,18 +49,15 @@ const OnboardingFeatures = () => {
   
   const features = [
     {
-      icon: (
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke="#D1FF82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      title: "Start Paying Less Today",
-      description: "Implement legal strategies to get your tax rate to 10%, 5%, 2%, or even ZERO."
+      icon: null,
+      title: "The average tax rate a person in the developed world pays teach year",
+      description: "When sales tax, duties, indirect taxes, and hidden taxes are added on to income tax.",
+      showTaxRate: true
     },
     {
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM21.2 15.4c.5.9.8 1.9.8 3.1v2M17 8a4 4 0 011.6 7.7" stroke="#D1FF82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM21.2 15.4c.5.9.8 1.9.8 3.1v2M17 8a4 4 0 011.6 7.7" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: "Personal Help From Humans and AI",
@@ -154,7 +66,7 @@ const OnboardingFeatures = () => {
     {
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 6l-10 7L2 6M4 3h16a2 2 0 012 2v14a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#D1FF82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M22 6l-10 7L2 6M4 3h16a2 2 0 012 2v14a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: "Massive Savings",
@@ -163,7 +75,7 @@ const OnboardingFeatures = () => {
     {
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.256-.02-.51-.062-.76M7 20H2v-2a3 3 0 013-3 4.99 4.99 0 012.938 1.243M7 20v-2c0-.256.02-.51.062-.76M16 3.13a4 4 0 010 7.75M19 6a4 4 0 00-3 6.75M6.5 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke="#D1FF82" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.256-.02-.51-.062-.76M7 20H2v-2a3 3 0 013-3 4.99 4.99 0 012.938 1.243M7 20v-2c0-.256.02-.51.062-.76M16 3.13a4 4 0 010 7.75M19 6a4 4 0 00-3 6.75M6.5 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: "Help Us Get More People to 0%",
@@ -180,11 +92,19 @@ const OnboardingFeatures = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
+    <div className="min-h-screen bg-[#E63946] text-white overflow-hidden">
+      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
       
       <div className="container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
+        <div className="pt-6 flex justify-center">
+          <OptimizedImage 
+            src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
+            alt="Untaxable Logo" 
+            className="h-10 object-contain"
+          />
+        </div>
+        
         <div className="flex-1 flex items-center justify-center">
           <Carousel className="w-full" 
             defaultSlideSize={100}
@@ -198,6 +118,7 @@ const OnboardingFeatures = () => {
                     icon={feature.icon}
                     title={feature.title}
                     description={feature.description}
+                    showTaxRate={feature.showTaxRate}
                   />
                 </CarouselItem>
               ))}
@@ -211,7 +132,7 @@ const OnboardingFeatures = () => {
               <div
                 key={dot}
                 className={`w-2 h-2 rounded-full ${
-                  currentSlide === dot ? 'bg-brand' : 'bg-white/30'
+                  currentSlide === dot ? 'bg-white' : 'bg-white/30'
                 } transition-colors cursor-pointer`}
                 onClick={() => setCurrentSlide(dot)}
               />
@@ -219,13 +140,13 @@ const OnboardingFeatures = () => {
           </div>
           
           <Button 
-            className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 text-base font-medium"
+            className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium"
             onClick={handleNext}
           >
             {currentSlide < 3 ? (
-              <>Next <ArrowRight size={16} className="ml-1" /></>
+              <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
             ) : (
-              <>Rate Us <Star size={16} className="ml-1" /></>
+              <>Rate Us <Star size={16} className="ml-1 text-white" /></>
             )}
           </Button>
         </div>
