@@ -19,12 +19,15 @@ const Welcome = () => {
   const isInitialMount = useRef(true);
 
   useEffect(() => {
+    // Initialize audio and reset typing state on component mount
     audioRef.current = new Audio('/dink-sound.mp3');
     audioRef.current.volume = 0.2; // Set volume to 20%
     
-    // Reset typing state on initial mount
+    // Reset typing state on mount
     typingIndex.current = 0;
     setDisplayText('');
+    setShowSubtitle(false);
+    setShowElements(false);
     
     return () => {
       if (arrowAnimationRef.current) {
@@ -67,13 +70,15 @@ const Welcome = () => {
     };
   }, [showElements]);
 
+  // The key typing animation effect
   useEffect(() => {
-    // Handle the typing animation
+    // Only run this effect if we haven't reached the end of the text
     if (typingIndex.current < fullText.length) {
       const typingTimer = setTimeout(() => {
         setDisplayText(fullText.substring(0, typingIndex.current + 1));
         typingIndex.current += 1;
         
+        // Vibrate on each character typed
         if (navigator.vibrate) {
           navigator.vibrate(10);
         }
@@ -81,10 +86,11 @@ const Welcome = () => {
       
       return () => clearTimeout(typingTimer);
     } else if (typingIndex.current === fullText.length) {
-      // Only show subtitle once typing is complete
+      // Show subtitle after typing is complete
       const subtitleTimer = setTimeout(() => {
         setShowSubtitle(true);
         
+        // Show elements after subtitle appears
         const elementsTimer = setTimeout(() => {
           setShowElements(true);
         }, 1000);
@@ -94,7 +100,7 @@ const Welcome = () => {
       
       return () => clearTimeout(subtitleTimer);
     }
-  }, [displayText, fullText]);
+  }, [displayText, fullText]); // Important: depend on displayText to trigger rerender
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-zinc-900 text-white overflow-hidden">
