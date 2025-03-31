@@ -13,11 +13,10 @@ interface InvestmentIncomeStepProps {
 const InvestmentIncomeStep: React.FC<InvestmentIncomeStepProps> = ({ data, updateData, onNext }) => {
   const options = [
     { value: 'None', icon: <Ban className="h-6 w-6" /> },
-    { value: 'Stocks', icon: <BarChart4 className="h-6 w-6" /> },
-    { value: 'Real Estate', icon: <Home className="h-6 w-6" /> },
-    { value: 'Bank Interest', icon: <Landmark className="h-6 w-6" /> },
-    { value: 'Business Income', icon: <Wallet className="h-6 w-6" /> },
-    { value: 'Other', icon: <CreditCard className="h-6 w-6" /> }
+    { value: '5% or less', icon: <BarChart4 className="h-6 w-6" /> },
+    { value: 'Less than half', icon: <Home className="h-6 w-6" /> },
+    { value: 'More than half', icon: <Landmark className="h-6 w-6" /> },
+    { value: 'All of it', icon: <Wallet className="h-6 w-6" /> }
   ];
 
   const handleSelect = (option: string) => {
@@ -36,7 +35,7 @@ const InvestmentIncomeStep: React.FC<InvestmentIncomeStepProps> = ({ data, updat
         <Coins className="h-10 w-10 text-brand" />
       </div>
       
-      <h2 className="text-xl font-headline font-semibold mb-6">Do you have any investment or passive income?</h2>
+      <h2 className="text-xl font-headline font-semibold mb-6">How much of your income comes from investments?</h2>
       
       <div className="space-y-3">
         {options.map((option) => (
