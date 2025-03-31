@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Eye, EyeOff } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface FeatureSlideProps {
@@ -12,9 +13,10 @@ interface FeatureSlideProps {
   showTaxRate?: boolean;
   showBillion?: boolean;
   showYears?: boolean;
+  isFinalSlide?: boolean;
 }
 
-const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears }: FeatureSlideProps) => {
+const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears, isFinalSlide }: FeatureSlideProps) => {
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
@@ -65,6 +67,17 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
     );
   }
 
+  if (isFinalSlide) {
+    return (
+      <div className="flex flex-col items-center space-y-6">
+        <div className="text-center space-y-3 max-w-xs">
+          <h2 className="text-2xl font-headline text-black font-semibold">Thankfully, there is a better way</h2>
+          <p className="text-base text-black/80">You don't have to live within this broken system.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center space-y-4">
       <div className="w-36 h-36 rounded-full bg-white/10 flex items-center justify-center">
@@ -81,7 +94,34 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
 
 const OnboardingFeatures = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isEyeOpen, setIsEyeOpen] = useState(true);
   const navigate = useNavigate();
+  
+  // Effect for eye blinking animation
+  useEffect(() => {
+    if (currentSlide === 3) {
+      const blinkInterval = setInterval(() => {
+        setIsEyeOpen(false);
+        
+        // First blink
+        setTimeout(() => {
+          setIsEyeOpen(true);
+          
+          // Brief pause between blinks
+          setTimeout(() => {
+            setIsEyeOpen(false);
+            
+            // Second blink
+            setTimeout(() => {
+              setIsEyeOpen(true);
+            }, 150);
+          }, 200);
+        }, 150);
+      }, 4000); // Repeat every 4 seconds
+      
+      return () => clearInterval(blinkInterval);
+    }
+  }, [currentSlide]);
   
   const features = [
     {
@@ -103,13 +143,10 @@ const OnboardingFeatures = () => {
       showYears: true
     },
     {
-      icon: (
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM21.2 15.4c.5.9.8 1.9.8 3.1v2M17 8a4 4 0 011.6 7.7" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      title: "Personal Help From Humans and AI",
-      description: "Get personalized support from our real human tax experts as well as our ultra-intelligent tax-based AI."
+      icon: null,
+      title: "",
+      description: "",
+      isFinalSlide: true
     }
   ];
 
@@ -121,8 +158,15 @@ const OnboardingFeatures = () => {
     }
   };
 
+  const getSlideBackgroundColor = (slideIndex: number) => {
+    if (slideIndex === 3) {
+      return "bg-[#D1FF82]"; // Brand color for slide 4
+    }
+    return "bg-[#E63946]"; // Original color for other slides
+  };
+
   return (
-    <div className="min-h-screen bg-[#E63946] text-white overflow-hidden">
+    <div className={`min-h-screen ${getSlideBackgroundColor(currentSlide)} text-white overflow-hidden`}>
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
       
@@ -151,6 +195,7 @@ const OnboardingFeatures = () => {
                     showTaxRate={feature.showTaxRate}
                     showBillion={feature.showBillion}
                     showYears={feature.showYears}
+                    isFinalSlide={feature.isFinalSlide}
                   />
                 </CarouselItem>
               ))}
@@ -172,13 +217,16 @@ const OnboardingFeatures = () => {
           </div>
           
           <Button 
-            className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium"
+            className={`w-full py-4 ${currentSlide === 3 ? 'bg-zinc-900' : 'bg-zinc-900'} hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium`}
             onClick={handleNext}
           >
             {currentSlide < 3 ? (
               <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
             ) : (
-              <>Rate Us <Star size={16} className="ml-1 text-white" /></>
+              <>Show me {isEyeOpen ? 
+                <Eye size={16} className="ml-1 text-white" /> : 
+                <EyeOff size={16} className="ml-1 text-white" />
+              }</>
             )}
           </Button>
         </div>
