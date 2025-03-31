@@ -2,6 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { DollarSign, Euro, PoundSterling, JapaneseYen, RussianRuble, IndianRupee, SwissFranc } from 'lucide-react';
 import SaudiRiyalIcon from '@/components/icons/SaudiRiyalIcon';
+import UkrainianHryvniaIcon from '@/components/icons/UkrainianHryvniaIcon';
+import TurkishLiraIcon from '@/components/icons/TurkishLiraIcon';
+import PolishZlotyIcon from '@/components/icons/PolishZlotyIcon';
+import ThaiBahtIcon from '@/components/icons/ThaiBahtIcon';
+import IsraeliShekelIcon from '@/components/icons/IsraeliShekelIcon';
+import KazakhTengeIcon from '@/components/icons/KazakhTengeIcon';
+import SouthKoreanWonIcon from '@/components/icons/SouthKoreanWonIcon';
 
 const CurrencyIcon = () => {
   const [currentIconIndex, setCurrentIconIndex] = useState(0);
@@ -14,7 +21,14 @@ const CurrencyIcon = () => {
     { Icon: RussianRuble, id: 5 },
     { Icon: IndianRupee, id: 6 },
     { Icon: SwissFranc, id: 7 },
-    { Icon: SaudiRiyalIcon, id: 8 }
+    { Icon: SaudiRiyalIcon, id: 8 },
+    { Icon: UkrainianHryvniaIcon, id: 9 },
+    { Icon: TurkishLiraIcon, id: 10 },
+    { Icon: PolishZlotyIcon, id: 11 },
+    { Icon: ThaiBahtIcon, id: 12 },
+    { Icon: IsraeliShekelIcon, id: 13 },
+    { Icon: KazakhTengeIcon, id: 14 },
+    { Icon: SouthKoreanWonIcon, id: 15 }
   ];
 
   useEffect(() => {

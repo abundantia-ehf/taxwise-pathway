@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target } from 'lucide-react';
+import { Goal } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface TaxGoalStepProps {
@@ -32,7 +32,7 @@ const TaxGoalStep: React.FC<TaxGoalStepProps> = ({ data, updateData, onNext }) =
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <Target className="h-10 w-10 text-brand" />
+        <Goal className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">What is your primary goal with legal tax optimization?</h2>
