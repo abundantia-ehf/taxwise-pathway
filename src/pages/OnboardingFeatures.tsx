@@ -14,17 +14,19 @@ interface FeatureSlideProps {
   showBillion?: boolean;
   showYears?: boolean;
   isFinalSlide?: boolean;
+  isActive?: boolean; // New prop to determine if slide is currently active
 }
 
-const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears, isFinalSlide }: FeatureSlideProps) => {
+const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears, isFinalSlide, isActive }: FeatureSlideProps) => {
   // For typewriter effect on the final slide
   const [typedText, setTypedText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const textToType = "there is a better way";
   const typingSpeed = 100; // milliseconds per character
-
+  
+  // Reset and start typewriter effect when the slide becomes active
   useEffect(() => {
-    if (isFinalSlide) {
+    if (isFinalSlide && isActive) {
       // Reset state
       setTypedText('');
       setIsTypingComplete(false);
@@ -52,7 +54,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
       // Cleanup on unmount
       return () => clearInterval(timer);
     }
-  }, [isFinalSlide]);
+  }, [isFinalSlide, isActive]); // Add isActive to dependency array
 
   if (showTaxRate) {
     return (
@@ -236,6 +238,7 @@ const OnboardingFeatures = () => {
                     showBillion={feature.showBillion}
                     showYears={feature.showYears}
                     isFinalSlide={feature.isFinalSlide}
+                    isActive={currentSlide === index} // Pass whether this slide is currently active
                   />
                 </CarouselItem>
               ))}
