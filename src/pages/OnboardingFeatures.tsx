@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ArrowRight, Star, Eye, EyeOff } from 'lucide-react';
+import { ArrowRight, Star, Eye, EyeClosed } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
 interface FeatureSlideProps {
@@ -17,6 +17,43 @@ interface FeatureSlideProps {
 }
 
 const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears, isFinalSlide }: FeatureSlideProps) => {
+  // For typewriter effect on the final slide
+  const [typedText, setTypedText] = useState('');
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const textToType = "there is a better way";
+  const typingSpeed = 100; // milliseconds per character
+
+  useEffect(() => {
+    if (isFinalSlide) {
+      // Reset state
+      setTypedText('');
+      setIsTypingComplete(false);
+      
+      // Type out text one character at a time
+      let index = 0;
+      const timer = setInterval(() => {
+        if (index < textToType.length) {
+          // Add the next character
+          setTypedText(textToType.substring(0, index + 1));
+          
+          // Vibrate device if supported
+          if (navigator.vibrate) {
+            navigator.vibrate(10);
+          }
+          
+          index++;
+        } else {
+          // Stop typing when complete
+          clearInterval(timer);
+          setIsTypingComplete(true);
+        }
+      }, typingSpeed);
+      
+      // Cleanup on unmount
+      return () => clearInterval(timer);
+    }
+  }, [isFinalSlide]);
+
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
@@ -71,7 +108,10 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
     return (
       <div className="flex flex-col items-center space-y-6">
         <div className="text-center space-y-3 max-w-xs">
-          <h2 className="text-2xl font-headline text-black font-semibold">Thankfully, there is a better way</h2>
+          <h2 className="text-2xl font-headline text-black font-semibold">
+            Thankfully, {typedText}
+            {!isTypingComplete && <span className="animate-pulse">|</span>}
+          </h2>
           <p className="text-base text-black/80">You don't have to live within this broken system.</p>
         </div>
       </div>
@@ -175,7 +215,7 @@ const OnboardingFeatures = () => {
           <OptimizedImage 
             src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
             alt="Untaxable Logo" 
-            className="h-8 object-contain" 
+            className={`h-8 object-contain ${currentSlide === 3 ? 'filter invert' : ''}`}
           />
         </div>
         
@@ -209,7 +249,9 @@ const OnboardingFeatures = () => {
               <div
                 key={dot}
                 className={`w-2 h-2 rounded-full ${
-                  currentSlide === dot ? 'bg-white' : 'bg-white/50'
+                  currentSlide === dot 
+                    ? currentSlide === 3 ? 'bg-zinc-900' : 'bg-white' 
+                    : currentSlide === 3 ? 'bg-zinc-500' : 'bg-white/50'
                 } transition-colors cursor-pointer`}
                 onClick={() => setCurrentSlide(dot)}
               />
@@ -225,7 +267,7 @@ const OnboardingFeatures = () => {
             ) : (
               <>Show me {isEyeOpen ? 
                 <Eye size={16} className="ml-1 text-white" /> : 
-                <EyeOff size={16} className="ml-1 text-white" />
+                <EyeClosed size={16} className="ml-1 text-white" />
               }</>
             )}
           </Button>
