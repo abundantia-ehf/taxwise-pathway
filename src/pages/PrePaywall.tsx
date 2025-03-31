@@ -57,28 +57,34 @@ const PrePaywall = () => {
           </div>
           
           <div className="relative flex justify-center items-center mb-16">
+            <AnimatePresence>
+              {animating && (
+                <motion.div
+                  className="absolute rounded-full bg-brand"
+                  initial={{ width: 0, height: 0, opacity: 1 }}
+                  animate={{ 
+                    width: '400vw', 
+                    height: '400vw', 
+                    opacity: 1 
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  style={{ 
+                    zIndex: 40,
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                />
+              )}
+            </AnimatePresence>
+            
             <Fingerprint 
               size={64} 
               className="text-brand cursor-pointer z-10" 
               onClick={handleFingerprintClick}
             />
-            
-            <AnimatePresence>
-              {animating && (
-                <motion.div
-                  className="absolute rounded-full bg-brand"
-                  initial={{ width: 0, height: 0, opacity: 0.7 }}
-                  animate={{ 
-                    width: '300vw', 
-                    height: '300vw', 
-                    opacity: 1 
-                  }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
-                  style={{ zIndex: 20 }}
-                />
-              )}
-            </AnimatePresence>
           </div>
         </div>
       </div>
