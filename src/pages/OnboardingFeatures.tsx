@@ -11,14 +11,35 @@ interface FeatureSlideProps {
   title: string;
   description: string;
   showTaxRate?: boolean;
+  showBillion?: boolean;
 }
 
-const FeatureSlide = ({ icon, title, description, showTaxRate }: FeatureSlideProps) => {
+const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: FeatureSlideProps) => {
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
-        <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)]">
+        <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_3px_rgba(255,255,255,0.7)]">
           42.5%
+        </div>
+        
+        <div className="text-center space-y-1 max-w-xs">
+          <h2 className="text-xl font-headline text-white">{title}</h2>
+          <p className="text-sm text-white/80">{description}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (showBillion) {
+    return (
+      <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center">
+          <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_3px_rgba(255,255,255,0.7)]">
+            $785
+          </div>
+          <div className="text-black text-3xl md:text-4xl font-bold drop-shadow-[3px_3px_3px_rgba(255,255,255,0.7)] w-full text-center">
+            BILLION
+          </div>
         </div>
         
         <div className="text-center space-y-1 max-w-xs">
@@ -55,6 +76,12 @@ const OnboardingFeatures = () => {
       showTaxRate: true
     },
     {
+      icon: null,
+      title: "Amount of estimated tax waste in the developed world each year",
+      description: "Nearly three-quarters of a trillion tax dollars disappear each year through waste, loss, mismanagement or government fraud.",
+      showBillion: true
+    },
+    {
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM21.2 15.4c.5.9.8 1.9.8 3.1v2M17 8a4 4 0 011.6 7.7" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -71,15 +98,6 @@ const OnboardingFeatures = () => {
       ),
       title: "Massive Savings",
       description: "The average person using Untaxable that earns $100,000 saves $21,600 the first year working with us."
-    },
-    {
-      icon: (
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.256-.02-.51-.062-.76M7 20H2v-2a3 3 0 013-3 4.99 4.99 0 012.938 1.243M7 20v-2c0-.256.02-.51.062-.76M16 3.13a4 4 0 010 7.75M19 6a4 4 0 00-3 6.75M6.5 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      title: "Help Us Get More People to 0%",
-      description: "Your review helps spread Untaxable's mission and create more low-tax citizens."
     }
   ];
 
@@ -119,6 +137,7 @@ const OnboardingFeatures = () => {
                     title={feature.title}
                     description={feature.description}
                     showTaxRate={feature.showTaxRate}
+                    showBillion={feature.showBillion}
                   />
                 </CarouselItem>
               ))}
