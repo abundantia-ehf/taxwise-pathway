@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BanknoteArrowUp } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface ForeignIncomeStepProps {
@@ -31,7 +31,7 @@ const ForeignIncomeStep: React.FC<ForeignIncomeStepProps> = ({ data, updateData,
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <BanknoteArrowUp className="h-10 w-10 text-brand" />
+        <ArrowUpDown className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">Do you have income from sources outside your home country?</h2>
