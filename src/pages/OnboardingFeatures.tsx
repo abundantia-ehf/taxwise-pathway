@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -14,47 +13,39 @@ interface FeatureSlideProps {
   showBillion?: boolean;
   showYears?: boolean;
   isFinalSlide?: boolean;
-  isActive?: boolean; // New prop to determine if slide is currently active
+  isActive?: boolean;
 }
 
 const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, showYears, isFinalSlide, isActive }: FeatureSlideProps) => {
-  // For typewriter effect on the final slide
   const [typedText, setTypedText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const textToType = "there is a better way."; // Added period at the end
-  const typingSpeed = 100; // milliseconds per character
-  
-  // Reset and start typewriter effect when the slide becomes active
+  const textToType = "there is a better way.";
+  const typingSpeed = 100;
+
   useEffect(() => {
     if (isFinalSlide && isActive) {
-      // Reset state
       setTypedText('');
       setIsTypingComplete(false);
       
-      // Type out text one character at a time
       let index = 0;
       const timer = setInterval(() => {
         if (index < textToType.length) {
-          // Add the next character
           setTypedText(textToType.substring(0, index + 1));
           
-          // Vibrate device if supported
           if (navigator.vibrate) {
             navigator.vibrate(10);
           }
           
           index++;
         } else {
-          // Stop typing when complete
           clearInterval(timer);
           setIsTypingComplete(true);
         }
       }, typingSpeed);
       
-      // Cleanup on unmount
       return () => clearInterval(timer);
     }
-  }, [isFinalSlide, isActive]); // Add isActive to dependency array
+  }, [isFinalSlide, isActive]);
 
   if (showTaxRate) {
     return (
@@ -155,33 +146,29 @@ const OnboardingFeatures = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isEyeOpen, setIsEyeOpen] = useState(true);
   const navigate = useNavigate();
-  
-  // Effect for eye blinking animation
+
   useEffect(() => {
     if (currentSlide === 3) {
       const blinkInterval = setInterval(() => {
         setIsEyeOpen(false);
         
-        // First blink
         setTimeout(() => {
           setIsEyeOpen(true);
           
-          // Brief pause between blinks
           setTimeout(() => {
             setIsEyeOpen(false);
             
-            // Second blink
             setTimeout(() => {
               setIsEyeOpen(true);
             }, 150);
           }, 200);
         }, 150);
-      }, 4000); // Repeat every 4 seconds
+      }, 4000);
       
       return () => clearInterval(blinkInterval);
     }
   }, [currentSlide]);
-  
+
   const features = [
     {
       icon: null,
@@ -211,7 +198,7 @@ const OnboardingFeatures = () => {
 
   const handleNext = () => {
     if (currentSlide === 3) {
-      navigate('/questionnaire/paywall');
+      navigate('/proof');
     } else {
       setCurrentSlide((prev) => prev + 1);
     }
@@ -219,9 +206,9 @@ const OnboardingFeatures = () => {
 
   const getSlideBackgroundColor = (slideIndex: number) => {
     if (slideIndex === 3) {
-      return "bg-[#D1FF82]"; // Brand color for slide 4
+      return "bg-[#D1FF82]";
     }
-    return "bg-[#E63946]"; // Original color for other slides
+    return "bg-[#E63946]";
   };
 
   return (
@@ -263,7 +250,7 @@ const OnboardingFeatures = () => {
                     showBillion={feature.showBillion}
                     showYears={feature.showYears}
                     isFinalSlide={feature.isFinalSlide}
-                    isActive={currentSlide === index} // Pass whether this slide is currently active
+                    isActive={currentSlide === index}
                   />
                 </CarouselItem>
               ))}

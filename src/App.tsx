@@ -20,6 +20,7 @@ import Learn from "./pages/Learn"; // Eagerly load the Learn component
 
 // Lazy loading for other routes
 const OnboardingFeatures = React.lazy(() => import("./pages/OnboardingFeatures"));
+const Proof = React.lazy(() => import("./pages/Proof"));
 const Questionnaire = React.lazy(() => import("./pages/Questionnaire"));
 const ConfirmationScreen = React.lazy(() => import("./pages/questionnaire/ConfirmationScreen"));
 const TaxRateScreen = React.lazy(() => import("./pages/questionnaire/TaxRateScreen"));
@@ -70,6 +71,7 @@ const App = () => (
                 {/* Public routes */}
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/onboarding-features" element={<OnboardingFeatures />} />
+                <Route path="/proof" element={<Proof />} />
                 <Route path="/questionnaire" element={<Questionnaire />} />
                 <Route path="/questionnaire/confirmation" element={<ConfirmationScreen />} />
                 <Route path="/questionnaire/tax-rate" element={<TaxRateScreen />} />
