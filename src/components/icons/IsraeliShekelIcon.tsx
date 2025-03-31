@@ -14,8 +14,8 @@ const IsraeliShekelIcon = (props: React.SVGProps<SVGSVGElement>) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M9 14V7H6a4 4 0 0 0 0 8h3" />
-    <path d="M15 10v7h3a4 4 0 0 0 0-8h-3" />
+    <path d="M6 3v12a3 3 0 0 0 3 3h6" />
+    <path d="M18 3v12a3 3 0 0 1-3 3H9" />
   </svg>
 );
 

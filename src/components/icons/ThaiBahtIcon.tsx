@@ -15,8 +15,8 @@ const ThaiBahtIcon = (props: React.SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path d="M12 4v16" />
-    <path d="M8 7.5a4 4 0 1 1 8 0v0a4 4 0 1 1-8 0v0z" />
-    <path d="M8 16.5a4 4 0 1 0 8 0v0a4 4 0 1 0-8 0v0z" />
+    <path d="M8 6h6a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-6" />
+    <path d="M8 14h6a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-6" />
   </svg>
 );
 

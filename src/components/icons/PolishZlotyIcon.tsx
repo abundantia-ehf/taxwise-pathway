@@ -14,9 +14,9 @@ const PolishZlotyIcon = (props: React.SVGProps<SVGSVGElement>) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M14 5h-5.5C6.5 5 5 6.5 5 8.5S6.5 12 8.5 12H10" />
-    <path d="M10 12h2.5c2 0 3.5 1.5 3.5 3.5S14.5 19 12.5 19H7" />
-    <line x1="8" y1="8" x2="16" y2="8" />
+    <path d="M9 5h6" />
+    <path d="M15 5v3a3 3 0 0 1-3 3h-3v5a2 2 0 0 0 2 2h4" />
+    <path d="M9 11h6" />
   </svg>
 );
 

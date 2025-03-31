@@ -14,8 +14,9 @@ const SouthKoreanWonIcon = (props: React.SVGProps<SVGSVGElement>) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M4 6l3.5 11.5L12 6l4.5 11.5L20 6" />
+    <path d="M5 6l2.5 12h2L12 6l2.5 12h2L19 6" />
     <path d="M4 13h16" />
+    <path d="M4 9h16" />
   </svg>
 );
 

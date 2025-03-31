@@ -15,7 +15,7 @@ const KazakhTengeIcon = (props: React.SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path d="M6 5h12" />
-    <path d="M6 11h12" />
+    <path d="M6 9h12" />
     <path d="M12 5v14" />
   </svg>
 );
