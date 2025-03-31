@@ -1,14 +1,17 @@
 
 /* Animation for slow bounce */
 @keyframes bounce-slow {
-  0%, 100% {
+  0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
-  50% {
+  40% {
     transform: translateY(10px);
+  }
+  60% {
+    transform: translateY(5px);
   }
 }
 
 .animate-bounce-slow {
-  animation: bounce-slow 2.6s infinite; /* Increased from 2s to 2.6s (30% slower) */
+  animation: bounce-slow 2.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; /* Using a more natural easing curve */
 }
