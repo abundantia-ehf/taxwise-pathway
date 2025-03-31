@@ -21,7 +21,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
   // For typewriter effect on the final slide
   const [typedText, setTypedText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const textToType = "there is a better way";
+  const textToType = "there is a better way."; // Added period at the end
   const typingSpeed = 100; // milliseconds per character
   
   // Reset and start typewriter effect when the slide becomes active
@@ -214,11 +214,19 @@ const OnboardingFeatures = () => {
       
       <div className="container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
         <div className="pt-6 flex justify-center">
-          <OptimizedImage 
-            src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
-            alt="Untaxable Logo" 
-            className={`h-8 object-contain ${currentSlide === 3 ? 'filter invert' : ''}`}
-          />
+          {currentSlide === 3 ? (
+            <OptimizedImage 
+              src="/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png" 
+              alt="Untaxable Logo" 
+              className="h-8 object-contain"
+            />
+          ) : (
+            <OptimizedImage 
+              src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
+              alt="Untaxable Logo" 
+              className="h-8 object-contain"
+            />
+          )}
         </div>
         
         <div className="flex-1 flex items-center justify-center">
