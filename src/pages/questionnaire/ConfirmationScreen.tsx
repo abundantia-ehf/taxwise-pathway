@@ -15,15 +15,15 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate data with many points extending beyond visible area
-    const generateRandomData = () => {
-      // Create a longer array of data points to ensure it extends beyond right edge
-      return Array.from({ length: 20 }, (_, i) => ({
+    // Generate data with many points
+    const generateExtendedData = () => {
+      // Create a long sequence that will force the chart to overflow
+      return Array.from({ length: 50 }, (_, i) => ({
         value: Math.floor(Math.random() * 60) + 20 // Values between 20 and 80
       }));
     };
 
-    setChartData(generateRandomData());
+    setChartData(generateExtendedData());
     
     // Set animation complete after a delay to match the animation duration
     const timer = setTimeout(() => {
@@ -46,10 +46,20 @@ const ConfirmationScreen = () => {
         className="flex flex-col h-full"
       >
         <div className="flex flex-col h-full px-6 justify-center">
-          {/* Chart container with overflow hidden but chart itself extends beyond */}
-          <div className="w-full h-[33vh] -mx-6 mb-6 overflow-hidden relative">
-            {/* Absolute positioning to force chart to extend beyond container */}
-            <div className="absolute left-[-10%] w-[120%] h-full">
+          {/* Chart container - completely new approach with overflow and scaling */}
+          <div className="w-full h-[33vh] overflow-hidden relative mb-6">
+            {/* 
+              Using a fixed width approach where we render a chart that's 
+              much wider than the screen and positioned to extend beyond both edges
+            */}
+            <div 
+              className="absolute" 
+              style={{ 
+                width: '300%', 
+                height: '100%',
+                left: '-100%', // Start 100% to the left of the container
+              }}
+            >
               <ChartContainer 
                 config={{
                   line: {
