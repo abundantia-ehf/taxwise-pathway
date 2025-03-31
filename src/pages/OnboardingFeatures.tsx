@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -86,12 +87,11 @@ const AnimatedCounter = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-xl font-headline mb-3 text-center">Estimated savings by Untaxable users</h2>
+      <h2 className="text-2xl font-headline mb-4 text-white">Estimated savings by Untaxable users</h2>
       
-      <div className="rounded-xl bg-zinc-900 p-6 border border-zinc-800 shadow-lg w-[420px] flex justify-center">
-        <div className="text-6xl font-semibold font-unitext text-white flex items-center justify-center">
-          <span className="text-6xl">$</span>
-          <span>{formatNumberWithCommas(displayValue)}</span>
+      <div className="rounded-lg bg-zinc-900 py-6 px-8 border border-zinc-800 shadow-lg w-[420px]">
+        <div className="w-full text-left font-mono text-6xl font-semibold text-white tabular-nums">
+          ${formatNumberWithCommas(displayValue)}
         </div>
       </div>
     </div>
