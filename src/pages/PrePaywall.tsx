@@ -71,7 +71,7 @@ const PrePaywall = () => {
                   transition={{ duration: 1.5, ease: "easeOut" }}
                   style={{ 
                     zIndex: 40,
-                    position: 'fixed',
+                    position: 'absolute', /* Change from fixed to absolute */
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)'
