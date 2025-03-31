@@ -17,7 +17,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate }: FeatureSlidePro
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
-        <div className="text-white text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(0,0,0,0.7)]">
+        <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)]">
           42.5%
         </div>
         
@@ -99,7 +99,7 @@ const OnboardingFeatures = () => {
       <div className="container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
         <div className="pt-6 flex justify-center">
           <OptimizedImage 
-            src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
+            src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
             alt="Untaxable Logo" 
             className="h-10 object-contain"
           />
