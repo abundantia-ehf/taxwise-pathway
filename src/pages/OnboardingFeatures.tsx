@@ -86,15 +86,14 @@ const AnimatedCounter = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-xl font-headline mb-3 text-center">Estimated savings by Untaxable users</h2>
-      
-      <div className="rounded-xl bg-zinc-800/90 p-6 border border-zinc-700/50 shadow-lg w-64">
-        <div className="flex items-end justify-center">
+      <div className="rounded-xl bg-gradient-to-br from-brand/30 to-brand/10 backdrop-blur-sm p-6 border border-brand/20 shadow-lg">
+        <div className="flex items-end">
           <span className="text-3xl md:text-4xl font-unitext text-white mb-1 mr-1">$</span>
-          <span className="text-5xl md:text-6xl font-semibold font-unitext text-white w-44 text-center">
+          <span className="text-5xl md:text-6xl font-semibold font-unitext text-white">
             {formatNumberWithCommas(displayValue)}
           </span>
         </div>
+        <div className="text-sm text-white/70 mt-2 font-medium">Total tax savings by Untaxable users</div>
       </div>
     </div>
   );
@@ -105,6 +104,11 @@ const FeatureSlide = ({ icon, title, description }: FeatureSlideProps) => {
     return (
       <div className="flex flex-col items-center space-y-4">
         <AnimatedCounter />
+        
+        <div className="text-center space-y-1 max-w-xs">
+          <h2 className="text-xl font-headline">{title}</h2>
+          <p className="text-sm text-white/70">{description}</p>
+        </div>
       </div>
     );
   }
