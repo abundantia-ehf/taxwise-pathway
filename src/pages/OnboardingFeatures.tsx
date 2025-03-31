@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ArrowRight, Star, CircleDollarSign } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface FeatureSlideProps {
   icon: React.ReactNode;
@@ -12,8 +12,8 @@ interface FeatureSlideProps {
 }
 
 const AnimatedCounter = () => {
-  const calculateCurrentCount = () => {
-    const startDate = new Date('2025-03-30T12:00:00Z').getTime(); // Start from 12 noon GMT on March 30th 2025
+  const calculateInitialValue = () => {
+    const startDate = new Date('2025-03-30T12:00:00Z').getTime();
     const initialValue = 99320600;
     const now = Date.now();
     
@@ -27,58 +27,91 @@ const AnimatedCounter = () => {
     return initialValue + (elapsedTenSeconds * 21);
   };
 
-  const [count, setCount] = useState(calculateCurrentCount());
-  const [displayValue, setDisplayValue] = useState(calculateCurrentCount());
-  const lastUpdateRef = useRef<number>(Date.now());
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [startValue, setStartValue] = useState(calculateInitialValue());
+  const [displayValue, setDisplayValue] = useState(calculateInitialValue());
+  const animationFrameRef = useRef<number | null>(null);
+  const lastUpdateTimeRef = useRef<number>(Date.now());
+  const targetValueRef = useRef<number>(calculateInitialValue());
 
+  // Update the target value every 10 seconds
   useEffect(() => {
-    // Update count every 10 seconds
-    intervalRef.current = setInterval(() => {
-      setCount(calculateCurrentCount());
-      lastUpdateRef.current = Date.now();
-    }, 10000);
+    const updateTargetValue = () => {
+      const now = Date.now();
+      const newTargetValue = calculateInitialValue();
+      targetValueRef.current = newTargetValue;
+      
+      // Update the start value for smooth animation
+      setStartValue(displayValue);
+      
+      // Store the time of this update
+      lastUpdateTimeRef.current = now;
+    };
+    
+    // Initial update
+    updateTargetValue();
+    
+    // Set interval to update target every 10 seconds
+    const intervalId = setInterval(updateTargetValue, 10000);
     
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      clearInterval(intervalId);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [displayValue]);
 
+  // Animate the counter continuously
   useEffect(() => {
-    if (count <= displayValue) return;
-    
-    const animateToNewValue = () => {
-      const diff = count - displayValue;
+    const animateValue = (timestamp: number) => {
+      const now = Date.now();
+      const elapsedSinceLastUpdate = (now - lastUpdateTimeRef.current) / 10000;
       
-      if (displayValue < count) {
-        setDisplayValue(prevValue => {
-          if (diff <= 5) {
-            return count;
-          }
-          return prevValue + Math.max(1, Math.floor(diff / 10));
-        });
-        
-        requestAnimationFrame(animateToNewValue);
+      // Calculate the exact value at this precise moment
+      const exactValue = startValue + (elapsedSinceLastUpdate * 21);
+      
+      // Set the display value
+      setDisplayValue(exactValue);
+      
+      // Continue animation
+      animationFrameRef.current = requestAnimationFrame(animateValue);
+    };
+    
+    // Start animation
+    animationFrameRef.current = requestAnimationFrame(animateValue);
+    
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
     };
-
-    requestAnimationFrame(animateToNewValue);
-  }, [count, displayValue]);
+  }, [startValue]);
 
   // Format number with commas
   const formatNumberWithCommas = (num: number): string => {
-    return num.toLocaleString('en-US');
+    return Math.floor(num).toLocaleString('en-US');
   };
+
+  // Create an array of the digits for the scrolling animation
+  const digits = formatNumberWithCommas(displayValue).split('');
 
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-end">
         <CircleDollarSign className="text-brand h-5 w-5 mr-2 mb-1" />
-        <span className="text-5xl md:text-6xl font-semibold font-unitext text-white">
-          {formatNumberWithCommas(displayValue)}
-        </span>
+        <div className="flex h-14 overflow-hidden text-5xl md:text-6xl font-semibold font-unitext text-white">
+          {digits.map((digit, index) => (
+            <div key={index} className="relative w-8 flex justify-center">
+              {digit === ',' ? (
+                <span className="absolute">,</span>
+              ) : (
+                <div className="animate-bounce-slow">
+                  <span>{digit}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="text-sm text-white/70 mt-2 font-medium">Total tax savings by Untaxable users</div>
     </div>
