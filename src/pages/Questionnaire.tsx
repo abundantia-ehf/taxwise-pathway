@@ -48,9 +48,9 @@ const Questionnaire = () => {
           {step === QuestionnaireScreen.Country && <CountryStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.TaxAmount && <TaxAmountStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.EmploymentType && <EmploymentTypeStep data={data} updateData={updateData} onNext={handleNext} />}
-          {step === QuestionnaireScreen.TaxFamiliarity && <TaxFamiliarityStep data={data} updateData={updateData} onNext={handleNext} />}
-          {step === QuestionnaireScreen.InvestmentIncome && <InvestmentIncomeStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.ForeignIncome && <ForeignIncomeStep data={data} updateData={updateData} onNext={handleNext} />}
+          {step === QuestionnaireScreen.InvestmentIncome && <InvestmentIncomeStep data={data} updateData={updateData} onNext={handleNext} />}
+          {step === QuestionnaireScreen.TaxFamiliarity && <TaxFamiliarityStep data={data} updateData={updateData} onNext={handleNext} />}
           {step === QuestionnaireScreen.TaxGoal && <TaxGoalStep data={data} updateData={updateData} onNext={handleNext} />}
         </div>
       </div>

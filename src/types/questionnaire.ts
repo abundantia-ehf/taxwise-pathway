@@ -16,8 +16,8 @@ export enum QuestionnaireScreen {
   Country = 1,
   TaxAmount = 2,
   EmploymentType = 3,
-  TaxFamiliarity = 4,
+  ForeignIncome = 4,
   InvestmentIncome = 5,
-  ForeignIncome = 6,
+  TaxFamiliarity = 6,
   TaxGoal = 7,
 }
