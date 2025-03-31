@@ -16,10 +16,15 @@ const Welcome = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const arrowAnimationRef = useRef<number | null>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
     audioRef.current = new Audio('/dink-sound.mp3');
     audioRef.current.volume = 0.2; // Set volume to 20%
+    
+    // Reset typing state on initial mount
+    typingIndex.current = 0;
+    setDisplayText('');
     
     return () => {
       if (arrowAnimationRef.current) {
@@ -63,10 +68,7 @@ const Welcome = () => {
   }, [showElements]);
 
   useEffect(() => {
-    // Reset state when component mounts
-    typingIndex.current = 0;
-    setDisplayText('');
-    
+    // Handle the typing animation
     if (typingIndex.current < fullText.length) {
       const typingTimer = setTimeout(() => {
         setDisplayText(fullText.substring(0, typingIndex.current + 1));
@@ -78,7 +80,8 @@ const Welcome = () => {
       }, typingSpeed);
       
       return () => clearTimeout(typingTimer);
-    } else {
+    } else if (typingIndex.current === fullText.length) {
+      // Only show subtitle once typing is complete
       const subtitleTimer = setTimeout(() => {
         setShowSubtitle(true);
         
