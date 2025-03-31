@@ -15,13 +15,12 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate data points with the last ones extending beyond visible area
+    // Generate data with many points extending beyond visible area
     const generateRandomData = () => {
-      // Adding extra points to ensure it extends beyond the right edge
-      const points = Array.from({ length: 12 }, (_, i) => ({
+      // Create a longer array of data points to ensure it extends beyond right edge
+      return Array.from({ length: 20 }, (_, i) => ({
         value: Math.floor(Math.random() * 60) + 20 // Values between 20 and 80
       }));
-      return points;
     };
 
     setChartData(generateRandomData());
@@ -47,57 +46,59 @@ const ConfirmationScreen = () => {
         className="flex flex-col h-full"
       >
         <div className="flex flex-col h-full px-6 justify-center">
-          {/* Graph visualization taking up the top third - with extra width to extend beyond screen */}
-          <div className="w-full h-[33vh] -mx-6 mb-6 overflow-hidden">
-            <ChartContainer 
-              config={{
-                line: {
-                  theme: { 
-                    light: '#D1FF82', 
-                    dark: '#D1FF82' 
+          {/* Chart container with overflow hidden but chart itself extends beyond */}
+          <div className="w-full h-[33vh] -mx-6 mb-6 overflow-hidden relative">
+            {/* Absolute positioning to force chart to extend beyond container */}
+            <div className="absolute left-[-10%] w-[120%] h-full">
+              <ChartContainer 
+                config={{
+                  line: {
+                    theme: { 
+                      light: '#D1FF82', 
+                      dark: '#D1FF82' 
+                    }
+                  },
+                  gradient: {
+                    theme: { 
+                      light: 'rgba(209, 255, 130, 0.2)', 
+                      dark: 'rgba(209, 255, 130, 0.2)' 
+                    }
                   }
-                },
-                gradient: {
-                  theme: { 
-                    light: 'rgba(209, 255, 130, 0.2)', 
-                    dark: 'rgba(209, 255, 130, 0.2)' 
-                  }
-                }
-              }}
-              className="w-[calc(100%+3rem)] -ml-6 h-full"
-            >
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                  data={chartData}
-                  margin={{ top: 20, right: -200, left: -30, bottom: 0 }}
-                  style={{ width: '150%' }} // Making the chart wider than the container
-                >
-                  <defs>
-                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#D1FF82" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#D1FF82" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke="#D1FF82"
-                    strokeWidth={3}
-                    fillOpacity={1}
-                    fill="url(#colorValue)"
-                    isAnimationActive={true}
-                    animationDuration={1500}
-                    animationEasing="ease-out"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </ChartContainer>
+                }}
+                className="w-full h-full"
+              >
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart
+                    data={chartData}
+                    margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#D1FF82" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#D1FF82" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <Area
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#D1FF82"
+                      strokeWidth={3}
+                      fillOpacity={1}
+                      fill="url(#colorValue)"
+                      isAnimationActive={true}
+                      animationDuration={1500}
+                      animationEasing="ease-out"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </div>
           </div>
           
           {/* Message based on questionnaire answers */}
           <div className="text-center mb-8">
             <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Answers.</h2>
-            <p className="text-base text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Based on your answers, there is a strong indication you could save a significant amount of money each year on taxes.
             </p>
           </div>
