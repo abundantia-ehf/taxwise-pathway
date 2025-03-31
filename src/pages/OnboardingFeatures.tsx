@@ -99,8 +99,8 @@ const OnboardingFeatures = () => {
     },
     {
       icon: null,
-      title: "Years spent working just to pay tax",
-      description: "Based on the average person working a 45 year career before retirement",
+      title: "Years spent working just to pay taxes",
+      description: "Nearly 20 years of life working just to pay the government. This is based on the average person working a 45 year career before retirement",
       showYears: true
     },
     {
