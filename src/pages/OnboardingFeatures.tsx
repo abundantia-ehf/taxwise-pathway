@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -116,7 +115,7 @@ const OnboardingFeatures = () => {
 
   const handleNext = () => {
     if (currentSlide === 3) {
-      navigate('/questionnaire');
+      navigate('/questionnaire/paywall');
     } else {
       setCurrentSlide((prev) => prev + 1);
     }

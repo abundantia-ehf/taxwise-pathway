@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -38,8 +37,8 @@ const ConfirmationScreen = () => {
   }, []);
 
   const handleContinue = () => {
-    // Navigate to the tax rate screen
-    navigate('/questionnaire/tax-rate');
+    // Updated navigation to the onboarding-features page instead of tax-rate
+    navigate('/onboarding-features');
   };
 
   return (
