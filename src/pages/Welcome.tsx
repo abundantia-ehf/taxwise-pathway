@@ -16,35 +16,33 @@ const Welcome = () => {
   const arrowAnimationRef = useRef<number | null>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
   
-  // Separate initialization and animation into different effects
-  
-  // This effect runs once on mount to initialize everything
+  // This effect handles the typing animation
   useEffect(() => {
-    // Initialize audio
-    audioRef.current = new Audio('/dink-sound.mp3');
-    audioRef.current.volume = 0.2; // Set volume to 20%
-    
-    // Clear any existing text and reset all animation states
+    // Reset states
     setDisplayText('');
     setShowSubtitle(false);
     setShowElements(false);
     
-    // Start the typing animation with an empty string
-    let currentIndex = 0;
+    // Initialize audio
+    audioRef.current = new Audio('/dink-sound.mp3');
+    audioRef.current.volume = 0.2;
     
-    const typingInterval = setInterval(() => {
-      if (currentIndex < fullText.length) {
-        setDisplayText(prev => prev + fullText.charAt(currentIndex));
+    // Type out text one character at a time
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        // Add the next character
+        setDisplayText(fullText.substring(0, index + 1));
         
-        // Vibrate on each character typed
+        // Vibrate device if supported
         if (navigator.vibrate) {
           navigator.vibrate(10);
         }
         
-        currentIndex += 1;
+        index++;
       } else {
-        // Typing is complete, clear the interval
-        clearInterval(typingInterval);
+        // Stop typing when complete
+        clearInterval(timer);
         
         // Show subtitle after typing is complete
         setTimeout(() => {
@@ -58,14 +56,14 @@ const Welcome = () => {
       }
     }, typingSpeed);
     
-    // Clean up intervals and animation frames
+    // Cleanup on unmount
     return () => {
-      clearInterval(typingInterval);
+      clearInterval(timer);
       if (arrowAnimationRef.current) {
         cancelAnimationFrame(arrowAnimationRef.current);
       }
     };
-  }, []); // Empty dependency array ensures this only runs once
+  }, []); // Empty dependency array ensures this only runs once on mount
 
   // This effect handles the arrow animation after elements are shown
   useEffect(() => {
