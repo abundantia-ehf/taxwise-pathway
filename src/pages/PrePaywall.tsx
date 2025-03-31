@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Fingerprint } from 'lucide-react';
+import { Fingerprint, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PrePaywall = () => {
@@ -32,8 +32,8 @@ const PrePaywall = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
       
       <div className="container max-w-md mx-auto px-4 py-8 h-screen flex flex-col">
-        <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold text-white mb-6">
+        <div className="flex-1 flex flex-col items-center justify-center text-center mt-[20vh]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold text-brand mb-6">
             It's time to get started.
           </h1>
           
@@ -41,11 +41,20 @@ const PrePaywall = () => {
             Paying tax is optional. We'll help you achieve this legally, in as little as a few weeks.
           </p>
           
-          <p className="text-md mb-16 text-white/80">
+          <p className="text-md mb-8 text-white/80">
             Hold your finger below and we'll begin setting things up.
           </p>
           
-          <div className="relative flex justify-center items-center mt-auto mb-16">
+          {/* Bouncing Arrow */}
+          <motion.div 
+            className="mb-12 text-white/60"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            <ChevronDown size={32} />
+          </motion.div>
+          
+          <div className="relative flex justify-center items-center mb-16">
             <Fingerprint 
               size={64} 
               className="text-brand cursor-pointer z-10" 
