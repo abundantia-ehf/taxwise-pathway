@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -100,7 +99,7 @@ const OnboardingFeatures = () => {
     {
       icon: null,
       title: "Years spent working just to pay taxes",
-      description: "Nearly 20 years of life working just to pay the government. This is based on the average person working a 45 year career before retirement",
+      description: "Nearly 20 years of life working just to pay the government. This is based on the average person working a 45 year career before retirement.",
       showYears: true
     },
     {
