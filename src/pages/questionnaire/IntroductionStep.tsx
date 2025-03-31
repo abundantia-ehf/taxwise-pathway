@@ -31,7 +31,7 @@ const IntroductionStep: React.FC<IntroductionStepProps> = ({ onNext }) => {
           onClick={onNext} 
           className="w-[90%] mx-auto py-6 bg-brand text-black hover:bg-brand/90"
         >
-          Got it <Check className="ml-1" size={16} />
+          Let's go <Check className="ml-1" size={16} />
         </Button>
         <div className="flex items-center justify-center mt-4 text-xs text-muted-foreground">
           <Lock className="h-3 w-3 mr-1" />
