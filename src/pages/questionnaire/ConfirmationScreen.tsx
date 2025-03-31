@@ -15,7 +15,7 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate 5 random points with increasing x values
+    // Generate 7 random points with increasing x values (added more points)
     const generateRandomData = () => {
       const points = Array.from({ length: 7 }, (_, i) => ({
         value: Math.floor(Math.random() * 60) + 20 // Values between 20 and 80
@@ -68,7 +68,7 @@ const ConfirmationScreen = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={chartData}
-                  margin={{ top: 20, right: -30, left: 0, bottom: 0 }}
+                  margin={{ top: 20, right: -100, left: 0, bottom: 0 }}
                 >
                   <defs>
                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
