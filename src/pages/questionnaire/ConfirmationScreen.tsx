@@ -15,7 +15,7 @@ const ConfirmationScreen = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // Generate just a few data points as requested
+    // Generate data points with one additional point
     const generateData = () => {
       return [
         { value: 45 },
@@ -24,15 +24,16 @@ const ConfirmationScreen = () => {
         { value: 70 },
         { value: 40 },
         { value: 55 },
+        { value: 65 }, // Added one more data point
       ];
     };
 
     setChartData(generateData());
     
-    // Set animation complete after a delay to match the animation duration
+    // Set animation complete after a delay to match the slower animation duration (30% slower)
     const timer = setTimeout(() => {
       setAnimationComplete(true);
-    }, 1500);
+    }, 1950); // Increased from 1500ms to 1950ms (30% slower)
     
     return () => clearTimeout(timer);
   }, []);
@@ -89,7 +90,7 @@ const ConfirmationScreen = () => {
                       fillOpacity={1}
                       fill="url(#colorValue)"
                       isAnimationActive={true}
-                      animationDuration={1500}
+                      animationDuration={1950} // Increased from 1500ms to 1950ms (30% slower)
                       animationEasing="ease-out"
                     />
                   </AreaChart>

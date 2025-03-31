@@ -10,5 +10,5 @@
 }
 
 .animate-bounce-slow {
-  animation: bounce-slow 2s infinite;
+  animation: bounce-slow 2.6s infinite; /* Increased from 2s to 2.6s (30% slower) */
 }
