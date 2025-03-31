@@ -18,8 +18,8 @@ const ConfirmationScreen = () => {
     // Generate random data points
     const generateRandomData = () => {
       const dataPoints = [];
-      // Generate 7 random data points between 20 and 80
-      for (let i = 0; i < 7; i++) {
+      // Generate 9 random data points between 20 and 80 (increased from 7 to 9)
+      for (let i = 0; i < 9; i++) {
         dataPoints.push({
           value: Math.floor(Math.random() * 60) + 20, // Random value between 20 and 80
         });
