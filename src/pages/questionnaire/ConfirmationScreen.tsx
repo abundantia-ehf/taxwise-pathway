@@ -17,7 +17,6 @@ const ConfirmationScreen = () => {
   useEffect(() => {
     // Generate data with many points
     const generateExtendedData = () => {
-      // Create a long sequence that will force the chart to overflow
       return Array.from({ length: 50 }, (_, i) => ({
         value: Math.floor(Math.random() * 60) + 20 // Values between 20 and 80
       }));
@@ -45,68 +44,55 @@ const ConfirmationScreen = () => {
         animate={{ opacity: 1 }}
         className="flex flex-col h-full"
       >
-        <div className="flex flex-col h-full px-6 justify-center">
-          {/* Chart container - completely new approach with overflow and scaling */}
-          <div className="w-full h-[33vh] overflow-hidden relative mb-6">
-            {/* 
-              Using a fixed width approach where we render a chart that's 
-              much wider than the screen and positioned to extend beyond both edges
-            */}
-            <div 
-              className="absolute" 
-              style={{ 
-                width: '300%', 
-                height: '100%',
-                left: '-100%', // Start 100% to the left of the container
-              }}
-            >
-              <ChartContainer 
-                config={{
-                  line: {
-                    theme: { 
-                      light: '#D1FF82', 
-                      dark: '#D1FF82' 
-                    }
-                  },
-                  gradient: {
-                    theme: { 
-                      light: 'rgba(209, 255, 130, 0.2)', 
-                      dark: 'rgba(209, 255, 130, 0.2)' 
-                    }
+        <div className="flex flex-col h-full justify-center">
+          {/* Edge-to-edge chart with no padding */}
+          <div className="w-screen h-[33vh] relative -mx-[calc(1.5rem)] mb-6">
+            <ChartContainer 
+              config={{
+                line: {
+                  theme: { 
+                    light: '#D1FF82', 
+                    dark: '#D1FF82' 
                   }
-                }}
-                className="w-full h-full"
-              >
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart
-                    data={chartData}
-                    margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-                  >
-                    <defs>
-                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#D1FF82" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#D1FF82" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <Area
-                      type="monotone"
-                      dataKey="value"
-                      stroke="#D1FF82"
-                      strokeWidth={3}
-                      fillOpacity={1}
-                      fill="url(#colorValue)"
-                      isAnimationActive={true}
-                      animationDuration={1500}
-                      animationEasing="ease-out"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </ChartContainer>
-            </div>
+                },
+                gradient: {
+                  theme: { 
+                    light: 'rgba(209, 255, 130, 0.2)', 
+                    dark: 'rgba(209, 255, 130, 0.2)' 
+                  }
+                }
+              }}
+              className="w-full h-full"
+            >
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={chartData}
+                  margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                >
+                  <defs>
+                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#D1FF82" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#D1FF82" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <Area
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#D1FF82"
+                    strokeWidth={3}
+                    fillOpacity={1}
+                    fill="url(#colorValue)"
+                    isAnimationActive={true}
+                    animationDuration={1500}
+                    animationEasing="ease-out"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </ChartContainer>
           </div>
           
           {/* Message based on questionnaire answers */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 px-6">
             <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Answers.</h2>
             <p className="text-sm text-muted-foreground">
               Based on your answers, there is a strong indication you could save a significant amount of money each year on taxes.
@@ -119,7 +105,7 @@ const ConfirmationScreen = () => {
           </div>
           
           {/* Action button */}
-          <div className="mt-4">
+          <div className="mt-4 px-6">
             <Button 
               onClick={handleContinue}
               className="w-full py-6 bg-brand text-black hover:bg-brand/90"
