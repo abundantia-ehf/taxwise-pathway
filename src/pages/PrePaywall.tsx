@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Fingerprint, ChevronDown } from 'lucide-react';
+import { Fingerprint, ArrowDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PrePaywall = () => {
@@ -32,7 +32,7 @@ const PrePaywall = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
       
       <div className="container max-w-md mx-auto px-4 py-8 h-screen flex flex-col">
-        <div className="flex-1 flex flex-col items-center justify-center text-center mt-[20vh]">
+        <div className="flex-1 flex flex-col items-center justify-center text-center mt-[15vh]">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold text-brand mb-6">
             It's time to get started.
           </h1>
@@ -45,14 +45,16 @@ const PrePaywall = () => {
             Hold your finger below and we'll begin setting things up.
           </p>
           
-          {/* Bouncing Arrow */}
-          <motion.div 
-            className="mb-12 text-white/60"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-          >
-            <ChevronDown size={32} />
-          </motion.div>
+          {/* Bouncing Arrow - updated to match Welcome page */}
+          <div className="flex-1 flex flex-col justify-center items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex justify-center my-7"
+            >
+              <ArrowDown className="text-brand animate-bounce-slow" size={50} />
+            </motion.div>
+          </div>
           
           <div className="relative flex justify-center items-center mb-16">
             <Fingerprint 
