@@ -57,7 +57,7 @@ const Proof = () => {
       <div className="container max-w-md mx-auto px-4 py-4 h-screen flex flex-col">
         <div className="pt-4 flex justify-center">
           <OptimizedImage 
-            src="/lovable-uploads/2291824e-979e-4b87-9c8f-45205548633c.png" 
+            src="/lovable-uploads/ab7cc816-8efa-4231-89af-0b746310b854.png" 
             alt="Untaxable Logo" 
             className="h-8 object-contain"
           />
