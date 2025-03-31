@@ -68,7 +68,7 @@ const ConfirmationScreen = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={chartData}
-                  margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                  margin={{ top: 20, right: -30, left: 0, bottom: 0 }}
                 >
                   <defs>
                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -94,8 +94,8 @@ const ConfirmationScreen = () => {
           
           {/* Message based on questionnaire answers */}
           <div className="text-center mb-8">
-            <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Answers</h2>
-            <p className="text-lg">
+            <h2 className="text-xl font-headline font-semibold mb-3">We've Analyzed Your Answers.</h2>
+            <p className="text-base text-muted-foreground">
               Based on your answers, there is a strong indication you could save a significant amount of money each year on taxes.
             </p>
           </div>
