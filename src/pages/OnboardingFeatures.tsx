@@ -12,7 +12,7 @@ interface FeatureSlideProps {
 }
 
 const AnimatedCounter = () => {
-  const calculateCurrentCount = () => {
+  const calculateInitialValue = () => {
     const startDate = new Date('2025-03-30T12:00:00Z').getTime(); // Start from 12 noon GMT on March 30th 2025
     const initialValue = 99320600;
     const now = Date.now();
@@ -27,49 +27,62 @@ const AnimatedCounter = () => {
     return initialValue + (elapsedTenSeconds * 21);
   };
 
-  const [count, setCount] = useState(calculateCurrentCount());
-  const [displayValue, setDisplayValue] = useState(calculateCurrentCount());
-  const lastUpdateRef = useRef<number>(Date.now());
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [displayValue, setDisplayValue] = useState(calculateInitialValue());
+  const nextValueRef = useRef(calculateInitialValue());
+  const animationFrameRef = useRef<number | null>(null);
+  const lastUpdateTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
-    // Update count every 10 seconds
-    intervalRef.current = setInterval(() => {
-      setCount(calculateCurrentCount());
-      lastUpdateRef.current = Date.now();
-    }, 10000);
+    // Function to calculate the current target value
+    const calculateCurrentTarget = () => {
+      const now = Date.now();
+      const startDate = new Date('2025-03-30T12:00:00Z').getTime();
+      
+      // If current time is before the start date, return initial value
+      if (now < startDate) {
+        return 99320600;
+      }
+      
+      const elapsedMs = Math.max(0, now - startDate);
+      // Calculate exact value with fraction based on current time
+      const tenSecondsPassed = elapsedMs / 10000;
+      const wholeIntervals = Math.floor(tenSecondsPassed);
+      const partialInterval = tenSecondsPassed - wholeIntervals;
+      
+      // Base value plus complete intervals, plus partial progress to next interval
+      return 99320600 + (wholeIntervals * 21) + (partialInterval * 21);
+    };
     
+    // Animation function that gradually updates the display value
+    const animateCounter = (timestamp: number) => {
+      // Calculate how much of the $21 to add based on elapsed time
+      const currentTarget = calculateCurrentTarget();
+      
+      // Update the display value
+      setDisplayValue(currentTarget);
+      
+      // Continue the animation
+      animationFrameRef.current = requestAnimationFrame(animateCounter);
+    };
+    
+    // Start the animation
+    animationFrameRef.current = requestAnimationFrame(animateCounter);
+    
+    // Cleanup on unmount
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
     };
   }, []);
 
-  useEffect(() => {
-    if (count <= displayValue) return;
-    
-    const animateToNewValue = () => {
-      const diff = count - displayValue;
-      
-      if (displayValue < count) {
-        setDisplayValue(prevValue => {
-          if (diff <= 5) {
-            return count;
-          }
-          return prevValue + Math.max(1, Math.floor(diff / 10));
-        });
-        
-        requestAnimationFrame(animateToNewValue);
-      }
-    };
-
-    requestAnimationFrame(animateToNewValue);
-  }, [count, displayValue]);
-
   // Format number with commas
   const formatNumberWithCommas = (num: number): string => {
-    return num.toLocaleString('en-US');
+    // Split into integer and decimal parts
+    const parts = num.toFixed(2).split('.');
+    const integerPart = parseInt(parts[0]).toLocaleString('en-US');
+    
+    return integerPart;
   };
 
   return (
