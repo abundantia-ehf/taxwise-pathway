@@ -88,12 +88,10 @@ const AnimatedCounter = () => {
     <div className="flex flex-col items-center">
       <h2 className="text-xl font-headline mb-3 text-center">Estimated savings by Untaxable users</h2>
       
-      <div className="rounded-xl bg-zinc-800/90 p-6 border border-zinc-700/50 shadow-lg w-64">
-        <div className="flex items-end justify-center">
-          <span className="text-3xl md:text-4xl font-unitext text-white mb-1 mr-1">$</span>
-          <span className="text-5xl md:text-6xl font-semibold font-unitext text-white w-44 text-center">
-            {formatNumberWithCommas(displayValue)}
-          </span>
+      <div className="rounded-xl bg-zinc-900 p-6 border border-zinc-800 shadow-lg w-[420px] flex justify-center">
+        <div className="text-6xl font-semibold font-unitext text-white flex items-center justify-center">
+          <span className="text-6xl">$</span>
+          <span>{formatNumberWithCommas(displayValue)}</span>
         </div>
       </div>
     </div>
