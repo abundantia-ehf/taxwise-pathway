@@ -10,7 +10,7 @@ const Welcome = () => {
   const [displayText, setDisplayText] = useState('');
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showElements, setShowElements] = useState(false);
-  const fullText = "Become Untaxable.";
+  const fullText = "Become\u200CUntaxable."; // Using zero-width non-joiner character to make the separator invisible
   const typingSpeed = 100; // milliseconds per character
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const arrowAnimationRef = useRef<number | null>(null);
@@ -133,7 +133,7 @@ const Welcome = () => {
               className="text-center space-y-2"
             >
               <h1 className="text-3xl font-headline">
-                {displayText}
+                {displayText.replace('\u200C', ' ')}
               </h1>
               <motion.p 
                 initial={{ opacity: 0 }}
