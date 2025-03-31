@@ -37,7 +37,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: Fe
           <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)]">
             $785
           </div>
-          <div className="text-black text-3xl md:text-4xl font-bold tracking-[0.35em] drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)] w-full text-center">
+          <div className="text-black text-3xl md:text-4xl font-bold tracking-wider drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)] w-full text-center" style={{ width: '100%', letterSpacing: '0.25em' }}>
             BILLION
           </div>
         </div>
@@ -77,7 +77,7 @@ const OnboardingFeatures = () => {
     },
     {
       icon: null,
-      title: "Amount of estimated tax waste in the developed world each year",
+      title: "Estimated tax waste in the developed world each year",
       description: "That's your money being lost to waste, mismanagement, or government fraud.",
       showBillion: true
     },
