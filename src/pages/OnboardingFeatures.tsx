@@ -17,7 +17,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate }: FeatureSlidePro
   if (showTaxRate) {
     return (
       <div className="flex flex-col items-center space-y-4">
-        <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_0_rgba(255,255,255,0.7)]">
+        <div className="text-black text-6xl md:text-7xl font-bold drop-shadow-[3px_3px_3px_rgba(255,255,255,0.7)]">
           42.5%
         </div>
         
