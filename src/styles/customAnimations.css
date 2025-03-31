@@ -38,7 +38,7 @@
 }
 
 .icon-highlight:hover .currency-icon {
-  color: #D1FF82 !important;
+  filter: brightness(1.2);
 }
 
 /* Fade animation for currency icon changes */
