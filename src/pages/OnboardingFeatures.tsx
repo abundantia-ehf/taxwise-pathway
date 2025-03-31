@@ -19,7 +19,7 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: Fe
     return (
       <div className="flex flex-col items-center space-y-4">
         <div className="text-black text-6xl md:text-7xl font-black">
-          42.5%
+          42.5<span className="text-3xl md:text-4xl">%</span>
         </div>
         
         <div className="text-center space-y-1 max-w-xs">
@@ -35,9 +35,9 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion }: Fe
       <div className="flex flex-col items-center space-y-4">
         <div className="flex flex-col items-center w-full text-center">
           <div className="text-black text-6xl md:text-7xl font-black mx-auto">
-            $785
+            <span className="text-3xl md:text-4xl">$</span>785
           </div>
-          <div className="text-black text-3xl md:text-4xl font-black mx-auto" style={{ width: 'min-content', letterSpacing: '0.25em' }}>
+          <div className="text-black text-3xl md:text-4xl font-black mx-auto" style={{ width: 'min-content' }}>
             BILLION
           </div>
         </div>
