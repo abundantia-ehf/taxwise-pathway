@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BadgeDollarSign } from 'lucide-react';
+import { Scale } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface TaxFamiliarityStepProps {
@@ -32,7 +32,7 @@ const TaxFamiliarityStep: React.FC<TaxFamiliarityStepProps> = ({ data, updateDat
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <BadgeDollarSign className="h-10 w-10 text-brand" />
+        <Scale className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-headline">How familiar are you with legal low tax strategies?</h2>

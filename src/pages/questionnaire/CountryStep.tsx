@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Globe, ArrowRight } from 'lucide-react';
+import { MapPinned, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { countries, allOtherCountries } from './CountryData';
@@ -21,12 +21,7 @@ const CountryStep: React.FC<CountryStepProps> = ({ data, updateData, onNext }) =
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          <Globe className="h-10 w-10 text-brand" />
-        </motion.div>
+        <MapPinned className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">Where do you live?</h2>

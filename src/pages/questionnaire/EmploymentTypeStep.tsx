@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText } from 'lucide-react';
+import { BriefcaseBusiness } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface EmploymentTypeStepProps {
@@ -34,7 +34,7 @@ const EmploymentTypeStep: React.FC<EmploymentTypeStepProps> = ({ data, updateDat
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <FileText className="h-10 w-10 text-brand" />
+        <BriefcaseBusiness className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">What best describes how you make money?</h2>

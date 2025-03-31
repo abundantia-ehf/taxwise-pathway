@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CircleDollarSign } from 'lucide-react';
+import { ChartCandlestick } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface InvestmentIncomeStepProps {
@@ -31,7 +31,7 @@ const InvestmentIncomeStep: React.FC<InvestmentIncomeStepProps> = ({ data, updat
       className="flex flex-col h-full px-6 py-8"
     >
       <div className="flex justify-center mb-6">
-        <CircleDollarSign className="h-10 w-10 text-brand" />
+        <ChartCandlestick className="h-10 w-10 text-brand" />
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">How much of your income comes from investments?</h2>
