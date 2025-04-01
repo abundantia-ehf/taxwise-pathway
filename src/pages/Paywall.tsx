@@ -53,17 +53,17 @@ const Paywall = () => {
         animate={{ opacity: 1 }}
         className="flex flex-col items-center justify-center h-screen overflow-hidden bg-black"
       >
-        <div className="container max-w-md mx-auto px-4 py-4 flex flex-col h-full justify-between items-center">
-          <div className="flex flex-col items-center w-full">
-            <div className="flex justify-center mb-4">
+        <div className="container max-w-md mx-auto px-4 py-4 flex flex-col h-full justify-center items-center">
+          <div className="flex flex-col items-center w-full max-w-xs mx-auto">
+            <div className="flex justify-center mb-5">
               <OptimizedImage 
                 src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
                 alt="Untaxable Logo" 
-                className="w-10 h-10 object-cover rounded-lg"
+                className="w-14 h-14 object-cover rounded-lg"
               />
             </div>
             
-            <div className="flex flex-col items-center mb-3">
+            <div className="flex flex-col items-center mb-4">
               <div className="flex items-center justify-center space-x-1">
                 <Laurel />
                 <p className="text-gray-500 text-xs">8,000+ customers</p>
@@ -102,11 +102,11 @@ const Paywall = () => {
               </p>
               
               {/* Testimonial */}
-              <div className="mb-6 px-4 py-3 bg-white/5 rounded-lg border border-white/10 w-[95%]">
-                <p className="text-white/90 text-center italic text-sm">
+              <div className="mb-6 px-5 py-4 bg-white/5 rounded-lg border border-white/10 w-full">
+                <p className="text-white/90 text-center italic text-base">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
                 </p>
-                <p className="text-white/70 text-center text-xs mt-2">
+                <p className="text-white/70 text-center text-sm mt-2">
                   — Rob Danilo 🇨🇦
                 </p>
                 <div className="flex items-center justify-center mt-1">
@@ -128,7 +128,7 @@ const Paywall = () => {
           </div>
           
           {/* Button positioned at the bottom of the page */}
-          <div className="w-full mb-4">
+          <div className="w-full max-w-xs mx-auto mb-4">
             <Button 
               onClick={handleContinue}
               disabled={isProcessing}
