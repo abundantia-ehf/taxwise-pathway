@@ -312,10 +312,15 @@ const OnboardingFeatures = () => {
             {currentSlide < 3 ? (
               <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
             ) : (
-              <>Show me {' '}{isEyeOpen ? 
-                <Eye size={16} className="ml-1 text-white" /> : 
-                <EyeClosed size={16} className="ml-1 text-white" />
-              }</>
+              <>
+                Show me
+                <span className="inline-flex items-center ml-2">
+                  {isEyeOpen ? 
+                    <Eye size={16} className="text-white" /> : 
+                    <EyeClosed size={16} className="text-white" />
+                  }
+                </span>
+              </>
             )}
           </button>
         </div>
