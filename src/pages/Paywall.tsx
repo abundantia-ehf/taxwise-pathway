@@ -102,13 +102,27 @@ const Paywall = () => {
               </p>
               
               {/* Testimonial with increased spacing */}
-              <div className="mb-12 px-4 py-4 bg-white/5 rounded-lg border border-white/10">
+              <div className="mb-12 px-4 py-4 bg-white/5 rounded-lg border border-white/10 max-w-[90%]">
                 <p className="text-white/90 text-center italic">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
                 </p>
                 <p className="text-white/70 text-center text-sm mt-2">
                   — Rob Danilo 🇨🇦
                 </p>
+                <div className="flex items-center justify-center mt-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg 
+                      key={i} 
+                      width="16" 
+                      height="16" 
+                      viewBox="0 0 24 24" 
+                      fill="currentColor"
+                      className="text-white/70"
+                    >
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -119,7 +133,7 @@ const Paywall = () => {
               onClick={handleContinue}
               disabled={isProcessing}
               className={cn(
-                "w-full py-4 font-bold text-lg",
+                "w-full py-4 font-semibold text-lg",
                 theme === 'greyscale' 
                   ? "bg-gray-300 text-black hover:bg-gray-400" 
                   : "bg-gradient-to-r from-[#0EA5E9] via-[#D1FF82] to-[#D1FF82] text-black hover:opacity-90"
