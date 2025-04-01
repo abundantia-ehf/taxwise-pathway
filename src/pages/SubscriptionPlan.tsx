@@ -8,12 +8,13 @@ import { cn } from '@/lib/utils';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from "sonner";
+import { ShieldCheck } from 'lucide-react';
 
 const SubscriptionPlan = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const { startSubscription } = useAuth();
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
+  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('monthly');
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleStartSubscription = () => {
@@ -48,38 +49,62 @@ const SubscriptionPlan = () => {
           />
         </div>
         
-        {/* Headline */}
-        <h1 className="text-2xl sm:text-3xl font-headline font-bold text-center mb-4">
-          Start your free 3-day trial today
+        {/* Headline - Changed to be on one line */}
+        <h1 className="text-2xl sm:text-3xl font-headline font-bold text-center mb-4 whitespace-nowrap">
+          Start your free 3-day trial
         </h1>
         
-        {/* Subheadline */}
-        <p className="text-center text-white/80 mb-8">
-          Get full access to Untaxable including 1-on-1 personal access to untaxable
+        {/* Subheadline - Updated text with bold sections */}
+        <p className="text-center text-white/80 mb-6">
+          <span className="font-bold">Get full access to Untaxable</span> including 1-on-1 support from Untaxable's tax pros, full tax mitigation training, and global tax databases. <span className="font-bold">Pay nothing now.</span>
         </p>
+        
+        {/* Added stylized bar graph */}
+        <div className="flex items-end justify-center space-x-8 mb-8 h-32">
+          {/* First bar - Red */}
+          <div className="flex flex-col items-center">
+            <span className="text-xl font-bold">42.5%</span>
+            <div className="w-20 bg-[#ea384c] rounded-t-md h-28 flex items-center justify-center text-white font-bold">
+              42.5%
+            </div>
+          </div>
+          
+          {/* Second bar - Brand green */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs text-white/60">possibly</span>
+            <span className="text-xl font-bold">0%</span>
+            <div className="w-20 bg-brand/20 rounded-t-md h-4"></div>
+          </div>
+        </div>
         
         {/* Pricing boxes container */}
         <div className="grid grid-cols-2 gap-4 mb-2">
-          {/* Monthly plan */}
+          {/* Monthly plan - Updated styling for selected state */}
           <div 
             className={cn(
               "rounded-lg border p-4 flex flex-col items-center cursor-pointer transition-all",
               selectedPlan === 'monthly' 
-                ? "border-brand bg-white/10" 
+                ? "border-brand bg-white" 
                 : "border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('monthly')}
           >
-            <span className="text-xs font-semibold text-white/80 mb-1">MONTHLY</span>
-            <div className="text-2xl font-bold">$44.99</div>
+            <span className={cn(
+              "text-xs font-semibold mb-1",
+              selectedPlan === 'monthly' ? "text-gray-600" : "text-white/80"
+            )}>MONTHLY</span>
+            <div className={cn(
+              "text-2xl font-bold",
+              selectedPlan === 'monthly' ? "text-black" : "text-white"
+            )}>$44.99</div>
           </div>
           
-          {/* Yearly plan */}
+          {/* Yearly plan - Updated styling for selected state */}
           <div 
             className={cn(
               "rounded-lg border p-4 flex flex-col items-center cursor-pointer transition-all relative",
               selectedPlan === 'yearly' 
-                ? "border-brand bg-white/10" 
+                ? "border-brand bg-white" 
                 : "border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('yearly')}
@@ -88,8 +113,14 @@ const SubscriptionPlan = () => {
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-black px-4 py-1 rounded text-xs font-bold text-white border border-brand whitespace-nowrap">
               SAVE 65%
             </div>
-            <span className="text-xs font-semibold text-white/80 mb-1">YEARLY</span>
-            <div className="text-2xl font-bold">$188.95</div>
+            <span className={cn(
+              "text-xs font-semibold mb-1",
+              selectedPlan === 'yearly' ? "text-gray-600" : "text-white/80"
+            )}>YEARLY</span>
+            <div className={cn(
+              "text-2xl font-bold",
+              selectedPlan === 'yearly' ? "text-black" : "text-white"
+            )}>$188.95</div>
           </div>
         </div>
         
@@ -120,10 +151,11 @@ const SubscriptionPlan = () => {
           {isProcessing ? "Processing..." : "Let's Get Started"}
         </Button>
         
-        {/* Cancel anytime text */}
-        <p className="text-center text-white/70 text-sm mt-4 mb-6">
-          Cancel anytime. 24/7 support.
-        </p>
+        {/* Cancel anytime text - Added shield-check icon */}
+        <div className="flex items-center justify-center gap-2 mt-4 mb-6 text-white/70 text-sm">
+          <ShieldCheck className="h-4 w-4" />
+          <p>Cancel anytime. 24/7 support.</p>
+        </div>
         
         {/* Terms and Privacy buttons */}
         <div className="flex justify-center gap-4">
