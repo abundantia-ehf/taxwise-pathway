@@ -51,9 +51,13 @@ const Paywall = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="flex flex-col items-center justify-center h-screen overflow-hidden bg-black"
+        className="flex flex-col items-center justify-center h-screen overflow-hidden bg-gradient-to-br from-black to-zinc-900"
       >
-        <div className="container max-w-md mx-auto px-4 py-4 flex flex-col h-full justify-center items-center">
+        {/* Add subtle gradient elements similar to Welcome page */}
+        <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
+        
+        <div className="container max-w-md mx-auto px-4 py-4 flex flex-col h-full justify-center items-center relative z-10">
           <div className="flex flex-col items-center w-full max-w-xs mx-auto">
             <div className="flex justify-center mb-5">
               <OptimizedImage 
