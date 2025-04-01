@@ -199,10 +199,7 @@ const OnboardingFeatures = () => {
     }
   ];
 
-  const handleNext = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
+  const handleNext = () => {    
     if (currentSlide === 3) {
       navigate('/proof');
     } else {
@@ -298,29 +295,29 @@ const OnboardingFeatures = () => {
             ))}
           </div>
           
-          <Button
-            className="w-full h-14 py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium rounded-md"
+          <button
+            type="button"
             onClick={handleNext}
-            variant="default"
-            onTouchStart={(e) => {
-              e.stopPropagation();
-            }}
-            style={{ 
+            className="w-full h-14 py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium rounded-md flex items-center justify-center"
+            style={{
               WebkitTapHighlightColor: 'transparent',
-              touchAction: 'manipulation'
+              touchAction: 'manipulation',
+              cursor: 'pointer',
+              position: 'relative',
+              zIndex: 30,
+              border: 'none',
+              outline: 'none'
             }}
           >
-            <span className="flex items-center justify-center w-full h-full">
-              {currentSlide < 3 ? (
-                <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
-              ) : (
-                <>Show me {isEyeOpen ? 
-                  <Eye size={16} className="ml-1 text-white" /> : 
-                  <EyeClosed size={16} className="ml-1 text-white" />
-                }</>
-              )}
-            </span>
-          </Button>
+            {currentSlide < 3 ? (
+              <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
+            ) : (
+              <>Show me {isEyeOpen ? 
+                <Eye size={16} className="ml-1 text-white" /> : 
+                <EyeClosed size={16} className="ml-1 text-white" />
+              }</>
+            )}
+          </button>
         </div>
       </div>
     </div>
