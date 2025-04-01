@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -150,6 +149,7 @@ const OnboardingFeatures = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const carouselRef = useRef<any>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (currentSlide === 3) {
@@ -200,7 +200,9 @@ const OnboardingFeatures = () => {
     }
   ];
 
-  const handleNext = () => {
+  const handleNext = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    
     if (currentSlide === 3) {
       navigate('/proof');
     } else {
@@ -296,18 +298,15 @@ const OnboardingFeatures = () => {
             ))}
           </div>
           
-          <div 
-            className="w-full"
-            onClick={handleNext}
-            role="button"
-            tabIndex={0}
-            aria-label={currentSlide < 3 ? "Next" : "Show me"}
+          <button 
+            className="w-full outline-none focus:outline-none active:outline-none tap-highlight-transparent"
+            onClick={handleNext} 
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+            onTouchStart={(e) => {
+              e.stopPropagation();
+            }}
           >
-            <Button 
-              className={`w-full py-4 ${currentSlide === 3 ? 'bg-zinc-900' : 'bg-zinc-900'} hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium touch-action-manipulation`}
-              onClick={handleNext}
-              type="button"
-            >
+            <div className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium rounded-md flex items-center justify-center">
               {currentSlide < 3 ? (
                 <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
               ) : (
@@ -316,8 +315,8 @@ const OnboardingFeatures = () => {
                   <EyeClosed size={16} className="ml-1 text-white" />
                 }</>
               )}
-            </Button>
-          </div>
+            </div>
+          </button>
         </div>
       </div>
     </div>
