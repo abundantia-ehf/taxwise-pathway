@@ -77,13 +77,17 @@ const SubscriptionPlan = () => {
           {/* Yearly plan */}
           <div 
             className={cn(
-              "rounded-lg border p-4 flex flex-col items-center cursor-pointer transition-all",
+              "rounded-lg border p-4 flex flex-col items-center cursor-pointer transition-all relative",
               selectedPlan === 'yearly' 
                 ? "border-brand bg-white/10" 
                 : "border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('yearly')}
           >
+            {/* Discount badge */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-black px-2 py-0.5 rounded text-xs font-bold text-white border border-white/20">
+              -65% OFF
+            </div>
             <span className="text-xs font-semibold text-white/80 mb-1">YEARLY</span>
             <div className="text-2xl font-bold">$188.95</div>
           </div>
