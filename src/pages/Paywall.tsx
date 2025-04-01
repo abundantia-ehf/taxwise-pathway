@@ -59,7 +59,7 @@ const Paywall = () => {
               <OptimizedImage 
                 src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
                 alt="Untaxable Logo" 
-                className="w-14 h-14 object-cover rounded-lg"
+                className="w-16 h-16 object-cover rounded-lg"
               />
             </div>
             
@@ -106,15 +106,15 @@ const Paywall = () => {
                 <p className="text-white/90 text-center italic text-base">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
                 </p>
-                <p className="text-white/70 text-center text-sm mt-2">
+                <p className="text-white/70 text-center text-sm mt-2 font-medium">
                   — Rob Danilo 🇨🇦
                 </p>
                 <div className="flex items-center justify-center mt-1">
                   {[...Array(5)].map((_, i) => (
                     <svg 
                       key={i} 
-                      width="10" 
-                      height="10" 
+                      width="12" 
+                      height="12" 
                       viewBox="0 0 24 24" 
                       fill="currentColor"
                       className={theme === 'greyscale' ? "text-yellow-200" : "text-yellow-400"}
