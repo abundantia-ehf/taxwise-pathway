@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -205,8 +206,9 @@ const OnboardingFeatures = () => {
     } else {
       if (carouselRef.current?.api) {
         carouselRef.current.api.scrollNext();
+        setCurrentSlide(prevSlide => prevSlide + 1);
       } else {
-        setCurrentSlide((prev) => prev + 1);
+        setCurrentSlide(prevSlide => prevSlide + 1);
       }
     }
   };
@@ -295,6 +297,7 @@ const OnboardingFeatures = () => {
           <Button 
             className={`w-full py-4 ${currentSlide === 3 ? 'bg-zinc-900' : 'bg-zinc-900'} hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium`}
             onClick={handleNext}
+            type="button"
           >
             {currentSlide < 3 ? (
               <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
