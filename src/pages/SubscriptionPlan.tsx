@@ -59,7 +59,7 @@ const SubscriptionPlan = () => {
         </p>
         
         {/* Pricing boxes container */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-2 gap-4 mb-2">
           {/* Monthly plan */}
           <div 
             className={cn(
@@ -71,8 +71,7 @@ const SubscriptionPlan = () => {
             onClick={() => setSelectedPlan('monthly')}
           >
             <span className="text-xs font-semibold text-white/80 mb-1">MONTHLY</span>
-            <div className="text-2xl font-bold mb-2">$44.99</div>
-            <span className="text-xs text-gray-400">Basic plan</span>
+            <div className="text-2xl font-bold">$44.99</div>
           </div>
           
           {/* Yearly plan */}
@@ -86,7 +85,19 @@ const SubscriptionPlan = () => {
             onClick={() => setSelectedPlan('yearly')}
           >
             <span className="text-xs font-semibold text-white/80 mb-1">YEARLY</span>
-            <div className="text-2xl font-bold mb-2">$188.95</div>
+            <div className="text-2xl font-bold">$188.95</div>
+          </div>
+        </div>
+        
+        {/* Plan descriptions underneath the boxes */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {/* Monthly plan description */}
+          <div className="flex justify-center">
+            <span className="text-xs text-gray-400">Basic plan</span>
+          </div>
+          
+          {/* Yearly plan description */}
+          <div className="flex justify-center">
             <span className="text-xs text-white">Just $15.75 per month!</span>
           </div>
         </div>
