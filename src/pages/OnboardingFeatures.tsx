@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -295,20 +296,28 @@ const OnboardingFeatures = () => {
             ))}
           </div>
           
-          <Button 
-            className={`w-full py-4 ${currentSlide === 3 ? 'bg-zinc-900' : 'bg-zinc-900'} hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium`}
+          <div 
+            className="w-full"
             onClick={handleNext}
-            type="button"
+            role="button"
+            tabIndex={0}
+            aria-label={currentSlide < 3 ? "Next" : "Show me"}
           >
-            {currentSlide < 3 ? (
-              <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
-            ) : (
-              <>Show me {isEyeOpen ? 
-                <Eye size={16} className="ml-1 text-white" /> : 
-                <EyeClosed size={16} className="ml-1 text-white" />
-              }</>
-            )}
-          </Button>
+            <Button 
+              className={`w-full py-4 ${currentSlide === 3 ? 'bg-zinc-900' : 'bg-zinc-900'} hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium touch-action-manipulation`}
+              onClick={handleNext}
+              type="button"
+            >
+              {currentSlide < 3 ? (
+                <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
+              ) : (
+                <>Show me {isEyeOpen ? 
+                  <Eye size={16} className="ml-1 text-white" /> : 
+                  <EyeClosed size={16} className="ml-1 text-white" />
+                }</>
+              )}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
