@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, RefreshCw } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -14,7 +14,6 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 const Paywall = () => {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isRestoring, setIsRestoring] = useState(false);
   const { hasSubscription, startSubscription, isAuthenticated } = useAuth();
   const { theme } = useTheme();
 
@@ -38,24 +37,6 @@ const Paywall = () => {
       }
       
       toast.success("Your free trial has started!");
-    }, 2000);
-  };
-
-  const handleRestorePurchase = () => {
-    setIsRestoring(true);
-    
-    setTimeout(() => {
-      setIsRestoring(false);
-      
-      const hasExistingSubscription = Math.random() > 0.5;
-      
-      if (hasExistingSubscription) {
-        startSubscription();
-        navigate('/home');
-        toast.success("Your subscription has been restored!");
-      } else {
-        toast.error("No previous subscription found.");
-      }
     }, 2000);
   };
 
@@ -122,41 +103,12 @@ const Paywall = () => {
             <p className="text-lg mb-8 text-white/80 text-center">
               Join thousands of users who have legally reduced their tax rate to 0%
             </p>
-          </div>
-          
-          <div className="bg-white rounded-t-3xl px-6 py-8">
-            <div className="flex justify-center mb-3">
-              <div className={cn(
-                "px-4 flex items-center justify-center h-7 rounded-md text-xs font-semibold",
-                theme === 'greyscale' ? "bg-gray-800 text-white" : "bg-[#1A1F2C] text-white"
-              )}>
-                UNTAXABLE PRO
-              </div>
-            </div>
-            
-            <div className="text-center mb-6">
-              <h2 className="text-lg font-headline font-semibold mb-2 text-gray-900">
-                Get help from tax mitigation pros
-              </h2>
-              <p className="text-gray-800 text-sm mb-3">
-                Make a low-tax life your reality in under two weeks
-              </p>
-              <p className="font-medium text-sm text-gray-900">
-                3 day free trial, then just 
-                <span className={cn(
-                  "px-1 rounded font-bold",
-                  theme === 'greyscale' ? "text-black bg-gray-300" : "text-black bg-brand"
-                )}>
-                  $48.50 US$/month
-                </span>
-              </p>
-            </div>
             
             <Button 
               onClick={handleContinue}
-              disabled={isProcessing || isRestoring}
+              disabled={isProcessing}
               className={cn(
-                "w-full py-6",
+                "w-full py-6 mt-8",
                 theme === 'greyscale' 
                   ? "bg-gray-300 text-black hover:bg-gray-400" 
                   : "bg-brand text-black hover:bg-brand/90"
@@ -168,26 +120,6 @@ const Paywall = () => {
                 <>Start 3-Day Free Trial <ArrowRight size={16} className="ml-1" /></>
               )}
             </Button>
-            
-            <Button 
-              onClick={handleRestorePurchase}
-              disabled={isProcessing || isRestoring}
-              variant="ghost" 
-              className="mt-3 w-full"
-            >
-              {isRestoring ? (
-                <>Checking subscription status...</>
-              ) : (
-                <>
-                  <RefreshCw size={14} className="mr-1" />
-                  Restore Purchase
-                </>
-              )}
-            </Button>
-            
-            <p className="text-center text-gray-500 text-xs mt-2">
-              No commitment, cancel any time.
-            </p>
           </div>
         </div>
       </motion.div>
