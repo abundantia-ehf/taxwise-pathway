@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -84,8 +83,8 @@ const SubscriptionPlan = () => {
             )}
             onClick={() => setSelectedPlan('yearly')}
           >
-            {/* Discount badge - Updated text and made it larger */}
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-black px-3 py-1 rounded text-xs font-bold text-white border border-white/20">
+            {/* Discount badge - Made wider to keep text on one line */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-black px-4 py-1 rounded text-xs font-bold text-white border border-white/20 whitespace-nowrap">
               SAVE 65%
             </div>
             <span className="text-xs font-semibold text-white/80 mb-1">YEARLY</span>
