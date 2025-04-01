@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -72,7 +73,7 @@ const SubscriptionPlan = () => {
               "text-2xl font-bold",
               selectedPlan === 'monthly' ? "text-black" : "text-white"
             )}>
-              <span className="text-xl">$</span>44.99
+              <span className="text-sm align-top">$</span>44.99
             </div>
           </div>
           
@@ -99,7 +100,7 @@ const SubscriptionPlan = () => {
               "text-2xl font-bold",
               selectedPlan === 'yearly' ? "text-black" : "text-white"
             )}>
-              <span className="text-xl">$</span>188.95
+              <span className="text-sm align-top">$</span>188.95
             </div>
           </div>
         </div>
