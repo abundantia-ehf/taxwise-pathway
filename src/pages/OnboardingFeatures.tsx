@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -250,8 +249,7 @@ const OnboardingFeatures = () => {
             ref={carouselRef}
             opts={{ 
               loop: false,
-              dragFree: false,
-              draggable: isMobile
+              dragFree: false
             }}
           >
             <CarouselContent>
