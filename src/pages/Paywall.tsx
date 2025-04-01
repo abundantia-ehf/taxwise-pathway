@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -28,8 +27,7 @@ const Paywall = () => {
     
     setTimeout(() => {
       setIsProcessing(false);
-      // Instead of starting subscription directly, navigate to subscribe page
-      navigate('/subscribe');
+      navigate('/subscription-plan');
     }, 1000); // Reduced timeout for better UX
   }, [navigate]);
 
@@ -46,7 +44,6 @@ const Paywall = () => {
         animate={{ opacity: 1 }}
         className="flex flex-col items-center justify-center h-screen overflow-hidden bg-gradient-to-br from-black to-zinc-900"
       >
-        {/* Add subtle gradient elements similar to Welcome page */}
         <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-brand/5 blur-3xl"></div>
         
@@ -100,7 +97,6 @@ const Paywall = () => {
                 Join thousands of users who have legally reduced their tax rate to 0%.
               </p>
               
-              {/* Testimonial - with increased spacing above and below */}
               <div className="mb-10 px-5 py-4 bg-white/5 rounded-lg border border-white/10 w-full">
                 <p className="text-white/90 text-center italic text-base">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
@@ -126,7 +122,6 @@ const Paywall = () => {
             </div>
           </div>
           
-          {/* Button positioned at the bottom of the page */}
           <div className="w-full max-w-xs mx-auto mb-4">
             <Button 
               onClick={handleContinue}
