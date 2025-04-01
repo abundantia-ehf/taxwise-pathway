@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,8 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from "sonner";
 import { ShieldCheck } from 'lucide-react';
+import { ChartContainer } from '@/components/ui/chart';
+import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 
 const SubscriptionPlan = () => {
   const navigate = useNavigate();
@@ -16,6 +18,17 @@ const SubscriptionPlan = () => {
   const { startSubscription } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('monthly');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [chartData, setChartData] = useState<{ value: number }[]>([]);
+
+  useEffect(() => {
+    // Create the specific chart data points requested
+    setChartData([
+      { value: 50 },  // Start at 50% height
+      { value: 100 }, // Go to 100% high
+      { value: 20 },  // Drop to 20% height
+      { value: 20 },  // Remain at 20%
+    ]);
+  }, []);
 
   const handleStartSubscription = () => {
     setIsProcessing(true);
@@ -59,36 +72,64 @@ const SubscriptionPlan = () => {
           <span className="font-bold">Get full access to Untaxable</span> including 1-on-1 support from Untaxable's tax pros, full tax mitigation training, and global tax databases. <span className="font-bold">Pay nothing now.</span>
         </p>
         
-        {/* Redesigned stylized bar graph */}
-        <div className="flex items-end justify-center space-x-12 mb-8 h-32">
-          {/* First bar - Red with 3D effect */}
-          <div className="flex flex-col items-center">
-            <div className="w-24 bg-gradient-to-t from-[#c12d3d] to-[#ea384c] rounded-t-md h-28 flex items-center justify-center text-white font-bold text-xl shadow-lg relative overflow-hidden">
-              <div className="absolute inset-0 bg-white/10 rounded-t-md"></div>
-              <span className="relative z-10">42.5%</span>
-            </div>
-          </div>
-          
-          {/* Second bar - Brand green */}
-          <div className="flex flex-col items-center">
-            <div className="flex flex-col items-center">
-              <span className="text-xs text-white/60 -mb-1">possibly</span>
-              <span className="text-xl font-bold">0%</span>
-              <div className="w-24 bg-gradient-to-t from-brand/30 to-brand/10 rounded-t-md h-4 shadow-lg relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/5 rounded-t-md"></div>
-              </div>
-            </div>
-          </div>
+        {/* Line chart replacing bar graph */}
+        <div className="h-32 mb-8 relative">
+          <ChartContainer 
+            config={{
+              line: {
+                theme: { 
+                  light: '#D1FF82', 
+                  dark: '#D1FF82' 
+                }
+              },
+              gradient: {
+                theme: { 
+                  light: 'rgba(209, 255, 130, 0.1)', 
+                  dark: 'rgba(209, 255, 130, 0.1)' 
+                }
+              }
+            }}
+            className="w-full h-32"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                data={chartData}
+                margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+              >
+                <defs>
+                  <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#ea384c" stopOpacity={0.8}/>
+                    <stop offset="60%" stopColor="#D1FF82" stopOpacity={0.8}/>
+                  </linearGradient>
+                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="url(#colorGradient)" stopOpacity={0.3}/>
+                    <stop offset="100%" stopColor="url(#colorGradient)" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="url(#colorGradient)"
+                  strokeWidth={3}
+                  fillOpacity={1}
+                  fill="url(#areaGradient)"
+                  isAnimationActive={true}
+                  animationDuration={1500}
+                  animationEasing="ease-out"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartContainer>
         </div>
         
         {/* Pricing boxes container */}
         <div className="grid grid-cols-2 gap-4 mb-2">
-          {/* Monthly plan - Updated styling for selected state with 2px border */}
+          {/* Monthly plan - Updated styling for selected state with 2px border and lighter bg */}
           <div 
             className={cn(
               "rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all",
               selectedPlan === 'monthly' 
-                ? "border-2 border-brand bg-white shadow-md" 
+                ? "border-2 border-brand bg-white/90 shadow-md" 
                 : "border border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('monthly')}
@@ -103,12 +144,12 @@ const SubscriptionPlan = () => {
             )}>$44.99</div>
           </div>
           
-          {/* Yearly plan - Updated styling for selected state with 2px border */}
+          {/* Yearly plan - Updated styling for selected state with 2px border and lighter bg */}
           <div 
             className={cn(
               "rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all relative",
               selectedPlan === 'yearly' 
-                ? "border-2 border-brand bg-white shadow-md" 
+                ? "border-2 border-brand bg-white/90 shadow-md" 
                 : "border border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('yearly')}
@@ -131,16 +172,22 @@ const SubscriptionPlan = () => {
           </div>
         </div>
         
-        {/* Plan descriptions underneath the boxes */}
+        {/* Plan descriptions underneath the boxes - Updated to change colors based on selection */}
         <div className="grid grid-cols-2 gap-4 mb-8">
           {/* Monthly plan description */}
           <div className="flex justify-center">
-            <span className="text-xs text-gray-400">Basic plan</span>
+            <span className={cn(
+              "text-xs",
+              selectedPlan === 'monthly' ? "text-white" : "text-gray-400"
+            )}>Basic plan</span>
           </div>
           
           {/* Yearly plan description */}
           <div className="flex justify-center">
-            <span className="text-xs text-white">Just $15.75 per month!</span>
+            <span className={cn(
+              "text-xs",
+              selectedPlan === 'yearly' ? "text-white" : "text-gray-400"
+            )}>Just $15.75 per month!</span>
           </div>
         </div>
         
