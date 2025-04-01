@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Star, ArrowRight, RefreshCw } from 'lucide-react';
+import { ArrowRight, RefreshCw } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -72,29 +73,38 @@ const Paywall = () => {
         className="flex flex-col min-h-screen bg-gradient-to-br from-black to-zinc-900"
       >
         <div className="container max-w-md mx-auto px-4 py-8 h-full flex flex-col">
-          <div className="flex justify-center mt-8 mb-12">
+          <div className="flex justify-center mt-4 mb-8">
             <OptimizedImage 
               src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
               alt="Untaxable Logo" 
-              className="w-16 h-16 object-cover rounded-lg"
+              className="w-12 h-12 object-cover rounded-lg"
             />
           </div>
           
-          <div className="flex flex-col items-center mb-8">
-            <div className="flex items-center justify-center space-x-3 mb-2">
+          <div className="flex flex-col items-center mb-6">
+            <div className="flex items-center justify-center space-x-1 mb-1">
               <Laurel />
               <p className="text-gray-500 text-sm">8,000+ customers</p>
               <Laurel />
             </div>
             
-            <div className="flex items-center justify-center space-x-3">
-              <Laurel />
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 text-gray-500 fill-gray-500" />
-                ))}
-              </div>
-              <Laurel />
+            <div className="flex items-center justify-center">
+              {[...Array(5)].map((_, i) => (
+                <svg 
+                  key={i} 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="text-gray-500 fill-gray-500"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              ))}
             </div>
           </div>
           
@@ -110,7 +120,7 @@ const Paywall = () => {
             </h1>
             
             <p className="text-lg mb-8 text-white/80 text-center">
-              Join thousands of users who have legally reduced their tax rate, often to 0%
+              Join thousands of users who have legally reduced their tax rate to 0%
             </p>
           </div>
           
