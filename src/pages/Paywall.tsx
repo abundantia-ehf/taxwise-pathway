@@ -53,7 +53,7 @@ const Paywall = () => {
         animate={{ opacity: 1 }}
         className="flex flex-col min-h-screen bg-gradient-to-br from-black to-zinc-900"
       >
-        <div className="container max-w-md mx-auto px-4 py-6 h-full flex flex-col">
+        <div className="container max-w-md mx-auto px-4 py-6 flex flex-col h-full">
           <div className="flex justify-center mb-6">
             <OptimizedImage 
               src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
@@ -101,21 +101,25 @@ const Paywall = () => {
             </p>
           </div>
           
-          <div className="mb-8">
+          {/* Button moved to bottom of container with margin-top auto */}
+          <div className="mt-auto mb-10">
             <Button 
               onClick={handleContinue}
               disabled={isProcessing}
               className={cn(
-                "w-full py-6 font-bold",
+                "w-full py-7 font-bold text-lg",
                 theme === 'greyscale' 
                   ? "bg-gray-300 text-black hover:bg-gray-400" 
-                  : "bg-gradient-to-r from-[#8B5CF6] via-[#D1FF82] to-[#0EA5E9] text-black hover:opacity-90"
+                  : "bg-gradient-to-r from-[#0EA5E9] via-[#D1FF82] to-[#D1FF82] text-black hover:opacity-90"
               )}
             >
               {isProcessing ? (
                 <>Processing...</>
               ) : (
-                <>Start My Free Trial <ArrowRight size={16} className="ml-1" /></>
+                <>
+                  Start My Free Trial 
+                  <ArrowRight size={22} className="ml-2 animate-pulse" />
+                </>
               )}
             </Button>
           </div>
