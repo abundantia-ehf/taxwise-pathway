@@ -101,13 +101,13 @@ const Paywall = () => {
             </p>
           </div>
           
-          {/* Button moved to bottom of container with margin-top auto */}
-          <div className="mt-auto mb-10">
+          {/* Button positioned at the bottom with less padding */}
+          <div className="pb-6">
             <Button 
               onClick={handleContinue}
               disabled={isProcessing}
               className={cn(
-                "w-full py-7 font-bold text-lg",
+                "w-full py-4 font-bold text-lg",
                 theme === 'greyscale' 
                   ? "bg-gray-300 text-black hover:bg-gray-400" 
                   : "bg-gradient-to-r from-[#0EA5E9] via-[#D1FF82] to-[#D1FF82] text-black hover:opacity-90"
@@ -118,7 +118,7 @@ const Paywall = () => {
               ) : (
                 <>
                   Start My Free Trial 
-                  <ArrowRight size={22} className="ml-2 animate-pulse" />
+                  <ArrowRight size={28} className="ml-2 animate-pulse" />
                 </>
               )}
             </Button>
