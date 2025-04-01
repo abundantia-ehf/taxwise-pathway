@@ -71,7 +71,9 @@ const SubscriptionPlan = () => {
             <div className={cn(
               "text-2xl font-bold",
               selectedPlan === 'monthly' ? "text-black" : "text-white"
-            )}>$44.99</div>
+            )}>
+              <span className="text-xl">$</span>44.99
+            </div>
           </div>
           
           <div 
@@ -96,7 +98,9 @@ const SubscriptionPlan = () => {
             <div className={cn(
               "text-2xl font-bold",
               selectedPlan === 'yearly' ? "text-black" : "text-white"
-            )}>$188.95</div>
+            )}>
+              <span className="text-xl">$</span>188.95
+            </div>
           </div>
         </div>
         
