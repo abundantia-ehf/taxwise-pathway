@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -204,11 +203,11 @@ const OnboardingFeatures = () => {
     if (currentSlide === 3) {
       navigate('/proof');
     } else {
+      const nextSlide = currentSlide + 1;
+      setCurrentSlide(nextSlide);
+      
       if (carouselRef.current?.api) {
-        carouselRef.current.api.scrollNext();
-        setCurrentSlide(prevSlide => prevSlide + 1);
-      } else {
-        setCurrentSlide(prevSlide => prevSlide + 1);
+        carouselRef.current.api.scrollTo(nextSlide);
       }
     }
   };
@@ -218,6 +217,10 @@ const OnboardingFeatures = () => {
       return "bg-[#D1FF82]";
     }
     return "bg-[#E63946]";
+  };
+
+  const handleSlideChange = (index: number) => {
+    setCurrentSlide(index);
   };
 
   return (
@@ -245,14 +248,13 @@ const OnboardingFeatures = () => {
         <div className="flex-1 flex items-center justify-center">
           <Carousel 
             className="w-full" 
-            defaultSlideSize={100}
-            onSlideChange={setCurrentSlide}
-            currentSlide={currentSlide}
             ref={carouselRef}
             opts={{ 
               loop: false,
               dragFree: false
             }}
+            onSlideChange={handleSlideChange}
+            currentSlide={currentSlide}
           >
             <CarouselContent>
               {features.map((feature, index) => (
@@ -284,10 +286,9 @@ const OnboardingFeatures = () => {
                     : currentSlide === 3 ? 'bg-zinc-500' : 'bg-white/50'
                 } transition-colors cursor-pointer`}
                 onClick={() => {
+                  setCurrentSlide(dot);
                   if (carouselRef.current?.api) {
                     carouselRef.current.api.scrollTo(dot);
-                  } else {
-                    setCurrentSlide(dot);
                   }
                 }}
               />
