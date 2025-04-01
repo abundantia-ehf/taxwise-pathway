@@ -97,14 +97,17 @@ const Paywall = () => {
                 </span>
               </h1>
               
-              <p className="text-lg mb-6 text-white/80 text-center">
+              <p className="text-lg mb-8 text-white/80 text-center">
                 Join thousands of users who have legally reduced their tax rate to 0%.
               </p>
               
-              {/* New testimonial */}
+              {/* Testimonial with more spacing */}
               <div className="mb-8 px-4 py-3 bg-white/5 rounded-lg border border-white/10">
                 <p className="text-white/90 text-center italic">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
+                </p>
+                <p className="text-white/70 text-center text-sm mt-2">
+                  — Michael J., Tech Consultant
                 </p>
               </div>
             </div>
