@@ -93,16 +93,16 @@ const Paywall = () => {
                   "border-b-4", 
                   theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
                 )}>
-                  legally
+                  legally.
                 </span>
               </h1>
               
-              <p className="text-base mb-6 text-white/80 text-center">
+              <p className="text-base mb-8 text-white/80 text-center">
                 Join thousands of users who have legally reduced their tax rate to 0%.
               </p>
               
-              {/* Testimonial */}
-              <div className="mb-6 px-5 py-4 bg-white/5 rounded-lg border border-white/10 w-full">
+              {/* Testimonial - with increased spacing above and below */}
+              <div className="mb-10 px-5 py-4 bg-white/5 rounded-lg border border-white/10 w-full">
                 <p className="text-white/90 text-center italic text-base">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
                 </p>
