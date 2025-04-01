@@ -1,4 +1,3 @@
-
 import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Presentation, Grid2x2Check, MessageSquare, Settings2, Home } from 'lucide-react';
@@ -23,19 +22,30 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
     location.pathname === '/onboarding' ||
     location.pathname === '/subscribe';
   
+  const isPaywallRoute = location.pathname === '/paywall';
+  
   useEffect(() => {
     if (isOnboardingRoute) {
       forceDarkMode();
     } else {
       resetThemeForce();
     }
-  }, [isOnboardingRoute, forceDarkMode, resetThemeForce]);
+    
+    if (isPaywallRoute) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOnboardingRoute, isPaywallRoute, forceDarkMode, resetThemeForce]);
   
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
-  // Updated navigation items with new icons
   const navigationItems = [
     {
       label: 'Home',
@@ -66,10 +76,14 @@ const MobileLayout = ({ children, hideNavigation = false }: MobileLayoutProps) =
 
   return (
     <div className={cn(
-      "flex flex-col min-h-screen w-full overflow-hidden",
+      "flex flex-col min-h-screen w-full",
+      isPaywallRoute ? "overflow-hidden" : "overflow-hidden",
       theme === 'dark' || theme === 'greyscale' ? 'bg-background text-foreground' : 'bg-background text-foreground'
     )}>
-      <main className="flex-1 overflow-y-auto pb-16">
+      <main className={cn(
+        "flex-1",
+        isPaywallRoute ? "overflow-hidden" : "overflow-y-auto pb-16"
+      )}>
         {children}
       </main>
 
