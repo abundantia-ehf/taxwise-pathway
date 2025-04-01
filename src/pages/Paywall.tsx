@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -15,25 +14,28 @@ const Paywall = () => {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
-  const { hasSubscription, startSubscription } = useAuth();
+  const { hasSubscription, startSubscription, isAuthenticated } = useAuth();
   const { theme } = useTheme();
 
-  // If user already has a subscription, redirect to home
   React.useEffect(() => {
-    if (hasSubscription) {
+    if (isAuthenticated && hasSubscription) {
       navigate('/home');
     }
-  }, [hasSubscription, navigate]);
+  }, [isAuthenticated, hasSubscription, navigate]);
 
   const handleContinue = () => {
     setIsProcessing(true);
     
-    // Simulate subscription process
     setTimeout(() => {
       setIsProcessing(false);
-      // Would integrate with Superwall/Stripe here
       startSubscription();
-      navigate('/home');
+      
+      if (!isAuthenticated) {
+        navigate('/signup');
+      } else {
+        navigate('/home');
+      }
+      
       toast.success("Your free trial has started!");
     }, 2000);
   };
@@ -41,11 +43,9 @@ const Paywall = () => {
   const handleRestorePurchase = () => {
     setIsRestoring(true);
     
-    // Simulate restore process
     setTimeout(() => {
       setIsRestoring(false);
       
-      // This would typically check with the payment provider if the user has an active subscription
       const hasExistingSubscription = Math.random() > 0.5;
       
       if (hasExistingSubscription) {
@@ -58,7 +58,6 @@ const Paywall = () => {
     }, 2000);
   };
 
-  // Laurel component for decoration
   const Laurel = ({ className }: { className?: string }) => (
     <div className={cn("text-gray-500", className)}>
       {"{"}{"}"} {/* Simple representation of laurel */}
@@ -73,7 +72,6 @@ const Paywall = () => {
         className="flex flex-col min-h-screen bg-gradient-to-br from-black to-zinc-900"
       >
         <div className="container max-w-md mx-auto px-4 py-8 h-full flex flex-col">
-          {/* Logo */}
           <div className="flex justify-center mt-8 mb-12">
             <OptimizedImage 
               src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
@@ -82,7 +80,6 @@ const Paywall = () => {
             />
           </div>
           
-          {/* Customer count and stars with laurels */}
           <div className="flex flex-col items-center mb-8">
             <div className="flex items-center justify-center space-x-3 mb-2">
               <Laurel />
@@ -101,7 +98,6 @@ const Paywall = () => {
             </div>
           </div>
           
-          {/* Main content */}
           <div className="flex-1 flex flex-col items-center justify-center">
             <h1 className="text-3xl font-headline font-bold mb-6 text-white text-center">
               Pay less tax, 
@@ -118,9 +114,7 @@ const Paywall = () => {
             </p>
           </div>
           
-          {/* Bottom section with subscription details */}
           <div className="bg-white rounded-t-3xl px-6 py-8">
-            {/* Pro badge */}
             <div className="flex justify-center mb-3">
               <div className={cn(
                 "px-4 flex items-center justify-center h-7 rounded-md text-xs font-semibold",
@@ -130,7 +124,6 @@ const Paywall = () => {
               </div>
             </div>
             
-            {/* Offer details */}
             <div className="text-center mb-6">
               <h2 className="text-lg font-headline font-semibold mb-2 text-gray-900">
                 Get help from tax mitigation pros
@@ -149,7 +142,6 @@ const Paywall = () => {
               </p>
             </div>
             
-            {/* Action button */}
             <Button 
               onClick={handleContinue}
               disabled={isProcessing || isRestoring}
@@ -167,7 +159,6 @@ const Paywall = () => {
               )}
             </Button>
             
-            {/* Restore purchase button */}
             <Button 
               onClick={handleRestorePurchase}
               disabled={isProcessing || isRestoring}
@@ -184,7 +175,6 @@ const Paywall = () => {
               )}
             </Button>
             
-            {/* No commitment text */}
             <p className="text-center text-gray-500 text-xs mt-2">
               No commitment, cancel any time.
             </p>

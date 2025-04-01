@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Fingerprint, ArrowDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/contexts/AuthContext';
 
 const PrePaywall = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [animating, setAnimating] = useState(false);
   
   const handleFingerprintClick = () => {
@@ -18,7 +20,8 @@ const PrePaywall = () => {
   useEffect(() => {
     if (animating) {
       const timer = setTimeout(() => {
-        navigate('/paywall');
+        // Force navigation to paywall page regardless of auth status
+        navigate('/paywall', { replace: true });
       }, 1500);
       
       return () => clearTimeout(timer);
