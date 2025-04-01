@@ -149,7 +149,6 @@ const OnboardingFeatures = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const carouselRef = useRef<any>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (currentSlide === 3) {
@@ -200,8 +199,9 @@ const OnboardingFeatures = () => {
     }
   ];
 
-  const handleNext = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleNext = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     
     if (currentSlide === 3) {
       navigate('/proof');
@@ -298,15 +298,19 @@ const OnboardingFeatures = () => {
             ))}
           </div>
           
-          <button 
-            className="w-full outline-none focus:outline-none active:outline-none tap-highlight-transparent"
-            onClick={handleNext} 
-            style={{ WebkitTapHighlightColor: 'transparent' }}
+          <Button
+            className="w-full h-14 py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium rounded-md"
+            onClick={handleNext}
+            variant="default"
             onTouchStart={(e) => {
               e.stopPropagation();
             }}
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation'
+            }}
           >
-            <div className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium rounded-md flex items-center justify-center">
+            <span className="flex items-center justify-center w-full h-full">
               {currentSlide < 3 ? (
                 <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
               ) : (
@@ -315,8 +319,8 @@ const OnboardingFeatures = () => {
                   <EyeClosed size={16} className="ml-1 text-white" />
                 }</>
               )}
-            </div>
-          </button>
+            </span>
+          </Button>
         </div>
       </div>
     </div>
