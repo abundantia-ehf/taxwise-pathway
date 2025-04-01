@@ -93,11 +93,13 @@ const Paywall = () => {
             <div className="flex flex-col items-center">
               <h1 className="text-3xl font-headline font-bold mb-4 text-white text-center">
                 Pay zero tax, 
-                <span className={cn(
-                  "border-b-4", 
-                  theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
-                )}>
-                  {" legally."}
+                <span className="text-white">
+                  <span className={cn(
+                    "border-b-4", 
+                    theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
+                  )}>
+                    legally
+                  </span>.
                 </span>
               </h1>
               
@@ -160,4 +162,3 @@ const Paywall = () => {
 };
 
 export default Paywall;
-
