@@ -97,7 +97,7 @@ const Paywall = () => {
                   "border-b-4", 
                   theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
                 )}>
-                  legally.
+                  {" legally."}
                 </span>
               </h1>
               
@@ -160,3 +160,4 @@ const Paywall = () => {
 };
 
 export default Paywall;
+
