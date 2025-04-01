@@ -20,7 +20,7 @@ const PrePaywall = () => {
   useEffect(() => {
     if (animating) {
       const timer = setTimeout(() => {
-        // Force navigation to paywall page regardless of auth status
+        // Navigate to paywall
         navigate('/paywall', { replace: true });
       }, 1500);
       

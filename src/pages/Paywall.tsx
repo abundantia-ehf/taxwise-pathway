@@ -14,7 +14,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 const Paywall = () => {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
-  const { hasSubscription, startSubscription, isAuthenticated } = useAuth();
+  const { hasSubscription, isAuthenticated } = useAuth();
   const { theme } = useTheme();
 
   React.useEffect(() => {
@@ -28,17 +28,10 @@ const Paywall = () => {
     
     setTimeout(() => {
       setIsProcessing(false);
-      startSubscription();
-      
-      if (!isAuthenticated) {
-        navigate('/signup');
-      } else {
-        navigate('/home');
-      }
-      
-      toast.success("Your free trial has started!");
-    }, 2000);
-  }, [isAuthenticated, navigate, startSubscription]);
+      // Instead of starting subscription directly, navigate to subscribe page
+      navigate('/subscribe');
+    }, 1000); // Reduced timeout for better UX
+  }, [navigate]);
 
   const Laurel = ({ className }: { className?: string }) => (
     <div className={cn("text-gray-500", className)}>
