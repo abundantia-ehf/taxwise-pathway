@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -23,7 +23,7 @@ const Paywall = () => {
     }
   }, [isAuthenticated, hasSubscription, navigate]);
 
-  const handleContinue = () => {
+  const handleContinue = useCallback(() => {
     setIsProcessing(true);
     
     setTimeout(() => {
@@ -38,7 +38,7 @@ const Paywall = () => {
       
       toast.success("Your free trial has started!");
     }, 2000);
-  };
+  }, [isAuthenticated, navigate, startSubscription]);
 
   const Laurel = ({ className }: { className?: string }) => (
     <div className={cn("text-gray-500", className)}>
@@ -87,7 +87,7 @@ const Paywall = () => {
             </div>
             
             <div className="flex flex-col items-center">
-              <h1 className="text-2xl font-headline font-bold mb-4 text-white text-center">
+              <h1 className="text-3xl font-headline font-bold mb-4 text-white text-center">
                 Pay zero tax, 
                 <span className={cn(
                   "border-b-4", 
