@@ -54,38 +54,42 @@ const SubscriptionPlan = () => {
           Start your free 3-day trial
         </h1>
         
-        {/* Subheadline - Updated text with bold sections */}
-        <p className="text-center text-white/80 mb-6">
+        {/* Subheadline - Updated with smaller text size */}
+        <p className="text-center text-white/80 mb-6 text-sm">
           <span className="font-bold">Get full access to Untaxable</span> including 1-on-1 support from Untaxable's tax pros, full tax mitigation training, and global tax databases. <span className="font-bold">Pay nothing now.</span>
         </p>
         
-        {/* Added stylized bar graph */}
-        <div className="flex items-end justify-center space-x-8 mb-8 h-32">
-          {/* First bar - Red */}
+        {/* Redesigned stylized bar graph */}
+        <div className="flex items-end justify-center space-x-12 mb-8 h-32">
+          {/* First bar - Red with 3D effect */}
           <div className="flex flex-col items-center">
-            <span className="text-xl font-bold">42.5%</span>
-            <div className="w-20 bg-[#ea384c] rounded-t-md h-28 flex items-center justify-center text-white font-bold">
-              42.5%
+            <div className="w-24 bg-gradient-to-t from-[#c12d3d] to-[#ea384c] rounded-t-md h-28 flex items-center justify-center text-white font-bold text-xl shadow-lg relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/10 rounded-t-md"></div>
+              <span className="relative z-10">42.5%</span>
             </div>
           </div>
           
           {/* Second bar - Brand green */}
           <div className="flex flex-col items-center">
-            <span className="text-xs text-white/60">possibly</span>
-            <span className="text-xl font-bold">0%</span>
-            <div className="w-20 bg-brand/20 rounded-t-md h-4"></div>
+            <div className="flex flex-col items-center">
+              <span className="text-xs text-white/60 -mb-1">possibly</span>
+              <span className="text-xl font-bold">0%</span>
+              <div className="w-24 bg-gradient-to-t from-brand/30 to-brand/10 rounded-t-md h-4 shadow-lg relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/5 rounded-t-md"></div>
+              </div>
+            </div>
           </div>
         </div>
         
         {/* Pricing boxes container */}
         <div className="grid grid-cols-2 gap-4 mb-2">
-          {/* Monthly plan - Updated styling for selected state */}
+          {/* Monthly plan - Updated styling for selected state with 2px border */}
           <div 
             className={cn(
-              "rounded-lg border p-4 flex flex-col items-center cursor-pointer transition-all",
+              "rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all",
               selectedPlan === 'monthly' 
-                ? "border-brand bg-white" 
-                : "border-white/20 bg-white/5"
+                ? "border-2 border-brand bg-white shadow-md" 
+                : "border border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('monthly')}
           >
@@ -99,18 +103,21 @@ const SubscriptionPlan = () => {
             )}>$44.99</div>
           </div>
           
-          {/* Yearly plan - Updated styling for selected state */}
+          {/* Yearly plan - Updated styling for selected state with 2px border */}
           <div 
             className={cn(
-              "rounded-lg border p-4 flex flex-col items-center cursor-pointer transition-all relative",
+              "rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all relative",
               selectedPlan === 'yearly' 
-                ? "border-brand bg-white" 
-                : "border-white/20 bg-white/5"
+                ? "border-2 border-brand bg-white shadow-md" 
+                : "border border-white/20 bg-white/5"
             )}
             onClick={() => setSelectedPlan('yearly')}
           >
-            {/* Discount badge - Added brand color border */}
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-black px-4 py-1 rounded text-xs font-bold text-white border border-brand whitespace-nowrap">
+            {/* Discount badge - Border only when selected */}
+            <div className={cn(
+              "absolute -top-3 left-1/2 transform -translate-x-1/2 bg-black px-4 py-1 rounded text-xs font-bold text-white whitespace-nowrap",
+              selectedPlan === 'yearly' ? "border border-brand" : ""
+            )}>
               SAVE 65%
             </div>
             <span className={cn(
