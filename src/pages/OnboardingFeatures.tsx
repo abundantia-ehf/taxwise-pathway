@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ArrowRight, Eye, EyeClosed, Star } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FeatureSlideProps {
   icon?: React.ReactNode;
@@ -145,7 +147,9 @@ const FeatureSlide = ({ icon, title, description, showTaxRate, showBillion, show
 const OnboardingFeatures = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isEyeOpen, setIsEyeOpen] = useState(true);
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const carouselRef = useRef<any>(null);
 
   useEffect(() => {
     if (currentSlide === 3) {
@@ -200,7 +204,11 @@ const OnboardingFeatures = () => {
     if (currentSlide === 3) {
       navigate('/proof');
     } else {
-      setCurrentSlide((prev) => prev + 1);
+      if (carouselRef.current?.api) {
+        carouselRef.current.api.scrollNext();
+      } else {
+        setCurrentSlide((prev) => prev + 1);
+      }
     }
   };
 
@@ -234,10 +242,17 @@ const OnboardingFeatures = () => {
         </div>
         
         <div className="flex-1 flex items-center justify-center">
-          <Carousel className="w-full" 
+          <Carousel 
+            className="w-full" 
             defaultSlideSize={100}
             onSlideChange={setCurrentSlide}
             currentSlide={currentSlide}
+            ref={carouselRef}
+            opts={{ 
+              loop: false,
+              dragFree: false,
+              draggable: isMobile
+            }}
           >
             <CarouselContent>
               {features.map((feature, index) => (
@@ -268,7 +283,13 @@ const OnboardingFeatures = () => {
                     ? currentSlide === 3 ? 'bg-zinc-900' : 'bg-white' 
                     : currentSlide === 3 ? 'bg-zinc-500' : 'bg-white/50'
                 } transition-colors cursor-pointer`}
-                onClick={() => setCurrentSlide(dot)}
+                onClick={() => {
+                  if (carouselRef.current?.api) {
+                    carouselRef.current.api.scrollTo(dot);
+                  } else {
+                    setCurrentSlide(dot);
+                  }
+                }}
               />
             ))}
           </div>
