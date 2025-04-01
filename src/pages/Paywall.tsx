@@ -51,10 +51,10 @@ const Paywall = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="flex flex-col min-h-screen bg-gradient-to-br from-black to-zinc-900"
+        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-black to-zinc-900"
       >
-        <div className="container max-w-md mx-auto px-4 py-6 flex flex-col h-full justify-between">
-          <div>
+        <div className="container max-w-md mx-auto px-4 py-6 flex flex-col h-full justify-between items-center">
+          <div className="flex flex-col items-center w-full">
             <div className="flex justify-center mb-6">
               <OptimizedImage 
                 src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
@@ -101,7 +101,7 @@ const Paywall = () => {
                 Join thousands of users who have legally reduced their tax rate to 0%.
               </p>
               
-              {/* Testimonial with increased spacing */}
+              {/* Testimonial with equal spacing above and below */}
               <div className="mb-12 px-4 py-4 bg-white/5 rounded-lg border border-white/10 max-w-[90%]">
                 <p className="text-white/90 text-center italic">
                   "One of the best investments I've ever made. I've increased my income by five figures, just by paying less tax."
@@ -113,11 +113,11 @@ const Paywall = () => {
                   {[...Array(5)].map((_, i) => (
                     <svg 
                       key={i} 
-                      width="16" 
-                      height="16" 
+                      width="12" 
+                      height="12" 
                       viewBox="0 0 24 24" 
                       fill="currentColor"
-                      className="text-white/70"
+                      className={theme === 'greyscale' ? "text-yellow-200" : "text-yellow-400"}
                     >
                       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                     </svg>
@@ -127,8 +127,8 @@ const Paywall = () => {
             </div>
           </div>
           
-          {/* Button positioned at the very bottom of the page */}
-          <div className="mb-4">
+          {/* Button positioned at the bottom of the page */}
+          <div className="w-full mb-4">
             <Button 
               onClick={handleContinue}
               disabled={isProcessing}
