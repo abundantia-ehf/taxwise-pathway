@@ -53,56 +53,58 @@ const Paywall = () => {
         animate={{ opacity: 1 }}
         className="flex flex-col min-h-screen bg-gradient-to-br from-black to-zinc-900"
       >
-        <div className="container max-w-md mx-auto px-4 py-6 flex flex-col h-full">
-          <div className="flex justify-center mb-6">
-            <OptimizedImage 
-              src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
-              alt="Untaxable Logo" 
-              className="w-10 h-10 object-cover rounded-lg"
-            />
-          </div>
-          
-          <div className="flex flex-col items-center mb-4">
-            <div className="flex items-center justify-center space-x-1">
-              <Laurel />
-              <p className="text-gray-500 text-xs">8,000+ customers</p>
-              <Laurel />
+        <div className="container max-w-md mx-auto px-4 py-6 flex flex-col h-full justify-between">
+          <div>
+            <div className="flex justify-center mb-6">
+              <OptimizedImage 
+                src="/lovable-uploads/42dcb219-6a8e-4cb6-a62b-d2f8f0b622a6.png" 
+                alt="Untaxable Logo" 
+                className="w-10 h-10 object-cover rounded-lg"
+              />
             </div>
             
-            <div className="flex items-center justify-center">
-              {[...Array(5)].map((_, i) => (
-                <svg 
-                  key={i} 
-                  width="12" 
-                  height="12" 
-                  viewBox="0 0 24 24" 
-                  fill="currentColor"
-                  className="text-gray-500"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              ))}
+            <div className="flex flex-col items-center mb-4">
+              <div className="flex items-center justify-center space-x-1">
+                <Laurel />
+                <p className="text-gray-500 text-xs">8,000+ customers</p>
+                <Laurel />
+              </div>
+              
+              <div className="flex items-center justify-center">
+                {[...Array(5)].map((_, i) => (
+                  <svg 
+                    key={i} 
+                    width="12" 
+                    height="12" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
+                    className="text-gray-500"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <h1 className="text-3xl font-headline font-bold mb-6 text-white text-center">
+                Pay zero tax, 
+                <span className={cn(
+                  "border-b-4", 
+                  theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
+                )}>
+                  legally
+                </span>
+              </h1>
+              
+              <p className="text-lg mb-8 text-white/80 text-center">
+                Join thousands of users who have legally reduced their tax rate to 0%
+              </p>
             </div>
           </div>
           
-          <div className="flex-1 flex flex-col items-center">
-            <h1 className="text-3xl font-headline font-bold mb-6 text-white text-center">
-              Pay zero tax, 
-              <span className={cn(
-                "border-b-4", 
-                theme === 'greyscale' ? "border-gray-400" : "border-[#ea384c]"
-              )}>
-                legally
-              </span>
-            </h1>
-            
-            <p className="text-lg mb-8 text-white/80 text-center">
-              Join thousands of users who have legally reduced their tax rate to 0%
-            </p>
-          </div>
-          
-          {/* Button positioned at the bottom with less padding */}
-          <div className="pb-6">
+          {/* Button positioned at the very bottom of the page */}
+          <div className="mb-4">
             <Button 
               onClick={handleContinue}
               disabled={isProcessing}
@@ -118,7 +120,7 @@ const Paywall = () => {
               ) : (
                 <>
                   Start My Free Trial 
-                  <ArrowRight size={28} className="ml-2 animate-pulse" />
+                  <ArrowRight size={36} className="ml-2 animate-[pulse_1.5s_ease-in-out_infinite]" />
                 </>
               )}
             </Button>
