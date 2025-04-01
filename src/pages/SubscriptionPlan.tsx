@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -58,34 +59,33 @@ const SubscriptionPlan = () => {
           <span className="font-bold">Get full access to Untaxable</span> including 1-on-1 support from Untaxable's tax pros, full tax mitigation training, and global tax databases. <span className="font-bold">Pay nothing now.</span>
         </p>
         
-        {/* Pricing boxes container - removing the margin-bottom that was used for the chart */}
+        {/* Pricing boxes container */}
         <div className="grid grid-cols-2 gap-4 mb-2">
-          {/* Monthly plan - Removed border, keeping conditional styling */}
+          {/* Monthly plan - Updated with gradient when selected */}
           <div 
             className={cn(
               "rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all",
               selectedPlan === 'monthly' 
-                ? "bg-white/90 shadow-md" 
+                ? "bg-gradient-to-br from-[#D1FF82] via-[#0EA5E9] to-[#8B5CF6] shadow-md" 
                 : "bg-white/5"
             )}
             onClick={() => setSelectedPlan('monthly')}
           >
             <span className={cn(
               "text-xs font-semibold mb-1",
-              selectedPlan === 'monthly' ? "text-gray-600" : "text-white/80"
+              selectedPlan === 'monthly' ? "text-white" : "text-white/80"
             )}>MONTHLY</span>
             <div className={cn(
-              "text-2xl font-bold",
-              selectedPlan === 'monthly' ? "text-black" : "text-white"
+              "text-2xl font-bold text-white"
             )}>$44.99</div>
           </div>
           
-          {/* Yearly plan - Removed border, keeping conditional styling */}
+          {/* Yearly plan - Updated with gradient when selected */}
           <div 
             className={cn(
               "rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all relative",
               selectedPlan === 'yearly' 
-                ? "bg-white/90 shadow-md" 
+                ? "bg-gradient-to-br from-[#D1FF82] via-[#0EA5E9] to-[#8B5CF6] shadow-md" 
                 : "bg-white/5"
             )}
             onClick={() => setSelectedPlan('yearly')}
@@ -99,16 +99,15 @@ const SubscriptionPlan = () => {
             </div>
             <span className={cn(
               "text-xs font-semibold mb-1",
-              selectedPlan === 'yearly' ? "text-gray-600" : "text-white/80"
+              selectedPlan === 'yearly' ? "text-white" : "text-white/80"
             )}>YEARLY</span>
             <div className={cn(
-              "text-2xl font-bold",
-              selectedPlan === 'yearly' ? "text-black" : "text-white"
+              "text-2xl font-bold text-white"
             )}>$188.95</div>
           </div>
         </div>
         
-        {/* Plan descriptions underneath the boxes - Updated to change colors based on selection */}
+        {/* Plan descriptions underneath the boxes */}
         <div className="grid grid-cols-2 gap-4 mb-8">
           {/* Monthly plan description */}
           <div className="flex justify-center">
