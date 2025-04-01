@@ -73,7 +73,7 @@ const SubscriptionPlan = () => {
               "text-2xl font-bold",
               selectedPlan === 'monthly' ? "text-black" : "text-white"
             )}>
-              <span className="text-sm align-top">US$</span>44.99
+              <span className="text-sm align-top">US$</span>44.99<span className="text-sm align-bottom">/mo</span>
             </div>
           </div>
           
@@ -100,7 +100,7 @@ const SubscriptionPlan = () => {
               "text-2xl font-bold",
               selectedPlan === 'yearly' ? "text-black" : "text-white"
             )}>
-              <span className="text-sm align-top">US$</span>188.95
+              <span className="text-sm align-top">US$</span>188.95<span className="text-sm align-bottom">/yr</span>
             </div>
           </div>
         </div>
