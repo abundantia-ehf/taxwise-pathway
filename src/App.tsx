@@ -1,3 +1,4 @@
+
 import React, { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -89,7 +90,6 @@ const App = () => (
                 {/* Add a direct route to HomePage for testing */}
                 <Route path="/home" element={<HomePage />} />
                 
-                {/* Protected routes requiring subscription */}
                 <Route 
                   path="/home-protected" 
                   element={
