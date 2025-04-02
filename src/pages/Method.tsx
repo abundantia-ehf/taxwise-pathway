@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -12,6 +11,11 @@ const Method = () => {
 
   const steps = [
     {
+      title: "The Flag Method",
+      description: "Our proprietary system for effectively eliminating your tax burden through legally-supported residency strategies.",
+      imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
+    },
+    {
       title: "Legal & Proven",
       description: "Used by thousands of people around the world to drastically reduce or eliminate their tax burden via legal means.",
       extraInfo: "Our customers live in 130+ countries",
@@ -19,11 +23,6 @@ const Method = () => {
       showStaticFlags: true,
       hideImage: true,
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
-    },
-    {
-      title: "The Flag Method",
-      description: "Our proprietary system for effectively eliminating your tax burden through legally-supported residency strategies.",
-      imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
     },
     {
       title: "1-on-1 Support",
@@ -45,7 +44,7 @@ const Method = () => {
   return (
     <div className="min-h-screen text-white overflow-hidden relative">
       <div className="absolute inset-0 bg-black">
-        <div className="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-2/5 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
       </div>
       
       <div className="relative z-10 container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
