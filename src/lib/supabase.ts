@@ -3,11 +3,15 @@ import { createClient } from '@supabase/supabase-js';
 import { supabase as configuredSupabase } from '@/integrations/supabase/client';
 import { Database } from '@/integrations/supabase/types';
 
+// Type for profile
+type ProfileRow = Database['public']['Tables']['profiles']['Row'];
+type ProfileInsert = Database['public']['Tables']['profiles']['Insert'];
+
 // Use the pre-configured Supabase client from the integrations folder
 export const supabase = configuredSupabase;
 
 // Helper to get user profile after login
-export async function getUserProfile(userId: string) {
+export async function getUserProfile(userId: string): Promise<ProfileRow | null> {
   if (!userId) return null;
   
   try {
@@ -34,7 +38,7 @@ export async function createUserProfile(userId: string, userData: {
   name?: string;
   provider?: string;
   photo_url?: string;
-}) {
+}): Promise<ProfileRow | null> {
   if (!userId) return null;
   
   try {
@@ -47,19 +51,21 @@ export async function createUserProfile(userId: string, userData: {
       
     if (existingProfile) {
       // Profile exists, no need to create
-      return existingProfile;
+      return getUserProfile(userId);
     }
     
     // Create new profile
+    const profileData: ProfileInsert = {
+      id: userId,
+      name: userData.name || '',
+      provider: userData.provider || 'email',
+      photo_url: userData.photo_url || null,
+      onboarding_completed: false
+    };
+    
     const { data, error } = await supabase
       .from('profiles')
-      .insert({
-        id: userId,
-        name: userData.name || '',
-        provider: userData.provider || 'email',
-        photo_url: userData.photo_url || null,
-        onboarding_completed: false
-      })
+      .insert(profileData)
       .select()
       .single();
     

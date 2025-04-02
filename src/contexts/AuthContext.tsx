@@ -3,6 +3,12 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { toast } from "sonner";
 import { supabase, getUserProfile, createUserProfile } from '@/lib/supabase';
 import { User as SupabaseUser, AuthError } from '@supabase/supabase-js';
+import { Database } from '@/integrations/supabase/types';
+
+// Define types based on the Database type
+type ProfileRow = Database['public']['Tables']['profiles']['Row'];
+type SubscriptionRow = Database['public']['Tables']['subscriptions']['Row'];
+type SubscriptionInsert = Database['public']['Tables']['subscriptions']['Insert'];
 
 interface User {
   id: string;
@@ -72,10 +78,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const userProfile: User = {
               id: session.user.id,
               email: session.user.email || '',
-              name: profile.name,
-              photoUrl: profile.photo_url,
-              provider: profile.provider as any,
-              onboardingCompleted: profile.onboarding_completed,
+              name: profile.name || undefined,
+              photoUrl: profile.photo_url || undefined,
+              provider: (profile.provider as 'email' | 'google' | 'apple') || 'email',
+              onboardingCompleted: profile.onboarding_completed || false,
             };
             
             // Get subscription data
@@ -87,29 +93,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 .single();
                 
               if (subscriptionData) {
+                const status = subscriptionData.status as 'trial' | 'active' | 'canceled' | 'expired';
                 userProfile.subscription = {
-                  status: subscriptionData.status,
-                  startDate: new Date(subscriptionData.start_date),
+                  status: status,
+                  startDate: subscriptionData.start_date ? new Date(subscriptionData.start_date) : new Date(),
                   trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
                   nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
                 };
               } else {
                 // Create initial subscription if none exists
+                const newSubscriptionData: SubscriptionInsert = {
+                  user_id: session.user.id,
+                  status: 'trial',
+                  start_date: new Date().toISOString(),
+                  trial_end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString() // 3 days trial
+                };
+                
                 const { data: newSubscription } = await supabase
                   .from('subscriptions')
-                  .insert({
-                    user_id: session.user.id,
-                    status: 'trial',
-                    start_date: new Date(),
-                    trial_end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days trial
-                  })
+                  .insert(newSubscriptionData)
                   .select()
                   .single();
                   
                 if (newSubscription) {
                   userProfile.subscription = {
                     status: 'trial',
-                    startDate: new Date(newSubscription.start_date),
+                    startDate: newSubscription.start_date ? new Date(newSubscription.start_date) : new Date(),
                     trialEndDate: newSubscription.trial_end_date ? new Date(newSubscription.trial_end_date) : undefined,
                     nextBillingDate: undefined
                   };
@@ -154,10 +163,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const userProfile: User = {
               id: session.user.id,
               email: session.user.email || '',
-              name: profile.name,
-              photoUrl: profile.photo_url,
-              provider: profile.provider as any,
-              onboardingCompleted: profile.onboarding_completed,
+              name: profile.name || undefined,
+              photoUrl: profile.photo_url || undefined,
+              provider: (profile.provider as 'email' | 'google' | 'apple') || 'email',
+              onboardingCompleted: profile.onboarding_completed || false,
             };
             
             // Get subscription data
@@ -169,29 +178,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 .single();
                 
               if (subscriptionData) {
+                const status = subscriptionData.status as 'trial' | 'active' | 'canceled' | 'expired';
                 userProfile.subscription = {
-                  status: subscriptionData.status,
-                  startDate: new Date(subscriptionData.start_date),
+                  status: status,
+                  startDate: subscriptionData.start_date ? new Date(subscriptionData.start_date) : new Date(),
                   trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
                   nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
                 };
               } else {
                 // Create initial subscription if none exists
+                const newSubscriptionData: SubscriptionInsert = {
+                  user_id: session.user.id,
+                  status: 'trial',
+                  start_date: new Date().toISOString(),
+                  trial_end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString() // 3 days trial
+                };
+                
                 const { data: newSubscription } = await supabase
                   .from('subscriptions')
-                  .insert({
-                    user_id: session.user.id,
-                    status: 'trial',
-                    start_date: new Date(),
-                    trial_end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days trial
-                  })
+                  .insert(newSubscriptionData)
                   .select()
                   .single();
                   
                 if (newSubscription) {
                   userProfile.subscription = {
                     status: 'trial',
-                    startDate: new Date(newSubscription.start_date),
+                    startDate: newSubscription.start_date ? new Date(newSubscription.start_date) : new Date(),
                     trialEndDate: newSubscription.trial_end_date ? new Date(newSubscription.trial_end_date) : undefined,
                     nextBillingDate: undefined
                   };
@@ -360,7 +372,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           .from('subscriptions')
           .update({ 
             status: 'active',
-            next_billing_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days from now
+            next_billing_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days from now
           })
           .eq('user_id', user.id);
           
