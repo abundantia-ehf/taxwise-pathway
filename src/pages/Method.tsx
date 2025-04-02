@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Earth } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import ScrollingFlags from '@/components/ScrollingFlags';
 
 const Method = () => {
   const navigate = useNavigate();
@@ -20,8 +19,9 @@ const Method = () => {
     {
       title: "Legal & Proven",
       description: "Used by thousands of individuals in the United States, Canada, Europe, Australia and beyond to drastically reduce or eliminate their tax burden via legal means.",
-      extraInfo: "Untaxable's customers live in 130+ countries",
-      showFlags: true,
+      extraInfo: "Our customers live in 130+ countries",
+      showEarthIcon: true,
+      showStaticFlags: true,
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
     },
     {
@@ -30,6 +30,9 @@ const Method = () => {
       imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
     }
   ];
+
+  // Country codes for static flags
+  const staticFlags = ['us', 'au', 'sg', 'za', 'ru', 'ca', 'gb', 'de', 'se', 'be'];
 
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
@@ -76,12 +79,23 @@ const Method = () => {
             <p className="text-white/80">{steps[activeStep].description}</p>
             
             {steps[activeStep].extraInfo && (
-              <p className="text-sm text-white/60">{steps[activeStep].extraInfo}</p>
+              <p className="text-sm text-white/60 flex items-center justify-center gap-1">
+                {steps[activeStep].showEarthIcon && <Earth size={16} />}
+                {steps[activeStep].extraInfo}
+              </p>
             )}
             
-            {steps[activeStep].showFlags && (
-              <div className="mt-2 w-screen -ml-4">
-                <ScrollingFlags />
+            {steps[activeStep].showStaticFlags && (
+              <div className="mt-3 flex justify-center space-x-2">
+                {staticFlags.map((code, index) => (
+                  <div key={index} className="flex-shrink-0">
+                    <img 
+                      src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
+                      alt={`Flag ${code}`}
+                      className="h-5 w-auto object-contain"
+                    />
+                  </div>
+                ))}
               </div>
             )}
           </div>
