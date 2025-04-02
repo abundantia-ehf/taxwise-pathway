@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+import ScrollingFlags from '@/components/ScrollingFlags';
 
 const Method = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ const Method = () => {
     {
       title: "Legal & Proven",
       description: "Used by thousands of individuals in the United States, Canada, Europe, Australia and beyond to drastically reduce or eliminate their tax burden via legal means.",
+      extraInfo: "Untaxable's customers live in 130+ countries",
+      showFlags: true,
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
     },
     {
@@ -71,6 +74,16 @@ const Method = () => {
             </div>
             <h1 className="text-2xl font-bold">{steps[activeStep].title}</h1>
             <p className="text-white/80">{steps[activeStep].description}</p>
+            
+            {steps[activeStep].extraInfo && (
+              <p className="text-sm text-white/60">{steps[activeStep].extraInfo}</p>
+            )}
+            
+            {steps[activeStep].showFlags && (
+              <div className="mt-2 w-screen -ml-4">
+                <ScrollingFlags />
+              </div>
+            )}
           </div>
         </motion.div>
         
