@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -18,7 +17,7 @@ const Method = () => {
     },
     {
       title: "Legal & Proven",
-      description: "Used by thousands of individuals in the United States, Canada, Europe, Australia and beyond to drastically reduce or eliminate their tax burden via legal means.",
+      description: "Used by thousands of people around the world to drastically reduce or eliminate their tax burden via legal means.",
       extraInfo: "Our customers live in 130+ countries",
       showEarthIcon: true,
       showStaticFlags: true,
@@ -32,8 +31,7 @@ const Method = () => {
     }
   ];
 
-  // Country codes for static flags
-  const staticFlags = ['us', 'au', 'sg', 'za', 'ru', 'ca', 'gb', 'de', 'se', 'be'];
+  const staticFlags = ['us', 'au', 'sg', 'za', 'ru', 'ca', 'gb', 'de', 'se', 'be', 'ar', 'es'];
 
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
@@ -45,12 +43,10 @@ const Method = () => {
 
   return (
     <div className="min-h-screen text-white overflow-hidden relative">
-      {/* Gradient background */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute top-0 left-0 w-full h-2/5 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
       </div>
       
-      {/* Content */}
       <div className="relative z-10 container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
         <div className="pt-6 flex justify-center">
           <OptimizedImage 
@@ -95,7 +91,7 @@ const Method = () => {
                     <img 
                       src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
                       alt={`Flag ${code}`}
-                      className="h-4 w-auto object-contain"
+                      className="h-3 w-auto object-contain"
                     />
                   </div>
                 ))}
