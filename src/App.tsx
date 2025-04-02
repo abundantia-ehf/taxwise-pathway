@@ -1,4 +1,3 @@
-
 import React, { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -19,6 +18,7 @@ import Start from "./pages/Start";
 import Learn from "./pages/Learn"; // Eagerly load the Learn component
 import Paywall from "./pages/Paywall"; // Eagerly load the Paywall component
 import SubscriptionPlan from "./pages/SubscriptionPlan"; // Eagerly load the new Subscription Plan page
+import HomePage from "./pages/HomePage"; // Eagerly load HomePage for direct access
 
 // Lazy loading for other routes
 const OnboardingFeatures = React.lazy(() => import("./pages/OnboardingFeatures"));
@@ -32,7 +32,6 @@ const Login = React.lazy(() => import("./pages/Login"));
 const Signup = React.lazy(() => import("./pages/Signup"));
 const Onboarding = React.lazy(() => import("./pages/Onboarding"));
 const Subscribe = React.lazy(() => import("./pages/Subscribe"));
-const HomePage = React.lazy(() => import("./pages/HomePage"));
 const VideoPlayer = React.lazy(() => import("./pages/VideoPlayer"));
 const Data = React.lazy(() => import("./pages/Data"));
 const Advice = React.lazy(() => import("./pages/Advice"));
@@ -87,15 +86,19 @@ const App = () => (
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/subscribe" element={<Subscribe />} />
                 
+                {/* Add a direct route to HomePage for testing */}
+                <Route path="/home" element={<HomePage />} />
+                
                 {/* Protected routes requiring subscription */}
                 <Route 
-                  path="/home" 
+                  path="/home-protected" 
                   element={
                     <ProtectedRoute requireSubscription>
                       <HomePage />
                     </ProtectedRoute>
                   } 
                 />
+                
                 <Route 
                   path="/learn" 
                   element={
@@ -104,6 +107,7 @@ const App = () => (
                     </ProtectedRoute>
                   } 
                 />
+                
                 <Route 
                   path="/video/:moduleId/:videoId" 
                   element={
