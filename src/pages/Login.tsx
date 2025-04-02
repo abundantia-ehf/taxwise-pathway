@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Mail, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 const Login = () => {
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -79,10 +81,10 @@ const Login = () => {
         >
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <img 
-              src="/lovable-uploads/aa12aa21-fe26-4c35-8eed-2cad093d11f6.png" 
+            <OptimizedImage 
+              src="/lovable-uploads/b492b9f7-2571-45ef-a009-d49288cfb9d5.png" 
               alt="Untaxable Logo" 
-              className="h-9"
+              className="h-auto w-[15%] mt-6"
             />
           </div>
           
@@ -177,7 +179,7 @@ const Login = () => {
               {/* Text and buttons */}
               <div className="pb-4 space-y-4">
                 <div className="text-center">
-                  <h3 className="text-xl font-unitext font-bold mb-1">Welcome back</h3>
+                  <h3 className="text-xl font-unitext font-bold mb-1">Welcome back.</h3>
                   <p className="text-sm text-white/70">Log in to continue your journey</p>
                 </div>
                 

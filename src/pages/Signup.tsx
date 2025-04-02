@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -61,7 +61,7 @@ const Signup = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">
-                Full Name
+                Name
               </label>
               <Input
                 id="name"
@@ -110,10 +110,11 @@ const Signup = () => {
             
             <Button 
               type="submit" 
-              className="w-full py-6 h-auto mt-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-medium"
+              className="w-full py-6 h-auto mt-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-semibold"
               disabled={isSubmitting || isLoading}
             >
               {isSubmitting || isLoading ? 'Creating account...' : 'Create Account'}
+              <ChevronRight size={18} />
             </Button>
             
             <p className="text-center text-sm mt-4">
