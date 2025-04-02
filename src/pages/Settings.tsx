@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -33,7 +32,6 @@ const Settings = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   
-  // Check if subscription is trial and format date
   const isTrialActive = user?.subscription?.status === 'trial' && user?.subscription?.trialEndDate ? 
     new Date(user.subscription.trialEndDate) > new Date() : false;
   
@@ -46,7 +44,6 @@ const Settings = () => {
     });
   };
 
-  // Get the appropriate theme icon and label
   const getThemeIcon = () => {
     switch (theme) {
       case 'dark':
@@ -60,7 +57,29 @@ const Settings = () => {
     }
   };
 
-  // Get provider icon
+  const getThemeLabel = () => {
+    switch (theme) {
+      case 'dark':
+        return 'Dark Mode';
+      case 'light':
+        return 'Light Mode';
+      case 'greyscale':
+        return 'Greyscale Mode';
+      default:
+        return 'Dark Mode';
+    }
+  };
+
+  const getInitials = () => {
+    if (!user?.name) return "U";
+    return user.name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  };
+
   const getProviderIcon = () => {
     if (!user?.provider) return <Mail className="h-4 w-4" />;
     
@@ -79,56 +98,31 @@ const Settings = () => {
     }
   };
 
-  const getThemeLabel = () => {
-    switch (theme) {
-      case 'dark':
-        return 'Dark Mode';
-      case 'light':
-        return 'Light Mode';
-      case 'greyscale':
-        return 'Greyscale Mode';
-      default:
-        return 'Dark Mode';
-    }
-  };
-
-  // Generate avatar fallback initials from name
-  const getInitials = () => {
-    if (!user?.name) return "U";
-    return user.name
-      .split(' ')
-      .map(part => part[0])
-      .join('')
-      .toUpperCase()
-      .substring(0, 2);
-  };
-
-  // FAQ items from the Support page
   const faqItems = [
     {
-      question: "How long is the free trial?",
-      answer: "The free trial lasts for 3 days, giving you access to all premium features. You'll be billed at the regular rate after the trial period unless you cancel."
+      question: "How do I maximize tax savings?",
+      answer: "Focus on understanding business entity structures, retirement account optimization, and legal tax deductions for your specific situation. Our modules cover these strategies in detail."
+    },
+    {
+      question: "Are these strategies legal?",
+      answer: "Yes, all strategies taught in our courses are 100% legal tax avoidance strategies, not tax evasion. We focus on using the existing tax code to your advantage."
+    },
+    {
+      question: "Do I need an accountant to implement these strategies?",
+      answer: "While having a tax professional is recommended, many strategies can be implemented on your own. We suggest using our guides as a way to better collaborate with your accountant."
+    },
+    {
+      question: "How often is the content updated?",
+      answer: "We update our content regularly to reflect changes in tax laws and regulations. Major updates typically occur annually after tax season, with minor updates throughout the year."
     },
     {
       question: "Can I cancel my subscription anytime?",
       answer: "Yes, you can cancel your subscription at any time. If you cancel during your trial period, you won't be charged. If you cancel after the trial, you'll still have access until the end of your billing period."
     },
     {
-      question: "Are the tax strategies legal?",
-      answer: "Absolutely. All strategies taught in Untaxable focus on legal tax avoidance, not tax evasion. We teach you to work within the existing tax code to minimize your tax burden legally."
-    },
-    {
-      question: "Do I need accounting knowledge?",
-      answer: "No prior accounting knowledge is required. Our courses are designed to be accessible to beginners while still valuable for those with some tax planning experience."
-    },
-    {
-      question: "Can I download the videos for offline viewing?",
-      answer: "Currently, videos are only available for streaming. We're working on implementing offline viewing in a future update."
-    },
-    {
-      question: "Are the strategies applicable outside the US?",
-      answer: "Most of our content focuses on US tax strategies. We do offer a dedicated international section, but specific applicability will vary by country."
-    },
+      question: "How long is the free trial?",
+      answer: "The free trial lasts for 7 days. During this period, you'll have full access to all premium features and content."
+    }
   ];
 
   return (
@@ -142,7 +136,6 @@ const Settings = () => {
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
           
-          {/* Help & FAQ Tab */}
           <TabsContent value="help" className="space-y-4">
             <h2 className="text-lg font-semibold mb-3 px-1">Frequently Asked Questions</h2>
             
@@ -173,15 +166,13 @@ const Settings = () => {
                   Billing Issues
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  For subscription, billing, or payment issues, please email us at billing@untaxable.com
+                  For subscription, billing, or payment issues, please email us at support@untaxable.com
                 </p>
               </CardContent>
             </Card>
           </TabsContent>
           
-          {/* Settings Tab */}
           <TabsContent value="settings" className="space-y-3">
-            {/* Profile Card */}
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center">
@@ -202,7 +193,6 @@ const Settings = () => {
               </CardContent>
             </Card>
             
-            {/* Subscription Card */}
             <Card>
               <CardContent className="p-4 space-y-3">
                 <div className="flex items-center justify-between">
@@ -231,7 +221,6 @@ const Settings = () => {
               </CardContent>
             </Card>
             
-            {/* Settings Section */}
             <div className="space-y-2">
               <h3 className="font-medium px-1">Settings</h3>
               
