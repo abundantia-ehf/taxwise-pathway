@@ -201,7 +201,7 @@ const OnboardingFeatures = () => {
 
   const handleNext = () => {    
     if (currentSlide === 3) {
-      navigate('/proof');
+      navigate('/method');
     } else {
       const nextSlide = currentSlide + 1;
       setCurrentSlide(nextSlide);

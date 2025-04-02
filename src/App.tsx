@@ -20,6 +20,7 @@ import Learn from "./pages/Learn"; // Eagerly load the Learn component
 import Paywall from "./pages/Paywall"; // Eagerly load the Paywall component
 import SubscriptionPlan from "./pages/SubscriptionPlan"; // Eagerly load the new Subscription Plan page
 import HomePage from "./pages/HomePage"; // Eagerly load HomePage for direct access
+import Method from "./pages/Method"; // Eagerly load the new Method page
 
 // Lazy loading for other routes
 const OnboardingFeatures = React.lazy(() => import("./pages/OnboardingFeatures"));
@@ -74,6 +75,7 @@ const App = () => (
                 {/* Public routes */}
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/onboarding-features" element={<OnboardingFeatures />} />
+                <Route path="/method" element={<Method />} />
                 <Route path="/proof" element={<Proof />} />
                 <Route path="/prepaywall" element={<PrePaywall />} />
                 <Route path="/paywall" element={<Paywall />} />
