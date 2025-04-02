@@ -81,7 +81,7 @@ const Method = () => {
             <p className="text-white/80">{steps[activeStep].description}</p>
             
             {steps[activeStep].showIcons && (
-              <div className="flex justify-center items-center gap-8 mt-4">
+              <div className="flex justify-center items-center gap-4 mt-4">
                 <Sword size={32} className="text-[#D1FF82]" />
                 <Shield size={32} className="text-[#D1FF82]" />
                 <Backpack size={32} className="text-[#D1FF82]" />

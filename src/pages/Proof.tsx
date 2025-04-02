@@ -99,9 +99,7 @@ const Proof = () => {
             className="w-full py-4 bg-brand hover:bg-brand/90 text-black shadow-md shadow-black/20 text-base font-medium"
             onClick={handleContinue}
           >
-            <span className="flex items-center justify-center w-full">
-              Continue <ArrowRight className="ml-1 h-4 w-4 text-black" />
-            </span>
+            Continue <ArrowRight className="ml-1 h-4 w-4 text-black" />
           </Button>
         </div>
       </div>
