@@ -45,7 +45,7 @@ const Method = () => {
   return (
     <div className="min-h-screen text-white overflow-hidden relative">
       <div className="absolute inset-0 bg-black">
-        <div className="absolute top-0 left-0 w-full h-2/5 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
       </div>
       
       <div className="relative z-10 container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
