@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -64,7 +63,7 @@ const Learn = () => {
               )}>
                 <CardContent className="p-3">
                   <p className="text-sm text-muted-foreground mb-3">
-                    Get familiar with the course structure and how to use this app effectively
+                    Get familiar with the app and how to best use the information here effectively
                   </p>
                   <div 
                     onClick={() => handleVideoClick('intro', startHereVideo.id, false)}

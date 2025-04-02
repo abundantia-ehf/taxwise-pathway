@@ -27,7 +27,7 @@ export const courseModules: Module[] = [
   {
     id: 'module-1',
     title: 'Groundwork',
-    description: 'Learn the basic principles of legal tax reduction strategies',
+    description: 'What you need to know before starting on your low-tax journey',
     progress: 20,
     videos: [
       { id: 'video-1-1', title: 'Disclaimer', duration: '9:45', completed: true, locked: false },
@@ -41,7 +41,7 @@ export const courseModules: Module[] = [
   {
     id: 'module-2',
     title: 'Tax Residency',
-    description: 'Optimize your business structure to legally minimize taxes',
+    description: 'Understanding the key fundamentals that allow you to legally pay low or no taxes.',
     progress: 0,
     videos: [
       { id: 'video-2-1', title: 'Understanding Tax Residency', duration: '14:10', completed: false, locked: true },
@@ -54,7 +54,7 @@ export const courseModules: Module[] = [
   {
     id: 'module-3',
     title: 'Offshoring',
-    description: 'Leverage real estate investments for significant tax benefits',
+    description: 'How to set up a legal low tax structure that actually works',
     progress: 0,
     videos: [
       { id: 'video-3-1', title: 'What We Aim To Achieve', duration: '16:30', completed: false, locked: true },
@@ -70,7 +70,7 @@ export const courseModules: Module[] = [
   {
     id: 'module-4',
     title: 'For U.S. Citizens',
-    description: 'Global tax optimization strategies for entrepreneurs',
+    description: 'Specific information to help U.S. citizens and residents overcome their unique challenges',
     progress: 0,
     videos: [
       { id: 'video-4-1', title: 'The Big U.S. Tax Problem', duration: '19:15', completed: false, locked: true },
