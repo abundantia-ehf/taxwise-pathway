@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -100,20 +101,28 @@ const Settings = () => {
 
   const faqItems = [
     {
+      question: "How should I use this app?",
+      answer: "To get the most out of Untaxable, we suggest you go through the course material first (sections I, II, and III for everyone, and also section IV for US citizens or residents). Once you've done that, get suggestions from Untaxable pros in the advice section, and use our databases to help setup your perfect legal tax structure."
+    },
+    {
       question: "How do I maximize tax savings?",
       answer: "Focus on understanding business entity structures, retirement account optimization, and legal tax deductions for your specific situation. Our modules cover these strategies in detail."
     },
     {
       question: "Are these strategies legal?",
-      answer: "Yes, all strategies taught in our courses are 100% legal tax avoidance strategies, not tax evasion. We focus on using the existing tax code to your advantage."
+      answer: "At Untaxable, we do our best to provide you with up to the minute tax mitigation information. However, even though we have a full research team on our side, as laws change extremely regularly, and we cannot hope to know your personal tax situation, it is possible that information provided in this app or on Untaxable.io is incorrect, or out of date. Information provided in this app is for general education and entertainment puposes only, and should not be considered official legal or tax advice. The responsibility will always be on you to confirm whether information provided in this app is correct."
     },
     {
       question: "Do I need an accountant to implement these strategies?",
-      answer: "While having a tax professional is recommended, many strategies can be implemented on your own. We suggest using our guides as a way to better collaborate with your accountant."
+      answer: "We always suggest you do not implement any tax mitigation plan or low tax strategy without first consulting the advice of an accountant, tax lawyer, or other similar legal tax professional in your home country, and/or the countries you are doing business in. The information in this app should be considered an introduction into low tax strategies, and not the final word on how you should apply these to your life. This should come from a trusted lawyer and/or accountant."
     },
     {
       question: "How often is the content updated?",
-      answer: "We update our content regularly to reflect changes in tax laws and regulations. Major updates typically occur annually after tax season, with minor updates throughout the year."
+      answer: "In some cases, daily. Our databases are updated sometimes on a daily basis when new information becomes available, and our course/learning modules are re-recorded whenever we need to update a lesson or section. However, please be advises that we cannot guarantee the information provided is accurate up to the current moment. Always remember that you will also need to update the app to its most recent version to ensure you have the most up to date information in the app."
+    },
+    {
+      question: "Does this work for anyone?",
+      answer: "The simple answer is yes, the information provided in this app can work for just about anyone, though how effective it will be in its implementation will depend on many factors. For example, if you earn primarily passive income, it will be harder to mitigate taxes than if you earn primarily active business income. Furthermore, US citizens will almost never be able to legally reduce their tax rate to zero, simply due to the US' citizenship-based taxation—however, even US citizens can benefit from significantly lower taxes, often bringing these down to a maximum of 10.5%"
     },
     {
       question: "Can I cancel my subscription anytime?",
@@ -163,10 +172,10 @@ const Settings = () => {
               <CardContent className="p-4 space-y-3">
                 <h3 className="font-medium flex items-center">
                   <CircleDollarSign className="h-4 w-4 mr-2 text-brand" />
-                  Billing Issues
+                  Help & Support
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  For subscription, billing, or payment issues, please email us at support@untaxable.com
+                  For any customer service, support, or billing/payment issues, please email us at hello@anticitizen.com
                 </p>
               </CardContent>
             </Card>
