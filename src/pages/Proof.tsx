@@ -94,16 +94,27 @@ const Proof = () => {
           </div>
         </div>
         
-        <div className="pb-4">
-          {/* Replacing the Button component with a native button for maximum clickability */}
-          <button 
-            className="w-full py-4 bg-brand hover:bg-brand/90 text-black rounded-md shadow-md shadow-black/20 text-base font-medium flex items-center justify-center gap-2 transition-colors"
-            onClick={handleContinue}
-            style={{ cursor: 'pointer' }}
+        {/* Completely rebuilt button container with z-index and pointer-events properties */}
+        <div className="pb-4 relative z-10">
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              handleContinue();
+            }}
+            className="block w-full overflow-visible"
           >
-            <span>Continue</span>
-            <ArrowRight className="h-4 w-4 text-black" />
-          </button>
+            <div 
+              className="w-full py-4 bg-brand hover:bg-brand/90 text-black rounded-md shadow-md shadow-black/20 flex items-center justify-center gap-2 transition-colors"
+              style={{
+                cursor: 'pointer',
+                pointerEvents: 'auto'
+              }}
+            >
+              <span className="font-medium text-base">Continue</span>
+              <ArrowRight className="h-4 w-4 text-black" />
+            </div>
+          </a>
         </div>
       </div>
     </div>
