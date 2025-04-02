@@ -8,6 +8,7 @@ import Header from '@/components/layout/Header';
 import GreetingQuote from '@/components/home/GreetingQuote';
 import NavigationSection from '@/components/home/NavigationSection';
 import LearningSection from '@/components/home/LearningSection';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -27,12 +28,12 @@ const HomePage = () => {
     }
   };
 
-  // Determine the logo path based on theme
+  // Determine the logo path based on theme - using the symbol logos instead of the wide logos
   const logoPath = theme === 'greyscale' 
-    ? "/lovable-uploads/bce91dd7-e69e-4ac6-a7c0-a42f182b9eda.png" // Use a greyscale logo
+    ? "/lovable-uploads/585e995d-eb07-4bfc-ad3f-e2612e89b865.png" // White logo for greyscale
     : theme === 'dark' 
-      ? "/lovable-uploads/e9f20d63-e4f1-4f76-8e74-f28dec18a2a6.png" 
-      : "/lovable-uploads/7c48630c-ff8f-48df-b315-dd322642ee8f.png";
+      ? "/lovable-uploads/cad1c605-826a-4af3-93da-4914437ce841.png" // Green logo for dark mode
+      : "/lovable-uploads/a9b6522b-688c-437c-b455-fbca829d7fce.png"; // Black logo for light mode
 
   return (
     <MobileLayout>
@@ -40,7 +41,7 @@ const HomePage = () => {
         <Header 
           title={
             <div className="h-[28px] w-auto">
-              <img 
+              <OptimizedImage 
                 src={logoPath}
                 alt="Untaxable Logo" 
                 className="h-full w-auto object-contain"
