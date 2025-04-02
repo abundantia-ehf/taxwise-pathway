@@ -18,12 +18,12 @@ const Method = () => {
     },
     {
       title: "Legal & Proven",
-      description: "Used by thousands of individuals worldwide to drastically reduce or eliminate their tax burden while maintaining their lifestyle.",
+      description: "Used by thousands of individuals in the United States, Canada, Europe, Australia and beyond to drastically reduce or eliminate their tax burden via legal means.",
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
     },
     {
-      title: "Simple Implementation",
-      description: "Follow our step-by-step process to establish yourself as a non-taxable entity in your current country of residence.",
+      title: "1-on-1 Support",
+      description: "Don't go through this alone. Our Untaxable pros will guide you based on your own personal income and tax situation.",
       imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
     }
   ];
