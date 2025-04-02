@@ -95,12 +95,15 @@ const Proof = () => {
         </div>
         
         <div className="pb-4">
-          <Button 
-            className="w-full py-4 bg-brand hover:bg-brand/90 text-black shadow-md shadow-black/20 text-base font-medium flex items-center justify-center"
+          {/* Replacing the Button component with a native button for maximum clickability */}
+          <button 
+            className="w-full py-4 bg-brand hover:bg-brand/90 text-black rounded-md shadow-md shadow-black/20 text-base font-medium flex items-center justify-center gap-2 transition-colors"
             onClick={handleContinue}
+            style={{ cursor: 'pointer' }}
           >
-            Continue <ArrowRight className="ml-1 h-4 w-4 text-black" />
-          </Button>
+            <span>Continue</span>
+            <ArrowRight className="h-4 w-4 text-black" />
+          </button>
         </div>
       </div>
     </div>
