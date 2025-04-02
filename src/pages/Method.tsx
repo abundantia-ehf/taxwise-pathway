@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -11,11 +12,6 @@ const Method = () => {
 
   const steps = [
     {
-      title: "The Flag Method",
-      description: "Our proprietary system for effectively eliminating your tax burden through legally-supported residency strategies.",
-      imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
-    },
-    {
       title: "Legal & Proven",
       description: "Used by thousands of people around the world to drastically reduce or eliminate their tax burden via legal means.",
       extraInfo: "Our customers live in 130+ countries",
@@ -23,6 +19,11 @@ const Method = () => {
       showStaticFlags: true,
       hideImage: true,
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
+    },
+    {
+      title: "The Flag Method",
+      description: "Our proprietary system for effectively eliminating your tax burden through legally-supported residency strategies.",
+      imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
     },
     {
       title: "1-on-1 Support",
