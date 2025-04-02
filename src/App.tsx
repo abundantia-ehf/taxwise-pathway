@@ -64,10 +64,10 @@ const App = () => (
           <BrowserRouter>
             <Suspense fallback={<PageLoader />}>
               <Routes>
-                {/* Initial route now redirects to start */}
-                <Route path="/" element={<Navigate to="/start" />} />
+                {/* Initial route now redirects to home for development */}
+                <Route path="/" element={<Navigate to="/home" />} />
                 
-                {/* Auth routes */}
+                {/* Auth routes - still available but not enforced */}
                 <Route path="/start" element={<Start />} />
                 <Route path="/loading" element={<LoadingPage />} />
                 
@@ -87,59 +87,14 @@ const App = () => (
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/subscribe" element={<Subscribe />} />
                 
-                {/* Add a direct route to HomePage for testing */}
+                {/* Make all routes accessible without protection during development */}
                 <Route path="/home" element={<HomePage />} />
-                
-                <Route 
-                  path="/home-protected" 
-                  element={
-                    <ProtectedRoute requireSubscription>
-                      <HomePage />
-                    </ProtectedRoute>
-                  } 
-                />
-                
-                <Route 
-                  path="/learn" 
-                  element={
-                    <ProtectedRoute requireSubscription>
-                      <Learn />
-                    </ProtectedRoute>
-                  } 
-                />
-                
-                <Route 
-                  path="/video/:moduleId/:videoId" 
-                  element={
-                    <ProtectedRoute requireSubscription>
-                      <VideoPlayer />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/data" 
-                  element={
-                    <ProtectedRoute requireSubscription>
-                      <Data />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/advice" 
-                  element={
-                    <ProtectedRoute requireSubscription>
-                      <Advice />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/settings" 
-                  element={
-                    <ProtectedRoute>
-                      <Settings />
-                    </ProtectedRoute>
-                  } 
-                />
+                <Route path="/home-protected" element={<HomePage />} />
+                <Route path="/learn" element={<Learn />} />
+                <Route path="/video/:moduleId/:videoId" element={<VideoPlayer />} />
+                <Route path="/data" element={<Data />} />
+                <Route path="/advice" element={<Advice />} />
+                <Route path="/settings" element={<Settings />} />
                 
                 {/* Catch-all route */}
                 <Route path="*" element={<NotFound />} />

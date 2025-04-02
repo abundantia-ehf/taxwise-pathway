@@ -14,7 +14,7 @@ const ProtectedRoute = ({
   const { isAuthenticated, hasSubscription } = useAuth();
   const location = useLocation();
   
-  // Development bypass flag - set to true while developing to skip auth checks
+  // Development bypass flag - set to true to skip auth checks during development
   const DEVELOPMENT_BYPASS = true;
   
   // Log authentication state to help debug routing issues

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useDragControls, PanInfo } from 'framer-motion';
@@ -65,8 +66,42 @@ const Start = () => {
     }
   };
 
+  // Function to bypass login and go directly to home during development
+  const handleDevBypass = (route: string) => {
+    navigate(route);
+  };
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Development bypass buttons - only visible during development */}
+      <div className="absolute top-4 left-4 z-50 flex flex-col gap-2">
+        <div className="text-xs text-white/50 bg-black/50 p-1 rounded">Dev Navigation:</div>
+        <Button 
+          size="sm" 
+          variant="outline" 
+          className="text-xs py-1 h-auto bg-black/50 border-lime-500/30 text-lime-500"
+          onClick={() => handleDevBypass('/home')}
+        >
+          Go to Home
+        </Button>
+        <Button 
+          size="sm" 
+          variant="outline" 
+          className="text-xs py-1 h-auto bg-black/50 border-lime-500/30 text-lime-500"
+          onClick={() => handleDevBypass('/learn')}
+        >
+          Go to Learn
+        </Button>
+        <Button 
+          size="sm" 
+          variant="outline" 
+          className="text-xs py-1 h-auto bg-black/50 border-lime-500/30 text-lime-500"
+          onClick={() => handleDevBypass('/welcome')}
+        >
+          Go to Welcome
+        </Button>
+      </div>
+
       <div className="absolute inset-0 h-full w-full">
         <OptimizedImage
           src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2960&auto=format&fit=crop"
