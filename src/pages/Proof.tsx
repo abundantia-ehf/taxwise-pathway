@@ -48,19 +48,7 @@ const Proof = () => {
   const { toast } = useToast();
   
   const handleContinue = () => {
-    if ((/iPhone|iPad|iPod|Android/i).test(navigator.userAgent)) {
-      toast({
-        title: "Rate our app",
-        description: "Enjoying Untaxable? Please take a moment to rate us.",
-        action: (
-          <Button variant="default" size="sm" onClick={() => navigate('/prepaywall')}>
-            Rate Now
-          </Button>
-        ),
-      });
-    } else {
-      navigate('/prepaywall');
-    }
+    navigate('/prepaywall');
   };
   
   return (

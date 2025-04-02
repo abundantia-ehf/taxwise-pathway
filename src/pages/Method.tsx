@@ -18,12 +18,6 @@ const Method = () => {
       hideImage: true
     },
     {
-      title: "1-on-1 Support",
-      description: "Don't go through this alone. Our Untaxable pros will guide you based on your own personal income and tax situation.",
-      showMessageIcon: true,
-      hideImage: true
-    },
-    {
       title: "Legal & Proven",
       description: "Used by thousands of people around the world to drastically reduce or eliminate their tax burden via legal means.",
       extraInfo: "Our customers live in 130+ countries",
@@ -31,6 +25,12 @@ const Method = () => {
       showStaticFlags: true,
       hideImage: true,
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
+    },
+    {
+      title: "1-on-1 Support",
+      description: "Don't go through this alone. Our Untaxable pros will guide you based on your own personal income and tax situation.",
+      showMessageIcon: true,
+      hideImage: true
     }
   ];
 
@@ -151,7 +151,7 @@ const Method = () => {
             {activeStep < steps.length - 1 ? (
               <>Next <ArrowRight size={16} className="ml-1 text-black" /></>
             ) : (
-              <>Continue to Proof <ArrowRight size={16} className="ml-1 text-black" /></>
+              <>I'm ready to go <ArrowRight size={16} className="ml-1 text-black" /></>
             )}
           </button>
         </div>
