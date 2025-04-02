@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import CurrencyIcon from './CurrencyIcon';
+import { CalendarSync } from 'lucide-react';
 import { QuestionnaireData } from '@/types/questionnaire';
 
 interface TaxAmountStepProps {
@@ -23,8 +23,8 @@ const TaxAmountStep: React.FC<TaxAmountStepProps> = ({ data, updateData, onNext 
       animate={{ opacity: 1 }}
       className="flex flex-col h-full px-6 py-8"
     >
-      <div className="mb-3">
-        <CurrencyIcon />
+      <div className="flex justify-center mb-3">
+        <CalendarSync className="h-10 w-10 text-brand animate-pulse" strokeWidth={1.5} />
       </div>
       
       <h2 className="text-xl font-headline font-semibold mb-6">How much did you pay in taxes last year?</h2>
