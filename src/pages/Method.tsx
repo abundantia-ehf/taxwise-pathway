@@ -22,6 +22,7 @@ const Method = () => {
       extraInfo: "Our customers live in 130+ countries",
       showEarthIcon: true,
       showStaticFlags: true,
+      hideImage: true,
       imageUrl: "/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png"
     },
     {
@@ -68,19 +69,21 @@ const Method = () => {
           className="flex-1 flex items-center justify-center"
         >
           <div className="text-center space-y-6">
-            <div className="w-24 h-24 mx-auto mb-4">
-              <OptimizedImage 
-                src={steps[activeStep].imageUrl}
-                alt={steps[activeStep].title}
-                className="w-full h-full object-contain"
-              />
-            </div>
+            {!steps[activeStep].hideImage && (
+              <div className="w-24 h-24 mx-auto mb-4">
+                <OptimizedImage 
+                  src={steps[activeStep].imageUrl}
+                  alt={steps[activeStep].title}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            )}
             <h1 className="text-2xl font-bold">{steps[activeStep].title}</h1>
             <p className="text-white/80">{steps[activeStep].description}</p>
             
             {steps[activeStep].extraInfo && (
               <p className="text-sm text-white/60 flex items-center justify-center gap-1">
-                {steps[activeStep].showEarthIcon && <Earth size={16} />}
+                {steps[activeStep].showEarthIcon && <Earth size={16} className="text-[#D1FF82]" />}
                 {steps[activeStep].extraInfo}
               </p>
             )}
@@ -92,7 +95,7 @@ const Method = () => {
                     <img 
                       src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
                       alt={`Flag ${code}`}
-                      className="h-5 w-auto object-contain"
+                      className="h-4 w-auto object-contain"
                     />
                   </div>
                 ))}
