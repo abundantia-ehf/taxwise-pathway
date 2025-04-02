@@ -37,11 +37,14 @@ const Method = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#D1FF82] text-black overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
+    <div className="min-h-screen text-white overflow-hidden relative">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-black">
+        <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-[#D1FF82]/80 to-transparent"></div>
+      </div>
       
-      <div className="container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
+      {/* Content */}
+      <div className="relative z-10 container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
         <div className="pt-6 flex justify-center">
           <OptimizedImage 
             src="/lovable-uploads/2d441c39-e935-49df-a144-c9d9ddf0b127.png" 
@@ -67,7 +70,7 @@ const Method = () => {
               />
             </div>
             <h1 className="text-2xl font-bold">{steps[activeStep].title}</h1>
-            <p className="text-black/80">{steps[activeStep].description}</p>
+            <p className="text-white/80">{steps[activeStep].description}</p>
           </div>
         </motion.div>
         
@@ -77,7 +80,7 @@ const Method = () => {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full ${
-                  activeStep === index ? 'bg-black' : 'bg-black/30'
+                  activeStep === index ? 'bg-white' : 'bg-white/30'
                 } transition-colors cursor-pointer`}
                 onClick={() => setActiveStep(index)}
                 aria-label={`Go to step ${index + 1}`}
@@ -88,7 +91,7 @@ const Method = () => {
           <button
             type="button"
             onClick={handleNext}
-            className="w-full h-14 py-4 bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-black/20 text-base font-medium rounded-md flex items-center justify-center"
+            className="w-full h-14 py-4 bg-[#D1FF82] hover:bg-[#C4EE75] text-black shadow-md shadow-black/20 text-base font-medium rounded-md flex items-center justify-center"
             style={{
               WebkitTapHighlightColor: 'transparent',
               touchAction: 'manipulation',
@@ -100,9 +103,9 @@ const Method = () => {
             }}
           >
             {activeStep < steps.length - 1 ? (
-              <>Next <ArrowRight size={16} className="ml-1 text-white" /></>
+              <>Next <ArrowRight size={16} className="ml-1 text-black" /></>
             ) : (
-              <>Continue to Proof <ArrowRight size={16} className="ml-1 text-white" /></>
+              <>Continue to Proof <ArrowRight size={16} className="ml-1 text-black" /></>
             )}
           </button>
         </div>
