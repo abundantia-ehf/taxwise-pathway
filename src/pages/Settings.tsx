@@ -106,7 +106,7 @@ const Settings = () => {
     },
     {
       question: "How do I maximize tax savings?",
-      answer: "Focus on understanding business entity structures, retirement account optimization, and legal tax deductions for your specific situation. Our modules cover these strategies in detail."
+      answer: "That will depend on your own unique situation. For some people, simply setting up a cheap offshore company will do the trick. For others, you may need to change your personal tax residency, or move to a low-tax country. You'll learn what strategy may be best for you when you go through our training material."
     },
     {
       question: "Are these strategies legal?",
