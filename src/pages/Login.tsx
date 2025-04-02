@@ -79,10 +79,10 @@ const Login = () => {
           transition={{ duration: 0.6 }}
           className="h-full flex flex-col justify-between"
         >
-          {/* Updated Logo */}
+          {/* Logo */}
           <div className="flex justify-center mb-4">
             <OptimizedImage 
-              src="/lovable-uploads/f989f645-c662-476d-84d9-dcefd027ce35.png" 
+              src="/lovable-uploads/b492b9f7-2571-45ef-a009-d49288cfb9d5.png" 
               alt="Untaxable Logo" 
               className="h-auto w-[15%] mt-6"
             />
@@ -163,7 +163,7 @@ const Login = () => {
                       <div className="text-center space-y-1">
                         <div className="w-12 h-12 mx-auto rounded-xl bg-black p-2">
                           <img 
-                            src="/lovable-uploads/f989f645-c662-476d-84d9-dcefd027ce35.png" 
+                            src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
                             alt="Untaxable Logo" 
                             className="w-full h-full object-cover rounded-md" 
                           />

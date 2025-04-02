@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useDragControls, PanInfo } from 'framer-motion';
@@ -97,9 +96,8 @@ const Start = () => {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="flex flex-col items-center"
         >
-          {/* Updated logo */}
           <img 
-            src="/lovable-uploads/f989f645-c662-476d-84d9-dcefd027ce35.png" 
+            src="/lovable-uploads/b89fefba-9fdf-4996-a4e2-72b71b30db58.png" 
             alt="Untaxable Logo" 
             className="w-7 h-7 mb-8"
           />

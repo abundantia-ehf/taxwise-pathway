@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
-import { OptimizedImage } from '@/components/ui/optimized-image';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -48,20 +47,11 @@ const Signup = () => {
           <ArrowLeft size={20} />
         </Button>
 
-        {/* Logo at the top */}
-        <div className="flex justify-center mb-4 pt-4">
-          <OptimizedImage 
-            src="/lovable-uploads/f989f645-c662-476d-84d9-dcefd027ce35.png" 
-            alt="Untaxable Logo" 
-            className="h-auto w-[15%] mt-2"
-          />
-        </div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="h-full flex flex-col justify-center py-6"
+          className="h-full flex flex-col justify-center py-10"
         >
           <div className="space-y-1 text-center mb-8">
             <h1 className="text-2xl font-bold">Create your account</h1>
