@@ -40,7 +40,7 @@ const Method = () => {
     <div className="min-h-screen text-white overflow-hidden relative">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-black">
-        <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-[#D1FF82]/80 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-2/5 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
       </div>
       
       {/* Content */}
