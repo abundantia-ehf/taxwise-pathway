@@ -1,9 +1,34 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Earth } from 'lucide-react';
+import { ArrowRight, Earth, Sword, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { OptimizedImage } from '@/components/ui/optimized-image';
+
+// Custom Potion icon that matches Lucide React style
+const Potion = ({ size = 24, color = "currentColor", ...props }) => {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6 10h12v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V10z"/>
+      <path d="M12 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+      <path d="M9 3h6"/>
+      <path d="M11 3v7"/>
+      <path d="M13 3v7"/>
+    </svg>
+  );
+};
 
 const Method = () => {
   const navigate = useNavigate();
@@ -11,9 +36,10 @@ const Method = () => {
 
   const steps = [
     {
-      title: "The Flag Method",
-      description: "Our proprietary system for effectively eliminating your tax burden through legally-supported residency strategies.",
-      imageUrl: "/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png"
+      title: "Tools & Tactics",
+      description: "We provide you with a comprehensive plan with all the necessary tools to significantly reduce your tax rate within days: not months or years",
+      showIcons: true,
+      hideImage: true
     },
     {
       title: "Legal & Proven",
@@ -44,7 +70,7 @@ const Method = () => {
   return (
     <div className="min-h-screen text-white overflow-hidden relative">
       <div className="absolute inset-0 bg-black">
-        <div className="absolute top-0 left-0 w-full h-2/5 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-[#D1FF82] via-[#D1FF82]/30 to-transparent"></div>
       </div>
       
       <div className="relative z-10 container max-w-md mx-auto px-4 py-4 h-screen flex flex-col justify-between">
@@ -76,6 +102,14 @@ const Method = () => {
             )}
             <h1 className="text-2xl font-bold">{steps[activeStep].title}</h1>
             <p className="text-white/80">{steps[activeStep].description}</p>
+            
+            {steps[activeStep].showIcons && (
+              <div className="flex justify-center items-center gap-8 mt-4">
+                <Sword size={40} className="text-[#D1FF82]" />
+                <Shield size={40} className="text-[#D1FF82]" />
+                <Potion size={40} color="#D1FF82" />
+              </div>
+            )}
             
             {steps[activeStep].extraInfo && (
               <p className="text-sm text-white/60 flex items-center justify-center gap-1">
