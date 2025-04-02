@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { toast } from "sonner";
-import { supabase, getUserProfile } from '@/lib/supabase';
+import { supabase, getUserProfile, createUserProfile } from '@/lib/supabase';
 import { User as SupabaseUser, AuthError } from '@supabase/supabase-js';
 
 interface User {
@@ -57,7 +57,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         
         if (session?.user) {
           setSupabaseUser(session.user);
-          const profile = await getUserProfile(session.user.id);
+          let profile = await getUserProfile(session.user.id);
+          
+          // If no profile exists, create one
+          if (!profile) {
+            profile = await createUserProfile(session.user.id, {
+              name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || '',
+              provider: session.user.app_metadata?.provider || 'email',
+              photo_url: session.user.user_metadata?.avatar_url
+            });
+          }
           
           if (profile) {
             const userProfile: User = {
@@ -70,19 +79,44 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             };
             
             // Get subscription data
-            const { data: subscriptionData } = await supabase
-              .from('subscriptions')
-              .select('*')
-              .eq('user_id', session.user.id)
-              .single();
-              
-            if (subscriptionData) {
-              userProfile.subscription = {
-                status: subscriptionData.status,
-                startDate: new Date(subscriptionData.start_date),
-                trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
-                nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
-              };
+            try {
+              const { data: subscriptionData } = await supabase
+                .from('subscriptions')
+                .select('*')
+                .eq('user_id', session.user.id)
+                .single();
+                
+              if (subscriptionData) {
+                userProfile.subscription = {
+                  status: subscriptionData.status,
+                  startDate: new Date(subscriptionData.start_date),
+                  trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
+                  nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
+                };
+              } else {
+                // Create initial subscription if none exists
+                const { data: newSubscription } = await supabase
+                  .from('subscriptions')
+                  .insert({
+                    user_id: session.user.id,
+                    status: 'trial',
+                    start_date: new Date(),
+                    trial_end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days trial
+                  })
+                  .select()
+                  .single();
+                  
+                if (newSubscription) {
+                  userProfile.subscription = {
+                    status: 'trial',
+                    startDate: new Date(newSubscription.start_date),
+                    trialEndDate: newSubscription.trial_end_date ? new Date(newSubscription.trial_end_date) : undefined,
+                    nextBillingDate: undefined
+                  };
+                }
+              }
+            } catch (error) {
+              console.error('Error fetching subscription data:', error);
             }
             
             setUser(userProfile);
@@ -100,43 +134,81 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     
     // Initial auth check
     const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session?.user) {
-        setSupabaseUser(session.user);
-        const profile = await getUserProfile(session.user.id);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
         
-        if (profile) {
-          const userProfile: User = {
-            id: session.user.id,
-            email: session.user.email || '',
-            name: profile.name,
-            photoUrl: profile.photo_url,
-            provider: profile.provider as any,
-            onboardingCompleted: profile.onboarding_completed,
-          };
+        if (session?.user) {
+          setSupabaseUser(session.user);
+          let profile = await getUserProfile(session.user.id);
           
-          // Get subscription data
-          const { data: subscriptionData } = await supabase
-            .from('subscriptions')
-            .select('*')
-            .eq('user_id', session.user.id)
-            .single();
-            
-          if (subscriptionData) {
-            userProfile.subscription = {
-              status: subscriptionData.status,
-              startDate: new Date(subscriptionData.start_date),
-              trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
-              nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
-            };
+          // If no profile exists, create one
+          if (!profile) {
+            profile = await createUserProfile(session.user.id, {
+              name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || '',
+              provider: session.user.app_metadata?.provider || 'email',
+              photo_url: session.user.user_metadata?.avatar_url
+            });
           }
           
-          setUser(userProfile);
+          if (profile) {
+            const userProfile: User = {
+              id: session.user.id,
+              email: session.user.email || '',
+              name: profile.name,
+              photoUrl: profile.photo_url,
+              provider: profile.provider as any,
+              onboardingCompleted: profile.onboarding_completed,
+            };
+            
+            // Get subscription data
+            try {
+              const { data: subscriptionData } = await supabase
+                .from('subscriptions')
+                .select('*')
+                .eq('user_id', session.user.id)
+                .single();
+                
+              if (subscriptionData) {
+                userProfile.subscription = {
+                  status: subscriptionData.status,
+                  startDate: new Date(subscriptionData.start_date),
+                  trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
+                  nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
+                };
+              } else {
+                // Create initial subscription if none exists
+                const { data: newSubscription } = await supabase
+                  .from('subscriptions')
+                  .insert({
+                    user_id: session.user.id,
+                    status: 'trial',
+                    start_date: new Date(),
+                    trial_end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days trial
+                  })
+                  .select()
+                  .single();
+                  
+                if (newSubscription) {
+                  userProfile.subscription = {
+                    status: 'trial',
+                    startDate: new Date(newSubscription.start_date),
+                    trialEndDate: newSubscription.trial_end_date ? new Date(newSubscription.trial_end_date) : undefined,
+                    nextBillingDate: undefined
+                  };
+                }
+              }
+            } catch (error) {
+              console.error('Error fetching subscription data:', error);
+            }
+            
+            setUser(userProfile);
+          }
         }
+      } catch (error) {
+        console.error('Error checking user session:', error);
+      } finally {
+        setIsLoading(false);
       }
-      
-      setIsLoading(false);
     };
     
     checkUser();
