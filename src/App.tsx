@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -62,47 +62,45 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                {/* Initial route now redirects to home for development */}
-                <Route path="/" element={<Navigate to="/home" />} />
-                
-                {/* Auth routes - still available but not enforced */}
-                <Route path="/start" element={<Start />} />
-                <Route path="/loading" element={<LoadingPage />} />
-                
-                {/* Public routes */}
-                <Route path="/welcome" element={<Welcome />} />
-                <Route path="/onboarding-features" element={<OnboardingFeatures />} />
-                <Route path="/method" element={<Method />} />
-                <Route path="/proof" element={<Proof />} />
-                <Route path="/prepaywall" element={<PrePaywall />} />
-                <Route path="/paywall" element={<Paywall />} />
-                <Route path="/subscription-plan" element={<SubscriptionPlan />} />
-                <Route path="/questionnaire" element={<Questionnaire />} />
-                <Route path="/questionnaire/confirmation" element={<ConfirmationScreen />} />
-                <Route path="/questionnaire/tax-rate" element={<TaxRateScreen />} />
-                <Route path="/questionnaire/paywall" element={<PaywallScreen />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/onboarding" element={<Onboarding />} />
-                <Route path="/subscribe" element={<Subscribe />} />
-                
-                {/* Make all routes accessible without protection during development */}
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/home-protected" element={<HomePage />} />
-                <Route path="/learn" element={<Learn />} />
-                <Route path="/video/:moduleId/:videoId" element={<VideoPlayer />} />
-                <Route path="/data" element={<Data />} />
-                <Route path="/advice" element={<Advice />} />
-                <Route path="/settings" element={<Settings />} />
-                
-                {/* Catch-all route */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              {/* Initial route now redirects to home for development */}
+              <Route path="/" element={<Navigate to="/home" />} />
+              
+              {/* Auth routes - still available but not enforced */}
+              <Route path="/start" element={<Start />} />
+              <Route path="/loading" element={<LoadingPage />} />
+              
+              {/* Public routes */}
+              <Route path="/welcome" element={<Welcome />} />
+              <Route path="/onboarding-features" element={<OnboardingFeatures />} />
+              <Route path="/method" element={<Method />} />
+              <Route path="/proof" element={<Proof />} />
+              <Route path="/prepaywall" element={<PrePaywall />} />
+              <Route path="/paywall" element={<Paywall />} />
+              <Route path="/subscription-plan" element={<SubscriptionPlan />} />
+              <Route path="/questionnaire" element={<Questionnaire />} />
+              <Route path="/questionnaire/confirmation" element={<ConfirmationScreen />} />
+              <Route path="/questionnaire/tax-rate" element={<TaxRateScreen />} />
+              <Route path="/questionnaire/paywall" element={<PaywallScreen />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/subscribe" element={<Subscribe />} />
+              
+              {/* Make all routes accessible without protection during development */}
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/home-protected" element={<HomePage />} />
+              <Route path="/learn" element={<Learn />} />
+              <Route path="/video/:moduleId/:videoId" element={<VideoPlayer />} />
+              <Route path="/data" element={<Data />} />
+              <Route path="/advice" element={<Advice />} />
+              <Route path="/settings" element={<Settings />} />
+              
+              {/* Catch-all route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>
