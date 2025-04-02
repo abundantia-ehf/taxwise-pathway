@@ -33,9 +33,9 @@ const LoadingScreen = ({ onFinished }: LoadingScreenProps) => {
         className="w-36 h-36 flex items-center justify-center z-10"
       >
         <OptimizedImage 
-          src="/lovable-uploads/e59d93a8-9521-40fd-b709-37eae4b6f67e.png" 
+          src="/lovable-uploads/f989f645-c662-476d-84d9-dcefd027ce35.png" 
           alt="Untaxable Logo" 
-          className="w-full h-full object-cover rounded-md"
+          className="w-full h-full object-cover"
           loadingHeight={144} // 36*4
         />
       </motion.div>

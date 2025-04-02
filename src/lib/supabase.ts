@@ -50,7 +50,7 @@ export async function createUserProfile(userId: string, userData: {
       return existingProfile;
     }
     
-    // Create new profile
+    // Create new profile with proper types
     const { data, error } = await supabase
       .from('profiles')
       .insert({
