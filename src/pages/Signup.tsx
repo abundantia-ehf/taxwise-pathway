@@ -1,8 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MobileLayout from '@/components/layout/MobileLayout';
-import Header from '@/components/layout/Header';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
@@ -14,7 +12,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { signup, isAuthenticated } = useAuth();
+  const { signup, isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +28,7 @@ const Signup = () => {
     
     try {
       await signup(email, password, name);
-      navigate('/welcome');
+      // The auth context will handle the navigation after successful signup
     } catch (error) {
       console.error('Signup error:', error);
     } finally {
@@ -113,9 +111,9 @@ const Signup = () => {
             <Button 
               type="submit" 
               className="w-full py-6 h-auto mt-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-medium"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoading}
             >
-              {isSubmitting ? 'Creating account...' : 'Create Account'}
+              {isSubmitting || isLoading ? 'Creating account...' : 'Create Account'}
             </Button>
             
             <p className="text-center text-sm mt-4">

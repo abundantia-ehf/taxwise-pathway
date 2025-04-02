@@ -1,6 +1,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { toast } from "sonner";
+import { supabase, getUserProfile } from '@/lib/supabase';
+import { User as SupabaseUser, AuthError } from '@supabase/supabase-js';
 
 interface User {
   id: string;
@@ -37,46 +39,131 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [supabaseUser, setSupabaseUser] = useState<SupabaseUser | null>(null);
   const [hasAnonymousSubscription, setHasAnonymousSubscription] = useState(false);
 
+  // Initialize user when component mounts
   useEffect(() => {
-    const savedUser = localStorage.getItem('untaxable-user');
     const hasSubscription = localStorage.getItem('untaxable-subscription') === 'true';
-    
     setHasAnonymousSubscription(hasSubscription);
     
-    setTimeout(() => {
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
+    // Get initial session
+    setIsLoading(true);
+    
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        // Handle auth state changes
+        console.log('Auth state change:', event);
+        
+        if (session?.user) {
+          setSupabaseUser(session.user);
+          const profile = await getUserProfile(session.user.id);
+          
+          if (profile) {
+            const userProfile: User = {
+              id: session.user.id,
+              email: session.user.email || '',
+              name: profile.name,
+              photoUrl: profile.photo_url,
+              provider: profile.provider as any,
+              onboardingCompleted: profile.onboarding_completed,
+            };
+            
+            // Get subscription data
+            const { data: subscriptionData } = await supabase
+              .from('subscriptions')
+              .select('*')
+              .eq('user_id', session.user.id)
+              .single();
+              
+            if (subscriptionData) {
+              userProfile.subscription = {
+                status: subscriptionData.status,
+                startDate: new Date(subscriptionData.start_date),
+                trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
+                nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
+              };
+            }
+            
+            setUser(userProfile);
+          } else {
+            console.error('No profile found for user:', session.user.id);
+          }
+        } else {
+          setSupabaseUser(null);
+          setUser(null);
+        }
+        
+        setIsLoading(false);
       }
+    );
+    
+    // Initial auth check
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session?.user) {
+        setSupabaseUser(session.user);
+        const profile = await getUserProfile(session.user.id);
+        
+        if (profile) {
+          const userProfile: User = {
+            id: session.user.id,
+            email: session.user.email || '',
+            name: profile.name,
+            photoUrl: profile.photo_url,
+            provider: profile.provider as any,
+            onboardingCompleted: profile.onboarding_completed,
+          };
+          
+          // Get subscription data
+          const { data: subscriptionData } = await supabase
+            .from('subscriptions')
+            .select('*')
+            .eq('user_id', session.user.id)
+            .single();
+            
+          if (subscriptionData) {
+            userProfile.subscription = {
+              status: subscriptionData.status,
+              startDate: new Date(subscriptionData.start_date),
+              trialEndDate: subscriptionData.trial_end_date ? new Date(subscriptionData.trial_end_date) : undefined,
+              nextBillingDate: subscriptionData.next_billing_date ? new Date(subscriptionData.next_billing_date) : undefined,
+            };
+          }
+          
+          setUser(userProfile);
+        }
+      }
+      
       setIsLoading(false);
-    }, 1000);
+    };
+    
+    checkUser();
+    
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
+
+  const handleAuthError = (error: AuthError) => {
+    console.error('Auth error:', error);
+    toast.error(error.message || 'Authentication failed');
+  };
 
   const login = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
       
-      const mockUser: User = {
-        id: '123',
-        email,
-        name: email.split('@')[0],
-        provider: 'email',
-        subscription: {
-          status: 'trial',
-          startDate: new Date(),
-          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        },
-        onboardingCompleted: false
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('untaxable-user', JSON.stringify(mockUser));
-      toast.success("Login successful!");
+      if (error) {
+        handleAuthError(error);
+      } else {
+        toast.success("Login successful!");
+      }
     } catch (error) {
-      toast.error("Login failed. Please check your credentials and try again.");
       console.error('Login error:', error);
+      toast.error("Login failed. Please check your credentials and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -85,27 +172,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signup = async (email: string, password: string, name: string) => {
     try {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          data: {
+            name,
+            provider: 'email'
+          }
+        }
+      });
       
-      const mockUser: User = {
-        id: '123',
-        email,
-        name,
-        provider: 'email',
-        subscription: {
-          status: 'trial',
-          startDate: new Date(),
-          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        },
-        onboardingCompleted: false
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('untaxable-user', JSON.stringify(mockUser));
-      toast.success("Account created successfully!");
+      if (error) {
+        handleAuthError(error);
+      } else {
+        toast.success("Account created successfully! Please check your email for verification.");
+      }
     } catch (error) {
-      toast.error("Signup failed. Please try again.");
       console.error('Signup error:', error);
+      toast.error("Signup failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -114,28 +199,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loginWithGoogle = async () => {
     try {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockUser: User = {
-        id: '456',
-        email: 'user@gmail.com',
-        name: 'Google User',
-        photoUrl: 'https://lh3.googleusercontent.com/a/default-user',
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        subscription: {
-          status: 'trial',
-          startDate: new Date(),
-          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        },
-        onboardingCompleted: false
-      };
+        options: {
+          redirectTo: window.location.origin + '/welcome'
+        }
+      });
       
-      setUser(mockUser);
-      localStorage.setItem('untaxable-user', JSON.stringify(mockUser));
-      toast.success("Google login successful!");
+      if (error) {
+        handleAuthError(error);
+      }
     } catch (error) {
-      toast.error("Google login failed. Please try again.");
       console.error('Google login error:', error);
+      toast.error("Google login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -144,53 +220,98 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loginWithApple = async () => {
     try {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockUser: User = {
-        id: '789',
-        email: 'user@icloud.com',
-        name: 'Apple User',
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'apple',
-        subscription: {
-          status: 'trial',
-          startDate: new Date(),
-          trialEndDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        },
-        onboardingCompleted: false
-      };
+        options: {
+          redirectTo: window.location.origin + '/welcome'
+        }
+      });
       
-      setUser(mockUser);
-      localStorage.setItem('untaxable-user', JSON.stringify(mockUser));
-      toast.success("Apple login successful!");
+      if (error) {
+        handleAuthError(error);
+      }
     } catch (error) {
-      toast.error("Apple login failed. Please try again.");
       console.error('Apple login error:', error);
+      toast.error("Apple login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('untaxable-user');
-    toast.info("You've been logged out");
-  };
-
-  const completeOnboarding = () => {
-    if (user) {
-      const updatedUser = {
-        ...user,
-        onboardingCompleted: true
-      };
-      setUser(updatedUser);
-      localStorage.setItem('untaxable-user', JSON.stringify(updatedUser));
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Logout error:', error);
+      toast.error("Logout failed. Please try again.");
+    } else {
+      setUser(null);
+      toast.info("You've been logged out");
     }
   };
 
-  const startSubscription = () => {
+  const completeOnboarding = async () => {
+    if (user && supabaseUser) {
+      try {
+        const { error } = await supabase
+          .from('profiles')
+          .update({ onboarding_completed: true })
+          .eq('id', user.id);
+          
+        if (error) {
+          console.error('Error updating onboarding status:', error);
+          toast.error("Failed to update onboarding status");
+          return;
+        }
+        
+        setUser({
+          ...user,
+          onboardingCompleted: true
+        });
+        
+      } catch (error) {
+        console.error('Error completing onboarding:', error);
+        toast.error("Failed to complete onboarding");
+      }
+    }
+  };
+
+  const startSubscription = async () => {
+    // This is a placeholder for real subscription integration
+    // In a real app, this would connect to Stripe or another payment processor
     setHasAnonymousSubscription(true);
     localStorage.setItem('untaxable-subscription', 'true');
-    toast.success("Subscription activated!");
+    
+    if (user && supabaseUser) {
+      try {
+        // Update subscription in Supabase
+        const { error } = await supabase
+          .from('subscriptions')
+          .update({ 
+            status: 'active',
+            next_billing_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days from now
+          })
+          .eq('user_id', user.id);
+          
+        if (error) {
+          console.error('Error updating subscription:', error);
+          return;
+        }
+        
+        // Update local user state
+        setUser({
+          ...user,
+          subscription: {
+            ...user.subscription,
+            status: 'active',
+            nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+          }
+        });
+        
+        toast.success("Subscription activated!");
+      } catch (error) {
+        console.error('Error starting subscription:', error);
+      }
+    }
   };
 
   const hasSubscription = !!user?.subscription && (user.subscription.status === 'active' || user.subscription.status === 'trial') || hasAnonymousSubscription;

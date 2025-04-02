@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useDragControls, PanInfo } from 'framer-motion';
@@ -11,7 +10,7 @@ const Start = () => {
   const [isPlatformIOS, setIsPlatformIOS] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loginWithGoogle, loginWithApple } = useAuth();
   const navigate = useNavigate();
   const dragControls = useDragControls();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -36,14 +35,22 @@ const Start = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handleAppleSignIn = () => {
-    // Will be implemented in the AuthContext
-    navigate('/welcome');
+  const handleAppleSignIn = async () => {
+    try {
+      await loginWithApple();
+      // Redirect happens automatically on OAuth callback
+    } catch (error) {
+      console.error('Apple sign-in error:', error);
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    // Will be implemented in the AuthContext
-    navigate('/welcome');
+  const handleGoogleSignIn = async () => {
+    try {
+      await loginWithGoogle();
+      // Redirect happens automatically on OAuth callback
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+    }
   };
 
   const handleEmailSignIn = () => {
@@ -60,7 +67,6 @@ const Start = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black">
-      {/* Background placeholder image instead of video */}
       <div className="absolute inset-0 h-full w-full">
         <OptimizedImage
           src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2960&auto=format&fit=crop"
@@ -69,7 +75,6 @@ const Start = () => {
         />
       </div>
       
-      {/* Sign-up card */}
       <motion.div 
         ref={cardRef}
         className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-black/30 backdrop-blur-[2px] border-2 border-white/20 p-6 pt-8"
@@ -83,7 +88,6 @@ const Start = () => {
           transition: { type: "spring", stiffness: 300, damping: 30 }
         }}
       >
-        {/* Drag indicator - shortened to 20px */}
         <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-white/20 rounded-full" />
         
         <motion.div
@@ -92,14 +96,12 @@ const Start = () => {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="flex flex-col items-center"
         >
-          {/* White Untaxable logo - should remain visible when minimized */}
           <img 
             src="/lovable-uploads/b89fefba-9fdf-4996-a4e2-72b71b30db58.png" 
             alt="Untaxable Logo" 
             className="w-7 h-7 mb-8"
           />
           
-          {/* Login buttons - now with 90% width of container */}
           <div className="w-[90%] mx-auto space-y-4 mb-4">
             {isPlatformIOS && (
               <Button 
@@ -139,7 +141,6 @@ const Start = () => {
             </Button>
           </div>
           
-          {/* Terms text - width now matching buttons */}
           <p className="w-3/4 mx-auto text-xs text-center text-white/50 mt-2 font-sans">
             By continuing, you agree to our Terms & Privacy Policy
           </p>

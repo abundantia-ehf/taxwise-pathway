@@ -1,8 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MobileLayout from '@/components/layout/MobileLayout';
-import Header from '@/components/layout/Header';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -15,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPlatformIOS, setIsPlatformIOS] = useState(false);
-  const { login, loginWithGoogle, loginWithApple, isAuthenticated } = useAuth();
+  const { login, loginWithGoogle, loginWithApple, isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +33,7 @@ const Login = () => {
     
     try {
       await login(email, password);
-      navigate('/welcome');
+      // Auth context will handle the redirect
     } catch (error) {
       console.error('Login error:', error);
     } finally {
@@ -47,7 +44,7 @@ const Login = () => {
   const handleAppleSignIn = async () => {
     try {
       await loginWithApple();
-      navigate('/welcome');
+      // Redirect is handled by OAuth flow
     } catch (error) {
       console.error('Apple sign-in error:', error);
     }
@@ -56,7 +53,7 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       await loginWithGoogle();
-      navigate('/welcome');
+      // Redirect is handled by OAuth flow
     } catch (error) {
       console.error('Google sign-in error:', error);
     }
@@ -135,9 +132,9 @@ const Login = () => {
                   <Button 
                     type="submit" 
                     className="w-full py-6 h-auto bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-medium"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || isLoading}
                   >
-                    {isSubmitting ? 'Logging in...' : 'Log in'}
+                    {isSubmitting || isLoading ? 'Logging in...' : 'Log in'}
                   </Button>
                   
                   <p className="text-center text-sm">
@@ -189,6 +186,7 @@ const Login = () => {
                     <Button 
                       className="w-full py-4 bg-brand text-black hover:bg-brand/90 shadow-md shadow-brand/20 font-medium flex items-center justify-center gap-2"
                       onClick={handleAppleSignIn}
+                      disabled={isLoading}
                     >
                       <svg viewBox="0 0 384 512" width="16" height="16" fill="currentColor">
                         <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
@@ -200,6 +198,7 @@ const Login = () => {
                   <Button 
                     className="w-full py-4 bg-white text-black hover:bg-white/90 shadow-md shadow-white/20 font-medium flex items-center justify-center gap-2"
                     onClick={handleGoogleSignIn}
+                    disabled={isLoading}
                   >
                     <svg viewBox="0 0 488 512" width="16" height="16">
                       <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" fill="currentColor"/>
@@ -211,6 +210,7 @@ const Login = () => {
                     variant="outline" 
                     className="w-full py-4 border-white/10 bg-white/5 text-white hover:bg-white/10 font-medium flex items-center justify-center gap-2"
                     onClick={handleEmailSignIn}
+                    disabled={isLoading}
                   >
                     <Mail size={16} />
                     Continue with Email
