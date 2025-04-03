@@ -104,9 +104,9 @@ const Start = () => {
 
       <div className="absolute inset-0 h-full w-full">
         <OptimizedImage
-          src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2960&auto=format&fit=crop"
-          alt="Background Landscape"
-          className="h-full w-full object-cover opacity-70"
+          src="/lovable-uploads/241793ed-5529-4d83-b6b3-44eca34d11c6.png"
+          alt="Abstract Blue Patterns Background"
+          className="h-full w-full object-cover opacity-80"
         />
       </div>
       
