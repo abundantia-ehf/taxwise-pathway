@@ -72,7 +72,7 @@ const Start = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+    <div className="relative h-screen w-full overflow-hidden bg-black">
       {/* Development bypass buttons - only visible during development */}
       <div className="absolute top-4 left-4 z-50 flex flex-col gap-2">
         <div className="text-xs text-white/50 bg-black/50 p-1 rounded">Dev Navigation:</div>
@@ -107,6 +107,7 @@ const Start = () => {
           src="/lovable-uploads/241793ed-5529-4d83-b6b3-44eca34d11c6.png"
           alt="Abstract Blue Patterns Background"
           className="h-full w-full object-cover opacity-80"
+          style={{ minHeight: '100vh' }}
         />
       </div>
       
